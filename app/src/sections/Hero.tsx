@@ -50,7 +50,10 @@ export function Hero() {
 
     /** vertical logo (p=0) ↔ horizontal logo at the top (p=1), plus pointer parallax on the wordmark */
     const apply = () => {
-      const vw = el.clientWidth, vh = Math.max(el.clientHeight, window.innerHeight);
+      // Canvas-ul WebGL are înălțime fixă (--vh) ca să nu se redimensioneze cât timp secțiunea se
+      // strânge la morph — altfel bufferul rămâne un cadru în urmă și monedele apar turtite.
+      const vw = el.clientWidth, vh = window.innerHeight;
+      el.style.setProperty('--vh', `${vh}px`);
       const L = computeLayout(vw, vh, prog.p, WORDMARK.aspect);
       heroSignals.cluster = { cx: L.cluster.x + L.cluster.w / 2, cy: L.cluster.y + L.cluster.h / 2, w: L.cluster.w };
       heroSignals.scroll = prog.p; heroSignals.ready = true;
@@ -60,6 +63,7 @@ export function Hero() {
     };
     apply();
     const ro = new ResizeObserver(apply); ro.observe(el);
+    window.addEventListener('resize', apply);
 
     const ctx = gsap.context(() => {
       const dots = gsap.utils.toArray<SVGCircleElement>('.wm-dot');
@@ -124,7 +128,7 @@ export function Hero() {
       window.addEventListener('pointermove', onMove, { passive: true }); window.addEventListener('blur', reset); document.addEventListener('pointerleave', reset);
       return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); window.removeEventListener('scroll', onScroll); window.removeEventListener('wheel', onWheel); getLenis()?.start(); };
     }, el);
-    return () => { ro.disconnect(); ctx.revert(); };
+    return () => { ro.disconnect(); window.removeEventListener('resize', apply); ctx.revert(); };
   }, []);
 
   return (

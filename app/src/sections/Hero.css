@@ -1,6 +1,6 @@
 .hero { position: relative; height: 100svh; overflow: clip; --logo-bottom: 300px; }
 @media (max-width: 900px) { .hero { height: auto; min-height: 100svh; } }
-.hero-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero-canvas { position: absolute; inset: 0 0 auto 0; height: var(--vh, 100svh); z-index: 1; pointer-events: none; }
 .hero-gl { position: absolute; inset: 0; }
 .hero-gl canvas { width: 100% !important; height: 100% !important; }
 .hero-poster { position: absolute; left: 0; top: 0; }
