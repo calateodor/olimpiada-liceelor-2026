@@ -1,0 +1,136 @@
+{
+  "attribution": "Date © OpenStreetMap contributors (ODbL). Geocodare: Nominatim + Overpass API; rutare: OSRM (profil pieton).",
+  "generated": "2026-09-08",
+  "venues": [
+    {
+      "id": "stadion-1-mai",
+      "name": "Stadionul 1 Mai",
+      "address": "Strada 13 Decembrie, Slatina (zona Plaja Olt)",
+      "lat": 44.42314,
+      "lon": 24.35032,
+      "source_query": "Stadionul 1 Mai, Slatina",
+      "osm": "way/44424292",
+      "confidence": "high",
+      "confidence_note": "Potrivire exactă Nominatim (leisure=stadium). Pistă de atletism și terenuri adiacente confirmate în Overpass."
+    },
+    {
+      "id": "lps",
+      "name": "Liceul cu Program Sportiv Slatina",
+      "address": "Strada Toamnei 10, Slatina",
+      "lat": 44.43062,
+      "lon": 24.3746,
+      "source_query": "Liceul cu Program Sportiv Slatina",
+      "osm": "way/490818456",
+      "confidence": "high",
+      "confidence_note": "Potrivire exactă Nominatim; adresa Str. Toamnei confirmată (nod OSM „Liceul Sportiv Slatina”, Str. Toamnei 10)."
+    },
+    {
+      "id": "radu-greceanu",
+      "name": "Colegiul Național „Radu Greceanu”",
+      "address": "Strada Nicolae Bălcescu, Slatina",
+      "lat": 44.43202,
+      "lon": 24.35111,
+      "source_query": "Colegiul Național Radu Greceanu, Slatina",
+      "osm": "way/490653648",
+      "confidence": "high",
+      "confidence_note": "Potrivire exactă Nominatim (way + nod OSM concordante)."
+    },
+    {
+      "id": "titulescu",
+      "name": "Liceul Teoretic „Nicolae Titulescu”",
+      "address": "Aleea Muncii, Slatina",
+      "lat": 44.42894,
+      "lon": 24.37135,
+      "source_query": "Liceul Teoretic Nicolae Titulescu, Slatina",
+      "osm": "way/481725182",
+      "confidence": "medium-high",
+      "confidence_note": "Potrivire Nominatim pe nume. Atenție: în OSM, în același loc există și nodul „Colegiul Național Vocațional Nicolae Titulescu – Corp B”; clădirea principală a Colegiului Vocațional este la 44.42665, 24.36945 (Aleea Rozelor 5). Verificați care instituție găzduiește evenimentul."
+    },
+    {
+      "id": "baza-dobrescu",
+      "name": "Baza Sportivă „Dumitru Dobrescu”",
+      "address": "Strada Ștrandului / Strada Basarabilor, Slatina",
+      "lat": 44.4243,
+      "lon": 24.3638,
+      "source_query": "Baza Sportivă Dumitru Dobrescu, Slatina; Complex Sportiv Dumitru Dobrescu Slatina; Overpass name~Dobrescu",
+      "osm": "pitch cluster way/561055832, way/561055833, way/482067045, way/1444952594 + bust node/13902307401",
+      "confidence": "medium",
+      "confidence_note": "Nici Nominatim, nici Overpass nu au un obiect numit „Baza Sportivă Dumitru Dobrescu”. Coordonata este centroidul grupului de terenuri de fotbal (OSM „Teren de fotbal”) de pe Str. Ștrandului, lângă care se află bustul „Dumitru Dobrescu” (node/13902307401, 44.42446, 24.36649), BMX Park și un mini-teren de baschet. Deducție din context, nu potrivire de nume — confirmați cu organizatorii."
+    },
+    {
+      "id": "baza-pirvulescu",
+      "name": "Baza Sportivă „Ion Pîrvulescu”",
+      "address": "zona Str. Libertății / Bd. A. I. Cuza, Slatina",
+      "lat": 44.42958,
+      "lon": 24.36736,
+      "source_query": "Baza Sportivă Ion Pîrvulescu, Slatina (Overpass: name~Pîrvulescu|Pirvulescu)",
+      "osm": "way/558465869",
+      "confidence": "high",
+      "confidence_note": "Nominatim nu a găsit nimic, dar Overpass a returnat leisure=pitch cu numele „Baza sportiva „Ion Pârvulescu”” (grafie â în loc de î). Potrivire de nume clară."
+    },
+    {
+      "id": "parcul-dobrescu",
+      "name": "Parcul „Eugen Dobrescu”",
+      "address": null,
+      "lat": null,
+      "lon": null,
+      "source_query": "Parcul Eugen Dobrescu, Slatina; Parcul Eugen Ionescu, Slatina; Parcul Central Slatina; Overpass name~Dobrescu|Eugen|Parcul",
+      "osm": null,
+      "confidence": "none",
+      "confidence_note": "Nu există în OSM niciun parc cu acest nume (nici „Eugen Dobrescu”, nici „Eugen Ionescu”). Coordonate lăsate null. Candidați: (a) parcul de pe Str. Ștrandului în care se află bustul „Dumitru Dobrescu” — way/490584124, 44.42339, 24.36542 (cel mai probabil dacă numele corect este „Dumitru Dobrescu”); (b) scuarul fără nume de lângă Primărie, cu statuia Tudor Vladimirescu — way/449515001, 44.42830, 24.35711 (potrivește descrierea „în centru, lângă Primărie”); (c) Parcul Esplanadei — way/449382463, 44.43015, 24.36271. Alegeți după confirmarea organizatorilor.",
+      "candidates": [
+        {
+          "label": "Parc cu bustul Dumitru Dobrescu (Str. Ștrandului)",
+          "lat": 44.42339,
+          "lon": 24.36542,
+          "osm": "way/490584124"
+        },
+        {
+          "label": "Scuar lângă Primărie (statuia Tudor Vladimirescu)",
+          "lat": 44.4283,
+          "lon": 24.35711,
+          "osm": "way/449515001"
+        },
+        {
+          "label": "Parcul Esplanadei",
+          "lat": 44.43015,
+          "lon": 24.36271,
+          "osm": "way/449382463"
+        }
+      ]
+    },
+    {
+      "id": "esplanada",
+      "name": "Esplanada (Parcul Esplanadei)",
+      "address": "Aleea Independenței, Slatina (lângă Casa de Cultură a Sindicatelor)",
+      "lat": 44.43015,
+      "lon": 24.36271,
+      "source_query": "Esplanada, Slatina (Nominatim: nimic) → Casa de Cultura Slatina + Overpass leisure=park",
+      "osm": "way/449382463",
+      "confidence": "high",
+      "confidence_note": "„Esplanada, Slatina” nu a dat rezultat în Nominatim, dar Overpass are parcul „Parcul Esplanadei”, adiacent Casei de Cultură a Sindicatelor (way/481566688, 44.43070, 24.36349, Aleea Independenței 3) și zonei pietonale Aleea Independenței."
+    },
+    {
+      "id": "primaria",
+      "name": "Primăria Municipiului Slatina",
+      "address": "Strada Mihail Kogălniceanu 1, Slatina",
+      "lat": 44.42798,
+      "lon": 24.35538,
+      "source_query": "Strada Mihail Kogălniceanu 1, Slatina",
+      "osm": "way/549348714",
+      "confidence": "high",
+      "confidence_note": "Potrivire exactă pe adresă (amenity=townhall, „Primăria Slatina”, Str. Mihail Kogălniceanu 1). Interogarea „Primăria Municipiului Slatina” nu a dat rezultat; cea pe adresă da."
+    },
+    {
+      "id": "parcul-tineretului",
+      "name": "Parcul Tineretului",
+      "address": "Bulevardul Alexandru Ioan Cuza / Strada Artileriei, Slatina",
+      "lat": 44.42733,
+      "lon": 24.38431,
+      "source_query": "Parcul Tineretului, Slatina",
+      "osm": "way/691374387",
+      "confidence": "high",
+      "confidence_note": "Potrivire exactă Nominatim (leisure=park). Conține pista de alergare (way/760145974). Delimitat de Bd. A. I. Cuza (N), Str. Artileriei (E), Str. Crizantemei (S) și Str. Tunari / McDonald's (V)."
+    }
+  ]
+}

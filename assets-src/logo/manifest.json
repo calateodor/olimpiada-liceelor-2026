@@ -1,0 +1,140 @@
+{
+  "sources": {
+    "coins": "C:\\Users\\Teo\\AppData\\Local\\Temp\\oltricouri\\1.jpg",
+    "wordmark_logo_full_coins_group": "D:\\Teo\\PNL\\Olimpiada\\Olimpiada Liceelor 2026\\Logo\\Ol logo 2026.png"
+  },
+  "coins": [
+    {
+      "name": "blue",
+      "file": "coin-blue.png",
+      "rim_color": "#2f749e",
+      "source_center": [
+        942.2,
+        419.4
+      ],
+      "source_radius": 219.4,
+      "occluded_by": [],
+      "reconstructed_fraction": 0.038,
+      "output_size": 840,
+      "output_center": [
+        420,
+        420
+      ],
+      "output_radius": 400.0
+    },
+    {
+      "name": "black",
+      "file": "coin-black.png",
+      "rim_color": "#2f2d28",
+      "source_center": [
+        1418.9,
+        424.1
+      ],
+      "source_radius": 218.0,
+      "occluded_by": [
+        "yellow"
+      ],
+      "reconstructed_fraction": 0.142,
+      "output_size": 840,
+      "output_center": [
+        420,
+        420
+      ],
+      "output_radius": 400.0
+    },
+    {
+      "name": "red",
+      "file": "coin-red.png",
+      "rim_color": "#bc3b2a",
+      "source_center": [
+        1890.3,
+        422.9
+      ],
+      "source_radius": 219.4,
+      "occluded_by": [
+        "green"
+      ],
+      "reconstructed_fraction": 0.119,
+      "output_size": 840,
+      "output_center": [
+        420,
+        420
+      ],
+      "output_radius": 400.0
+    },
+    {
+      "name": "yellow",
+      "file": "coin-yellow.png",
+      "rim_color": "#e7a621",
+      "source_center": [
+        1163.1,
+        687.6
+      ],
+      "source_radius": 211.5,
+      "occluded_by": [
+        "blue"
+      ],
+      "reconstructed_fraction": 0.138,
+      "output_size": 840,
+      "output_center": [
+        420,
+        420
+      ],
+      "output_radius": 400.0
+    },
+    {
+      "name": "green",
+      "file": "coin-green.png",
+      "rim_color": "#3e863d",
+      "source_center": [
+        1637.9,
+        691.2
+      ],
+      "source_radius": 213.9,
+      "occluded_by": [
+        "black"
+      ],
+      "reconstructed_fraction": 0.274,
+      "output_size": 840,
+      "output_center": [
+        420,
+        420
+      ],
+      "output_radius": 400.0
+    }
+  ],
+  "z_order_top_to_bottom": [
+    "blue",
+    "yellow",
+    "black",
+    "green",
+    "red"
+  ],
+  "wordmark": {
+    "file": "wordmark.png",
+    "source_box": [
+      606,
+      332,
+      1598,
+      661
+    ]
+  },
+  "logo_full": {
+    "file": "logo-full.png",
+    "source_box": [
+      103,
+      330,
+      1598,
+      661
+    ]
+  },
+  "coins_group": {
+    "file": "coins-group.png",
+    "source_box": [
+      103,
+      330,
+      630,
+      613
+    ]
+  }
+}

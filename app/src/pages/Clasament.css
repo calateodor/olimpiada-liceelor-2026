@@ -1,0 +1,7 @@
+.cl { padding-bottom: var(--s24); }
+.cl-matrix { margin-top: clamp(var(--s16), 8vw, var(--s24)); }
+.cl-table th .mark { margin-inline: auto; }
+.cl-table td b { font-weight: 800; display: block; }
+.cl-pts { display: block; font-size: 10px; }
+.cl-p1 { background: #FFF6D6; } .cl-p2 { background: #F1F3F6; } .cl-p3 { background: #F8EBDD; }
+.cl-total td { border-top: 1px solid var(--fg); font-weight: 800; }

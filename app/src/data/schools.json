@@ -1,0 +1,66 @@
+{
+  "attribution": "Date © OpenStreetMap contributors (ODbL). Geocodare: Nominatim + Overpass API; rutare: OSRM (profil pieton).",
+  "schools": [
+    {
+      "id": "titulescu",
+      "name": "Liceul Teoretic „Nicolae Titulescu”",
+      "lat": 44.42894,
+      "lon": 24.37135,
+      "osm": "way/481725182",
+      "confidence": "medium-high"
+    },
+    {
+      "id": "minulescu",
+      "name": "Colegiul Național „Ion Minulescu”",
+      "lat": 44.42478,
+      "lon": 24.36281,
+      "osm": "node/4828304458",
+      "address": "Strada Basarabilor 33",
+      "confidence": "high"
+    },
+    {
+      "id": "greceanu",
+      "name": "Colegiul Național „Radu Greceanu”",
+      "lat": 44.43202,
+      "lon": 24.35111,
+      "osm": "way/490653648",
+      "confidence": "high"
+    },
+    {
+      "id": "lps",
+      "name": "Liceul cu Program Sportiv Slatina",
+      "lat": 44.43062,
+      "lon": 24.3746,
+      "osm": "way/490818456",
+      "address": "Strada Toamnei 10",
+      "confidence": "high"
+    },
+    {
+      "id": "alexe-marin",
+      "name": "Colegiul Tehnic „Alexe Marin”",
+      "lat": 44.43133,
+      "lon": 24.38749,
+      "osm": "way/413271898",
+      "confidence": "high",
+      "note": "În OSM apare ca „Colegiul Tehnic Alexe Marin” (nu „Tehnologic”); Nominatim nu l-a găsit, potrivit prin Overpass."
+    },
+    {
+      "id": "metalurgic",
+      "name": "Colegiul Tehnic Metalurgic",
+      "lat": 44.42336,
+      "lon": 24.37873,
+      "osm": "way/490686819",
+      "confidence": "high",
+      "note": "În OSM apare ca „Colegiul Tehnic Metalurgic” (nu „Liceul Tehnologic”); potrivit prin Overpass."
+    },
+    {
+      "id": "economic",
+      "name": "Colegiul Economic „Petre S. Aurelian”",
+      "lat": 44.4343,
+      "lon": 24.37287,
+      "osm": "way/413120144",
+      "confidence": "high",
+      "note": "În OSM: „Colegiul Economic P.S. Aurelian”; potrivit prin Overpass."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "attribution": "Date © OpenStreetMap contributors (ODbL). Geocodare: Nominatim + Overpass API; rutare: OSRM (profil pieton).",
+  "distance_m": 4900.7,
+  "waypoints": [
+    {
+      "name": "Start / Sosire – Aleea Eroilor × Str. Artileriei (colț SE Parcul Tineretului)",
+      "lat": 44.42709,
+      "lon": 24.38613,
+      "note": "„Aleea Eroilor” nu există în OSM; strada de pe latura sudică a Parcului Tineretului este mapată ca „Strada Crizantemei” (way/691374386) și este singura care se potrivește descrierii (se intersectează cu Str. Artileriei și duce la McDonald's / Str. Tunari).",
+      "snapped": {
+        "lat": 44.427089,
+        "lon": 24.38613,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Aleea Cazărmii"
+      }
+    },
+    {
+      "name": "Aleea Eroilor (latura sudică Parcul Tineretului)",
+      "lat": 44.42661,
+      "lon": 24.38366,
+      "snapped": {
+        "lat": 44.426611,
+        "lon": 24.38366,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Strada Crizantemei"
+      }
+    },
+    {
+      "name": "McDonald's (Str. Tunari 1B)",
+      "lat": 44.4272,
+      "lon": 24.38205,
+      "note": "Clădirea McDonald's: 44.42718, 24.38245 (way/754581641); punctul este pe carosabilul Str. Tunari.",
+      "snapped": {
+        "lat": 44.427201,
+        "lon": 24.382023,
+        "snap_distance_m": 2.2,
+        "osrm_street": "Strada Tunari"
+      }
+    },
+    {
+      "name": "Sens giratoriu McDonald's (Str. Tunari × Bd. A. I. Cuza)",
+      "lat": 44.42765,
+      "lon": 24.38207,
+      "note": "junction=roundabout way/760598297",
+      "snapped": {
+        "lat": 44.427646,
+        "lon": 24.382082,
+        "snap_distance_m": 1.1,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Winmarkt – punct de întoarcere (capăt vest Bd. A. I. Cuza)",
+      "lat": 44.42842,
+      "lon": 24.36282,
+      "note": "„Winmarkt Slatina” nu există în OSM. Singurul magazin universal din oraș este „Plazza Slatina” (node/4535236692, 44.42881, 24.36294), la capătul vestic al Bd. Cuza, exact unde descrierea traseului cere întoarcerea — foarte probabil aceeași clădire. Confirmați.",
+      "snapped": {
+        "lat": 44.428419,
+        "lon": 24.362819,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Strada Ghiocei"
+      }
+    },
+    {
+      "name": "Instituția Prefectului – Județul Olt (Bd. A. I. Cuza 16)",
+      "lat": 44.42822,
+      "lon": 24.36622,
+      "note": "Clădirea: 44.42779, 24.36626 (way/662186395); punctul este pe carosabilul Bd. Cuza.",
+      "snapped": {
+        "lat": 44.428215,
+        "lon": 24.366217,
+        "snap_distance_m": 0.6,
+        "osrm_street": "Bulevardul Alexandru Ioan Cuza"
+      }
+    },
+    {
+      "name": "Sens giratoriu Casa de Cultură a Tineretului (Bd. A. I. Cuza × Str. Ecaterina Teodoroiu)",
+      "lat": 44.4263,
+      "lon": 24.3754,
+      "note": "Casa de Cultură a Tineretului: 44.42607, 24.37695 (way/481940466, Str. Ecaterina Teodoroiu 1). Ieșirea a 2-a = Str. Ecaterina Teodoroiu spre SE.",
+      "snapped": {
+        "lat": 44.426352,
+        "lon": 24.375246,
+        "snap_distance_m": 13.6,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Str. Ecaterina Teodoroiu",
+      "lat": 44.42385,
+      "lon": 24.3799,
+      "snapped": {
+        "lat": 44.423929,
+        "lon": 24.379974,
+        "snap_distance_m": 10.6,
+        "osrm_street": "Strada Ecaterina Teodoroiu"
+      }
+    },
+    {
+      "name": "Sens giratoriu Steaua (Str. Artileriei × Str. Ecaterina Teodoroiu / DJ546, lângă Kaufland Artileriei 2K)",
+      "lat": 44.42161,
+      "lon": 24.38472,
+      "note": "junction=roundabout way/44536964; Kaufland way/490681540 (44.42414, 24.38629); Piațeta Steaua 44.42173, 24.38395.",
+      "snapped": {
+        "lat": 44.421724,
+        "lon": 24.384757,
+        "snap_distance_m": 13.0,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Str. Artileriei",
+      "lat": 44.42549,
+      "lon": 24.38572,
+      "snapped": {
+        "lat": 44.42549,
+        "lon": 24.385724,
+        "snap_distance_m": 0.3,
+        "osrm_street": "Strada Artileriei"
+      }
+    },
+    {
+      "name": "Sosire – Aleea Eroilor × Str. Artileriei",
+      "lat": 44.42709,
+      "lon": 24.38613,
+      "snapped": {
+        "lat": 44.427089,
+        "lon": 24.38613,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Aleea Cazărmii"
+      }
+    }
+  ]
+}

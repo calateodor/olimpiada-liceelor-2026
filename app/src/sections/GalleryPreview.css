@@ -1,0 +1,9 @@
+.gp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4); }
+.gp-item img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; border-radius: var(--r-md); background: var(--n-50); }
+.gp-item a { display: grid; gap: var(--s2); }
+.gp-item:nth-child(4n+2) { margin-top: var(--s10); }
+.gp-item:nth-child(4n+4) { margin-top: var(--s6); }
+.gp-empty { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); align-items: end; }
+.gp-empty img { aspect-ratio: 3 / 4; object-fit: contain; width: 100%; background: var(--bg-2); border-radius: var(--r-lg); padding: var(--s6); }
+.gp-empty p { grid-column: 1 / -1; }
+@media (max-width: 720px) { .gp-grid { grid-template-columns: 1fr 1fr; } .gp-empty { grid-template-columns: 1fr 1fr 1fr; } }

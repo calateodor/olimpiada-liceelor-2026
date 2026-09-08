@@ -1,0 +1,2760 @@
+{
+  "edition": 2026,
+  "organizer": "Primăria Municipiului Slatina",
+  "regulations": [
+    {
+      "id": "general",
+      "slug": "general",
+      "title": "Regulament general",
+      "subtitle": "Regulament competițional sportiv între licee",
+      "category": "general",
+      "gender": null,
+      "source": "REGULAMENT GENERAL OLIMPIADA LICEELOR 2026.docx",
+      "source_title_lines": [
+        "Regulament Competițional Sportive între Licee",
+        "in cadrul”Olimpiada Liceelor” Slatina 2025"
+      ],
+      "source_line_count": 46,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competițiile sportive (fotbal, handbal, volei, baschet) se desfășoară în sistem de grupe. Echipele sau sportivii sunt împărțiți în grupe, fiecare participant urmând să joace împotriva celorlalți din grupă. În funcție de rezultatele obținute, se stabilește un clasament în cadrul fiecărei grupe, iar primii clasați (sau un număr stabilit de participanți) se califică în fazele următoare ale competiției.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Tragerea la sorți stabilește meciurile fiecărei runde.",
+              "bullets": []
+            },
+            {
+              "number": "1.3.",
+              "text": "Respectarea regulamentului fiecărui sport este obligatorie (după regulamentele federațiilor de specialitate).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Organizare și program",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "Competiția se desfășoară pe grupe – sferturi – semifinale – finală (în funcție de numărul echipelor/participanților).",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Modificarile programului meciurilor este anunțat cu cel puțin 24 de ore înainte.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Prezența la teren/sală este obligatorie cu 15 minute înainte de ora programată.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizatori.",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "Deciziile arbitrului sunt definitive și nu pot fi contestate în timpul jocului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Durata meciurilor și criterii de departajare",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate, se aplică regulile specifice fiecărui sport (prelungiri, set decisiv, lovituri de departajare, fotofiniș la cros).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Regulament pe sporturi",
+          "items": [
+            {
+              "number": null,
+              "text": "Fotbal",
+              "bullets": [
+                "(teren redus 4+1 si 3 rezerve)",
+                "Durata: 2 reprize a câte 20 min.",
+                "În caz de egalitate: lovituri de departajare (3 executanți inițiali, apoi „sudden death”).",
+                "Echipele pot avea max. 4 rezerve, cu schimbări nelimitate.",
+                "Pauza – 5 minute.",
+                "Lot maxim: 8 jucători."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Handbal",
+              "bullets": [
+                "Durata: 2 reprize x 15 min (cu pauză de 5 min).",
+                "Egalitate: aruncări de la 7 m (3 executanți, apoi „sudden death”).",
+                "Lot maxim: 9 jucători."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Volei",
+              "bullets": [
+                "Meciul se dispută din 3 seturi câștigate (până la 25 puncte, diferență de min. 2).",
+                "Dacă scorul devine 2-2 la seturi, se joacă set decisiv până la 15 puncte.",
+                "Lot maxim: 12 jucători."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Tenis de masă",
+              "bullets": [
+                "Sistem eliminatoriu, meciuri din 3 seturi câștigate (set până la 11 puncte).",
+                "Egalitate la 10-10: se joacă până la diferență de 2 puncte."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Cros",
+              "bullets": [
+                "5 km, alergare se va face pe distanță - traseul stabilit de organizatori.",
+                "Start în comun.",
+                "Clasamentul se face după ordinea sosirii (fotofiniș dacă e necesar).",
+                "Primele locuri se califică în runda următoare, până la stabilirea finalei."
+              ],
+              "emphasis": true
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Comportament și fair-play",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Se interzic violența, injuriile, comportamentele nesportive.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Abaterile pot duce la eliminarea jucătorului sau chiar a echipei din competiție.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Premiere",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Se acordă diplome, medalii sau cupe pentru locurile I–III.",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Echipament:",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Fiecare jucător din echipă trebuie să aibă tricouri de aceeași culoare.",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Dacă ambele au culori apropiate → se folosesc veste.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "futsal",
+      "slug": "futsal",
+      "title": "Futsal",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "băieți",
+      "source": "1. Regulament FUTSAL (B) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – FUTSAL"
+      ],
+      "source_line_count": 45,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de futsal se desfășoară conform prezentului regulament și regulilor oficiale stabilite de FIFA și UEFA, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Participarea la competiție implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Echipele sunt repartizate în grupe, fiecare jucând împotriva tuturor echipelor din grupă.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Se acordă puncte astfel:",
+              "bullets": [
+                "Victorie – 3 puncte",
+                "Egal – 1 punct",
+                "Înfrângere – 0 puncte"
+              ]
+            },
+            {
+              "number": "2.4.",
+              "text": "Primele echipe clasate (în funcție de numărul stabilit) se califică în fazele eliminatorii.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Număr mai mare de goluri marcate"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Echipe și jucători",
+          "items": [
+            {
+              "number": "4.1.",
+              "text": "O echipă este formată din maximum 12 jucători.",
+              "bullets": []
+            },
+            {
+              "number": "4.2.",
+              "text": "Pe teren se află 5 jucători (4 + portar).",
+              "bullets": []
+            },
+            {
+              "number": "4.3.",
+              "text": "Schimbările sunt nelimitate și se fac în timpul jocului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Durata jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciul se joacă în 2 reprize a câte 15 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Pauza dintre reprize: 5 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.3.",
+              "text": "Cronometrul poate fi oprit în situații speciale (accidentări, time-out).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Terenul și mingea",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Meciurile se desfășoară pe teren de dimensiuni reduse.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Se utilizează mingea oficială de futsal (mai mică, cu săritură redusă).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Reguli de joc (esențial)",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Nu există ofsaid.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Repunerea mingii se face cu piciorul (nu cu mâna).",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "După 5 faulturi cumulative într-o repriză, se acordă lovitură de la 10 metri.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Cartonaș galben – avertisment.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Cartonaș roșu – eliminare; echipa joacă în inferioritate 2 minute sau până la primirea unui gol.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Jucătorul eliminat nu mai poate reintra în meci.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Echipament",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Echipament obligatoriu: tricou, șort, încălțări adecvate jocului.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Portarul trebuie să aibă echipament distinct.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "handbal",
+      "slug": "handbal",
+      "title": "Handbal",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "fete",
+      "source": "2. Regulament HANDBAL (F) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – HANDBAL"
+      ],
+      "source_line_count": 57,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de handbal feminin se desfășoară între liceele din municipiul Slatina, în conformitate cu prezentul regulament și regulile stabilite de IHF și EHF, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Participarea la competiție implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "La competiție participă 7 echipe, reprezentând liceele din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Fiecare echipă poate înscrie maximum 9 jucătoare (6 + 1 + 2 rezerve).",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Participantele trebuie să fie eleve ale liceului pe care îl reprezintă.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "Echipele vor fi împărțite în:",
+              "bullets": [
+                "Grupa A – 4 echipe",
+                "Grupa B – 3 echipe"
+              ]
+            },
+            {
+              "number": "3.3.",
+              "text": "În cadrul fiecărei grupe se joacă sistem „fiecare cu fiecare”.",
+              "bullets": []
+            },
+            {
+              "number": "3.4.",
+              "text": "Clasamentul în grupe se stabilește pe baza punctajului:",
+              "bullets": [
+                "Victorie → 3 puncte",
+                "Egal → 1 punct",
+                "Înfrângere → 0 puncte"
+              ]
+            },
+            {
+              "number": "3.5.",
+              "text": "Se califică în semifinale:",
+              "bullets": [
+                "Locurile 1 și 2 din fiecare grupă"
+              ]
+            },
+            {
+              "number": "3.6.",
+              "text": "Semifinale:",
+              "bullets": [
+                "Locul 1 Grupa A vs Locul 2 Grupa B",
+                "Locul 1 Grupa B vs Locul 2 Grupa A"
+              ]
+            },
+            {
+              "number": "3.7.",
+              "text": "Câștigătoarele dispută finala, iar învinsele – finala mică (locul 3).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Număr mai mare de goluri marcate"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Durata jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciurile se dispută în 2 reprize a câte 15 minute (adaptat competițiilor școlare).",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Pauza dintre reprize: 5 minute.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Echipe și desfășurarea jocului",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Echipa este formată din 7 jucătoare + 2 rezerve",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Pe teren evoluează 7 jucătoare pentru fiecare echipă (6 jucătoare de câmp + 1 portar).",
+              "bullets": []
+            },
+            {
+              "number": "6.3.",
+              "text": "Schimbările sunt nelimitate și se efectuează în zona de schimb.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Teren și echipament",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Meciurile se desfășoară pe teren de handbal standard, în sală.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Echipamentul este obligatoriu: tricou, șort, încălțăminte de sală.",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "Portarul trebuie să aibă echipament distinct.",
+              "bullets": []
+            },
+            {
+              "number": "7.4.",
+              "text": "Echipele trebuie să aibă echipamente diferite ca culoare.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Reguli de bază",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "O echipă poate avea posesia mingii maximum 3 secunde fără a pasa sau a dribla.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Sunt permise maximum 3 pași fără dribling.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Contactul fizic este permis doar în limitele regulamentului.",
+              "bullets": []
+            },
+            {
+              "number": "8.4.",
+              "text": "Aruncările de la 7 metri se acordă pentru faulturi clare de gol.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Avertisment (cartonaș galben)",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Eliminare temporară de 2 minute",
+              "bullets": []
+            },
+            {
+              "number": "9.3.",
+              "text": "Cartonaș roșu – eliminare definitivă",
+              "bullets": []
+            },
+            {
+              "number": "9.4.",
+              "text": "Descalificare în cazuri grave",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "miss-mister",
+      "slug": "miss-mister",
+      "title": "Miss & Mister",
+      "subtitle": "Regulament de organizare",
+      "category": "artistic",
+      "gender": "mixt",
+      "source": "3. Regulament MISS & MISTER (M) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – MISS & MISTER"
+      ],
+      "source_line_count": 45,
+      "sections": [
+        {
+          "number": "I",
+          "heading": "SCOPUL CONCURSULUI",
+          "items": [
+            {
+              "number": null,
+              "text": "Concursul Miss/Mister are ca obiectiv promovarea creativității, talentului, eleganței și spiritului artistic al elevilor de liceu din municipiul Slatina. Evenimentul se dorește a fi o manifestare a imaginației, originalității și a spiritului de echipă.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "II",
+          "heading": "PARTICIPANȚI",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Concursul se adresează elevilor din clasele a IX-a, a X-a și a XI-a din liceele municipiului Slatina.",
+                "Participanții trebuie să respecte toate etapele și probele impuse de organizatori."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "III",
+          "heading": "STRUCTURA CONCURSULUI ȘI PROBE.",
+          "items": [
+            {
+              "number": null,
+              "text": "Concursul va conține mai multe probe, fiecare cu punctaj propriu:",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Proba de Prezentare – Ținută casual",
+              "bullets": [
+                "Obiectiv: evidențierea stilului personal și a naturaleții.",
+                "Evaluare: naturalețe, atitudine, originalitate în alegerea vestimentației casual."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Proba de Prezentare – Ținută elegantă",
+              "bullets": [
+                "Obiectiv: punerea în valoare a rafinamentului și eleganței.",
+                "Evaluare: eleganță, postură, încredere, coerența stilului ales."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Proba de talent – max. 3 minute (ex: dans, cântat, recitare etc.)",
+              "bullets": [
+                "Exemple: dans, interpretare vocală, instrumentală, recitare, actorie etc.",
+                "Evaluare: originalitate, expresivitate, prezență scenică, calitatea performanței."
+              ]
+            },
+            {
+              "number": null,
+              "text": "Proba de dans",
+              "bullets": [
+                "Durată: aproximativ 1-2 minute.",
+                "Colajul muzical va fi pus la dispoziție de organizatori după finalizarea înscrierilor.",
+                "Ținută obligatorie: smart casual.",
+                "Evaluare: sincronizare, creativitate, atitudine, ritm"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Proba de Cultură Generală & Întrebări de Personalitate",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Structură:",
+              "bullets": [
+                "1 întrebare de cultură generală/logică/întrebări cu tâlc",
+                "Intrebările vor fi la prima vedere.",
+                "Evaluare: spontaneitate, claritatea răspunsului, coerență, capacitatea de exprimare."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "IV",
+          "heading": "PROCESUL DE JURIZARE",
+          "items": [
+            {
+              "number": null,
+              "text": "1. Criterii de evaluare generale",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Fiecare membru al juriului va nota pe o scară de la 1 la 5 următoarele criterii:",
+              "bullets": [
+                "Proba de Prezentare – Ținută casual - Naturalețe, stil personal, atitudine",
+                "Proba de Prezentare – Ținută elegantă - Eleganță, rafinament, postură, încredere",
+                "Proba de talent - Originalitate, expresivitate, prezență scenică, calitatea execuției",
+                "Proba de dans (colaj impus) - Sincronizare, creativitate, ritm, atitudine",
+                "Proba de cultură generală și personalitate - Răspunsuri corecte, coerente și spontane (personalitate)"
+              ]
+            },
+            {
+              "number": null,
+              "text": "2. Procesul de notare",
+              "bullets": [
+                "Fiecare membru va avea un tabel individual de jurizare.",
+                "Se va acorda un punctaj total pentru fiecare participant.",
+                "Deciziile juriului sunt finale și nu pot fi contestate."
+              ],
+              "emphasis": true
+            }
+          ]
+        },
+        {
+          "number": "V",
+          "heading": "REGULI SUPLIMENTARE ȘI RECOMANDĂRI",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Participanții sunt responsabili de costumele și recuzita necesară momentelor lor.",
+                "Nu sunt permise momente cu conținut ofensator, vulgar sau politic.",
+                "Organizatorii oferă sprijin logistic (sunet, lumini, proiector).",
+                "Participanții care nu respectă regulamentul pot fi descalificați."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "baschet",
+      "slug": "baschet",
+      "title": "Baschet",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "băieți",
+      "source": "4. Regulament BASCHET (B) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – BASCHET"
+      ],
+      "source_line_count": 54,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de baschet se desfășoară în cadrul „Olimpiadei Liceelor” din municipiul Slatina, conform prezentului regulament și regulilor stabilite de FIBA și FIBA Europe, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Competiția se desfășoară separat pentru fete și băieți, pe aceleași reguli.",
+              "bullets": []
+            },
+            {
+              "number": "1.3.",
+              "text": "Participarea implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "La competiție participă echipele liceelor din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Fiecare liceu poate înscrie câte o echipă de băieți.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "O echipă poate avea maximum 7 jucători. (5 titulari+2 rezerve)",
+              "bullets": []
+            },
+            {
+              "number": "2.4.",
+              "text": "Participanții trebuie să fie elevi ai liceului pe care îl reprezintă.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "În funcție de numărul de echipe, acestea vor fi împărțite în grupe (ex: 2 grupe – una de 4 echipe și una de 3 echipe).",
+              "bullets": []
+            },
+            {
+              "number": "3.3.",
+              "text": "În cadrul fiecărei grupe se joacă sistem „fiecare cu fiecare”.",
+              "bullets": []
+            },
+            {
+              "number": "3.4.",
+              "text": "Clasamentul în grupe se stabilește pe baza punctajului:",
+              "bullets": [
+                "Victorie → 2 puncte",
+                "Înfrângere → 1 punct",
+                "Neprezentare → 0 puncte"
+              ]
+            },
+            {
+              "number": "3.5.",
+              "text": "Se califică în semifinale:",
+              "bullets": [
+                "Locurile 1 și 2 din fiecare grupă"
+              ]
+            },
+            {
+              "number": "3.6.",
+              "text": "Semifinale:",
+              "bullets": [
+                "Locul 1 Grupa A vs Locul 2 Grupa B",
+                "Locul 1 Grupa B vs Locul 2 Grupa A"
+              ]
+            },
+            {
+              "number": "3.7.",
+              "text": "Câștigătoarele dispută finala, iar învinsele – finala mică (locul 3).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Număr mai mare de puncte marcate"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Durata jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciurile se dispută în 2 reprize a câte 15 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Pauza dintre reprize: 2 minute.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Echipe și desfășurarea jocului",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Pe teren evoluează 5 jucători pentru fiecare echipă.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Numărul minim pentru începerea meciului: 5 jucători.",
+              "bullets": []
+            },
+            {
+              "number": "6.3.",
+              "text": "Schimbările sunt nelimitate și se efectuează conform regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Reguli de bază",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Se aplică regulile oficiale de baschet.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Timp de atac: 24 secunde (poate fi adaptat dacă nu există cronometru oficial).",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "După 5 faulturi personale, jucătorul este eliminat din joc.",
+              "bullets": []
+            },
+            {
+              "number": "7.4.",
+              "text": "Se acordă aruncări libere conform regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Teren și echipament",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Meciurile se desfășoară pe teren de baschet standard.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Echipamentul este obligatoriu: tricou, șort, încălțăminte sport.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Echipele trebuie să aibă echipamente diferite ca culoare.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Fault tehnic",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Eliminare pentru abateri grave",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenis-de-masa",
+      "slug": "tenis-de-masa",
+      "title": "Tenis de masă",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "băieți și fete",
+      "source": "5. Regulament TENIS DE MASĂ  (B-F) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – TENIS DE MASĂ"
+      ],
+      "source_line_count": 43,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de tenis de masă se desfășoară în cadrul „Olimpiadei Liceelor” din municipiul Slatina, conform prezentului regulament și regulilor stabilite de ITTF și ETTU, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Competiția se desfășoară separat pentru fete și băieți, pe aceleași reguli.",
+              "bullets": []
+            },
+            {
+              "number": "1.3.",
+              "text": "Participarea implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "La competiție participă elevi din 7 licee din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Fiecare liceu poate înscrie:",
+              "bullets": [
+                "1 sportiv (fete) - 1 sportiv (băieți)"
+              ]
+            },
+            {
+              "number": "2.3.",
+              "text": "Participanții trebuie să fie elevi ai liceului pe care îl reprezintă.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Competiția se desfășoară în sistem eliminatoriu (knock-out).",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "Sportivii sunt înscriși într-un tablou competițional stabilit prin tragere la sorți.",
+              "bullets": []
+            },
+            {
+              "number": "3.3.",
+              "text": "Sportivii învinși sunt eliminați din competiție, iar învingătorii avansează în turul următor.",
+              "bullets": []
+            },
+            {
+              "number": "3.4.",
+              "text": "Se dispută:",
+              "bullets": [
+                "tururi preliminare",
+                "sferturi de finală (dacă este cazul)",
+                "semifinale",
+                "finala"
+              ]
+            },
+            {
+              "number": "3.5.",
+              "text": "Sportivii învinși în semifinale pot disputa finala mică (locul 3).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Sistem de joc",
+          "items": [
+            {
+              "number": "4.1.",
+              "text": "Meciurile se dispută în sistemul „cel mai bun din 3 seturi”.",
+              "bullets": []
+            },
+            {
+              "number": "4.2.",
+              "text": "Un set se joacă până la 11 puncte, cu diferență de minimum 2 puncte.",
+              "bullets": []
+            },
+            {
+              "number": "4.3.",
+              "text": "Serviciul se schimbă la fiecare 5 puncte.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Desfășurarea jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Fiecare meci se joacă între doi sportivi.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Mingea trebuie să atingă masa proprie înainte de a trece peste fileu.",
+              "bullets": []
+            },
+            {
+              "number": "5.3.",
+              "text": "Este permis un singur contact cu mingea pentru fiecare schimb.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Teren și echipament",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Meciurile se desfășoară în sală, pe mese standard de tenis de masă.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Se utilizează mingi omologate.",
+              "bullets": []
+            },
+            {
+              "number": "6.3.",
+              "text": "Sportivii trebuie să poarte echipament sportiv adecvat.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Comportamentul nesportiv poate duce la avertisment.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Repetarea abaterilor poate duce la pierderea punctelor sau a meciului.",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "Deciziile arbitrilor sunt obligatorii.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "volei",
+      "slug": "volei",
+      "title": "Volei",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "fete",
+      "source": "6. Regulament VOLEI (F) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – VOLEI FEMININ"
+      ],
+      "source_line_count": 58,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de volei feminin se desfășoară în cadrul „Olimpiadei Liceelor” din municipiul Slatina, conform prezentului regulament și regulilor stabilite de FIVB și CEV, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Participarea la competiție implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "La competiție participă echipele de volei feminin ale liceelor din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Fiecare liceu poate înscrie o singură echipă.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "O echipă poate avea maximum 8 jucătoare.",
+              "bullets": []
+            },
+            {
+              "number": "2.4.",
+              "text": "Participantele trebuie să fie eleve ale liceului pe care îl reprezintă.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "În funcție de numărul de echipe (ex: 7 echipe), acestea vor fi împărțite în:",
+              "bullets": [
+                "Grupa A – 4 echipe",
+                "Grupa B – 3 echipe"
+              ]
+            },
+            {
+              "number": "3.3.",
+              "text": "În cadrul fiecărei grupe se joacă sistem „fiecare cu fiecare”.",
+              "bullets": []
+            },
+            {
+              "number": "3.4.",
+              "text": "Clasamentul în grupe se stabilește pe baza punctajului:",
+              "bullets": [
+                "Victorie 2–0 sau 2–1 → 3 puncte",
+                "Înfrângere 1–2 → 1 punct",
+                "Înfrângere 0–2 → 0 puncte"
+              ]
+            },
+            {
+              "number": "3.5.",
+              "text": "Se califică în semifinale:",
+              "bullets": [
+                "Locurile 1 și 2 din fiecare grupă"
+              ]
+            },
+            {
+              "number": "3.6.",
+              "text": "Semifinale:",
+              "bullets": [
+                "Locul 1 Grupa A vs Locul 2 Grupa B",
+                "Locul 1 Grupa B vs Locul 2 Grupa A"
+              ]
+            },
+            {
+              "number": "3.7.",
+              "text": "Câștigătoarele dispută finala, iar învinsele – finala mică (locul 3).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Raportul seturilor (seturi câștigate / pierdute)"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Sistem de joc",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciurile se dispută în sistemul „cel mai bun din 3 seturi”.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Primele două seturi se joacă până la 25 puncte (diferență minim 2 puncte).",
+              "bullets": []
+            },
+            {
+              "number": "5.3.",
+              "text": "În caz de egalitate (1–1), setul decisiv se joacă până la 15 puncte.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Echipe și desfășurarea jocului",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Pe teren evoluează 6 jucătoare pentru fiecare echipă.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Se pot efectua schimbări conform regulamentului oficial (max. 6 schimbări/set).",
+              "bullets": []
+            },
+            {
+              "number": "6.3.",
+              "text": "Este permisă utilizarea jucătoarei libero.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Teren și echipament",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Meciurile se desfășoară pe teren de volei standard, în sală.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Înălțimea fileului: 2,24 m.",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "Echipamentul este obligatoriu: tricou, șort, încălțăminte de sală.",
+              "bullets": []
+            },
+            {
+              "number": "7.4.",
+              "text": "Echipele trebuie să aibă echipamente diferite ca culoare.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Reguli de bază",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Se aplică regulile oficiale de volei.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Serviciul se execută din spatele liniei de fund.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Echipa are dreptul la maximum 3 atingeri pentru a trimite mingea peste fileu.",
+              "bullets": []
+            },
+            {
+              "number": "8.4.",
+              "text": "Blocajul nu se consideră atingere.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Avertisment verbal",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Cartonaș galben – avertisment oficial",
+              "bullets": []
+            },
+            {
+              "number": "9.3.",
+              "text": "Cartonaș roșu – punct pentru adversar",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graffiti",
+      "slug": "graffiti",
+      "title": "Graffiti",
+      "subtitle": "Regulament de organizare",
+      "category": "artistic",
+      "gender": "mixt",
+      "source": "7. Regulament GRAFITTI (M) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – GRAFITTI"
+      ],
+      "source_line_count": 31,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Scopul competiției",
+          "items": [
+            {
+              "number": null,
+              "text": "Proba de graffiti își propune:",
+              "bullets": [
+                "să încurajeze exprimarea artistică a elevilor prin artă urbană;",
+                "să promoveze mesajele sociale, culturale sau educaționale pozitive;",
+                "să valorifice spațiile publice sau panourile dedicate într-un mod creativ și responsabil."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți eligibili",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Elevi de liceu, înscriși la una dintre instituțiile de învățământ participante la Olimpiadă;",
+                "Participarea se face individual sau în echipe de maximum 3 membri;",
+                "Participanții trebuie să aibă acordul scris al părinților/tutorilor legali și al instituției de învățământ."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Structura concursului și probele",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Fiecare echipă va avea la dispoziție un perete sau un panou pentru lucrare",
+                "Zonele de lucru vor fi stabilite de organizatori pentru a evita suprapunerea lucrărilor",
+                "Etapa live: Execuția lucrării pe panouri/locații special amenajate oferite de organizatori.",
+                "Timp de execuție: 4-5 ore (în funcție de complexitate și condiții meteo).",
+                "Tematică liberă (Free Style). Schița lucrării propuse va fi pusă la dispoziția organizatorilor, spre aprobare, cu cel puțin 10 zile înainte de concurs.",
+                "Spray-uri/markere. Uneltele de bază vor fi puse la dispoziție de organizatori."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Criterii de evaluare",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Originalitate și creativitate",
+                "Tehnică și execuție",
+                "Mesaj transmis și impact vizual",
+                "Curățenia spațiului și respectarea timpului"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Reguli suplimentare",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Este interzisă reprezentarea mesajelor ofensatoare, discriminatorii, violente sau politice;",
+                "Este interzisă intervenția în afara suprafeței de concurs;",
+                "Nu se pot deteriora spațiile sau materialele puse la dispoziție;",
+                "Fumatul, consumul de alcool sau droguri în perimetrul concursului atrag eliminarea automată."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Recomandări pentru participanți",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Să vină îmbrăcați corespunzător pentru lucrul cu vopsele;",
+                "Să participe la briefingul tehnic de la începutul zilei pentru detalii organizatorice."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "voluntariat",
+      "slug": "voluntariat",
+      "title": "Voluntariat",
+      "subtitle": "Regulament de organizare",
+      "category": "voluntariat",
+      "gender": "mixt",
+      "source": "8. Regulament VOLUNTARIAT (M) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – VOLUNTARIAT"
+      ],
+      "source_line_count": 30,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Scopul probei:",
+          "items": [
+            {
+              "number": null,
+              "text": "Promovarea spiritului civic, implicării sociale și a valorilor umanitare în rândul elevilor din liceele din municipiul Slatina prin acțiuni de voluntariat în comunitate.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Participanți:",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Echipe formate din 10–15 elevi din clasele IX–XI, coordonate de un cadru didactic."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Cerințe pentru proba de voluntariat:",
+          "items": [
+            {
+              "number": null,
+              "text": "Fiecare echipă va desfășura o acțiune de voluntariat pe o temă aleasă (ex. protecția mediului, sprijin pentru persoane vârstnice, activități educative cu copii mai mici etc.), cu următoarele condiții:",
+              "bullets": [
+                "Acțiunea să aibă loc în comunitatea locală (Slatina).",
+                "Să fie documentată printr-un dosar de prezentare care va conține:",
+                "Titlul proiectului",
+                "Descrierea acțiunii",
+                "Obiective",
+                "Durată și locație",
+                "Parteneri implicați (dacă există)",
+                "Fotografii/filmări relevante",
+                "Impresii ale elevilor",
+                "Aportul fiecărui membru"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Evaluare:",
+          "items": [
+            {
+              "number": null,
+              "text": "Un juriu desemnat de organizatori va evalua fiecare proiect pe baza următoarelor criterii:",
+              "bullets": [
+                "Impactul în comunitate (30p)",
+                "Gradul de implicare al elevilor (20p)",
+                "Creativitate și inițiativă (20p)",
+                "Calitatea documentării și prezentării finale (20p)",
+                "Respectarea tematicii și regulamentului (10p)"
+              ]
+            },
+            {
+              "number": null,
+              "text": "Punctaj maxim: 100 puncte",
+              "bullets": [],
+              "emphasis": true
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Dispoziții finale:",
+          "items": [
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Participarea la această probă este voluntară, dar constituie parte integrantă din competiția interliceală.",
+                "Activitățile desfășurate trebuie să respecte toate normele legale privind siguranța elevilor și activitățile extrașcolare.",
+                "Orice abatere de la regulament poate duce la descalificare."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "galerie",
+      "slug": "galerie",
+      "title": "Galerie",
+      "subtitle": "Regulament de organizare",
+      "category": "artistic",
+      "gender": "mixt",
+      "source": "9. Regulament GALERIE (M) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – GALERIE"
+      ],
+      "source_line_count": 45,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de futsal se desfășoară conform prezentului regulament și regulilor oficiale stabilite de FIFA și UEFA, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Participarea la competiție implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Echipele sunt repartizate în grupe, fiecare jucând împotriva tuturor echipelor din grupă.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Se acordă puncte astfel:",
+              "bullets": [
+                "Victorie – 3 puncte",
+                "Egal – 1 punct",
+                "Înfrângere – 0 puncte"
+              ]
+            },
+            {
+              "number": "2.4.",
+              "text": "Primele echipe clasate (în funcție de numărul stabilit) se califică în fazele eliminatorii.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Număr mai mare de goluri marcate"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Echipe și jucători",
+          "items": [
+            {
+              "number": "4.1.",
+              "text": "O echipă este formată din maximum 12 jucători.",
+              "bullets": []
+            },
+            {
+              "number": "4.2.",
+              "text": "Pe teren se află 5 jucători (4 + portar).",
+              "bullets": []
+            },
+            {
+              "number": "4.3.",
+              "text": "Schimbările sunt nelimitate și se fac în timpul jocului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Durata jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciul se joacă în 2 reprize a câte 15 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Pauza dintre reprize: 5 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.3.",
+              "text": "Cronometrul poate fi oprit în situații speciale (accidentări, time-out).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Terenul și mingea",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Meciurile se desfășoară pe teren de dimensiuni reduse.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Se utilizează mingea oficială de futsal (mai mică, cu săritură redusă).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Reguli de joc (esențial)",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Nu există ofsaid.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Repunerea mingii se face cu piciorul (nu cu mâna).",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "După 5 faulturi cumulative într-o repriză, se acordă lovitură de la 10 metri.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Cartonaș galben – avertisment.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Cartonaș roșu – eliminare; echipa joacă în inferioritate 2 minute sau până la primirea unui gol.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Jucătorul eliminat nu mai poate reintra în meci.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Echipament",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Echipament obligatoriu: tricou, șort, încălțări adecvate jocului.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Portarul trebuie să aibă echipament distinct.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ],
+      "placeholder": true,
+      "note": "Textul sursă este o copie a regulamentului de futsal; regulamentul specific urmează să fie redactat."
+    },
+    {
+      "id": "majorete",
+      "slug": "majorete",
+      "title": "Majorete",
+      "subtitle": "Regulament de organizare",
+      "category": "artistic",
+      "gender": "fete",
+      "source": "10. Regulament MAJORETE (F) Olimpiada Liceelor 2026.docx",
+      "source_title_lines": [
+        "OLIMPIADA LICEELOR 2026",
+        "REGULAMENT DE ORGANIZARE – MAJORETE"
+      ],
+      "source_line_count": 45,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Competiția de futsal se desfășoară conform prezentului regulament și regulilor oficiale stabilite de FIFA și UEFA, adaptate la nivel local.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Participarea la competiție implică acceptarea integrală a regulamentului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "Competiția se desfășoară în sistem de grupe.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Echipele sunt repartizate în grupe, fiecare jucând împotriva tuturor echipelor din grupă.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Se acordă puncte astfel:",
+              "bullets": [
+                "Victorie – 3 puncte",
+                "Egal – 1 punct",
+                "Înfrângere – 0 puncte"
+              ]
+            },
+            {
+              "number": "2.4.",
+              "text": "Primele echipe clasate (în funcție de numărul stabilit) se califică în fazele eliminatorii.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Criterii de departajare în grupe",
+          "items": [
+            {
+              "number": null,
+              "text": "În caz de egalitate de puncte:",
+              "bullets": [
+                "a) Rezultatul direct",
+                "b) Număr mai mare de goluri marcate"
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Echipe și jucători",
+          "items": [
+            {
+              "number": "4.1.",
+              "text": "O echipă este formată din maximum 12 jucători.",
+              "bullets": []
+            },
+            {
+              "number": "4.2.",
+              "text": "Pe teren se află 5 jucători (4 + portar).",
+              "bullets": []
+            },
+            {
+              "number": "4.3.",
+              "text": "Schimbările sunt nelimitate și se fac în timpul jocului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Durata jocului",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Meciul se joacă în 2 reprize a câte 15 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Pauza dintre reprize: 5 minute.",
+              "bullets": []
+            },
+            {
+              "number": "5.3.",
+              "text": "Cronometrul poate fi oprit în situații speciale (accidentări, time-out).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "Terenul și mingea",
+          "items": [
+            {
+              "number": "6.1.",
+              "text": "Meciurile se desfășoară pe teren de dimensiuni reduse.",
+              "bullets": []
+            },
+            {
+              "number": "6.2.",
+              "text": "Se utilizează mingea oficială de futsal (mai mică, cu săritură redusă).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "Reguli de joc (esențial)",
+          "items": [
+            {
+              "number": "7.1.",
+              "text": "Nu există ofsaid.",
+              "bullets": []
+            },
+            {
+              "number": "7.2.",
+              "text": "Repunerea mingii se face cu piciorul (nu cu mâna).",
+              "bullets": []
+            },
+            {
+              "number": "7.3.",
+              "text": "După 5 faulturi cumulative într-o repriză, se acordă lovitură de la 10 metri.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "Sancțiuni disciplinare",
+          "items": [
+            {
+              "number": "8.1.",
+              "text": "Cartonaș galben – avertisment.",
+              "bullets": []
+            },
+            {
+              "number": "8.2.",
+              "text": "Cartonaș roșu – eliminare; echipa joacă în inferioritate 2 minute sau până la primirea unui gol.",
+              "bullets": []
+            },
+            {
+              "number": "8.3.",
+              "text": "Jucătorul eliminat nu mai poate reintra în meci.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "Arbitraj",
+          "items": [
+            {
+              "number": "9.1.",
+              "text": "Meciurile sunt conduse de arbitri desemnați de organizator.",
+              "bullets": []
+            },
+            {
+              "number": "9.2.",
+              "text": "Deciziile arbitrilor sunt definitive.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "Echipament",
+          "items": [
+            {
+              "number": "10.1.",
+              "text": "Echipament obligatoriu: tricou, șort, încălțări adecvate jocului.",
+              "bullets": []
+            },
+            {
+              "number": "10.2.",
+              "text": "Portarul trebuie să aibă echipament distinct.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "11.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "11.2.",
+              "text": "Situațiile neprevăzute se soluționează de comisia organizatoare la fața locului.",
+              "bullets": []
+            }
+          ]
+        }
+      ],
+      "placeholder": true,
+      "note": "Textul sursă este o copie a regulamentului de futsal; regulamentul specific urmează să fie redactat."
+    },
+    {
+      "id": "cros",
+      "slug": "cros",
+      "title": "Cros",
+      "subtitle": "Regulament de organizare",
+      "category": "sport",
+      "gender": "mixt",
+      "source": "Traseu cros 2026.doc + REGULAMENT GENERAL (secțiunea Cros) + anexa nr.1 REGULAMENT (art. 8, art. 22)",
+      "source_title_lines": [],
+      "source_line_count": null,
+      "sections": [
+        {
+          "number": "1",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "1.1.",
+              "text": "Proba de cros se desfășoară în cadrul „Olimpiadei Liceelor” Slatina 2026, conform prezentului regulament și regulamentului general al competiției.",
+              "bullets": []
+            },
+            {
+              "number": "1.2.",
+              "text": "Proba este mixtă (masculin și feminin) și este deschisă elevilor și cadrelor didactice ale liceelor din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "1.3.",
+              "text": "Fiecare liceu poate înscrie: Maxim 20 participanți (elevi și cadre didactice).",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "Sistem de desfășurare",
+          "items": [
+            {
+              "number": "2.1.",
+              "text": "Distanța de parcurs este de 5 km; alergarea se va face pe traseul stabilit de organizatori.",
+              "bullets": []
+            },
+            {
+              "number": "2.2.",
+              "text": "Start în comun.",
+              "bullets": []
+            },
+            {
+              "number": "2.3.",
+              "text": "Clasamentul se face după ordinea sosirii (fotofiniș dacă este necesar).",
+              "bullets": []
+            },
+            {
+              "number": "2.4.",
+              "text": "La proba Cros vor fi premiați primii trei concurenți care obțin cel mai bun timp de parcurgere a traseului.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "Traseul",
+          "items": [
+            {
+              "number": "3.1.",
+              "text": "Traseul competiției sportive de cros din cadrul programului Olimpiada Liceelor, ediția 2026. Startul va fi de pe str. Aleea Eroilor din Parcul Tineretului. Se va continua deplasarea la dreapta (McDonald's). Ajunși la sensul giratoriu, se va face stânga pe bld. A. I. Cuza și se va continua deplasarea până la magazinul Winmarkt. Acolo va fi un punct de ocolire și se va întoarce pe bld. A. I. Cuza, pe sensul de mers către Instituția Prefectului - Județul Olt. Deplasarea va continua până la sensul giratoriu de la Casa de Cultură a Tineretului, unde se va alerga pe a doua ieșire din sensul giratoriu, pe strada Ecaterina Teodoroiu, până la sensul giratoriu din zona Centrului Comercial din strada Artileriei (zona Steaua), unde se va alerga pe strada Artileriei până la intersecția cu str. Aleea Eroilor din Parcul Tineretului, către zona de Start/Finish. Atenție! Traseul se va parcurge o singură dată.",
+              "bullets": []
+            },
+            {
+              "number": "3.2.",
+              "text": "Pe scurt, etapele traseului:",
+              "bullets": [
+                "Start: str. Aleea Eroilor, Parcul Tineretului.",
+                "Se continuă deplasarea la dreapta (McDonald's).",
+                "La sensul giratoriu se face stânga pe bld. A. I. Cuza, până la magazinul Winmarkt.",
+                "La Winmarkt este punctul de ocolire; se revine pe bld. A. I. Cuza, pe sensul de mers către Instituția Prefectului – Județul Olt.",
+                "Se continuă până la sensul giratoriu de la Casa de Cultură a Tineretului; se ia a doua ieșire, pe strada Ecaterina Teodoroiu.",
+                "Se aleargă pe strada Ecaterina Teodoroiu până la sensul giratoriu din zona Centrului Comercial din strada Artileriei (zona Steaua).",
+                "Se aleargă pe strada Artileriei până la intersecția cu str. Aleea Eroilor (Parcul Tineretului), către zona de Start/Finish.",
+                "Atenție! Traseul se va parcurge o singură dată."
+              ]
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "Echipament și comportament",
+          "items": [
+            {
+              "number": "4.1.",
+              "text": "Participanții vor purta obligatoriu echipamentul cu însemnele manifestării pus la dispoziție de organizatori și încălțăminte adecvată alergării.",
+              "bullets": []
+            },
+            {
+              "number": "4.2.",
+              "text": "Se interzic violența, injuriile și comportamentele nesportive; abaterile pot duce la eliminarea participantului din competiție.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "5.1.",
+              "text": "Organizatorul își rezervă dreptul de a modifica regulamentul.",
+              "bullets": []
+            },
+            {
+              "number": "5.2.",
+              "text": "Situațiile neprevăzute se soluționează de către organizatori.",
+              "bullets": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anexa-hcl",
+      "slug": "anexa-hcl",
+      "title": "Regulament cadru (Anexa nr. 1 la HCL)",
+      "subtitle": "Regulament cadru de organizare a programului de stimulare a performanței „Olimpiada Liceelor”",
+      "category": "general",
+      "gender": null,
+      "source": "anexa nr.1 REGULAMENT.docx",
+      "source_title_lines": [
+        "Anexa nr.1 la HCL nr.________________2025",
+        "Regulament cadru organizare program de stimulare a performanței",
+        "„Olimpiada Liceelor”, 2025"
+      ],
+      "source_line_count": 117,
+      "sections": [
+        {
+          "number": "Capitolul I",
+          "heading": "Dispoziții generale",
+          "items": [
+            {
+              "number": "Art. 1",
+              "text": "Consiliul Local și Primăria municipiului Slatina organizează în perioada iunie - septembrie 2025, programul de stimulare a performanței - „Olimpiada Liceelor”, adresat elevilor din învățământul preuniversitar din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 2",
+              "text": "Programul ”Olimpiada Liceelor” este constituit din probe competiționale cu caracter educativ, artistic și sportiv, la care se pot înscrie elevii claselor a IX-a, a X-a și a XI-a din liceele din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 3",
+              "text": "Programul ”Olimpiada Liceelor” are ca obiectiv principal identificarea, încurajarea și susținerea elevilor cu potențial ridicat de performanță din unitățile de învățământ liceal din municipiul Slatina. Regulamentul definește cadrul specific de organizare și desfășurare a programului de stimulare a performanței „Olimpiada Liceelor”, și este elaborat conform prevederilor Metodologiei-cadru de organizare și desfășurare a competițiilor școlare si extrascolare, aprobată prin OMECTS nr. 3035/2012, cu modificările și completările ulterioare.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 4",
+              "text": "Programul de stimulare a performanței - „Olimpiada Liceelor” se va realiza în colaborare cu Inspectoratul Școlar Județean Olt, care va asigura consultanță de specialitate pe toată perioada derulării acestuia.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "Capitolul II",
+          "heading": "Reglementări specifice",
+          "items": [
+            {
+              "number": "Art. 5",
+              "text": "Legislația aplicabilă",
+              "bullets": [
+                "art. 140 alin. (3) lit. c) din Legea nr. 198/2023 a învățământului preuniversitar, cu modificările și completările ulterioare;",
+                "art. 129 alin. (1) și alin. (7) lit. a), d), e), f) din Ordonanța de Urgență a Guvernului nr. 57/2019 privind Codul Administrativ, cu modificările și completările ulterioare;",
+                "art. 5 alin (3), art.14 din Legea nr. 273/2006 privind finanțele publice locale, cu modificările și completările ulterioare;",
+                "art.14 din Legea nr.273/2006 privind finanțele publice locale, modificată și completată și art.12 alin.5 din Legea Educației Naționale nr.1/2011;",
+                "art. 3 alin.(1) din Legea nr.69/2000 a educației fizice și sportului, cu modificările și completările ulterioare."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": "Art. 6.",
+              "text": "Drepturi și obligații",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": "Art. 6.1.",
+              "text": "Drepturi și obligații organizatori",
+              "bullets": [
+                "Primarul municipiului Slatina va iniția și va supune dezbaterii Consiliului Local al municipiului Slatina, proiectul de hotărâre referitor la aprobare Programe și proiecte culturale și manifestări sportive organizate în anul în curs, care va include programul de stimulare a performanței - „Olimpiada Liceelor” și prevederi bugetare pentru organizarea și desfășurarea acestuia.",
+                "După aprobarea regulamentului de organizare a programului „Olimpiada Liceelor” se va aproba prin Dispoziție a Primarului municipiului Slatina un calendar cu datele de susținere a probelor de concurs.",
+                "Organizatorii au obligația de a pune la dispoziție fiecărei unități de învățământ materialele necesare pentru proba de desen graffiti.",
+                "Organizatorii și directorii unităților de învățământ – ce vor găzdui desfășurarea probelor de concurs vor lua măsuri de asigurare a ordinii, liniștii publice și a siguranței elevilor, în perioada de desfășurare a acțiunilor din cadrul programului „Olimpiada liceelor”.",
+                "Un juriu compus din 7 membrii și constituit prin Dispoziția primarului municipiului Slatina va asigura monitorizarea desfășurării probelor de concurs, evaluarea performanțelor participanților din cadrul secțiunilor Artistice și Voluntariat și desemnarea câștigătorilor.",
+                "Organizatorii au obligația de a asigura participanților echipamente cu însemnele manifestării, diplomele, trofeele, premiile, festivitatea de premiere."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": "Art. 6.2.",
+              "text": "Drepturi și obligații participanți",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Drepturi și obligații participanți",
+              "bullets": [
+                "Fiecare liceu are obligația de a completa fișa de înscriere conform modelului Anexa nr.2 la H.C.L. 2025, în care vor fi menționate probele de concurs, numele, prenumele și datele de identificare ale elevilor și profesorilor îndrumători precum și semnătura acestora. Fișa de înscriere va purta semnătura directorului și ștampila unității de învățământ, precum și avizul medicului școlii, care să ateste starea de sănătate a elevilor înscriși în competiții.",
+                "Fișa de înscriere, Acordul de prelucarare a datelor(GDPR) și copiile actelor de identitate ale participanților vor fi depuse in format fizic la Registratura Primăriei municipiului Slatina cât și în format electronic pe adresa de e-mail : cultura.sport@primariaslatina.ro.",
+                "Data limită de depunere a fișelor de înscriere la ”Olimpiada Liceelor” este de maxim 15 zile de la data comunicării regulamentului către unitatea de învățământ.",
+                "Elevii înscriși în concurs pot fi înlocuiți motivat, cu cel mult 24 ore înainte de desfășurarea probei, numai cu acordul organizatorilor, prin completarea fișei de înlocuire, Anexă nr.6 la H.C.L. 2025.",
+                "Fiecare liceu participant va comunica în scris Primăriei municipiului Slatina activitățile pe care intenționează să le organizeze în cadrul secțiunii „Voluntariat” și ziua/zilele în care acestea sunt programate să se desfășoare.",
+                "Pe timpul derulării probelor de concurs, elevii vor purta obligatoriu echipamente cu însemnele manifestării, în culoarea liceului, care vor fi puse la dispoziție de organizatori și vor avea asupra lor cartea de identitate/legitimația de elev. La probele de miss, mister, interpretare muzicală și dans nu este impusă purtarea echipamentului.",
+                "Fiecare unitate de învățământ care găzduiește probele sportive trebuie să asigure prezența asistentului medical și medicul unității."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": "Art. 7.",
+              "text": "Secțiuni de concurs",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Programul „Olimpiada Liceelor” se desfășoară pe trei secțiuni: sport, artistică, voluntariat.",
+              "bullets": []
+            },
+            {
+              "number": "(1)",
+              "text": "Probe de concurs secțiunea sportivă:",
+              "bullets": [
+                "fotbal (băieți)",
+                "handbal (fete)",
+                "tenis de masă (băieți)",
+                "tenis de masă (fete)",
+                "baschet (băieți)",
+                "volei (fete)",
+                "cros (mixt- masculin și feminin, cadre didactice și elevi)"
+              ]
+            },
+            {
+              "number": "(2)",
+              "text": "Probe de concurs secțiunea artistică:",
+              "bullets": [
+                "miss",
+                "mister",
+                "interpretare muzicală",
+                "dans– mixt (trupă/individual)",
+                "desen Grafitti"
+              ]
+            },
+            {
+              "number": "(3)",
+              "text": "voluntariat",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Secțiunea voluntariat constă în implicarea elevilor în orice fel de acțiune umanitară, de ecologizare, de protecția mediului, etc. Acțiunile menționate anterior nu au caracter limitativ și se vor desfășura în mod obligatoriu în municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 8.",
+              "text": "Constituire echipaje",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Numărul maxim al elevilor, profesorilor îndrumători și antrenorilor care formează un echipaj, diferențiat în funcție de complexitatea probelor de concurs este următoarea:",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Fotbal (băieți) – teren mare",
+              "bullets": [
+                "5 elevi + 3 rezerve",
+                "1 profesor"
+              ]
+            },
+            {
+              "number": null,
+              "text": "Handbal (fete)",
+              "bullets": [
+                "7 eleve + 2 rezerve",
+                "1 profesor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Tenis de masă (băieți și fete)",
+              "bullets": [
+                "1 elev/ă",
+                "1 antrenor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Baschet (băieți)",
+              "bullets": [
+                "5 elevi + 2 rezerve",
+                "1 antrenor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Volei (fete)",
+              "bullets": [
+                "6 eleve + 2 rezerve",
+                "1 antrenor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Cros",
+              "bullets": [
+                "Maxim 20 participanți (elevi și cadre didactice)"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Miss",
+              "bullets": [
+                "1 elevă",
+                "1 reprezentant al unității de învățământ"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Mister",
+              "bullets": [
+                "1 elev",
+                "1 reprezentant al unității de învățământ"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Interpretare muzicală",
+              "bullets": [
+                "interpret individual sau trupă",
+                "1 reprezentant al unității de învățământ"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Dans",
+              "bullets": [
+                "mixt (interpret individul sau grup)",
+                "1 profesor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Desen grafitti",
+              "bullets": [
+                "3 elevi/eleve",
+                "1 profesor"
+              ],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "Voluntariat",
+              "bullets": [
+                "1 echipă formată din 10-15 elevi, stabilită de directorul unității de învățământ;",
+                "1 reprezentant al unității de învățământ."
+              ],
+              "emphasis": true
+            },
+            {
+              "number": "Art. 9.",
+              "text": "Evaluare performanțe",
+              "bullets": [],
+              "emphasis": true
+            },
+            {
+              "number": null,
+              "text": "În urma susținerii fiecărei probe din cadrul Olimpiadei Liceelor, primele trei locuri vor fi punctate după cum urmeză:",
+              "bullets": [
+                "locul I – 10 p",
+                "locul II – 8 p",
+                "locul III – 6 p"
+              ]
+            },
+            {
+              "number": null,
+              "text": "Valoare punct: 100 lei.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "Capitolul III",
+          "heading": "Premiere câștigători",
+          "items": [
+            {
+              "number": "Art. 10",
+              "text": "În urma desfășurării fiecărei probe de concurs vor fi acordate premii în bani fiecărui membru al echipei, atât elevi cât și profesori coordonatori.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 11",
+              "text": "Valoarea premiilor este următoarea: 300 lei pentru locul I, 200 lei pentru locul II, 100 lei pentru locul III, celelalte locuri nefiind premiate.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 12",
+              "text": "În urma centralizării punctelor obținute după efectuarea fiecărei probe de concurs, primele trei licee vor primi un trofeu și premii în sume de bani aferente numărului de puncte obținute. Suma se va împărți în mod egal membrilor echipelor conform fișei de înscriere/înlocuire anexă la H.C.L. 2025.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 13",
+              "text": "Fiecare unitate de învățământ participantă la Olimpiada Liceelor va primi din partea Consiliului Local al municipiului Slatina și Primăriei municipiului Slatina dotări/modernizări în limita sumei de 100.000 lei.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 14",
+              "text": "Toți participanții vor primi diplome de participare/ diplome cu locul obținut în urma suținerii probelor.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 15",
+              "text": "Pentru acordarea premiilor, este obligatorie participarea Unității de Învățământ la toate probele din cadrul Olimpiadei Liceelor.",
+              "bullets": []
+            }
+          ]
+        },
+        {
+          "number": "Capitolul IV",
+          "heading": "Dispoziții finale",
+          "items": [
+            {
+              "number": "Art. 16",
+              "text": "Neprezentarea la o probă de concurs atrage după sine descalificarea unității de învățământ la proba respectivă.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 17",
+              "text": "Unitățile de învățământ vor avea în vedere ca un elev/profesor îndrumător/antrenor să nu se înscrie la mai mult de două probe de concurs.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 18",
+              "text": "Este interzis antrenorilor care participă la competiție să arbitreze probele sportive din cadrul manifestării. Arbitrajul va fi asigurat de personal calificat din cadrul cluburilor sportive din municipiul Slatina.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 19",
+              "text": "Susținătorilor liceelor care asistă la probele de concurs le este interzis să utilizeze un limbaj trivial împotriva celorlalți competitori sau să desfășoare acțiuni care pot aduce atingere demnității persoanei și imaginii școlii, precum și manifestări antisociale. De asemenea, este strict interzisă folosirea obiectelor pirotehnice.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 20",
+              "text": "Nerespectarea prevederilor art. 19 atrage, în funcție de gravitatea faptei, sancționarea potrivit legii a celor vinovați și descalificarea liceului.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 21",
+              "text": "Nu se acceptă contestații ulterioare deliberărilor finale ale comisiei de jurizare. Orice nemulțumire sau nelămurire privind desfășurarea concursului ori evaluarea poate fi adresată direct comisiei de jurizare în momentul apariției, urmând a fi soluționată pe loc, în cadrul evenimentului. Deciziile comisiei sunt finale și nu pot fi revizuite ulterior.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 22",
+              "text": "La proba Cros vor fi premiați primii trei concurenți care obțin cel mai bun timp de parcurgere a traseului.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 23",
+              "text": "Proba de Miss/Mister se va desfășura conform regulamentului identificat la Anexa nr. 3 la H.C.L. 2025.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 24",
+              "text": "La proba de interpretare muzicală, utilizarea playback-ului atrage după sine descalificarea concurentului/echipei. Durata interpretării muzicale este de maximum 4 minute. Fiecare participant are obligația de a prezenta organizatorului piesa interpretată, negativul fiind pus la dispoziție cu cel puțin 10 zile înainte de desfășurarea probei.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 25",
+              "text": "Dans Mixt. Proba de dans mixt poate fi desfășurată individual sau în echipă. Durata probei este de maximum 5 minute. Fiecare participant/echipă are obligația de a prezenta organizatorului piesa sau colajul muzical pe care se desfășoară proba, pozitivul/negativul fiind pus la dispoziție cu cel puțin 10 zile înainte de desfășurarea acesteia.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 26",
+              "text": "La proba Desen Graffiti, tema aleasă nu trebuie să conțină manifestări obscene, însemne și sloganuri politice sau imagini ale personalităților vieții publice. Utilizarea șabloanelor și a altor instrumente de desen tehnic atrage după sine descalificarea liceului de la această probă. Este permisă schițarea desenului pe panouri cu creion sau cretă. Proba se desfășoară conform regulamentului identificat la Anexa nr. 4 la H.C.L. 2025.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 27",
+              "text": "La proba Voluntariat, echipa va fi formată din maximum 15 elevi și un coordonator (cadru didactic). Fiecare unitate de învățământ va prezenta proiectul de voluntariat și componența echipei în timp util. Perioada de desfășurare a activităților din cadrul proiectului de voluntariat este cuprinsă între 1 iunie - 1 septembrie 2025.",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "Fiecare echipă va anunța în scris data desfășurării/ finalizării proiectului, în atenția comisiei de jurizare în vederea evaluării și punctării proiectului. Proba se desfășoară conform regulamentului identificat la Anexa nr. 5 la H.C.L. 2025.",
+              "bullets": []
+            },
+            {
+              "number": "Art. 28",
+              "text": "Prezentul regulament cadru este anexă la H.C.L. nr. ________ 2025 și intră în vigoare la data publicării Hotărârii Consiliului Local.",
+              "bullets": []
+            },
+            {
+              "number": null,
+              "text": "",
+              "bullets": [
+                "Șef Serviciu Cultură, Sport, Educație — Gina Lorena MOISIU",
+                "Întocmit, — Compartiment Cultură, Sport — Corina Florina MITRACHE"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

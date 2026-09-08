@@ -1,0 +1,5 @@
+.ln { display: grid; gap: var(--s8); }
+.ln-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s4); }
+.ln-live { padding: var(--s4); background: var(--bg-2); border-radius: var(--r-xl); }
+.ln-recent { display: grid; gap: var(--s4); }
+.ln-cta { display: flex; justify-content: flex-start; }

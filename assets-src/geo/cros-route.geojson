@@ -1,0 +1,1344 @@
+{
+  "type": "FeatureCollection",
+  "attribution": "Date © OpenStreetMap contributors (ODbL). Geocodare: Nominatim + Overpass API; rutare: OSRM (profil pieton).",
+  "distance_m": 4900.7,
+  "duration_walk_s": 503.2,
+  "waypoints": [
+    {
+      "name": "Start / Sosire – Aleea Eroilor × Str. Artileriei (colț SE Parcul Tineretului)",
+      "lat": 44.42709,
+      "lon": 24.38613,
+      "note": "„Aleea Eroilor” nu există în OSM; strada de pe latura sudică a Parcului Tineretului este mapată ca „Strada Crizantemei” (way/691374386) și este singura care se potrivește descrierii (se intersectează cu Str. Artileriei și duce la McDonald's / Str. Tunari).",
+      "snapped": {
+        "lat": 44.427089,
+        "lon": 24.38613,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Aleea Cazărmii"
+      }
+    },
+    {
+      "name": "Aleea Eroilor (latura sudică Parcul Tineretului)",
+      "lat": 44.42661,
+      "lon": 24.38366,
+      "snapped": {
+        "lat": 44.426611,
+        "lon": 24.38366,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Strada Crizantemei"
+      }
+    },
+    {
+      "name": "McDonald's (Str. Tunari 1B)",
+      "lat": 44.4272,
+      "lon": 24.38205,
+      "note": "Clădirea McDonald's: 44.42718, 24.38245 (way/754581641); punctul este pe carosabilul Str. Tunari.",
+      "snapped": {
+        "lat": 44.427201,
+        "lon": 24.382023,
+        "snap_distance_m": 2.2,
+        "osrm_street": "Strada Tunari"
+      }
+    },
+    {
+      "name": "Sens giratoriu McDonald's (Str. Tunari × Bd. A. I. Cuza)",
+      "lat": 44.42765,
+      "lon": 24.38207,
+      "note": "junction=roundabout way/760598297",
+      "snapped": {
+        "lat": 44.427646,
+        "lon": 24.382082,
+        "snap_distance_m": 1.1,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Winmarkt – punct de întoarcere (capăt vest Bd. A. I. Cuza)",
+      "lat": 44.42842,
+      "lon": 24.36282,
+      "note": "„Winmarkt Slatina” nu există în OSM. Singurul magazin universal din oraș este „Plazza Slatina” (node/4535236692, 44.42881, 24.36294), la capătul vestic al Bd. Cuza, exact unde descrierea traseului cere întoarcerea — foarte probabil aceeași clădire. Confirmați.",
+      "snapped": {
+        "lat": 44.428419,
+        "lon": 24.362819,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Strada Ghiocei"
+      }
+    },
+    {
+      "name": "Instituția Prefectului – Județul Olt (Bd. A. I. Cuza 16)",
+      "lat": 44.42822,
+      "lon": 24.36622,
+      "note": "Clădirea: 44.42779, 24.36626 (way/662186395); punctul este pe carosabilul Bd. Cuza.",
+      "snapped": {
+        "lat": 44.428215,
+        "lon": 24.366217,
+        "snap_distance_m": 0.6,
+        "osrm_street": "Bulevardul Alexandru Ioan Cuza"
+      }
+    },
+    {
+      "name": "Sens giratoriu Casa de Cultură a Tineretului (Bd. A. I. Cuza × Str. Ecaterina Teodoroiu)",
+      "lat": 44.4263,
+      "lon": 24.3754,
+      "note": "Casa de Cultură a Tineretului: 44.42607, 24.37695 (way/481940466, Str. Ecaterina Teodoroiu 1). Ieșirea a 2-a = Str. Ecaterina Teodoroiu spre SE.",
+      "snapped": {
+        "lat": 44.426352,
+        "lon": 24.375246,
+        "snap_distance_m": 13.6,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Str. Ecaterina Teodoroiu",
+      "lat": 44.42385,
+      "lon": 24.3799,
+      "snapped": {
+        "lat": 44.423929,
+        "lon": 24.379974,
+        "snap_distance_m": 10.6,
+        "osrm_street": "Strada Ecaterina Teodoroiu"
+      }
+    },
+    {
+      "name": "Sens giratoriu Steaua (Str. Artileriei × Str. Ecaterina Teodoroiu / DJ546, lângă Kaufland Artileriei 2K)",
+      "lat": 44.42161,
+      "lon": 24.38472,
+      "note": "junction=roundabout way/44536964; Kaufland way/490681540 (44.42414, 24.38629); Piațeta Steaua 44.42173, 24.38395.",
+      "snapped": {
+        "lat": 44.421724,
+        "lon": 24.384757,
+        "snap_distance_m": 13.0,
+        "osrm_street": null
+      }
+    },
+    {
+      "name": "Str. Artileriei",
+      "lat": 44.42549,
+      "lon": 24.38572,
+      "snapped": {
+        "lat": 44.42549,
+        "lon": 24.385724,
+        "snap_distance_m": 0.3,
+        "osrm_street": "Strada Artileriei"
+      }
+    },
+    {
+      "name": "Sosire – Aleea Eroilor × Str. Artileriei",
+      "lat": 44.42709,
+      "lon": 24.38613,
+      "snapped": {
+        "lat": 44.427089,
+        "lon": 24.38613,
+        "snap_distance_m": 0.1,
+        "osrm_street": "Aleea Cazărmii"
+      }
+    }
+  ],
+  "description": "Start pe Aleea Eroilor (Parcul Tineretului) → dreapta (McDonald's) → sens giratoriu, stânga pe Bd. A. I. Cuza → până la Winmarkt (întoarcere) → înapoi pe Bd. Cuza pe lângă Prefectura Olt → sens giratoriu Casa de Cultură a Tineretului, ieșirea 2 pe Str. Ecaterina Teodoroiu → sens giratoriu Steaua (Str. Artileriei) → Str. Artileriei până la Aleea Eroilor / Parcul Tineretului → Sosire. Un singur tur.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Traseu cros – Olimpiada Liceelor Slatina 2026",
+        "laps": 1,
+        "distance_m": 4900.7,
+        "duration_walk_s": 503.2,
+        "profile": "foot",
+        "source": "OSRM router.project-osrm.org (profil pieton) prin punctele din `waypoints`"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            24.386126,
+            44.427089
+          ],
+          [
+            24.386017,
+            44.427068
+          ],
+          [
+            24.385647,
+            44.426997
+          ],
+          [
+            24.384422,
+            44.426759
+          ],
+          [
+            24.383655,
+            44.42661
+          ],
+          [
+            24.382843,
+            44.426451
+          ],
+          [
+            24.381989,
+            44.426285
+          ],
+          [
+            24.381998,
+            44.42647
+          ],
+          [
+            24.382003,
+            44.426643
+          ],
+          [
+            24.382006,
+            44.426785
+          ],
+          [
+            24.382012,
+            44.426907
+          ],
+          [
+            24.382023,
+            44.427201
+          ],
+          [
+            24.382023,
+            44.427212
+          ],
+          [
+            24.382024,
+            44.427286
+          ],
+          [
+            24.382024,
+            44.427505
+          ],
+          [
+            24.38202,
+            44.42756
+          ],
+          [
+            24.382016,
+            44.427614
+          ],
+          [
+            24.382035,
+            44.427616
+          ],
+          [
+            24.382058,
+            44.427624
+          ],
+          [
+            24.382077,
+            44.427638
+          ],
+          [
+            24.382082,
+            44.427646
+          ],
+          [
+            24.382089,
+            44.427655
+          ],
+          [
+            24.382093,
+            44.427674
+          ],
+          [
+            24.382088,
+            44.427692
+          ],
+          [
+            24.382075,
+            44.427709
+          ],
+          [
+            24.382063,
+            44.427717
+          ],
+          [
+            24.382056,
+            44.427722
+          ],
+          [
+            24.382032,
+            44.42773
+          ],
+          [
+            24.382016,
+            44.427732
+          ],
+          [
+            24.382006,
+            44.427733
+          ],
+          [
+            24.38198,
+            44.427729
+          ],
+          [
+            24.381955,
+            44.427719
+          ],
+          [
+            24.381936,
+            44.427703
+          ],
+          [
+            24.381933,
+            44.427697
+          ],
+          [
+            24.381893,
+            44.427702
+          ],
+          [
+            24.381813,
+            44.427688
+          ],
+          [
+            24.381248,
+            44.427579
+          ],
+          [
+            24.380583,
+            44.427446
+          ],
+          [
+            24.380485,
+            44.427428
+          ],
+          [
+            24.37964,
+            44.427274
+          ],
+          [
+            24.379096,
+            44.427172
+          ],
+          [
+            24.378966,
+            44.427147
+          ],
+          [
+            24.378881,
+            44.427131
+          ],
+          [
+            24.378495,
+            44.427056
+          ],
+          [
+            24.377865,
+            44.426936
+          ],
+          [
+            24.377425,
+            44.42685
+          ],
+          [
+            24.376605,
+            44.42669
+          ],
+          [
+            24.376018,
+            44.426575
+          ],
+          [
+            24.375986,
+            44.426569
+          ],
+          [
+            24.375705,
+            44.426514
+          ],
+          [
+            24.375618,
+            44.426488
+          ],
+          [
+            24.375554,
+            44.426466
+          ],
+          [
+            24.375457,
+            44.426425
+          ],
+          [
+            24.375402,
+            44.426428
+          ],
+          [
+            24.375348,
+            44.42642
+          ],
+          [
+            24.3753,
+            44.426401
+          ],
+          [
+            24.374982,
+            44.42641
+          ],
+          [
+            24.374811,
+            44.426417
+          ],
+          [
+            24.374745,
+            44.426422
+          ],
+          [
+            24.374695,
+            44.426429
+          ],
+          [
+            24.374416,
+            44.42647
+          ],
+          [
+            24.373988,
+            44.42656
+          ],
+          [
+            24.373126,
+            44.426741
+          ],
+          [
+            24.372926,
+            44.426782
+          ],
+          [
+            24.372723,
+            44.426828
+          ],
+          [
+            24.370959,
+            44.427221
+          ],
+          [
+            24.370841,
+            44.427247
+          ],
+          [
+            24.369539,
+            44.427538
+          ],
+          [
+            24.368995,
+            44.427659
+          ],
+          [
+            24.368958,
+            44.427667
+          ],
+          [
+            24.368486,
+            44.427788
+          ],
+          [
+            24.368247,
+            44.427849
+          ],
+          [
+            24.368144,
+            44.427875
+          ],
+          [
+            24.367938,
+            44.427921
+          ],
+          [
+            24.367907,
+            44.427929
+          ],
+          [
+            24.367562,
+            44.428011
+          ],
+          [
+            24.36677,
+            44.428196
+          ],
+          [
+            24.366261,
+            44.428315
+          ],
+          [
+            24.365729,
+            44.428423
+          ],
+          [
+            24.365397,
+            44.428473
+          ],
+          [
+            24.365185,
+            44.428502
+          ],
+          [
+            24.36508,
+            44.428514
+          ],
+          [
+            24.364758,
+            44.428549
+          ],
+          [
+            24.364417,
+            44.428558
+          ],
+          [
+            24.364213,
+            44.428551
+          ],
+          [
+            24.364017,
+            44.428547
+          ],
+          [
+            24.36392,
+            44.42854
+          ],
+          [
+            24.363539,
+            44.428511
+          ],
+          [
+            24.363455,
+            44.428504
+          ],
+          [
+            24.363234,
+            44.428478
+          ],
+          [
+            24.363076,
+            44.428455
+          ],
+          [
+            24.362824,
+            44.428417
+          ],
+          [
+            24.362637,
+            44.428363
+          ],
+          [
+            24.362753,
+            44.428348
+          ],
+          [
+            24.362987,
+            44.428355
+          ],
+          [
+            24.363091,
+            44.428363
+          ],
+          [
+            24.363203,
+            44.428374
+          ],
+          [
+            24.363544,
+            44.428404
+          ],
+          [
+            24.363681,
+            44.428417
+          ],
+          [
+            24.363903,
+            44.428436
+          ],
+          [
+            24.364016,
+            44.428445
+          ],
+          [
+            24.364183,
+            44.428451
+          ],
+          [
+            24.364424,
+            44.428451
+          ],
+          [
+            24.364793,
+            44.428433
+          ],
+          [
+            24.365213,
+            44.428384
+          ],
+          [
+            24.365361,
+            44.428364
+          ],
+          [
+            24.365675,
+            44.428323
+          ],
+          [
+            24.366217,
+            44.428215
+          ],
+          [
+            24.366599,
+            44.428123
+          ],
+          [
+            24.366727,
+            44.428093
+          ],
+          [
+            24.367285,
+            44.427959
+          ],
+          [
+            24.367355,
+            44.427943
+          ],
+          [
+            24.367876,
+            44.427812
+          ],
+          [
+            24.367884,
+            44.42781
+          ],
+          [
+            24.36818,
+            44.427736
+          ],
+          [
+            24.368281,
+            44.427713
+          ],
+          [
+            24.368444,
+            44.427677
+          ],
+          [
+            24.368672,
+            44.427625
+          ],
+          [
+            24.368874,
+            44.42758
+          ],
+          [
+            24.368908,
+            44.427574
+          ],
+          [
+            24.369497,
+            44.427443
+          ],
+          [
+            24.370915,
+            44.427127
+          ],
+          [
+            24.372684,
+            44.426734
+          ],
+          [
+            24.372887,
+            44.426688
+          ],
+          [
+            24.373088,
+            44.426646
+          ],
+          [
+            24.373646,
+            44.426528
+          ],
+          [
+            24.374314,
+            44.426396
+          ],
+          [
+            24.374671,
+            44.426316
+          ],
+          [
+            24.374951,
+            44.426254
+          ],
+          [
+            24.375109,
+            44.426223
+          ],
+          [
+            24.375306,
+            44.426184
+          ],
+          [
+            24.375343,
+            44.42617
+          ],
+          [
+            24.37538,
+            44.426162
+          ],
+          [
+            24.375437,
+            44.426161
+          ],
+          [
+            24.375492,
+            44.426172
+          ],
+          [
+            24.375539,
+            44.426194
+          ],
+          [
+            24.375576,
+            44.426226
+          ],
+          [
+            24.375588,
+            44.426243
+          ],
+          [
+            24.3756,
+            44.426275
+          ],
+          [
+            24.375601,
+            44.426308
+          ],
+          [
+            24.375591,
+            44.42634
+          ],
+          [
+            24.375569,
+            44.42637
+          ],
+          [
+            24.375539,
+            44.426395
+          ],
+          [
+            24.375501,
+            44.426413
+          ],
+          [
+            24.375457,
+            44.426425
+          ],
+          [
+            24.375402,
+            44.426428
+          ],
+          [
+            24.375348,
+            44.42642
+          ],
+          [
+            24.3753,
+            44.426401
+          ],
+          [
+            24.375259,
+            44.426371
+          ],
+          [
+            24.375246,
+            44.426352
+          ],
+          [
+            24.375234,
+            44.426333
+          ],
+          [
+            24.375226,
+            44.426291
+          ],
+          [
+            24.375236,
+            44.42625
+          ],
+          [
+            24.375264,
+            44.426213
+          ],
+          [
+            24.375306,
+            44.426184
+          ],
+          [
+            24.375343,
+            44.42617
+          ],
+          [
+            24.37538,
+            44.426162
+          ],
+          [
+            24.375769,
+            44.425973
+          ],
+          [
+            24.376165,
+            44.425791
+          ],
+          [
+            24.376855,
+            44.425474
+          ],
+          [
+            24.377171,
+            44.425326
+          ],
+          [
+            24.377312,
+            44.42526
+          ],
+          [
+            24.377492,
+            44.425167
+          ],
+          [
+            24.378205,
+            44.424833
+          ],
+          [
+            24.378536,
+            44.424678
+          ],
+          [
+            24.378546,
+            44.424673
+          ],
+          [
+            24.378581,
+            44.424657
+          ],
+          [
+            24.379429,
+            44.424197
+          ],
+          [
+            24.379655,
+            44.424081
+          ],
+          [
+            24.379974,
+            44.423929
+          ],
+          [
+            24.380812,
+            44.423528
+          ],
+          [
+            24.380924,
+            44.423474
+          ],
+          [
+            24.381228,
+            44.423328
+          ],
+          [
+            24.381263,
+            44.423311
+          ],
+          [
+            24.381257,
+            44.423302
+          ],
+          [
+            24.381254,
+            44.423292
+          ],
+          [
+            24.381255,
+            44.423281
+          ],
+          [
+            24.381261,
+            44.423271
+          ],
+          [
+            24.38127,
+            44.423263
+          ],
+          [
+            24.381282,
+            44.423257
+          ],
+          [
+            24.381296,
+            44.423254
+          ],
+          [
+            24.381311,
+            44.423254
+          ],
+          [
+            24.381325,
+            44.423257
+          ],
+          [
+            24.381338,
+            44.423262
+          ],
+          [
+            24.381347,
+            44.423271
+          ],
+          [
+            24.381521,
+            44.423186
+          ],
+          [
+            24.381801,
+            44.423053
+          ],
+          [
+            24.381827,
+            44.42304
+          ],
+          [
+            24.381984,
+            44.422965
+          ],
+          [
+            24.383473,
+            44.422205
+          ],
+          [
+            24.38353,
+            44.422176
+          ],
+          [
+            24.383635,
+            44.422122
+          ],
+          [
+            24.384045,
+            44.421903
+          ],
+          [
+            24.384127,
+            44.421862
+          ],
+          [
+            24.384471,
+            44.421619
+          ],
+          [
+            24.384558,
+            44.421566
+          ],
+          [
+            24.384583,
+            44.421532
+          ],
+          [
+            24.384617,
+            44.421508
+          ],
+          [
+            24.384658,
+            44.421491
+          ],
+          [
+            24.384704,
+            44.421484
+          ],
+          [
+            24.384742,
+            44.421485
+          ],
+          [
+            24.38476,
+            44.421488
+          ],
+          [
+            24.384797,
+            44.421494
+          ],
+          [
+            24.38483,
+            44.421512
+          ],
+          [
+            24.384857,
+            44.421532
+          ],
+          [
+            24.384877,
+            44.421557
+          ],
+          [
+            24.384889,
+            44.421584
+          ],
+          [
+            24.384891,
+            44.421613
+          ],
+          [
+            24.384878,
+            44.421652
+          ],
+          [
+            24.384849,
+            44.421686
+          ],
+          [
+            24.384816,
+            44.421707
+          ],
+          [
+            24.384777,
+            44.421721
+          ],
+          [
+            24.384757,
+            44.421724
+          ],
+          [
+            24.384735,
+            44.421728
+          ],
+          [
+            24.384691,
+            44.421727
+          ],
+          [
+            24.384644,
+            44.421716
+          ],
+          [
+            24.384604,
+            44.421696
+          ],
+          [
+            24.384573,
+            44.421669
+          ],
+          [
+            24.384554,
+            44.421638
+          ],
+          [
+            24.384546,
+            44.421605
+          ],
+          [
+            24.384558,
+            44.421566
+          ],
+          [
+            24.384583,
+            44.421532
+          ],
+          [
+            24.384617,
+            44.421508
+          ],
+          [
+            24.384658,
+            44.421491
+          ],
+          [
+            24.384704,
+            44.421484
+          ],
+          [
+            24.384742,
+            44.421485
+          ],
+          [
+            24.38476,
+            44.421488
+          ],
+          [
+            24.384797,
+            44.421494
+          ],
+          [
+            24.38483,
+            44.421512
+          ],
+          [
+            24.384857,
+            44.421532
+          ],
+          [
+            24.384877,
+            44.421557
+          ],
+          [
+            24.384889,
+            44.421584
+          ],
+          [
+            24.384891,
+            44.421613
+          ],
+          [
+            24.384878,
+            44.421652
+          ],
+          [
+            24.384849,
+            44.421686
+          ],
+          [
+            24.384841,
+            44.421756
+          ],
+          [
+            24.384836,
+            44.421822
+          ],
+          [
+            24.384831,
+            44.421922
+          ],
+          [
+            24.384833,
+            44.422022
+          ],
+          [
+            24.384885,
+            44.422276
+          ],
+          [
+            24.384899,
+            44.422344
+          ],
+          [
+            24.38495,
+            44.422573
+          ],
+          [
+            24.384984,
+            44.422684
+          ],
+          [
+            24.385018,
+            44.422799
+          ],
+          [
+            24.385061,
+            44.422934
+          ],
+          [
+            24.385155,
+            44.423275
+          ],
+          [
+            24.385244,
+            44.423603
+          ],
+          [
+            24.385293,
+            44.423806
+          ],
+          [
+            24.385327,
+            44.423954
+          ],
+          [
+            24.385467,
+            44.424489
+          ],
+          [
+            24.385493,
+            44.424596
+          ],
+          [
+            24.385518,
+            44.424699
+          ],
+          [
+            24.385724,
+            44.42549
+          ],
+          [
+            24.385978,
+            44.426509
+          ],
+          [
+            24.386065,
+            44.426853
+          ],
+          [
+            24.386126,
+            44.427089
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 0,
+        "name": "Start / Sosire – Aleea Eroilor × Str. Artileriei (colț SE Parcul Tineretului)",
+        "note": "„Aleea Eroilor” nu există în OSM; strada de pe latura sudică a Parcului Tineretului este mapată ca „Strada Crizantemei” (way/691374386) și este singura care se potrivește descrierii (se intersectează cu Str. Artileriei și duce la McDonald's / Str. Tunari)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38613,
+          44.42709
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 1,
+        "name": "Aleea Eroilor (latura sudică Parcul Tineretului)",
+        "note": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38366,
+          44.42661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 2,
+        "name": "McDonald's (Str. Tunari 1B)",
+        "note": "Clădirea McDonald's: 44.42718, 24.38245 (way/754581641); punctul este pe carosabilul Str. Tunari."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38205,
+          44.4272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 3,
+        "name": "Sens giratoriu McDonald's (Str. Tunari × Bd. A. I. Cuza)",
+        "note": "junction=roundabout way/760598297"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38207,
+          44.42765
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 4,
+        "name": "Winmarkt – punct de întoarcere (capăt vest Bd. A. I. Cuza)",
+        "note": "„Winmarkt Slatina” nu există în OSM. Singurul magazin universal din oraș este „Plazza Slatina” (node/4535236692, 44.42881, 24.36294), la capătul vestic al Bd. Cuza, exact unde descrierea traseului cere întoarcerea — foarte probabil aceeași clădire. Confirmați."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.36282,
+          44.42842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 5,
+        "name": "Instituția Prefectului – Județul Olt (Bd. A. I. Cuza 16)",
+        "note": "Clădirea: 44.42779, 24.36626 (way/662186395); punctul este pe carosabilul Bd. Cuza."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.36622,
+          44.42822
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 6,
+        "name": "Sens giratoriu Casa de Cultură a Tineretului (Bd. A. I. Cuza × Str. Ecaterina Teodoroiu)",
+        "note": "Casa de Cultură a Tineretului: 44.42607, 24.37695 (way/481940466, Str. Ecaterina Teodoroiu 1). Ieșirea a 2-a = Str. Ecaterina Teodoroiu spre SE."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.3754,
+          44.4263
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 7,
+        "name": "Str. Ecaterina Teodoroiu",
+        "note": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.3799,
+          44.42385
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 8,
+        "name": "Sens giratoriu Steaua (Str. Artileriei × Str. Ecaterina Teodoroiu / DJ546, lângă Kaufland Artileriei 2K)",
+        "note": "junction=roundabout way/44536964; Kaufland way/490681540 (44.42414, 24.38629); Piațeta Steaua 44.42173, 24.38395."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38472,
+          44.42161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 9,
+        "name": "Str. Artileriei",
+        "note": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38572,
+          44.42549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "index": 10,
+        "name": "Sosire – Aleea Eroilor × Str. Artileriei",
+        "note": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.38613,
+          44.42709
+        ]
+      }
+    }
+  ]
+}

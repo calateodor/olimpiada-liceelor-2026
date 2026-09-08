@@ -1,0 +1,46 @@
+{
+  "name": "Slatina, Olt, România",
+  "osm": "relation/9744252",
+  "center": [
+    44.4299971,
+    24.3631837
+  ],
+  "bbox": {
+    "south": 44.3896292,
+    "north": 44.4779601,
+    "west": 24.320581,
+    "east": 24.4334868
+  },
+  "bbox_leaflet": [
+    [
+      44.3896292,
+      24.320581
+    ],
+    [
+      44.4779601,
+      24.4334868
+    ]
+  ],
+  "zoom_suggestion": {
+    "city": 13,
+    "venues_overview": 14,
+    "single_venue": 16,
+    "cros_route": 15
+  },
+  "venues_center": [
+    44.42871,
+    24.36749
+  ],
+  "venues_bbox_leaflet": [
+    [
+      44.42114,
+      24.34732
+    ],
+    [
+      44.4363,
+      24.39049
+    ]
+  ],
+  "attribution": "Date © OpenStreetMap contributors (ODbL). Geocodare: Nominatim + Overpass API; rutare: OSRM (profil pieton).",
+  "source": "Nominatim (boundary relation Slatina, admin city)"
+}

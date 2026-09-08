@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+*.psd
+assets-src/doodly/uploads/
+assets-src/wordmark/_*.png
+assets-src/wordmark/check-*.png
+.claude/launch.json
+assets-src/doodly/

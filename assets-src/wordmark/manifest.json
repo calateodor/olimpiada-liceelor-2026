@@ -1,0 +1,149 @@
+{
+ "source": "1.jpg",
+ "source_size": [
+  2880,
+  1620
+ ],
+ "frame": {
+  "x": 580,
+  "y": 919,
+  "w": 1720,
+  "h": 505
+ },
+ "frame_note": "common frame = bounding box of the whole wordmark block (all layers incl. dots and haze) in 1.jpg pixels; layer x/y/w/h are relative to it, *_pct are percentages of the frame",
+ "draw_order": [
+  "olimpiada",
+  "slatina",
+  "y2026",
+  "dots",
+  "liceelor"
+ ],
+ "layers": {
+  "olimpiada": {
+   "file": "olimpiada.png",
+   "x": 109,
+   "y": 0,
+   "w": 1445,
+   "h": 300,
+   "left_pct": 6.3372,
+   "top_pct": 0.0,
+   "width_pct": 84.0116,
+   "height_pct": 59.4059,
+   "abs": {
+    "x": 689,
+    "y": 919,
+    "w": 1445,
+    "h": 300
+   }
+  },
+  "liceelor": {
+   "file": "liceelor.png",
+   "x": 423,
+   "y": 200,
+   "w": 874,
+   "h": 305,
+   "left_pct": 24.593,
+   "top_pct": 39.604,
+   "width_pct": 50.814,
+   "height_pct": 60.396,
+   "abs": {
+    "x": 1003,
+    "y": 1119,
+    "w": 874,
+    "h": 305
+   }
+  },
+  "slatina": {
+   "file": "slatina.png",
+   "x": 119,
+   "y": 362,
+   "w": 349,
+   "h": 81,
+   "left_pct": 6.9186,
+   "top_pct": 71.6832,
+   "width_pct": 20.2907,
+   "height_pct": 16.0396,
+   "abs": {
+    "x": 699,
+    "y": 1281,
+    "w": 349,
+    "h": 81
+   }
+  },
+  "y2026": {
+   "file": "y2026.png",
+   "x": 1230,
+   "y": 367,
+   "w": 214,
+   "h": 75,
+   "left_pct": 71.5116,
+   "top_pct": 72.6733,
+   "width_pct": 12.4419,
+   "height_pct": 14.8515,
+   "abs": {
+    "x": 1810,
+    "y": 1286,
+    "w": 214,
+    "h": 75
+   }
+  },
+  "dots": {
+   "file": "dots.png",
+   "x": 0,
+   "y": 146,
+   "w": 1720,
+   "h": 212,
+   "left_pct": 0.0,
+   "top_pct": 28.9109,
+   "width_pct": 100.0,
+   "height_pct": 41.9802,
+   "abs": {
+    "x": 580,
+    "y": 1065,
+    "w": 1720,
+    "h": 212
+   }
+  },
+  "wordmark_full": {
+   "file": "wordmark-full.png",
+   "x": 0,
+   "y": 0,
+   "w": 1720,
+   "h": 505,
+   "left_pct": 0.0,
+   "top_pct": 0.0,
+   "width_pct": 100.0,
+   "height_pct": 100.0,
+   "abs": {
+    "x": 580,
+    "y": 919,
+    "w": 1720,
+    "h": 505
+   }
+  }
+ },
+ "dots": {
+  "coordinate_space": "pixels relative to the common frame (same as manifest.json)",
+  "colour": "#376481",
+  "count_visible": 65,
+  "median_diameter_px": 10.28,
+  "median_spacing_px": 21.0,
+  "order": "along the path: tip of the left hook -> down the left vertical -> along the bottom left-to-right (behind Liceelor) -> up the right vertical -> tip of the right hook",
+  "gaps": [
+   {
+    "after_index": 30,
+    "before_index": 31,
+    "distance_px": 810.6,
+    "approx_hidden_dots": 38
+   }
+  ],
+  "hidden_behind_liceelor": true,
+  "file": "dots.json"
+ },
+ "colours": {
+  "outline": "#2c668c",
+  "fill": "#9ad7ff",
+  "liceelor_haze_unblend_R": 140,
+  "dots": "#376481"
+ }
+}
