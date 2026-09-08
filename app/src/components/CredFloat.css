@@ -1,0 +1,65 @@
+.cred-float {
+  position: fixed; left: 0; top: 0; z-index: 150; /* peste bara de sus (100), sub meniul mare (200) */
+  width: clamp(72px, 7vw, 92px);
+  /* fără touch-action browserul ar derula pagina în loc să miște jucăria */
+  touch-action: none;
+  cursor: grab;
+  user-select: none; -webkit-user-select: none;
+  /* pe iOS, apasarea lunga pe imagine deschide meniul „Salveaza poza" si rupe tragerea */
+  -webkit-touch-callout: none;
+  opacity: 0; pointer-events: none;
+  transition: opacity .5s var(--e-out, ease);
+  will-change: transform;
+}
+.cred-float.visible { opacity: 1; pointer-events: auto; }
+.cred-float.trasa { cursor: grabbing; }
+
+.cred-spin { position: relative; will-change: transform; }
+/* halou întunecat în spate: jucăria trece peste rânduri albe, galbene sau mov,
+   iar fără el s-ar pierde exact peste culorile deschise ale liceelor */
+.cred-spin::before {
+  content: ''; position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: 190%; height: 190%; border-radius: 50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(11,14,34,.58) 0%, rgba(11,14,34,.46) 30%, rgba(11,14,34,.26) 45%,
+    rgba(11,14,34,.08) 56%, rgba(11,14,34,0) 66%);
+}
+
+.cred-float img {
+  display: block; width: 100%; height: auto;
+  -webkit-user-drag: none;
+  filter:
+    drop-shadow(0 0 18px rgba(124, 58, 237, .55))
+    drop-shadow(0 6px 14px rgba(4, 6, 20, .6));
+  animation: cred-plutire 3.4s ease-in-out infinite;
+  transition: scale .3s var(--e-out, ease);
+}
+/* cât o ții sau cât patinează, nu mai plutește — altfel mișcările se bat cap în cap */
+.cred-float.trasa img,
+.cred-float.patineaza img { animation-play-state: paused; }
+.cred-float.trasa img { scale: 1.06; }
+@media (hover: hover) { .cred-float:hover img { scale: 1.08; } }
+
+@keyframes cred-plutire {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+
+/* turtirea de la ricoșeu — pe axa peretelui de care s-a lovit */
+.cred-float.lovita-x .cred-spin { animation: cred-izbit-x .34s ease-out; }
+.cred-float.lovita-y .cred-spin { animation: cred-izbit-y .34s ease-out; }
+@keyframes cred-izbit-x {
+  0% { scale: 1 1; }
+  28% { scale: .78 1.2; }
+  100% { scale: 1 1; }
+}
+@keyframes cred-izbit-y {
+  0% { scale: 1 1; }
+  28% { scale: 1.2 .78; }
+  100% { scale: 1 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cred-float img { animation: none; }
+  .cred-float.lovita-x .cred-spin, .cred-float.lovita-y .cred-spin { animation: none; }
+}

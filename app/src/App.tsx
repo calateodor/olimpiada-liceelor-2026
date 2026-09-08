@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { CursorGlow } from './components/CursorGlow';
+import { CredFloat } from './components/CredFloat';
 import { initSmoothScroll, destroySmoothScroll, ScrollTrigger, scrollToTop } from './lib/motion';
 import { useStore, startPolling } from './store/state';
 
@@ -54,6 +55,7 @@ export default function App() {
       <a href="#main" className="skip-link">Sari la conținut</a>
       <ScrollManager />
       {!isAdmin && <CursorGlow />}
+      {!isAdmin && <CredFloat always={pathname !== '/'} />}
       {!isAdmin && <Nav />}
       <main id="main">
         <Suspense fallback={<div className="page" aria-busy="true" />}>
