@@ -51,7 +51,7 @@ function Coin({ def, index }: { def: CoinDef; index: number }) {
 
   // sharp, glossy enamel: low roughness + hard clearcoat → tight highlights from the moving key light
   const side = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.28, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 0.9 }), [def.color]);
-  const face = useMemo(() => new THREE.MeshPhysicalMaterial({ map: tex, normalMap: nrm, normalScale: new THREE.Vector2(0.55, 0.55), transparent: true, roughness: 0.32, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.015, clearcoatNormalMap: nrm, clearcoatNormalScale: new THREE.Vector2(0.75, 0.75), envMapIntensity: 0.9, alphaTest: 0.02 }), [tex, nrm]);
+  const face = useMemo(() => new THREE.MeshPhysicalMaterial({ map: tex, normalMap: nrm, normalScale: new THREE.Vector2(0.28, 0.28), transparent: true, roughness: 0.32, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.015, clearcoatNormalMap: nrm, clearcoatNormalScale: new THREE.Vector2(0.38, 0.38), envMapIntensity: 0.9, alphaTest: 0.02 }), [tex, nrm]);
   const back = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05 }), [def.color]);
   const mats = useMemo(() => [side, back, back], [side, back]);
   useEffect(() => () => { side.dispose(); face.dispose(); back.dispose(); }, [side, face, back]);
