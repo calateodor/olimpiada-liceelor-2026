@@ -38,30 +38,6 @@ function domeGeometry(radius: number, sagitta: number, seg = 64) {
   return g;
 }
 
-/** stylised glint: a hard-edged diagonal band (plus a thin trailing line) sweeping the face every few seconds */
-function withGlint(mat: THREE.MeshPhysicalMaterial, seed: number) {
-  const u = { uTime: { value: 0 }, uSeed: { value: seed } };
-  mat.onBeforeCompile = shader => {
-    shader.uniforms.uTime = u.uTime; shader.uniforms.uSeed = u.uSeed;
-    shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', '#include <common>\nuniform float uTime; uniform float uSeed;')
-      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
-        {
-          vec2 p = vMapUv - 0.5;
-          float disc = 1.0 - smoothstep(0.47, 0.485, length(p));
-          float d = dot(p, normalize(vec2(1.0, 1.15)));
-          float cyc = fract(uTime * 0.16 + uSeed);
-          float off = mix(-1.6, 1.6, cyc);
-          float main = 1.0 - smoothstep(0.030, 0.038, abs(d - off));
-          float trail = 1.0 - smoothstep(0.009, 0.014, abs(d - off + 0.075));
-          float g = clamp(main + 0.55 * trail, 0.0, 1.0) * disc;
-          totalEmissiveRadiance += vec3(1.0, 0.98, 0.92) * g * 0.95;
-        }`);
-  };
-  mat.customProgramCacheKey = () => 'glint';
-  return u;
-}
-
 /* ------------------------------------------------------------------ coin */
 function Coin({ def, index }: { def: CoinDef; index: number }) {
   const [tex, nrm] = useTexture([def.tex, def.tex.replace('.png', '-normal.png')]);
@@ -74,7 +50,6 @@ function Coin({ def, index }: { def: CoinDef; index: number }) {
   // matte-ish base (no broad sheen) + mirror clearcoat (sharp reflections of thin strips) + edge-only normals
   const side = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.5, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 0.45 }), [def.color]);
   const face = useMemo(() => new THREE.MeshPhysicalMaterial({ map: tex, normalMap: nrm, normalScale: new THREE.Vector2(1.15, 1.15), transparent: true, roughness: 0.62, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.0, clearcoatNormalMap: nrm, clearcoatNormalScale: new THREE.Vector2(1.4, 1.4), envMapIntensity: 0.4, alphaTest: 0.02 }), [tex, nrm]);
-  const glint = useMemo(() => withGlint(face, index * 0.19), [face, index]);
   const back = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.5, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 0.45 }), [def.color]);
   const mats = useMemo(() => [side, back, back], [side, back]);
   useEffect(() => () => { side.dispose(); face.dispose(); back.dispose(); dome.dispose(); }, [side, face, back, dome]);
@@ -91,7 +66,6 @@ function Coin({ def, index }: { def: CoinDef; index: number }) {
     const t = clock.elapsedTime;
     const p = heroSignals.scroll;
     const { t: it, r: ir } = intro.current;
-    glint.uTime.value = t;
     const f0 = 0.06 + index * 0.07, f1 = f0 + 0.5;
     const flip = smooth((p - f0) / (f1 - f0));
     const spread = Math.sin(Math.PI * Math.min(1, Math.max(0, (p - 0.02) / 0.9)));

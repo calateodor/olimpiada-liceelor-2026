@@ -8,7 +8,7 @@ import './Nav.css';
 import { asset } from '../lib/asset';
 
 const LINKS = [
-  ['/program', 'Program'], ['/probe', 'Probe'], ['/licee', 'Licee'], ['/clasament', 'Clasament'], ['/galerie', 'Galerie'], ['/concert', 'Concert'],
+  ['/program', 'Program'], ['/probe', 'Probe'], ['/licee', 'Licee'], ['/clasament', 'Clasament'], ['/galerie', 'Galerie'],
 ] as const;
 
 export function Nav() {
@@ -33,7 +33,7 @@ export function Nav() {
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const dark = loc.pathname.startsWith('/concert');
+  const dark = false;
 
   return (
     <>

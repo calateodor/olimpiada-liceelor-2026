@@ -1,0 +1,7 @@
+.cglow {
+  position: fixed; left: 0; top: 0; width: 620px; height: 620px; margin: -310px 0 0 -310px;
+  border-radius: 50%; pointer-events: none; z-index: 60; opacity: 0;
+  background: radial-gradient(circle, rgba(185,156,255,.26) 0%, rgba(124,58,237,.14) 30%, rgba(124,58,237,0) 62%);
+  mix-blend-mode: screen; will-change: transform;
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) { .cglow { display: none; } }

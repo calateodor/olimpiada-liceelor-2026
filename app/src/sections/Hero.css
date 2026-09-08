@@ -1,6 +1,5 @@
-.hero-wrap { height: calc(100svh + 70vh); }
-.hero { position: sticky; top: 0; height: 100svh; overflow: clip; --logo-bottom: 300px; }
-@media (max-width: 900px) { .hero-wrap { height: auto; } .hero { position: relative; height: auto; min-height: 100svh; } }
+.hero { position: relative; height: 100svh; overflow: clip; --logo-bottom: 300px; }
+@media (max-width: 900px) { .hero { height: auto; min-height: 100svh; } }
 .hero-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .hero-gl { position: absolute; inset: 0; }
 .hero-gl canvas { width: 100% !important; height: 100% !important; }
@@ -15,7 +14,7 @@
 .wm-dots { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .wm-dot { transform-box: fill-box; transform-origin: center; }
 
-.hero-content { position: relative; z-index: 3; opacity: 0; pointer-events: none; padding-top: calc(var(--logo-bottom) + var(--s10)); padding-bottom: var(--s16); display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s10); align-items: start; }
+.hero-content { position: relative; z-index: 3; opacity: 0; pointer-events: none; padding-top: calc(var(--logo-bottom) + var(--s10)); padding-bottom: var(--s12); display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s10); align-items: start; }
 .hero-copy { display: grid; gap: var(--s5); }
 .hero-title { font-size: clamp(3rem, 7vw, 6rem); }
 .hero-next { display: grid; gap: var(--s4); align-content: start; }

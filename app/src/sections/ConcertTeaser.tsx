@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { useStore } from '../store/state';
 import { gsap, prefersReducedMotion } from '../lib/motion';
 import { asset } from '../lib/asset';
@@ -19,7 +18,7 @@ export function ConcertTeaser() {
   }, [phase]);
 
   const title = phase === 0 ? '???' : phase === 1 ? 'Concert' : 'Grasu XXL';
-  const sub = phase === 0 ? 'Ceva se pregătește pentru seara finală. Nu putem spune încă ce. Urmărește traseul.' : phase === 1 ? 'După Miss & Mister, scena de pe Esplanadă rămâne aprinsă. Un concert. Artistul, în curând.' : 'Live pe Esplanadă, după finala Miss & Mister. Intrarea liberă.';
+  const sub = phase === 0 ? 'Ceva se pregătește pentru seara finală, după Miss & Mister. Nu putem spune încă ce. Urmărește traseul.' : phase === 1 ? 'După Miss & Mister, scena de pe Esplanadă rămâne aprinsă. Un concert. Artistul, în curând.' : 'Live pe Esplanadă, după finala Miss & Mister. Intrarea liberă.';
 
   return (
     <section ref={root} className="ct section" aria-label="Seara finală">
@@ -28,7 +27,7 @@ export function ConcertTeaser() {
           <div className="idx" data-ct><span className="bar bar-sm">Seara finală · 3 oct</span><span className="mono">Esplanada Slatina</span></div>
           <h2 className={`h1 ct-title ${phase === 0 ? 'is-mystery' : ''}`} data-ct>{title}</h2>
           <p className="lead" data-ct>{sub}</p>
-          <div data-ct><Link to="/concert" className="btn btn-lg">{phase === 0 ? 'Află mai multe' : 'Detalii'}</Link></div>
+          <p className="mono" data-ct>3 octombrie · Esplanada · intrarea liberă</p>
         </div>
         <div className="ct-card">
           <span className="mono ct-card-d">3 oct</span>

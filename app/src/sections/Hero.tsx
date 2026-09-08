@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { gsap, ScrollTrigger, prefersReducedMotion } from '../lib/motion';
+import { gsap, prefersReducedMotion, getLenis } from '../lib/motion';
 import { heroSignals } from '../three/signals';
 import { computeLayout } from '../three/heroLayout';
 import { Wordmark, WORDMARK } from './Wordmark';
@@ -85,6 +85,7 @@ export function Hero() {
       /* ---------- scroll: time-based morph to the horizontal logo (plays once you start scrolling, reverses at the top) ---------- */
       const morph = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' } })
         .to(prog, { p: 1, duration: 1.3, onUpdate: apply }, 0)
+        .to(el, { height: 'auto', duration: 1.3 }, 0)
         .to(hint, { opacity: 0, duration: 0.3 }, 0)
         .fromTo(dots, { scale: 1 }, { scale: 0.001, duration: 0.25, stagger: { each: 0.006 } }, 0.05)
         .to(dots, { scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: { each: 0.006 } }, 0.8)
@@ -92,7 +93,25 @@ export function Hero() {
         .fromTo('.wm-y2026', { x: 0 }, { x: 18, duration: 0.5, yoyo: true, repeat: 1 }, 0.2)
         .fromTo(content, { opacity: 0, y: 30, pointerEvents: 'none' }, { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.9, ease: 'expo.out' }, 0.7)
         .from('[data-hero-fade]', { y: 18, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'expo.out' }, 0.8);
-      ScrollTrigger.create({ start: 2, end: 'max', onEnter: () => morph.play(), onLeaveBack: () => morph.reverse() });
+      // First scroll: snap back to the top, hold the page still while the logo travels (time-based, no scrub),
+      // then release. Wheel-up while already at the top brings the vertical logo back.
+      let morphed = false, busy = false;
+      const lock = () => getLenis()?.stop();
+      const unlock = () => { busy = false; getLenis()?.start(); };
+      morph.eventCallback('onComplete', unlock);
+      morph.eventCallback('onReverseComplete', unlock);
+      const onScroll = () => {
+        if (morphed || busy || window.scrollY <= 2) return;
+        busy = true; morphed = true;
+        const l = getLenis(); if (l) l.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0);
+        lock(); morph.play();
+      };
+      const onWheel = (e: WheelEvent) => {
+        if (!morphed || busy || e.deltaY >= 0 || window.scrollY > 1) return;
+        busy = true; morphed = false; lock(); morph.reverse();
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('wheel', onWheel, { passive: true });
 
       /* ---------- pointer → coin tilt + wordmark parallax ---------- */
       const onMove = (e: PointerEvent) => {
@@ -103,13 +122,12 @@ export function Hero() {
       };
       const reset = () => { heroSignals.px = 0; heroSignals.py = 0; gsap.to(par, { x: 0, y: 0, duration: 0.8, onUpdate: apply, overwrite: true }); };
       window.addEventListener('pointermove', onMove, { passive: true }); window.addEventListener('blur', reset); document.addEventListener('pointerleave', reset);
-      return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); };
+      return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); window.removeEventListener('scroll', onScroll); window.removeEventListener('wheel', onWheel); getLenis()?.start(); };
     }, el);
     return () => { ro.disconnect(); ctx.revert(); };
   }, []);
 
   return (
-    <div className="hero-wrap">
     <section ref={root} className="hero" aria-label="Olimpiada Liceelor Slatina 2026">
       <h1 className="sr-only">Olimpiada Liceelor Slatina 2026</h1>
       <div className="hero-canvas">
@@ -171,6 +189,5 @@ export function Hero() {
         <svg width="22" height="22" viewBox="0 0 24 24" className="hero-scroll-arc"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="40 60" /></svg>
       </div>
     </section>
-    </div>
   );
 }

@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
+import { CursorGlow } from './components/CursorGlow';
 import { initSmoothScroll, destroySmoothScroll, ScrollTrigger, scrollToTop } from './lib/motion';
 import { useStore, startPolling } from './store/state';
 
@@ -15,7 +16,6 @@ const Clasament = lazy(() => import('./pages/Clasament'));
 const Regulamente = lazy(() => import('./pages/Regulamente'));
 const Locatii = lazy(() => import('./pages/Locatii'));
 const Galerie = lazy(() => import('./pages/Galerie'));
-const Concert = lazy(() => import('./pages/Concert'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -53,6 +53,7 @@ export default function App() {
     <>
       <a href="#main" className="skip-link">Sari la conținut</a>
       <ScrollManager />
+      {!isAdmin && <CursorGlow />}
       {!isAdmin && <Nav />}
       <main id="main">
         <Suspense fallback={<div className="page" aria-busy="true" />}>
@@ -68,7 +69,6 @@ export default function App() {
             <Route path="/regulamente/:slug" element={<Regulamente />} />
             <Route path="/locatii" element={<Locatii />} />
             <Route path="/galerie" element={<Galerie />} />
-            <Route path="/concert" element={<Concert />} />
             <Route path="/admin/*" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

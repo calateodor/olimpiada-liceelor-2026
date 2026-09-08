@@ -21,7 +21,7 @@ export function Footer() {
           </div>
           <div>
             <p className="mono">Ghid</p>
-            <Link to="/locatii">Locații & traseu cros</Link><Link to="/galerie">Galerie foto</Link><Link to="/concert">Seara finală</Link>
+            <Link to="/locatii">Locații & traseu cros</Link><Link to="/galerie">Galerie foto</Link>
           </div>
           <div>
             <p className="mono">Contact</p>
