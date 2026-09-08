@@ -31,8 +31,8 @@ export function GeneralStandings({ full = false }: { full?: boolean }) {
       <div className="container">
         {!full && (
           <div className="sec-head">
-            <span className="idx">03 / Clasament general</span>
-            <h2 className="h2">Cine ia cupa?</h2>
+            <div className="idx"><span className="bar bar-sm">Clasament general</span><span className="mono">10 · 8 · 6 puncte pe probă</span></div>
+            <h2 className="h2">Cine <span className="ye spark">conduce</span></h2>
             <p className="aside body">Locul I aduce 10 puncte, locul II 8, locul III 6, la fiecare dintre cele 15 probe. Suma decide trofeul cel mare. {counted > 0 ? `${counted} probe punctate până acum.` : 'Nicio probă punctată încă — totul e deschis.'}</p>
           </div>
         )}

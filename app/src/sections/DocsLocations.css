@@ -1,5 +1,0 @@
-.dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
-.dl-card { display: grid; gap: var(--s4); padding: clamp(var(--s6), 4vw, var(--s10)); border: var(--line); border-radius: var(--r-xl); background: var(--bg-2); align-content: start; }
-.dl-icon { width: 40px; height: 40px; color: var(--brand); }
-.dl-card .link { display: inline-flex; align-items: center; gap: var(--s2); width: fit-content; }
-@media (max-width: 720px) { .dl-grid { grid-template-columns: 1fr; } }

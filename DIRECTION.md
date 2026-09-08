@@ -1,5 +1,8 @@
 # Olimpiada Liceelor Slatina 2026 — direcție artistică
 
+> **Revizia 3 (8 sept, seara).** Structura paginilor urmează kitul „Doodly Style” (hero cu logo orizontal + „Hai la joc!” + cardul următorului eveniment, banda liceelor, „Unde suntem azi”, „Cine conduce”, grila probelor, „???”). Tema e dark: navy #0B0E22, violet neon #7C3AED / #9F67FF, galben #FACC15, după afișul „HTML Roadmap”. Roadmap-ul e un drum șerpuit cu linie punctată galbenă și noduri numerotate. Hero-ul 3D rămâne, dar animația de asamblare → orizontal rulează singură, în timp, fără scrub la scroll. Restul documentului descrie revizia 2 (albă) și rămâne ca istoric.
+
+
 **Teză vizuală.** „Arena de lumină”: cele cinci medalioane 3D din logo devin obiecte reale în WebGL, plutind într-o lumină albă de studio, cu reflexii care alunecă pe email când miști mouse-ul sau derulezi. Restul site-ului e alb, tipografie uriașă și grea, etichete mono minuscule pentru date și locații, iar cele șapte culori ale liceelor sunt singurele pete de culoare solidă — fiecare liceu are propria „arenă” colorată full-bleed. Premium, cinematic, nu cartoon.
 
 **Focal hero.** Canvas Three.js cu cele 5 medalioane (rim 3D colorat + față texturată din sprite-ul decupat), orbitând lent, reacționând la pointer, cu un „sheen” care mătură suprafața. Sub ele, wordmark-ul „OLIMPIADA LICEELOR” în Bricolage Grotesque 800 condensat, dezvăluit literă cu literă. Poster static pentru reduced-motion / fără WebGL.

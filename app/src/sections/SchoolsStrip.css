@@ -1,6 +1,6 @@
 .ss { padding-block: clamp(var(--s20), 10vw, var(--s40)) 0; background: var(--bg); }
-.ss-list { border-top: 1px solid var(--fg); }
-.ss-row { border-bottom: 1px solid var(--fg); position: relative; overflow: hidden; }
+.ss-list { border-top: 1.5px solid var(--v-600); }
+.ss-row { border-bottom: 1.5px solid var(--v-600); position: relative; overflow: hidden; }
 .ss-link { position: relative; display: grid; grid-template-columns: minmax(120px, .6fr) 1fr auto; align-items: center; gap: var(--s8); padding: var(--s6) var(--gutter); min-height: 150px; color: var(--fg); transition: color var(--d-2); isolation: isolate; }
 .ss-bg { position: absolute; inset: 0; background: var(--c); z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform var(--d-3) var(--e-inout); }
 .ss-row .ss-bg { transform: scaleX(1); }

@@ -1,90 +1,78 @@
 /* =====================================================================
-   OLIMPIADA LICEELOR SLATINA 2026 — TOKENS
-   primitive → semantic → component
+   OLIMPIADA LICEELOR SLATINA 2026 — TOKENS (dark · violet · galben)
    ===================================================================== */
 :root {
-  /* ---- primitives: brand (logo) ---- */
-  --p-blue: #2D6FB3;
-  --p-blue-deep: #1B4C82;
-  --p-blue-ink: #245F9E;
-  --p-blue-sky: #A9D5F7;
-  --p-blue-mist: #E8F1FB;
-  --p-red: #C43D34;
-  --p-yellow: #F0B323;
-  --p-green: #2F8A3B;
-  --p-coal: #2B2B2B;
+  color-scheme: dark;
+  /* ---- brand (logo) ---- */
+  --p-blue: #2D6FB3; --p-blue-sky: #A9D5F7; --p-blue-ink: #245F9E;
+  --p-red: #C43D34; --p-yellow: #F0B323; --p-green: #2F8A3B; --p-coal: #2B2B2B;
 
-  /* ---- primitives: schools ---- */
-  --s-1: #FF8A00; --s-2: #1DA84A; --s-3: #FFFFFF; --s-4: #6B7280; --s-5: #7B2FBE; --s-6: #FFE500; --s-7: #1F4BFF;
+  /* ---- theme primitives ---- */
+  --v-950: #07091A;   /* deepest */
+  --v-900: #0B0E22;   /* page */
+  --v-800: #121635;   /* section alt */
+  --v-700: #191E44;   /* card */
+  --v-600: #232A5C;   /* raised / border strong */
+  --v-500: #2F377A;
+  --pu-700: #4C1D95; --pu-600: #6D28D9; --pu-500: #7C3AED; --pu-400: #9F67FF; --pu-300: #B99CFF; --pu-200: #D9CCFF;
+  --ye-500: #FACC15; --ye-400: #FFE066; --ye-600: #E5B90A;
+  --w-0: #FFFFFF; --w-1: #E9EAF6; --w-2: #B9BDDD; --w-3: #8A90BF; --w-4: #5E6494;
 
-  /* ---- primitives: neutrals ---- */
-  --n-0: #FFFFFF;
-  --n-50: #F3F5F9;
-  --n-100: #E7EBF2;
-  --n-200: #CFD6E2;
-  --n-300: #A9B4C6;
-  --n-400: #7C889C;
-  --n-500: #556274;
-  --n-700: #263244;
-  --n-900: #0B1220;
-  --n-950: #06070B;
+  /* ---- schools ---- */
+  --s-1: #FF8A00; --s-2: #1DA84A; --s-3: #FFFFFF; --s-4: #8A93A6; --s-5: #9B4DE0; --s-6: #FFE500; --s-7: #3B6BFF;
 
-  /* ---- primitives: status ---- */
-  --live: #FF2E4C;
-  --ok: #17B26A;
-  --warn: #F0B323;
+  /* ---- status ---- */
+  --live: #FF3B5C; --ok: #22C55E; --warn: #FACC15;
 
   /* ---- type ---- */
   --f-display: 'Bricolage Grotesque', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --f-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --wdth-tight: 75; --wdth-normal: 100;
-
   --t-2xs: 0.6875rem; --t-xs: 0.75rem; --t-sm: 0.875rem; --t-md: 1rem; --t-lg: 1.125rem; --t-xl: 1.375rem;
   --t-2xl: 1.75rem; --t-3xl: 2.25rem; --t-4xl: 3rem;
-  --t-h3: clamp(1.75rem, 3vw, 2.5rem);
-  --t-h2: clamp(2.5rem, 5.5vw, 5rem);
-  --t-h1: clamp(3.25rem, 8.5vw, 8.5rem);
-  --t-mega: clamp(3.4rem, 13.5vw, 15rem);
+  --t-h3: clamp(1.6rem, 2.6vw, 2.2rem);
+  --t-h2: clamp(2.2rem, 4.6vw, 4rem);
+  --t-h1: clamp(2.8rem, 7vw, 6.5rem);
+  --t-mega: clamp(3.4rem, 11vw, 11rem);
 
   /* ---- space ---- */
   --s1: .25rem; --s2: .5rem; --s3: .75rem; --s4: 1rem; --s5: 1.25rem; --s6: 1.5rem; --s8: 2rem; --s10: 2.5rem;
   --s12: 3rem; --s16: 4rem; --s20: 5rem; --s24: 6rem; --s32: 8rem; --s40: 10rem;
   --gutter: clamp(1.25rem, 4vw, 4rem);
-  --container: 1440px;
+  --container: 1320px;
 
   /* ---- shape ---- */
-  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 28px; --r-pill: 999px;
+  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 26px; --r-pill: 999px;
 
-  /* ---- elevation ---- */
-  --sh-1: 0 1px 2px rgba(11,18,32,.06), 0 1px 1px rgba(11,18,32,.04);
-  --sh-2: 0 4px 12px rgba(11,18,32,.06), 0 1px 3px rgba(11,18,32,.06);
-  --sh-3: 0 24px 60px -20px rgba(11,18,32,.25), 0 8px 24px -12px rgba(11,18,32,.15);
-  --line: 1px solid var(--n-100);
+  /* ---- glow / elevation ---- */
+  --glow-pu: 0 0 0 1px rgba(159,103,255,.35), 0 0 24px rgba(124,58,237,.35);
+  --glow-pu-strong: 0 0 0 1.5px rgba(185,156,255,.7), 0 0 34px rgba(124,58,237,.6), 0 0 80px rgba(124,58,237,.25);
+  --glow-ye: 0 0 0 1.5px rgba(250,204,21,.8), 0 0 28px rgba(250,204,21,.45);
+  --sh-3: 0 30px 60px -24px rgba(0,0,0,.7);
+  --line: 1px solid var(--v-600);
 
   /* ---- motion ---- */
-  --e-out: cubic-bezier(.16,1,.3,1);
-  --e-inout: cubic-bezier(.76,0,.24,1);
+  --e-out: cubic-bezier(.16,1,.3,1); --e-inout: cubic-bezier(.76,0,.24,1);
   --d-1: 160ms; --d-2: 320ms; --d-3: 640ms; --d-4: 1100ms;
-
-  /* ---- z ---- */
   --z-nav: 100; --z-menu: 200; --z-modal: 300; --z-toast: 400;
 
   /* ===== semantic ===== */
-  --bg: var(--n-0);
-  --bg-2: var(--n-50);
-  --fg: var(--n-900);
-  --fg-2: var(--n-500);
-  --fg-3: var(--n-400);
-  --brand: var(--p-blue);
-  --brand-deep: var(--p-blue-deep);
-  --brand-mist: var(--p-blue-mist);
-  --border: var(--n-100);
-  --border-strong: var(--n-200);
-  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--brand);
+  --bg: var(--v-900);
+  --bg-2: var(--v-800);
+  --surface: var(--v-700);
+  --surface-2: var(--v-600);
+  --fg: var(--w-0);
+  --fg-2: var(--w-2);
+  --fg-3: var(--w-3);
+  --brand: var(--pu-500);
+  --brand-bright: var(--pu-400);
+  --brand-soft: var(--pu-300);
+  --accent: var(--ye-500);
+  --border: var(--v-600);
+  --border-strong: var(--pu-500);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--ye-500);
 
   /* ===== component ===== */
   --nav-h: 72px;
   --btn-h: 48px; --btn-h-sm: 38px; --btn-h-lg: 58px;
   --tag-h: 26px;
-  --table-head: var(--n-900);
 }

@@ -1,0 +1,10 @@
+.tk { overflow: hidden; border-block: 1.5px solid var(--v-600); background: var(--v-800); padding-block: var(--s3); position: relative; }
+.tk::before, .tk::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1; pointer-events: none; }
+.tk::before { left: 0; background: linear-gradient(90deg, var(--v-800), transparent); }
+.tk::after { right: 0; background: linear-gradient(270deg, var(--v-800), transparent); }
+.tk-track { display: flex; gap: var(--s3); width: max-content; animation: tk-move 40s linear infinite; }
+.tk:hover .tk-track { animation-play-state: paused; }
+.tk-chip { display: inline-flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s4) var(--s2) var(--s2); border: 1.5px solid var(--v-600); border-radius: var(--r-pill); background: var(--v-700); font-weight: 700; font-size: var(--t-sm); white-space: nowrap; transition: border-color var(--d-1), box-shadow var(--d-1); }
+.tk-chip:hover { border-color: var(--pu-400); box-shadow: var(--glow-pu); }
+@keyframes tk-move { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .tk-track { animation: none; flex-wrap: wrap; width: auto; } }

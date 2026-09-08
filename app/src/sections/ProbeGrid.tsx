@@ -24,8 +24,8 @@ export function ProbeGrid({ full = false }: { full?: boolean }) {
       <div className="container">
         {!full && (
           <div className="sec-head">
-            <span className="idx">04 / Probe</span>
-            <h2 className="h2">15 probe,<br />trei secțiuni</h2>
+            <div className="idx"><span className="bar bar-sm">Cele 15 probe</span></div>
+            <h2 className="h2">Sport · <span className="ye">Artă</span> · Voluntariat</h2>
             <p className="aside body">Șapte probe sportive, șapte artistice, una de voluntariat. Toate liceele participă la toate probele. Fiecare probă are pagina ei: program, tabele, rezultate, galerie.</p>
           </div>
         )}

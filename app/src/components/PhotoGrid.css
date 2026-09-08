@@ -1,6 +1,6 @@
 .phg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s3); }
 .phg-item button { display: grid; gap: var(--s2); width: 100%; text-align: left; border-radius: var(--r-md); }
-.phg-item img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--r-md); background: var(--n-50); transition: transform var(--d-3) var(--e-out), filter var(--d-3); }
+.phg-item img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--r-md); background: var(--v-800); transition: transform var(--d-3) var(--e-out), filter var(--d-3); }
 .phg-item button:hover img { transform: scale(1.02); }
 .lb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: center; padding: var(--s6); animation: fade var(--d-2) var(--e-out); }
 .lb img { max-height: 84vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); }
