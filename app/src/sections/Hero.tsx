@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { gsap, prefersReducedMotion } from '../lib/motion';
+import { gsap, ScrollTrigger, prefersReducedMotion } from '../lib/motion';
 import { heroSignals } from '../three/signals';
 import { computeLayout } from '../three/heroLayout';
 import { Wordmark, WORDMARK } from './Wordmark';
@@ -13,7 +13,6 @@ import { asset } from '../lib/asset';
 import './Hero.css';
 
 const CoinsCanvas = lazy(() => import('../three/CoinsScene').then(m => ({ default: m.CoinsCanvas })));
-const INTRO_KEY = 'ol.intro.seen';
 
 function supportsWebGL() {
   try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
@@ -46,15 +45,16 @@ export function Hero() {
   useEffect(() => {
     const el = root.current;
     const reduced = prefersReducedMotion();
-    const seen = sessionStorage.getItem(INTRO_KEY) === '1';
-    const prog = { p: reduced || seen ? 1 : 0 };
+    const prog = { p: reduced ? 1 : 0 };
+    const par = { x: 0, y: 0 };
 
+    /** vertical logo (p=0) ↔ horizontal logo at the top (p=1), plus pointer parallax on the wordmark */
     const apply = () => {
       const vw = el.clientWidth, vh = Math.max(el.clientHeight, window.innerHeight);
       const L = computeLayout(vw, vh, prog.p, WORDMARK.aspect);
       heroSignals.cluster = { cx: L.cluster.x + L.cluster.w / 2, cy: L.cluster.y + L.cluster.h / 2, w: L.cluster.w };
       heroSignals.scroll = prog.p; heroSignals.ready = true;
-      gsap.set(word.current, { x: L.word.x, y: L.word.y, width: L.word.w, height: L.word.h });
+      gsap.set(word.current, { x: L.word.x - par.x * 10, y: L.word.y - par.y * 8, width: L.word.w, height: L.word.h });
       if (poster.current) gsap.set(poster.current, { x: L.cluster.x, y: L.cluster.y, width: L.cluster.w, height: L.cluster.h });
       el.style.setProperty('--logo-bottom', `${L.logoBottom}px`);
     };
@@ -63,27 +63,45 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       const dots = gsap.utils.toArray<SVGCircleElement>('.wm-dot');
-      const content = el.querySelector('[data-hero-content]')!;
-      if (reduced) { gsap.set(content, { opacity: 1 }); return; }
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-      if (!seen) {
-        /* first visit: assemble the vertical logo → morph (time-based) to the horizontal one → content */
-        tl.from('.wm-olimpiada', { y: 40, scale: 0.9, opacity: 0, transformOrigin: '50% 100%', duration: 1.0 }, 0.8)
-          .from(dots, { scale: 0, opacity: 0, duration: 0.3, ease: 'back.out(3)', stagger: { each: 0.012 } }, 1.0)
-          .fromTo('.wm-liceelor', { clipPath: 'inset(-20% 100% -20% -5%)', x: -14 }, { clipPath: 'inset(-20% -5% -20% -5%)', x: 0, duration: 0.85, ease: 'power2.inOut' }, 1.15)
-          .from('.wm-slatina', { x: -30, opacity: 0, duration: 0.7 }, 1.35)
-          .from('.wm-y2026', { x: 30, opacity: 0, duration: 0.7 }, 1.4)
-          .to(prog, { p: 1, duration: 1.5, ease: 'power3.inOut', onUpdate: apply, onComplete: () => sessionStorage.setItem(INTRO_KEY, '1') }, 2.7)
-          .fromTo(content, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0 }, 3.6)
-          .from('[data-hero-fade]', { y: 20, opacity: 0, duration: 0.9, stagger: 0.07 }, 3.7);
-      } else {
-        tl.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9 }, 0.6)
-          .from('[data-hero-fade]', { y: 16, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.7);
-      }
+      const content = el.querySelector<HTMLElement>('[data-hero-content]')!;
+      const hint = el.querySelector<HTMLElement>('.hero-scroll')!;
+      if (reduced) { gsap.set(content, { opacity: 1, pointerEvents: 'auto' }); gsap.set(hint, { opacity: 0 }); return; }
+
+      /* ---------- intro: coins drop (in the 3D scene) while the wordmark builds itself ---------- */
+      gsap.timeline({ defaults: { ease: 'expo.out' } })
+        .from('.wm-olimpiada', { y: 40, scale: 0.9, opacity: 0, transformOrigin: '50% 100%', duration: 1.0 }, 0.9)
+        .from(dots, { scale: 0, opacity: 0, duration: 0.3, ease: 'back.out(3)', stagger: { each: 0.012 } }, 1.1)
+        .fromTo('.wm-liceelor', { clipPath: 'inset(-20% 100% -20% -5%)', x: -14 }, { clipPath: 'inset(-20% -5% -20% -5%)', x: 0, duration: 0.85, ease: 'power2.inOut' }, 1.25)
+        .from('.wm-slatina', { x: -30, opacity: 0, duration: 0.7 }, 1.45)
+        .from('.wm-y2026', { x: 30, opacity: 0, duration: 0.7 }, 1.5)
+        .from(hint, { opacity: 0, y: 10, duration: 0.8 }, 2.2);
+
+      /* ---------- idle life ---------- */
       gsap.to('.wm-liceelor', { filter: 'drop-shadow(0 0 18px rgba(169,213,247,.95))', duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.5 });
-      gsap.to(dots, { opacity: 0.55, duration: 0.6, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.05, repeat: -1, yoyo: true }, delay: 3 });
-      const onMove = (e: PointerEvent) => { if (e.pointerType === 'touch') return; heroSignals.px = (e.clientX / window.innerWidth - 0.5) * 2; heroSignals.py = (e.clientY / window.innerHeight - 0.5) * 2; };
-      const reset = () => { heroSignals.px = 0; heroSignals.py = 0; };
+      gsap.to(dots, { opacity: 0.5, duration: 0.6, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.04, repeat: -1, yoyo: true }, delay: 2.6 });
+      gsap.to('.wm-in', { y: -6, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
+      gsap.to('.wm-olimpiada', { scale: 1.012, transformOrigin: '50% 100%', duration: 3.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
+
+      /* ---------- scroll: time-based morph to the horizontal logo (plays once you start scrolling, reverses at the top) ---------- */
+      const morph = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' } })
+        .to(prog, { p: 1, duration: 1.3, onUpdate: apply }, 0)
+        .to(hint, { opacity: 0, duration: 0.3 }, 0)
+        .fromTo(dots, { scale: 1 }, { scale: 0.001, duration: 0.25, stagger: { each: 0.006 } }, 0.05)
+        .to(dots, { scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: { each: 0.006 } }, 0.8)
+        .fromTo('.wm-slatina', { x: 0 }, { x: -18, duration: 0.5, yoyo: true, repeat: 1 }, 0.2)
+        .fromTo('.wm-y2026', { x: 0 }, { x: 18, duration: 0.5, yoyo: true, repeat: 1 }, 0.2)
+        .fromTo(content, { opacity: 0, y: 30, pointerEvents: 'none' }, { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.9, ease: 'expo.out' }, 0.7)
+        .from('[data-hero-fade]', { y: 18, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'expo.out' }, 0.8);
+      ScrollTrigger.create({ start: 2, end: 'max', onEnter: () => morph.play(), onLeaveBack: () => morph.reverse() });
+
+      /* ---------- pointer → coin tilt + wordmark parallax ---------- */
+      const onMove = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        heroSignals.px = (e.clientX / window.innerWidth - 0.5) * 2;
+        heroSignals.py = (e.clientY / window.innerHeight - 0.5) * 2;
+        gsap.to(par, { x: heroSignals.px, y: heroSignals.py, duration: 0.8, ease: 'power3.out', onUpdate: apply, overwrite: true });
+      };
+      const reset = () => { heroSignals.px = 0; heroSignals.py = 0; gsap.to(par, { x: 0, y: 0, duration: 0.8, onUpdate: apply, overwrite: true }); };
       window.addEventListener('pointermove', onMove, { passive: true }); window.addEventListener('blur', reset); document.addEventListener('pointerleave', reset);
       return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); };
     }, el);
@@ -91,6 +109,7 @@ export function Hero() {
   }, []);
 
   return (
+    <div className="hero-wrap">
     <section ref={root} className="hero" aria-label="Olimpiada Liceelor Slatina 2026">
       <h1 className="sr-only">Olimpiada Liceelor Slatina 2026</h1>
       <div className="hero-canvas">
@@ -146,6 +165,12 @@ export function Hero() {
           )}
         </aside>
       </div>
+
+      <div className="hero-scroll mono" aria-hidden="true">
+        <span>Scroll</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" className="hero-scroll-arc"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="40 60" /></svg>
+      </div>
     </section>
+    </div>
   );
 }

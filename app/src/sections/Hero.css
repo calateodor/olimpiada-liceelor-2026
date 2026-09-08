@@ -1,4 +1,6 @@
-.hero { position: relative; min-height: 100svh; overflow: clip; --logo-bottom: 300px; }
+.hero-wrap { height: calc(100svh + 70vh); }
+.hero { position: sticky; top: 0; height: 100svh; overflow: clip; --logo-bottom: 300px; }
+@media (max-width: 900px) { .hero-wrap { height: auto; } .hero { position: relative; height: auto; min-height: 100svh; } }
 .hero-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .hero-gl { position: absolute; inset: 0; }
 .hero-gl canvas { width: 100% !important; height: 100% !important; }
@@ -7,12 +9,13 @@
 
 .hero-word { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; }
 .wm { position: absolute; }
+.wm-in { position: absolute; inset: 0; }
 .wm-l { position: absolute; display: block; max-width: none; user-select: none; }
 .wm-liceelor { filter: drop-shadow(0 0 10px rgba(169,213,247,.55)); }
 .wm-dots { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .wm-dot { transform-box: fill-box; transform-origin: center; }
 
-.hero-content { position: relative; z-index: 3; opacity: 0; padding-top: calc(var(--logo-bottom) + var(--s10)); padding-bottom: var(--s16); display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s10); align-items: start; }
+.hero-content { position: relative; z-index: 3; opacity: 0; pointer-events: none; padding-top: calc(var(--logo-bottom) + var(--s10)); padding-bottom: var(--s16); display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--s10); align-items: start; }
 .hero-copy { display: grid; gap: var(--s5); }
 .hero-title { font-size: clamp(3rem, 7vw, 6rem); }
 .hero-next { display: grid; gap: var(--s4); align-content: start; }
@@ -23,6 +26,9 @@
 .hero-next-teams { display: inline-flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
 .hero-cd { display: flex; gap: var(--s6); flex-wrap: wrap; }
 .hero-cd > div { display: grid; }
+.hero-scroll { position: absolute; right: var(--gutter); bottom: var(--s6); z-index: 3; display: flex; align-items: center; gap: var(--s2); color: var(--ye-500); }
+.hero-scroll-arc { animation: spin 6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 .hero-cd b { font-weight: 800; font-size: var(--t-3xl); letter-spacing: -.04em; line-height: 1; color: var(--ye-500); font-variation-settings: 'opsz' 96, 'wdth' 80, 'wght' 800; }
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: var(--s8); padding-top: calc(var(--logo-bottom) + var(--s8)); }
