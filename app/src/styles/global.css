@@ -54,6 +54,20 @@ ul, ol { padding: 0; list-style: none; }
 .split-line { display: block; overflow: hidden; }
 .split-char, .split-word { display: inline-block; will-change: transform; }
 
+/* ---------- REGULA: scris peste o culoare de liceu ----------
+   Culorile liceelor sunt trase la sorți și merg de la alb pur la albastru închis, deci nicio
+   culoare fixă de text nu ține pe toate. `data/schools.ts` calculează cerneala (--ink) după
+   luminanța WCAG; orice suprafață pictată cu acea culoare primește `data-on-color` și forțează
+   titlurile — care în tema dark au culoare proprie — să moștenească cerneala. Fără regula asta,
+   rândul alb sau cel galben rămân cu scris alb pe alb. */
+[data-on-color] { color: var(--ink, var(--fg)); }
+[data-on-color] .h-mega, [data-on-color] .h1, [data-on-color] .h2, [data-on-color] .h3, [data-on-color] .h4,
+[data-on-color] .lead, [data-on-color] .body, [data-on-color] .mono, [data-on-color] .muted,
+[data-on-color] .dim, [data-on-color] .ye, [data-on-color] .pu, [data-on-color] .link { color: inherit; }
+[data-on-color] .mono, [data-on-color] .dim, [data-on-color] .muted, [data-on-color] .body { opacity: .74; }
+[data-on-color] .link { text-decoration: underline; text-underline-offset: 3px; }
+[data-on-color] .btn-ghost { color: inherit; border-color: currentColor; }
+
 /* label bar — the purple "brush" bar from the roadmap poster */
 .bar { display: inline-block; position: relative; padding: .28em .8em .3em; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; font-variation-settings: 'opsz' 48, 'wdth' 85, 'wght' 800; line-height: 1; isolation: isolate; }
 .bar::before { content: ''; position: absolute; inset: 0; background: var(--pu-500); z-index: -1; clip-path: polygon(0 12%, 100% 0, 98.5% 100%, 1.5% 92%); box-shadow: 0 0 24px rgba(124,58,237,.45); }

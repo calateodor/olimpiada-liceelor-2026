@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { useStore } from '../store/state';
-import { SCHOOL_BY_ID, SCHOOLS, type SchoolId } from '../data/schools';
+import { SCHOOL_BY_ID, SCHOOLS, schoolVars, type SchoolId } from '../data/schools';
 import { schoolMatches, generalStandings, eventPlacements, eventStatus, PLACE_LABEL, fmtDate, matchDate, SECTION_LABEL } from '../lib/competition';
 import { MatchCard } from '../components/MatchCard';
 import { SchoolMark } from '../components/SchoolMark';
@@ -53,8 +53,8 @@ export default function Liceu() {
   const prev = SCHOOLS[(idx + 6) % 7], next = SCHOOLS[(idx + 1) % 7];
 
   return (
-    <div ref={root} className="page lc" style={{ ['--c' as string]: s.color, ['--fgc' as string]: s.fg }}>
-      <header className={`lc-hero ${s.color === '#FFFFFF' ? 'is-white' : ''}`}>
+    <div ref={root} className="page lc" style={schoolVars(s)}>
+      <header className="lc-hero" data-on-color>
         <div className="container lc-hero-in">
           <span className="lc-num h-mega num" aria-hidden="true">{s.nr}</span>
           <div className="lc-hero-t">

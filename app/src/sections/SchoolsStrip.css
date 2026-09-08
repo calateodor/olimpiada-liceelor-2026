@@ -1,16 +1,58 @@
-.ss { padding-block: clamp(var(--s20), 10vw, var(--s40)) 0; background: var(--bg); }
-.ss-list { border-top: 1.5px solid var(--v-600); }
-.ss-row { border-bottom: 1.5px solid var(--v-600); position: relative; overflow: hidden; }
-.ss-link { position: relative; display: grid; grid-template-columns: minmax(120px, .6fr) 1fr auto; align-items: center; gap: var(--s8); padding: var(--s6) var(--gutter); min-height: 150px; color: var(--fg); transition: color var(--d-2); isolation: isolate; }
-.ss-bg { position: absolute; inset: 0; background: var(--c); z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform var(--d-3) var(--e-inout); }
-.ss-row .ss-bg { transform: scaleX(1); }
-.ss-link { color: var(--fgc); }
-.ss-num { font-size: clamp(4rem, 9vw, 9rem); line-height: .8; }
-.ss-info { display: grid; gap: var(--s2); }
-.ss-name { max-width: 20ch; }
-.ss-meta { color: inherit; opacity: .7; }
-.ss-arrow { width: 36px; height: 36px; transition: transform var(--d-2) var(--e-out); }
+.ss { padding-bottom: 0; }
+.ss-list { border-top: 1px solid rgba(255,255,255,.1); }
+.ss-row { position: relative; }
+
+.ss-link {
+  position: relative; display: grid; grid-template-columns: minmax(110px, .42fr) 1fr auto;
+  align-items: center; gap: var(--s8);
+  padding: var(--s6) var(--gutter); min-height: 164px;
+  color: var(--ink); overflow: hidden; isolation: isolate;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+}
+/* culoarea liceului, cu o cădere spre varianta ei închisă — niciun rând nu rămâne o suprafață plată */
+.ss-bg { position: absolute; inset: 0; z-index: -2; transform-origin: left; background: linear-gradient(102deg, var(--c) 0%, var(--c) 42%, var(--c-deep) 100%); }
+/* textură: dungi diagonale în cerneala rândului, ca pe afiș */
+.ss-link::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; opacity: .1; pointer-events: none;
+  background-image: repeating-linear-gradient(114deg, transparent 0 26px, currentColor 26px 28px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 38%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 38%, #000 100%);
+}
+/* cifra-fantomă din dreapta, decupată de marginea rândului */
+.ss-ghost {
+  position: absolute; right: 2.5%; top: 50%; translate: 0 -50%; z-index: -1;
+  font-weight: 800; font-size: clamp(9rem, 17vw, 17rem); line-height: .8; letter-spacing: -.06em;
+  color: currentColor; opacity: .11; pointer-events: none;
+  font-variation-settings: 'opsz' 96, 'wdth' 78, 'wght' 800;
+}
+/* numărul mare: contur în cerneala rândului, se umple la hover */
+.ss-num {
+  font-weight: 800; font-size: clamp(4rem, 8.5vw, 8.5rem); line-height: .78; letter-spacing: -.05em;
+  color: transparent; -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill;
+  font-variation-settings: 'opsz' 96, 'wdth' 80, 'wght' 800;
+  transition: color var(--d-2) var(--e-out), transform var(--d-3) var(--e-out);
+}
+.ss-info { display: grid; gap: var(--s3); min-width: 0; }
+.ss-name { max-width: 18ch; }
+.ss-tags { display: flex; gap: var(--s2); flex-wrap: wrap; }
+.ss-tag {
+  font-family: var(--f-mono); font-size: var(--t-2xs); letter-spacing: .08em; text-transform: uppercase;
+  padding: .35em .7em; border-radius: var(--r-pill); border: 1px solid currentColor; opacity: .8;
+}
+.ss-tag-rank { background: var(--ink); color: var(--c); opacity: 1; border-color: var(--ink); }
+.ss-go { display: inline-flex; align-items: center; gap: var(--s3); font-weight: 700; white-space: nowrap; }
+.ss-go .mono { color: inherit; }
+.ss-arrow { width: 30px; height: 30px; transition: transform var(--d-2) var(--e-out); }
+
+.ss-link:hover .ss-num { color: var(--ink); transform: translateX(6px); }
 .ss-link:hover .ss-arrow { transform: translateX(8px); }
-.ss-link:hover .ss-num { transform: translateX(6px); }
-.ss-num { transition: transform var(--d-2) var(--e-out); }
-@media (max-width: 720px) { .ss-link { grid-template-columns: auto 1fr; } .ss-arrow { display: none; } }
+.ss-link:hover .ss-ghost { opacity: .18; }
+.ss-link:focus-visible { outline: 3px solid var(--ink); outline-offset: -6px; box-shadow: none; }
+
+@media (max-width: 860px) {
+  .ss-link { grid-template-columns: auto 1fr; gap: var(--s5); min-height: 132px; padding-block: var(--s5); }
+  .ss-go { display: none; }
+  .ss-ghost { font-size: 12rem; right: -1.5%; opacity: .1; }
+  .ss-num { -webkit-text-stroke-width: 2.5px; }
+  .ss-name { max-width: none; font-size: clamp(1.15rem, 5vw, 1.6rem); }
+}

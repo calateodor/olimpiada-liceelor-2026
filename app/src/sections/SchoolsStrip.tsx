@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { SCHOOLS } from '../data/schools';
+import { SCHOOLS, schoolVars } from '../data/schools';
 import { useStore } from '../store/state';
 import { generalStandings } from '../lib/competition';
 import { gsap, prefersReducedMotion } from '../lib/motion';
@@ -17,31 +17,37 @@ export function SchoolsStrip() {
     if (prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('.ss-row').forEach(row => {
-        gsap.from(row.querySelector('.ss-num'), { xPercent: -30, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
         gsap.from(row.querySelector('.ss-bg'), { scaleX: 0, transformOrigin: 'left', duration: 1.1, ease: 'expo.inOut', scrollTrigger: { trigger: row, start: 'top 90%', once: true } });
+        gsap.from(row.querySelector('.ss-num'), { xPercent: -25, opacity: 0, duration: 1, ease: 'expo.out', delay: 0.15, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
+        gsap.from(row.querySelectorAll('.ss-info > *'), { x: -18, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06, delay: 0.25, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
+        gsap.from(row.querySelector('.ss-ghost'), { xPercent: 12, opacity: 0, duration: 1.2, ease: 'expo.out', delay: 0.2, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
       });
     }, root.current);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} className="ss" aria-label="Licee">
+    <section ref={root} className="ss section" aria-label="Licee">
       <div className="container sec-head">
-        <span className="idx">05 / Licee</span>
-        <h2 className="h2">Șapte culori,<br />o singură arenă</h2>
-        <p className="aside body">Numărul și culoarea au fost trase la sorți. Grupa A: 1–4. Grupa B: 5–7. Fiecare liceu are pagina lui cu meciuri, rezultate, lot și galerie.</p>
+        <div className="idx"><span className="bar bar-sm">Cele 7 licee</span><span className="mono">Numere și culori trase la sorți</span></div>
+        <h2 className="h2">Șapte <span className="ye spark">culori</span>, o singură arenă</h2>
       </div>
       <ul className="ss-list">
         {SCHOOLS.map(s => (
-          <li key={s.id} className="ss-row" style={{ ['--c' as string]: s.color, ['--fgc' as string]: s.fg }}>
+          <li key={s.id} className="ss-row" style={schoolVars(s)} data-on-color>
             <Link to={`/licee/${s.id}`} className="ss-link">
               <span className="ss-bg" aria-hidden="true" />
-              <span className="ss-num h-mega num">{s.nr}</span>
+              <span className="ss-ghost num" aria-hidden="true">{s.nr}</span>
+              <span className="ss-num num" aria-hidden="true">{s.nr}</span>
               <span className="ss-info">
                 <span className="h3 ss-name">{s.name}</span>
-                <span className="mono ss-meta">{s.colorName} · Grupa {s.group} · locul {rank[s.id]} în general</span>
+                <span className="ss-tags">
+                  <span className="ss-tag">{s.colorName}</span>
+                  <span className="ss-tag">Grupa {s.group}</span>
+                  <span className="ss-tag ss-tag-rank">Locul {rank[s.id]} în general</span>
+                </span>
               </span>
-              <Icon icon="solar:arrow-right-linear" className="ss-arrow" />
+              <span className="ss-go"><span className="mono">Vezi liceul</span><Icon icon="solar:arrow-right-linear" className="ss-arrow" /></span>
             </Link>
           </li>
         ))}

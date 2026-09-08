@@ -41,7 +41,7 @@ export function GeneralStandings({ full = false }: { full?: boolean }) {
             <li key={r.school.id} className={`gs-row ${i === 0 ? 'is-first' : ''}`}>
               <span className="gs-rank mono">{String(i + 1).padStart(2, '0')}</span>
               <Link to={`/licee/${r.school.id}`} className="gs-school"><SchoolMark school={r.school} /><span className="gs-name">{r.school.short}<span className="dim gs-full">{r.school.name}</span></span></Link>
-              <span className="gs-bar"><span className="gs-bar-fill" style={{ transform: `scaleX(${r.pts / max})`, background: r.school.color, outline: r.school.color === '#FFFFFF' ? '1px solid var(--n-200)' : undefined }} /></span>
+              <span className="gs-bar"><span className="gs-bar-fill" style={{ transform: `scaleX(${r.pts / max})`, background: `linear-gradient(90deg, ${r.school.deep}, ${r.school.color})` }} /></span>
               <span className="gs-medals mono" aria-label={`${r.gold} aur, ${r.silver} argint, ${r.bronze} bronz`}>
                 <i className="gs-m gs-g">{r.gold}</i><i className="gs-m gs-s">{r.silver}</i><i className="gs-m gs-b">{r.bronze}</i>
               </span>
