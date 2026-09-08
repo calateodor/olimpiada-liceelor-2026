@@ -23,7 +23,7 @@
 .hero-next-t { font-size: clamp(1.3rem, 2vw, 1.8rem); }
 .hero-next-list { display: grid; gap: var(--s2); border-top: 1px solid var(--v-600); padding-top: var(--s3); }
 .hero-next-list li { display: grid; grid-template-columns: 5ch 1fr auto; gap: var(--s3); align-items: center; font-weight: 600; font-size: var(--t-sm); }
-.hero-next-teams { display: inline-flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.hero-next-teams { display: inline-flex; align-items: center; gap: var(--s2); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .hero-cd { display: flex; gap: var(--s6); flex-wrap: wrap; }
 .hero-cd > div { display: grid; }
 .hero-scroll { position: absolute; right: var(--gutter); bottom: var(--s6); z-index: 3; display: flex; align-items: center; gap: var(--s2); color: var(--ye-500); }
@@ -32,4 +32,6 @@
 .hero-cd b { font-weight: 800; font-size: var(--t-3xl); letter-spacing: -.04em; line-height: 1; color: var(--ye-500); font-variation-settings: 'opsz' 96, 'wdth' 80, 'wght' 800; }
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: var(--s8); padding-top: calc(var(--logo-bottom) + var(--s8)); }
+  .hero-next-list li { grid-template-columns: 4.5ch 1fr auto; font-size: var(--t-xs); }
+  .hero-next-teams .mark { --sz: 22px; }
 }
