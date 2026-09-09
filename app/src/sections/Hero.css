@@ -6,6 +6,10 @@
 .hero-bg::after { content: ''; position: absolute; inset: 0; background:
   linear-gradient(180deg, rgba(11,14,34,.72) 0%, rgba(11,14,34,.25) 18%, rgba(11,14,34,0) 34%, rgba(11,14,34,0) 62%, var(--v-900) 100%),
   radial-gradient(ellipse 70% 60% at 50% 55%, rgba(11,14,34,0) 0%, rgba(11,14,34,.35) 100%); }
+/* grila de puncte a paginii, peste poza: sta pe loc (nu vine cu parallax-ul), un pic mai vizibila
+   decat pe fundalul simplu, ca sa se citeasca si peste zonele luminoase ale pozei */
+.hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(rgba(255,255,255,.085) 1px, transparent 1.25px); background-size: 22px 22px; }
 @media (prefers-reduced-motion: reduce) { .hero-bg { inset: 0; } }
 @media (max-width: 900px) { .hero { height: auto; min-height: 100svh; } }
 .hero-canvas { position: absolute; inset: 0 0 auto 0; height: var(--vh, 100svh); z-index: 1; pointer-events: none; }
