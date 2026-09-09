@@ -5,18 +5,24 @@ import * as THREE from 'three';
 import { gsap } from '../lib/motion';
 import { heroSignals, announceCoinsReady } from './signals';
 import { CLUSTER_W } from './heroLayout';
-import { asset } from '../lib/asset';
+// sprite-urile trec prin Vite si primesc nume cu hash: cand se schimba, browserul nu mai poate
+// servi din cache varianta veche (s-a intamplat: aceeasi cale, imagine diferita)
+import coinBlue from '../assets/coins/coin-blue.png';
+import coinYellow from '../assets/coins/coin-yellow.png';
+import coinBlack from '../assets/coins/coin-black.png';
+import coinGreen from '../assets/coins/coin-green.png';
+import coinRed from '../assets/coins/coin-red.png';
 
 /* ------------------------------------------------------------------ data
    Positions are the logo artwork's own geometry (coin radius = 1).
    `layer` = paint order (0 front). Each layer has its own depth, so coins never intersect. */
 export interface CoinDef { id: string; color: string; tex: string; x: number; y: number; layer: number }
 export const COINS: CoinDef[] = [
-  { id: 'blue',   color: '#2f749e', tex: asset('/img/coins/coin-blue.png'),   x: -2.16, y: 0.62,  layer: 0 },
-  { id: 'yellow', color: '#e7a621', tex: asset('/img/coins/coin-yellow.png'), x: -1.16, y: -0.61, layer: 1 },
-  { id: 'black',  color: '#2f2d28', tex: asset('/img/coins/coin-black.png'),  x: 0.01,  y: 0.60,  layer: 2 },
-  { id: 'green',  color: '#3e863d', tex: asset('/img/coins/coin-green.png'),  x: 1.01,  y: -0.62, layer: 3 },
-  { id: 'red',    color: '#bc3b2a', tex: asset('/img/coins/coin-red.png'),    x: 2.16,  y: 0.60,  layer: 4 },
+  { id: 'blue',   color: '#2f749e', tex: coinBlue,   x: -2.16, y: 0.62,  layer: 0 },
+  { id: 'yellow', color: '#e7a621', tex: coinYellow, x: -1.16, y: -0.61, layer: 1 },
+  { id: 'black',  color: '#2f2d28', tex: coinBlack,  x: 0.01,  y: 0.60,  layer: 2 },
+  { id: 'green',  color: '#3e863d', tex: coinGreen,  x: 1.01,  y: -0.62, layer: 3 },
+  { id: 'red',    color: '#bc3b2a', tex: coinRed,    x: 2.16,  y: 0.60,  layer: 4 },
 ];
 const CAM_Z = 24, FOV = 18;
 const R = 1, T = 0.16, SEG = 128;
