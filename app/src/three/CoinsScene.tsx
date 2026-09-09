@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useTexture, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 import { gsap } from '../lib/motion';
-import { heroSignals } from './signals';
+import { heroSignals, announceCoinsReady } from './signals';
 import { CLUSTER_W } from './heroLayout';
 import { asset } from '../lib/asset';
 
@@ -109,6 +109,8 @@ function Coin({ def, index }: { def: CoinDef; index: number }) {
 function Cluster() {
   const g = useRef<THREE.Group>(null!);
   const { camera, size } = useThree();
+  // texturile s-au incarcat si suntem sub Suspense: de aici incolo monedele chiar se deseneaza
+  useEffect(() => { announceCoinsReady(); }, []);
   useFrame(() => {
     const c = heroSignals.cluster;
     if (!heroSignals.ready || !c.w) return;

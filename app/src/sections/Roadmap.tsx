@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { useStore } from '../store/state';
@@ -58,30 +58,42 @@ function buildNodes(state: State): Node[] {
   ];
 }
 
-/* ---------------- drumul: S-curve între noduri ---------------- */
+/* ---------------- drumul: S-curve între noduri ----------------
+   Nodurile NU mai stau la pas fix: fiecare etapă are alt număr de rânduri, iar cu un pas
+   constant eticheta etapei următoare cădea peste ultimele rânduri ale celei dinainte.
+   Pozițiile pe verticală se calculează din înălțimea reală a fiecărui bloc de text
+   (măsurată în pixeli, convertită în unități SVG), plus o distanță minimă între ele. */
 const W = 1000;
-function buildPath(n: number, stepY: number, mobile: boolean) {
+const LEAD = 90;   // bucata de drum dinaintea primului nod și după ultimul, în px
+function buildPath(ys: number[], mobile: boolean, total: number) {
   const xs = (i: number) => (mobile ? 90 : i % 2 === 0 ? 250 : 750);
-  const pts = Array.from({ length: n }, (_, i) => [xs(i), stepY * i + stepY * 0.5] as const);
-  const startY = -stepY * 0.4, endY = stepY * (n - 0.5) + stepY * 0.5;
-  let d = `M ${pts[0][0]} ${startY} L ${pts[0][0]} ${pts[0][1]}`;
-  for (let i = 0; i < n - 1; i++) {
+  const pts = ys.map((y, i) => [xs(i), y] as const);
+  let d = `M ${pts[0][0]} 0 L ${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 0; i < pts.length - 1; i++) {
     const [x0, y0] = pts[i], [x1, y1] = pts[i + 1];
-    d += mobile ? ` L ${x1} ${y1}` : ` C ${x0} ${y0 + stepY * 0.5}, ${x1} ${y1 - stepY * 0.5}, ${x1} ${y1}`;
+    const m = (y1 - y0) / 2;
+    d += mobile ? ` L ${x1} ${y1}` : ` C ${x0} ${y0 + m}, ${x1} ${y1 - m}, ${x1} ${y1}`;
   }
-  d += ` L ${pts[n - 1][0]} ${endY}`;
-  return { d, pts, h: endY };
+  d += ` L ${pts[pts.length - 1][0]} ${total}`;
+  return { d, pts };
 }
 
 export function Roadmap() {
   const state = useStore(s => s.state);
   const root = useRef<HTMLElement>(null!);
   const pathRef = useRef<SVGPathElement>(null!);
+  const roadRef = useRef<HTMLDivElement>(null!);
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 760px)').matches);
   const today = todayISO();
   const nodes = useMemo(() => buildNodes(state), [state]);
-  const stepY = mobile ? 300 : 250;
-  const { d, pts, h } = useMemo(() => buildPath(nodes.length, stepY, mobile), [nodes.length, stepY, mobile]);
+  // estimare pentru prima randare; useLayoutEffect-ul de mai jos o inlocuieste cu masuratorile reale
+  const [layout, setLayout] = useState<{ ys: number[]; h: number } | null>(null);
+  const fallback = useMemo(() => {
+    const step = mobile ? 330 : 270;
+    return { ys: nodes.map((_, i) => LEAD + step * i + step * 0.5), h: LEAD * 2 + step * nodes.length };
+  }, [nodes.length, mobile]);
+  const { ys, h } = layout && layout.ys.length === nodes.length ? layout : fallback;
+  const { d, pts } = useMemo(() => buildPath(ys, mobile, h), [ys, h, mobile]);
   const status = (n: Node) => (n.items.some(i => i.live) ? 'live' : today > n.to || n.items.filter(i => i.eventId).every(i => i.done) && n.items.some(i => i.done) ? 'done' : today >= n.from && today <= n.to ? 'now' : 'next');
 
   // matches played so far (for the progress card)
@@ -94,6 +106,44 @@ export function Roadmap() {
     mq.addEventListener('change', on); return () => mq.removeEventListener('change', on);
   }, []);
 
+  /* Așezarea nodurilor: măsurăm cât ocupă blocul de text al fiecărei etape și îl centrăm pe nod,
+     lăsând o distanță minimă între blocuri vecine. Blocurile își iau lățimea din fereastră, nu din
+     înălțimea drumului, așa că măsurarea nu se poate autoîntreține la infinit. */
+  useLayoutEffect(() => {
+    const road = roadRef.current;
+    if (!road) return;
+    const measure = () => {
+      const w = road.clientWidth;
+      if (!w) return;
+      const k = W / w;                                  // pixeli -> unități SVG (scara e uniformă)
+      const gap = (mobile ? 46 : 64) * k;               // spațiul liber minim între două etape
+      const minPx = mobile ? 56 : 76;                   // cercul cu numărul
+      const els = Array.from(road.querySelectorAll<HTMLElement>('.rd-node'));
+      if (els.length !== nodes.length) return;
+      const halves = els.map(n => {
+        const side = n.querySelector<HTMLElement>('.rd-side');
+        return (Math.max(side ? side.offsetHeight : 0, minPx) / 2) * k;
+      });
+      const lead = LEAD * k;
+      const out: number[] = [];
+      let y = lead + halves[0];
+      for (let i = 0; i < halves.length; i++) {
+        if (i > 0) y += halves[i - 1] + gap + halves[i];
+        out.push(y);
+      }
+      const total = y + halves[halves.length - 1] + lead;
+      setLayout(prev =>
+        prev && prev.ys.length === out.length && Math.abs(prev.h - total) < 0.5 && prev.ys.every((v, i) => Math.abs(v - out[i]) < 0.5)
+          ? prev : { ys: out, h: total });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(road);
+    // fonturile se încarcă după prima randare și schimbă înălțimea rândurilor
+    document.fonts?.ready.then(measure).catch(() => {});
+    return () => ro.disconnect();
+  }, [mobile, nodes]);
+
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
@@ -105,7 +155,7 @@ export function Roadmap() {
       });
     }, root.current);
     return () => ctx.revert();
-  }, [mobile, nodes.length]);
+  }, [mobile, nodes.length, h]);
 
   return (
     <section ref={root} id="roadmap" className="rd section" aria-label="Traseul competiției">
@@ -123,8 +173,8 @@ export function Roadmap() {
           </div>
         </div>
 
-        <div className={`rd-road ${mobile ? 'is-mobile' : ''}`} style={{ aspectRatio: `${W} / ${h}` }}>
-          <svg viewBox={`0 ${-stepY * 0.4} ${W} ${h + stepY * 0.4}`} preserveAspectRatio="none" className="rd-svg" aria-hidden="true">
+        <div ref={roadRef} className={`rd-road ${mobile ? 'is-mobile' : ''}`} style={{ aspectRatio: `${W} / ${h}` }}>
+          <svg viewBox={`0 0 ${W} ${h}`} preserveAspectRatio="none" className="rd-svg" aria-hidden="true">
             <defs>
               <filter id="rd-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14" /></filter>
             </defs>
@@ -137,7 +187,7 @@ export function Roadmap() {
             const st = status(n); const [x, y] = pts[i];
             const left = i % 2 === 0; // label on the right of an even node (left side), left of odd nodes
             return (
-              <article key={n.id} className={`rd-node is-${st} ${mobile ? 'side-r' : left ? 'side-r' : 'side-l'}`} style={{ left: `${(x / W) * 100}%`, top: `${((y + stepY * 0.4) / (h + stepY * 0.4)) * 100}%` }}>
+              <article key={n.id} className={`rd-node is-${st} ${mobile ? 'side-r' : left ? 'side-r' : 'side-l'}`} style={{ left: `${(x / W) * 100}%`, top: `${(y / h) * 100}%` }}>
                 <div className="rd-num"><span className="num">{String(i + 1).padStart(2, '0')}</span>{st === 'done' && <Icon icon="solar:check-read-linear" className="rd-check" />}</div>
                 <div className="rd-side">
                   <div className="rd-label">

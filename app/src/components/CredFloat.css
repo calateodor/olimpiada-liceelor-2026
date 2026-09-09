@@ -1,6 +1,6 @@
 .cred-float {
   position: fixed; left: 0; top: 0; z-index: 150; /* peste bara de sus (100), sub meniul mare (200) */
-  width: clamp(72px, 7vw, 92px);
+  width: clamp(50px, 4.9vw, 64px);   /* 70% din marimea initiala */
   /* fără touch-action browserul ar derula pagina în loc să miște jucăria */
   touch-action: none;
   cursor: grab;

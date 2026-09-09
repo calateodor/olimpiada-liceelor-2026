@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { gsap, prefersReducedMotion, getLenis } from '../lib/motion';
+import { gsap, prefersReducedMotion, getLenis, ScrollTrigger } from '../lib/motion';
 import { heroSignals } from '../three/signals';
 import { computeLayout } from '../three/heroLayout';
 import { Wordmark, WORDMARK } from './Wordmark';
@@ -71,8 +71,10 @@ export function Hero() {
       const hint = el.querySelector<HTMLElement>('.hero-scroll')!;
       if (reduced) { gsap.set(content, { opacity: 1, pointerEvents: 'auto' }); gsap.set(hint, { opacity: 0 }); return; }
 
-      /* ---------- intro: coins drop (in the 3D scene) while the wordmark builds itself ---------- */
-      gsap.timeline({ defaults: { ease: 'expo.out' } })
+      /* ---------- intro: monedele cad (in scena 3D) exact cat timp se construieste wordmark-ul.
+         Timeline-ul sta pe pauza pana cand scena 3D anunta ca deseneaza, ca sa nu porneasca
+         scrisul singur si monedele sa pice abia dupa ce s-a incarcat chunk-ul de 3D. ---------- */
+      const introTl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } })
         .from('.wm-olimpiada', { y: 40, scale: 0.9, opacity: 0, transformOrigin: '50% 100%', duration: 1.0 }, 0.9)
         .from(dots, { scale: 0, opacity: 0, duration: 0.3, ease: 'back.out(3)', stagger: { each: 0.012 } }, 1.1)
         .fromTo('.wm-liceelor', { clipPath: 'inset(-20% 100% -20% -5%)', x: -14 }, { clipPath: 'inset(-20% -5% -20% -5%)', x: 0, duration: 0.85, ease: 'power2.inOut' }, 1.25)
@@ -80,11 +82,25 @@ export function Hero() {
         .from('.wm-y2026', { x: 30, opacity: 0, duration: 0.7 }, 1.5)
         .from(hint, { opacity: 0, y: 10, duration: 0.8 }, 2.2);
 
-      /* ---------- idle life ---------- */
-      gsap.to('.wm-liceelor', { filter: 'drop-shadow(0 0 18px rgba(169,213,247,.95))', duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.5 });
-      gsap.to(dots, { opacity: 0.5, duration: 0.6, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.04, repeat: -1, yoyo: true }, delay: 2.6 });
-      gsap.to('.wm-in', { y: -6, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
-      gsap.to('.wm-olimpiada', { scale: 1.012, transformOrigin: '50% 100%', duration: 3.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
+      /* ---------- idle life (pornite odata cu intro-ul, ca sa pastreze aceleasi decalaje) ---------- */
+      const startIdle = () => {
+        gsap.to('.wm-liceelor', { filter: 'drop-shadow(0 0 18px rgba(169,213,247,.95))', duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.5 });
+        gsap.to(dots, { opacity: 0.5, duration: 0.6, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.04, repeat: -1, yoyo: true }, delay: 2.6 });
+        gsap.to('.wm-in', { y: -6, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
+        gsap.to('.wm-olimpiada', { scale: 1.012, transformOrigin: '50% 100%', duration: 3.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2.4 });
+      };
+      let introStarted = false;
+      const startIntro = () => {
+        if (introStarted) return;
+        introStarted = true;
+        clearTimeout(introFallback);
+        window.removeEventListener('hero:coins-ready', startIntro);
+        introTl.play(); startIdle();
+      };
+      // daca WebGL-ul lipseste sau scena intarzie, scrisul nu are de ce sa astepte la nesfarsit
+      const introFallback = window.setTimeout(startIntro, 2500);
+      if (heroSignals.coinsReady) startIntro();
+      else window.addEventListener('hero:coins-ready', startIntro);
 
       /* ---------- scroll: time-based morph to the horizontal logo (plays once you start scrolling, reverses at the top) ---------- */
       const morph = gsap.timeline({ paused: true, defaults: { ease: 'power3.inOut' } })
@@ -97,25 +113,36 @@ export function Hero() {
         .fromTo('.wm-y2026', { x: 0 }, { x: 18, duration: 0.5, yoyo: true, repeat: 1 }, 0.2)
         .fromTo(content, { opacity: 0, y: 30, pointerEvents: 'none' }, { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.9, ease: 'expo.out' }, 0.7)
         .from('[data-hero-fade]', { y: 18, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'expo.out' }, 0.8);
-      // First scroll: snap back to the top, hold the page still while the logo travels (time-based, no scrub),
-      // then release. Wheel-up while already at the top brings the vertical logo back.
+      // La prima intentie de scroll (rotita, deget, tasta) inghetam pagina pe loc si lasam morph-ul
+      // sa curga: logo-ul urca in bara, textul apare, hero-ul se strange si sectiunea de dedesubt
+      // intra in cadru singura. Pagina NU mai e trasa inapoi in varf. Prindem gestul inainte sa
+      // apuce Lenis sa deruleze, altfel logo-ul ar ateriza deja iesit din ecran.
       let morphed = false, busy = false;
       const lock = () => getLenis()?.stop();
-      const unlock = () => { busy = false; getLenis()?.start(); };
+      // dupa morph inaltimea hero-ului s-a schimbat: reasezam declansatoarele sectiunilor de dedesubt
+      const unlock = () => { busy = false; getLenis()?.start(); ScrollTrigger.refresh(); };
       morph.eventCallback('onComplete', unlock);
       morph.eventCallback('onReverseComplete', unlock);
-      const onScroll = () => {
-        if (morphed || busy || window.scrollY <= 2) return;
+      const startMorph = () => {
+        if (morphed || busy) return;
         busy = true; morphed = true;
-        const l = getLenis(); if (l) l.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0);
         lock(); morph.play();
       };
+      const onScroll = () => { if (window.scrollY > 2) startMorph(); };
+      const onTouchMove = () => startMorph();
+      const onKey = (e: KeyboardEvent) => {
+        if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].includes(e.key)) startMorph();
+      };
       const onWheel = (e: WheelEvent) => {
+        if (e.deltaY > 0) { startMorph(); return; }
+        // rotita in sus, cu pagina deja in varf: aducem inapoi logo-ul vertical
         if (!morphed || busy || e.deltaY >= 0 || window.scrollY > 1) return;
         busy = true; morphed = false; lock(); morph.reverse();
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('wheel', onWheel, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('keydown', onKey);
 
       /* ---------- pointer → coin tilt + wordmark parallax ---------- */
       const onMove = (e: PointerEvent) => {
@@ -126,7 +153,7 @@ export function Hero() {
       };
       const reset = () => { heroSignals.px = 0; heroSignals.py = 0; gsap.to(par, { x: 0, y: 0, duration: 0.8, onUpdate: apply, overwrite: true }); };
       window.addEventListener('pointermove', onMove, { passive: true }); window.addEventListener('blur', reset); document.addEventListener('pointerleave', reset);
-      return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); window.removeEventListener('scroll', onScroll); window.removeEventListener('wheel', onWheel); getLenis()?.start(); };
+      return () => { clearTimeout(introFallback); window.removeEventListener('hero:coins-ready', startIntro); window.removeEventListener('pointermove', onMove); window.removeEventListener('blur', reset); document.removeEventListener('pointerleave', reset); window.removeEventListener('scroll', onScroll); window.removeEventListener('wheel', onWheel); window.removeEventListener('touchmove', onTouchMove); window.removeEventListener('keydown', onKey); getLenis()?.start(); };
     }, el);
     return () => { ro.disconnect(); window.removeEventListener('resize', apply); ctx.revert(); };
   }, []);
@@ -136,7 +163,9 @@ export function Hero() {
       <h1 className="sr-only">Olimpiada Liceelor Slatina 2026</h1>
       <div className="hero-canvas">
         {webgl ? (
-          <Suspense fallback={<div ref={poster} className="hero-poster"><img src={asset('/img/medalioane.png')} alt="" /></div>}>
+          /* fara poster cat se incarca scena: altfel monedele apar intai statice, apoi dispar si abia
+             pe urma incepe animatia. Pana e gata scena, locul lor ramane gol si tot hero-ul asteapta. */
+          <Suspense fallback={null}>
             <CoinsCanvas className="hero-gl" />
           </Suspense>
         ) : (
