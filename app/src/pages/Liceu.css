@@ -3,7 +3,9 @@
 .lc-hero::before { content: ''; position: absolute; inset: 0; opacity: .1; pointer-events: none; background-image: repeating-linear-gradient(114deg, transparent 0 30px, currentColor 30px 32px); -webkit-mask-image: linear-gradient(90deg, transparent 45%, #000 100%); mask-image: linear-gradient(90deg, transparent 45%, #000 100%); }
 .lc-hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 90px; background: linear-gradient(180deg, transparent, var(--bg)); opacity: .55; pointer-events: none; }
 
-.lc-hero-in { display: grid; grid-template-columns: auto 1fr; gap: var(--s10); align-items: end; padding-block: var(--s16) var(--s12); }
+.lc-hero-in { display: grid; grid-template-columns: auto auto 1fr; gap: var(--s10); align-items: end; padding-block: var(--s16) var(--s12); }
+/* sigla stă lângă numărul uriaș, pe aceeași linie de bază cu titlul */
+.lc-crest { margin-bottom: var(--s2); }
 .lc-hero .lc-num { font-size: clamp(8rem, 26vw, 26rem); line-height: .75; color: var(--ink); -webkit-text-stroke: 0; opacity: .96; }
 .lc-hero-t { display: grid; gap: var(--s5); }
 .lc-hero .mono, .lc-hero .dim { color: inherit; opacity: .72; }
@@ -32,4 +34,4 @@
 .lc-pn { display: flex; justify-content: space-between; border-top: 1.5px solid var(--v-600); padding-top: var(--s6); }
 .lc-pn-l { display: inline-flex; align-items: center; gap: var(--s3); font-weight: 700; }
 .table .team { display: inline-flex; }
-@media (max-width: 800px) { .lc-hero-in { grid-template-columns: 1fr; } .lc-num { font-size: clamp(8rem, 40vw, 16rem); } .lc-ev { grid-template-columns: 1fr auto; } .lc-ev-i { display: none; } }
+@media (max-width: 800px) { .lc-hero-in { grid-template-columns: auto 1fr; } .lc-crest { --sz: clamp(96px, 30vw, 140px); align-self: center; } .lc-hero-t { grid-column: 1 / -1; } .lc-num { font-size: clamp(8rem, 40vw, 16rem); } .lc-ev { grid-template-columns: 1fr auto; } .lc-ev-i { display: none; } }

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import { asset } from '../lib/asset';
+import { SCHOOLS } from '../data/schools';
+import { SchoolCrest } from './SchoolCrest';
 
 export function Footer() {
   return (
@@ -9,6 +11,9 @@ export function Footer() {
         <div className="footer-brand">
           <img src={asset('/img/logo-transparent.png')} alt="Olimpiada Liceelor Slatina 2026" width="320" loading="lazy" />
           <p className="body">Program de stimulare a performanței organizat de Consiliul Local și Primăria Municipiului Slatina, în colaborare cu liceele din municipiu și Inspectoratul Școlar Județean Olt. Aprobat prin HCL nr. 184 / 18.06.2026.</p>
+          <ul className="footer-schools" aria-label="Liceele participante">
+            {SCHOOLS.map(s => <li key={s.id}><Link to={`/licee/${s.id}`} title={s.name}><SchoolCrest school={s} size="md" decorative /><span className="sr-only">{s.name}</span></Link></li>)}
+          </ul>
         </div>
         <nav className="footer-cols" aria-label="Subsol">
           <div>

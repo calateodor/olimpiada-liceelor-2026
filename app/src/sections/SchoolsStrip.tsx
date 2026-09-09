@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { SCHOOLS, schoolVars } from '../data/schools';
+import { SchoolCrest } from '../components/SchoolCrest';
 import { useStore } from '../store/state';
 import { generalStandings } from '../lib/competition';
 import { gsap, prefersReducedMotion } from '../lib/motion';
@@ -21,6 +22,7 @@ export function SchoolsStrip() {
         gsap.from(row.querySelector('.ss-num'), { xPercent: -25, opacity: 0, duration: 1, ease: 'expo.out', delay: 0.15, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
         gsap.from(row.querySelectorAll('.ss-info > *'), { x: -18, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06, delay: 0.25, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
         gsap.from(row.querySelector('.ss-ghost'), { xPercent: 12, opacity: 0, duration: 1.2, ease: 'expo.out', delay: 0.2, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
+        gsap.from(row.querySelector('.ss-crest'), { scale: 0.4, rotate: -14, opacity: 0, duration: 1.1, ease: 'back.out(1.6)', delay: 0.35, scrollTrigger: { trigger: row, start: 'top 85%', once: true } });
       });
     }, root.current);
     return () => ctx.revert();
@@ -47,6 +49,7 @@ export function SchoolsStrip() {
                   <span className="ss-tag ss-tag-rank">Locul {rank[s.id]} în general</span>
                 </span>
               </span>
+              <SchoolCrest school={s} size="xl" className="ss-crest" decorative />
               <span className="ss-go"><span className="mono">Vezi liceul</span><Icon icon="solar:arrow-right-linear" className="ss-arrow" /></span>
             </Link>
           </li>

@@ -6,6 +6,7 @@ import { SCHOOL_BY_ID, SCHOOLS, schoolVars, type SchoolId } from '../data/school
 import { schoolMatches, generalStandings, eventPlacements, eventStatus, PLACE_LABEL, fmtDate, matchDate, SECTION_LABEL } from '../lib/competition';
 import { MatchCard } from '../components/MatchCard';
 import { SchoolMark } from '../components/SchoolMark';
+import { SchoolCrest } from '../components/SchoolCrest';
 import { PhotoGrid } from '../components/PhotoGrid';
 import { EVENT_ICON } from '../sections/ProbeGrid';
 import { gsap, revealChars, revealUp, prefersReducedMotion } from '../lib/motion';
@@ -57,6 +58,7 @@ export default function Liceu() {
       <header className="lc-hero" data-on-color>
         <div className="container lc-hero-in">
           <span className="lc-num h-mega num" aria-hidden="true">{s.nr}</span>
+          <SchoolCrest school={s} size="hero" className="lc-crest" />
           <div className="lc-hero-t">
             <p className="mono" data-r><Link to="/licee">Licee</Link> / Grupa {s.group} · {s.colorName}</p>
             <h1 ref={h} className="h1">{s.name}</h1>

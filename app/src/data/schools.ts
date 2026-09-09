@@ -10,6 +10,7 @@ export interface School {
   color: string;              // hex
   fg: string;                 // REGULA de contrast: cerneala care rămâne lizibilă pe `color`
   deep: string;               // varianta închisă a culorii (degradeuri, umbre)
+  ring: string;               // inelul din jurul siglei: culoarea, sau varianta închisă când culoarea e (aproape) albă
   group: 'A' | 'B';
 }
 
@@ -58,7 +59,7 @@ export function mix(hex: string, target: string, amount: number) {
   return `#${c.map(v => v.toString(16).padStart(2, '0')).join('')}`;
 }
 
-type Raw = Omit<School, 'fg' | 'deep'>;
+type Raw = Omit<School, 'fg' | 'deep' | 'ring'>;
 const RAW: Raw[] = [
   { id: 'titulescu',   nr: 1, name: 'Liceul Teoretic Nicolae Titulescu',      short: 'Titulescu',   colorName: 'Portocaliu', color: '#FF8A00', group: 'A' },
   { id: 'minulescu',   nr: 2, name: 'Colegiul Național Ion Minulescu',        short: 'Minulescu',   colorName: 'Verde',      color: '#1DA84A', group: 'A' },
@@ -69,12 +70,17 @@ const RAW: Raw[] = [
   { id: 'economic',    nr: 7, name: 'Colegiul Economic P. S. Aurelian',       short: 'Economic',    colorName: 'Albastru',   color: '#3B6BFF', group: 'B' },
 ];
 
-export const SCHOOLS: School[] = RAW.map(s => ({ ...s, fg: inkOn(s.color), deep: mix(s.color, inkOn(s.color), 0.16) }));
+export const SCHOOLS: School[] = RAW.map(s => {
+  const deep = mix(s.color, inkOn(s.color), 0.16);
+  // un inel alb pe discul alb al siglei ar dispărea: liceele cu culoare deschisă primesc varianta închisă
+  const ring = contrast(s.color, '#FFFFFF') < 1.6 ? mix(s.color, INK_DARK, 0.28) : s.color;
+  return { ...s, fg: inkOn(s.color), deep, ring };
+});
 
 export const SCHOOL_BY_ID = Object.fromEntries(SCHOOLS.map(s => [s.id, s])) as Record<SchoolId, School>;
 export const SCHOOL_BY_NR = Object.fromEntries(SCHOOLS.map(s => [s.nr, s])) as Record<number, School>;
 
 /** Variabilele CSS pentru orice suprafață pictată cu o culoare de liceu. */
 export function schoolVars(s: School) {
-  return { ['--c' as string]: s.color, ['--c-deep' as string]: s.deep, ['--ink' as string]: s.fg, ['--fgc' as string]: s.fg };
+  return { ['--c' as string]: s.color, ['--c-deep' as string]: s.deep, ['--c-ring' as string]: s.ring, ['--ink' as string]: s.fg, ['--fgc' as string]: s.fg };
 }

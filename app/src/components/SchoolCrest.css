@@ -1,0 +1,25 @@
+.crest {
+  --sz: 48px;
+  position: relative; width: var(--sz); height: var(--sz); flex: 0 0 auto;
+  display: grid; place-items: center; border-radius: 50%; background: #fff;
+  /* inel în culoarea liceului + o umbră moale care o desprinde de orice fundal */
+  box-shadow:
+    0 0 0 calc(var(--sz) * .05) var(--c-ring),
+    0 calc(var(--sz) * .08) calc(var(--sz) * .3) rgba(4, 6, 20, .45);
+}
+.crest img { width: 82%; height: 82%; object-fit: contain; display: block; user-select: none; -webkit-user-drag: none; }
+/* pastila cu numărul tras la sorți */
+.crest-nr {
+  position: absolute; right: -7%; bottom: -7%;
+  width: 42%; height: 42%; min-width: 16px; min-height: 16px; border-radius: 50%;
+  background: var(--c); color: var(--fg-mark);
+  display: grid; place-items: center; font-weight: 800; line-height: 1;
+  font-size: calc(var(--sz) * .2); letter-spacing: -.03em;
+  font-variation-settings: 'opsz' 48, 'wdth' 90, 'wght' 800;
+  box-shadow: 0 0 0 2px #fff, inset 0 -.06em 0 rgba(0,0,0,.25);
+}
+.crest-sm { --sz: 32px; }
+.crest-md { --sz: 44px; }   /* cât cercul numerotat de dinainte, ca numele din cardurile de meci să nu se strângă */
+.crest-lg { --sz: 88px; }
+.crest-xl { --sz: 150px; }
+.crest-hero { --sz: clamp(120px, 16vw, 210px); }

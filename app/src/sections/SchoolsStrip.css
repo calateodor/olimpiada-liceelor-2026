@@ -3,7 +3,7 @@
 .ss-row { position: relative; }
 
 .ss-link {
-  position: relative; display: grid; grid-template-columns: minmax(110px, .42fr) 1fr auto;
+  position: relative; display: grid; grid-template-columns: minmax(110px, .42fr) 1fr auto auto;
   align-items: center; gap: var(--s8);
   padding: var(--s6) var(--gutter); min-height: 164px;
   color: var(--ink); overflow: hidden; isolation: isolate;
@@ -41,6 +41,9 @@
 }
 .ss-tag-rank { background: var(--ink); color: var(--c); opacity: 1; border-color: var(--ink); }
 .ss-go { display: inline-flex; align-items: center; gap: var(--s3); font-weight: 700; white-space: nowrap; }
+/* sigla liceului, în spațiul gol din dreapta rândului; la hover se ridică puțin spre cititor */
+.ss-crest { --sz: clamp(96px, 9vw, 132px); margin-inline: var(--s6) var(--s10); transition: transform var(--d-3) var(--e-out); }
+.ss-link:hover .ss-crest { transform: translateY(-4px) scale(1.04) rotate(-3deg); }
 .ss-go .mono { color: inherit; }
 .ss-arrow { width: 30px; height: 30px; transition: transform var(--d-2) var(--e-out); }
 
@@ -50,8 +53,9 @@
 .ss-link:focus-visible { outline: 3px solid var(--ink); outline-offset: -6px; box-shadow: none; }
 
 @media (max-width: 860px) {
-  .ss-link { grid-template-columns: auto 1fr; gap: var(--s5); min-height: 132px; padding-block: var(--s5); }
+  .ss-link { grid-template-columns: auto 1fr auto; gap: var(--s5); min-height: 132px; padding-block: var(--s5); }
   .ss-go { display: none; }
+  .ss-crest { --sz: 64px; margin: 0 var(--s2) 0 0; }
   .ss-ghost { font-size: 12rem; right: -1.5%; opacity: .1; }
   .ss-num { -webkit-text-stroke-width: 2.5px; }
   .ss-name { max-width: none; font-size: clamp(1.15rem, 5vw, 1.6rem); }
