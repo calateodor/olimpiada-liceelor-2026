@@ -10,7 +10,8 @@
     "deploy": "npm run build && wrangler deploy",
     "lint": "oxlint",
     "cf-typegen": "wrangler types",
-    "build:pages": "tsc -b && vite build"
+    "build:pages": "tsc -b && vite build",
+    "deploy:pages": "npm run build && node scripts/pages-bundle.mjs && cd pages && wrangler pages deploy --commit-dirty=true"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

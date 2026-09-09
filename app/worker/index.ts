@@ -21,7 +21,8 @@ import { verifyCredentials, makeAccess } from '../src/lib/auth';
 
 export interface Env {
   OL_KV: KVNamespace;
-  OL_MEDIA: R2Bucket;
+  /** lipseste pana cand R2 e activat in cont: incarcarea de poze raspunde 503, restul merge */
+  OL_MEDIA?: R2Bucket;
   ADMIN_SECRET?: string;
   ASSETS: Fetcher;
 }
@@ -118,6 +119,7 @@ export default {
 
     if (p === '/api/upload' && req.method === 'POST') {
       if (!(await verify(env, req))) return json({ error: 'unauthorized' }, 401);
+      if (!env.OL_MEDIA) return json({ error: 'Stocarea pozelor (R2) nu e activată încă în contul Cloudflare.' }, 503);
       const form = await req.formData();
       const file = form.get('file');
       if (!(file instanceof File)) return json({ error: 'no file' }, 400);
@@ -129,6 +131,7 @@ export default {
     }
 
     if (p.startsWith('/media/')) {
+      if (!env.OL_MEDIA) return new Response('not found', { status: 404 });
       const key = decodeURIComponent(p.slice('/media/'.length));
       const obj = await env.OL_MEDIA.get(key);
       if (!obj) return new Response('not found', { status: 404 });
@@ -141,6 +144,11 @@ export default {
 
     if (p.startsWith('/api/')) return json({ error: 'not found' }, 404);
 
-    return env.ASSETS.fetch(req);
+    // fisiere statice; rutele aplicatiei (/licee/lps, /probe/fotbal...) primesc index.html (SPA)
+    const res = await env.ASSETS.fetch(req);
+    if (res.status === 404 && req.method === 'GET' && !p.split('/').pop()!.includes('.')) {
+      return env.ASSETS.fetch(new Request(new URL('/', req.url), req));
+    }
+    return res;
   },
 } satisfies ExportedHandler<Env>;

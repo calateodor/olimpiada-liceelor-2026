@@ -1,0 +1,20 @@
+// Configurația de PUBLICARE pe Cloudflare Pages (proiectul "olimpiada-liceelor").
+// De ce Pages și nu Workers: domeniul olimpiada.primariaslatina.ro are DNS-ul la primărie
+// (Hurricane Electric), iar un Worker poate primi un domeniu propriu doar dacă zona e în
+// Cloudflare. Pages acceptă un simplu CNAME de la orice DNS. Același cod de Worker rulează
+// ca `_worker.js` lângă fișierele statice, cu aceleași legături (KV pentru date, R2 pentru poze).
+//
+// Se rulează din acest folder: `npm run deploy:pages` (din app/).
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "olimpiada-liceelor",
+  "pages_build_output_dir": "../dist/client",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    { "binding": "OL_KV", "id": "7699a7a108b14742b4ee16508bdc2421" }
+  ]
+  // Când R2 e activat în cont (dashboard → R2 → Enable) și bucket-ul există
+  // (`npx wrangler r2 bucket create olimpiada-media`), adaugă:
+  // ,"r2_buckets": [ { "binding": "OL_MEDIA", "bucket_name": "olimpiada-media" } ]
+}

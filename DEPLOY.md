@@ -14,7 +14,7 @@ npm run dev
 Deschide http://localhost:5173. Panoul: http://localhost:5173/admin (sau linkul „Administrare” din subsol), cu utilizatorul `administrator` și parola stabilită.
 Local, datele și pozele se salvează în emulatorul Cloudflare (folderul `.wrangler/`), deci „Publică” funcționează și offline.
 
-Parola nu e scrisă nicăieri în clar: în `app/src/data/access.ts` stă doar amprenta ei (PBKDF2, 600.000 de iterații). Din panou → **Cont** se poate schimba (când site-ul rulează pe Cloudflare; amprenta nouă se salvează în KV).
+Parola nu e scrisă nicăieri în clar: în `app/src/data/access.ts` stă doar amprenta ei (PBKDF2, 100.000 de iterații). Din panou → **Cont** se poate schimba (când site-ul rulează pe Cloudflare; amprenta nouă se salvează în KV).
 
 ## 2. Cont Cloudflare (o singură dată, ~10 minute)
 
@@ -43,14 +43,29 @@ npx wrangler secret put ADMIN_SECRET
 
 Pune un șir lung aleator (30+ caractere). Fără el panoul merge oricum (folosește amprenta parolei ca secret), dar cu el sesiunile deschise rămân valabile și după o schimbare de parolă.
 
-## 3. Publicare
+## 3. Publicare (Cloudflare Pages)
 
 ```bash
 cd app
-npm run deploy
+npm run deploy:pages
 ```
 
-Site-ul apare la `https://olimpiada-liceelor.<contul-tău>.workers.dev`. Fiecare `npm run deploy` publică ultima versiune a codului; datele (rezultate, poze) rămân în KV/R2, nu se pierd.
+Site-ul e la **https://olimpiada-liceelor.pages.dev**. Fiecare `npm run deploy:pages` publică ultima versiune a codului; datele (rezultate, poze, setări) rămân în KV/R2, nu se pierd.
+
+Ce face comanda: construiește site-ul, pune Worker-ul construit de Vite lângă fișierele statice ca `_worker.js` (`scripts/pages-bundle.mjs`) și îl trimite cu `wrangler pages deploy` din folderul `app/pages/`, unde stă configurația proiectului (`pages/wrangler.jsonc`: KV, și R2 după activare).
+
+De ce Pages și nu un Worker simplu: domeniul `olimpiada.primariaslatina.ro` are DNS-ul la primărie, iar Workers acceptă domenii proprii doar pentru zone aflate în Cloudflare. Pages acceptă un CNAME de la orice DNS.
+
+Secretul de sesiune e pus deja (`wrangler pages secret put ADMIN_SECRET --project-name olimpiada-liceelor`, din `app/pages/`).
+
+**Pozele.** R2 nu e încă activat în cont. Când e: dashboard → R2 → Enable (cere card doar ca verificare; planul gratuit are 10 GB), apoi:
+
+```bash
+cd app
+npx wrangler r2 bucket create olimpiada-media
+```
+
+și descomentează `r2_buckets` în `app/pages/wrangler.jsonc`, apoi `npm run deploy:pages`. Până atunci panoul spune clar la Poze că stocarea nu e activată; tot restul merge.
 
 ## 4. Domeniu: olimpiada.primariaslatina.ro
 
@@ -59,13 +74,13 @@ DNS-ul primăriei e la Hurricane Electric (ns1–ns5.he.net). Cere IT-ului prim�
 ```
 Tip: CNAME
 Nume: olimpiada
-Valoare: olimpiada-liceelor.<contul-tău>.workers.dev
+Valoare: olimpiada-liceelor.pages.dev
+TTL: 300
 ```
 
-Apoi, în Cloudflare dashboard → Workers & Pages → olimpiada-liceelor → Settings → Domains & Routes → Add → Custom domain → `olimpiada.primariaslatina.ro`.
-Dacă domeniul nu e pe Cloudflare, folosește varianta „Custom domain” cu verificare prin CNAME (Cloudflare îți spune exact ce înregistrare mai trebuie). HTTPS se emite automat.
+După ce înregistrarea există, în Cloudflare dashboard → Workers & Pages → olimpiada-liceelor → Custom domains → Set up a custom domain → `olimpiada.primariaslatina.ro`. Cloudflare verifică CNAME-ul și emite HTTPS automat (câteva minute, cel mult o oră). Până atunci site-ul e accesibil la adresa `.pages.dev`.
 
-Plan B: un domeniu propriu (ex. olimpiadaliceelor.ro) adăugat în Cloudflare, ~50 lei/an.
+Plan B, dacă primăria nu poate: un domeniu propriu (ex. olimpiadaliceelor.ro) adăugat în Cloudflare, ~50 lei/an.
 
 ## 5. Cum se folosește admin-ul în timpul competiției
 

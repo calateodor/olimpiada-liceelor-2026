@@ -28,7 +28,7 @@ export async function verifyCredentials(user: string, password: string, access: 
 }
 
 /** Amprentă nouă pentru o parolă nouă (schimbarea parolei din panou). */
-export async function makeAccess(user: string, password: string, iterations = 600000): Promise<Access> {
+export async function makeAccess(user: string, password: string, iterations = 100000): Promise<Access> {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const h = await deriveHash(password, salt, iterations);
   return { user: user.trim().toLowerCase(), salt: b64.enc(salt.buffer), hash: b64.enc(h), iterations };
