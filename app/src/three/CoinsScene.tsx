@@ -40,17 +40,16 @@ function domeGeometry(radius: number, sagitta: number, seg = 64) {
 
 /* ------------------------------------------------------------------ coin */
 function Coin({ def, index }: { def: CoinDef; index: number }) {
-  // doar culoarea: fata monedei e neteda, fara harta de relief (nici pe email, nici pe lac)
-  const tex = useTexture(def.tex);
+  const [tex, nrm] = useTexture([def.tex, def.tex.replace('.png', '-normal.png')]);
   const dome = useMemo(() => domeGeometry(R * 1.05, 0.05), []);
   const g = useRef<THREE.Group>(null!);
   const inner = useRef<THREE.Group>(null!);
   const intro = useRef({ t: 0, r: 0 });
   useMemo(() => { tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 16; }, [tex]);
 
-  // matte-ish base (no broad sheen) + mirror clearcoat (sharp reflections of thin strips), smooth surface
+  // matte-ish base (no broad sheen) + mirror clearcoat (sharp reflections of thin strips) + edge-only normals
   const side = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.5, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 0.45 }), [def.color]);
-  const face = useMemo(() => new THREE.MeshPhysicalMaterial({ map: tex, transparent: true, roughness: 0.62, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.0, envMapIntensity: 0.4, alphaTest: 0.02 }), [tex]);
+  const face = useMemo(() => new THREE.MeshPhysicalMaterial({ map: tex, normalMap: nrm, normalScale: new THREE.Vector2(1.15, 1.15), transparent: true, roughness: 0.62, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.0, clearcoatNormalMap: nrm, clearcoatNormalScale: new THREE.Vector2(1.4, 1.4), envMapIntensity: 0.4, alphaTest: 0.02 }), [tex, nrm]);
   const back = useMemo(() => new THREE.MeshPhysicalMaterial({ color: def.color, roughness: 0.5, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 0.45 }), [def.color]);
   const mats = useMemo(() => [side, back, back], [side, back]);
   useEffect(() => () => { side.dispose(); face.dispose(); back.dispose(); dome.dispose(); }, [side, face, back, dome]);
