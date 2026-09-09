@@ -10,6 +10,7 @@ import { liveMatches, upcomingMatches, resolvedMatches, fmtDate, matchDate, STAG
 import { SCHOOL_BY_ID } from '../data/schools';
 import { SchoolMark } from '../components/SchoolMark';
 import { asset } from '../lib/asset';
+import fundal from '../assets/fundal-hero.webp';
 import './Hero.css';
 
 const CoinsCanvas = lazy(() => import('../three/CoinsScene').then(m => ({ default: m.CoinsCanvas })));
@@ -33,6 +34,7 @@ export function Hero() {
   const root = useRef<HTMLElement>(null!);
   const word = useRef<HTMLDivElement>(null!);
   const poster = useRef<HTMLDivElement>(null!);
+  const bg = useRef<HTMLDivElement>(null!);
   const [webgl] = useState(() => supportsWebGL() && !prefersReducedMotion());
   const state = useStore(s => s.state);
   const all = state.events.flatMap(ev => resolvedMatches(ev, state.matches));
@@ -58,6 +60,8 @@ export function Hero() {
       heroSignals.cluster = { cx: L.cluster.x + L.cluster.w / 2, cy: L.cluster.y + L.cluster.h / 2, w: L.cluster.w };
       heroSignals.scroll = prog.p; heroSignals.ready = true;
       gsap.set(word.current, { x: L.word.x - par.x * 10, y: L.word.y - par.y * 8, width: L.word.w, height: L.word.h });
+      // fundalul e cel mai departe: se misca invers si mai putin decat scrisul, ca sa dea adancime
+      if (bg.current) gsap.set(bg.current, { x: par.x * -22, y: par.y * -14 });
       if (poster.current) gsap.set(poster.current, { x: L.cluster.x, y: L.cluster.y, width: L.cluster.w, height: L.cluster.h });
       el.style.setProperty('--logo-bottom', `${L.logoBottom}px`);
     };
@@ -144,6 +148,9 @@ export function Hero() {
       window.addEventListener('touchmove', onTouchMove, { passive: true });
       window.addEventListener('keydown', onKey);
 
+      /* ---------- parallax la scroll: poza aluneca mai incet decat pagina ---------- */
+      gsap.to(bg.current, { yPercent: 16, ease: 'none', scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true } });
+
       /* ---------- pointer → coin tilt + wordmark parallax ---------- */
       const onMove = (e: PointerEvent) => {
         if (e.pointerType === 'touch') return;
@@ -161,6 +168,8 @@ export function Hero() {
   return (
     <section ref={root} className="hero" aria-label="Olimpiada Liceelor Slatina 2026">
       <h1 className="sr-only">Olimpiada Liceelor Slatina 2026</h1>
+      {/* poza cu multimea si cupa de la o editie trecuta, in duoton mov; sta in spatele monedelor */}
+      <div ref={bg} className="hero-bg" aria-hidden="true"><img src={fundal} alt="" decoding="async" fetchPriority="high" /></div>
       <div className="hero-canvas">
         {webgl ? (
           /* fara poster cat se incarca scena: altfel monedele apar intai statice, apoi dispar si abia
