@@ -4,6 +4,7 @@ import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { CursorGlow } from './components/CursorGlow';
 import { CredFloat } from './components/CredFloat';
+import { Announcement } from './components/Announcement';
 import { initSmoothScroll, destroySmoothScroll, ScrollTrigger, scrollToTop } from './lib/motion';
 import { useStore, startPolling } from './store/state';
 
@@ -57,6 +58,7 @@ export default function App() {
       {!isAdmin && <CursorGlow />}
       {!isAdmin && <CredFloat always={pathname !== '/'} />}
       {!isAdmin && <Nav />}
+      {!isAdmin && <Announcement />}
       <main id="main">
         <Suspense fallback={<div className="page" aria-busy="true" />}>
           <Routes>

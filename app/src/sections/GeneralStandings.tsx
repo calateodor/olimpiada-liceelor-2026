@@ -26,6 +26,15 @@ export function GeneralStandings({ full = false }: { full?: boolean }) {
     return () => ctx.revert();
   }, [rows.map(r => r.pts).join()]);
 
+  // ascuns din panou: publicul vede doar mesajul (de ex. până validează juriul)
+  if (!state.config.standings.show) {
+    return (
+      <section className={`gs ${full ? '' : 'section'}`} aria-label="Clasament general">
+        <div className="container"><div className="card gs-hidden"><span className="bar bar-sm">Clasament general</span><p className="h4">{state.config.standings.note || 'Clasamentul general se publică în curând.'}</p></div></div>
+      </section>
+    );
+  }
+
   return (
     <section ref={root} className={`gs ${full ? '' : 'section'}`} aria-label="Clasament general">
       <div className="container">
@@ -49,6 +58,7 @@ export function GeneralStandings({ full = false }: { full?: boolean }) {
             </li>
           ))}
         </ol>
+        {state.config.standings.note && <p className="mono gs-note">{state.config.standings.note}</p>}
         {!full && <div style={{ marginTop: 'var(--s8)' }}><Link to="/clasament" className="btn btn-ghost">Clasamentul pe probe</Link></div>}
       </div>
     </section>

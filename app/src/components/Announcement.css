@@ -1,0 +1,11 @@
+.ann {
+  position: fixed; left: 0; right: 0; top: var(--nav-h); z-index: 90;
+  display: flex; align-items: center; justify-content: center; gap: var(--s3);
+  padding: var(--s2) var(--gutter); font-weight: 600; font-size: var(--t-sm); text-align: center;
+  background: var(--pu-500); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+.ann-i { width: 18px; height: 18px; flex: 0 0 auto; }
+.ann-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.ann-live { background: var(--live); }
+.ann-warn { background: var(--ye-500); color: var(--v-950); }
+.ann-info { background: var(--pu-500); }

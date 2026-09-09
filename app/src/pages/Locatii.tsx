@@ -31,6 +31,7 @@ function FitRoute({ on }: { on: boolean }) {
 
 export default function Locatii() {
   const events = useStore(s => s.state.events);
+  const notes = useStore(x => x.state.config.venueNotes);
   const { hash } = useLocation();
   const [sel, setSel] = useState<string | null>(hash ? hash.slice(1) : null);
   const showCros = sel === 'cros';
@@ -73,6 +74,7 @@ export default function Locatii() {
               <button onClick={() => setSel(v.id)}>
                 <span className="mono"><Icon icon="solar:map-point-linear" /> {v.address}</span>
                 <span className="h4">{NICE[v.id] ?? v.name}</span>
+                {notes[v.id] && <span className="body lo-note">{notes[v.id]}</span>}
                 <span className="lo-evs">{evAt(v.id).map(e => <Link key={e.id} to={`/probe/${e.id}`} className="tag">{e.name} {e.subtitle.split(' ')[0]}</Link>)}</span>
               </button>
               <a className="link lo-dir" href={`https://www.google.com/maps/dir/?api=1&destination=${v.lat},${v.lon}`} target="_blank" rel="noreferrer">Navighează <Icon icon="solar:arrow-right-up-linear" /></a>

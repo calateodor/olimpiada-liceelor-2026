@@ -39,7 +39,8 @@ export function Hero() {
   const state = useStore(s => s.state);
   const all = state.events.flatMap(ev => resolvedMatches(ev, state.matches));
   const live = liveMatches(all);
-  const next = live[0] ?? upcomingMatches(all, new Date(), 1)[0];
+  const forced = state.config.countdownEventId ? upcomingMatches(all.filter(m => m.eventId === state.config.countdownEventId), new Date(), 1)[0] : null;
+  const next = live[0] ?? forced ?? upcomingMatches(all, new Date(), 1)[0];
   const nextEv = next ? state.events.find(e => e.id === next.eventId) : null;
   const sameSlot = next ? all.filter(m => m.eventId === next.eventId && m.date === next.date && m.status !== 'finished').sort((a, b) => a.time.localeCompare(b.time)) : [];
   const cd = useCountdown(next && next.status !== 'live' ? matchDate(next).getTime() : null);
@@ -169,7 +170,7 @@ export function Hero() {
     <section ref={root} className="hero" aria-label="Olimpiada Liceelor Slatina 2026">
       <h1 className="sr-only">Olimpiada Liceelor Slatina 2026</h1>
       {/* poza cu multimea si cupa de la o editie trecuta, in duoton mov; sta in spatele monedelor */}
-      <div ref={bg} className="hero-bg" aria-hidden="true"><img src={fundal} alt="" decoding="async" fetchPriority="high" /></div>
+      <div ref={bg} className="hero-bg" aria-hidden="true" hidden={!state.config.heroPhoto}><img src={fundal} alt="" decoding="async" fetchPriority="high" /></div>
       <div className="hero-canvas">
         {webgl ? (
           /* fara poster cat se incarca scena: altfel monedele apar intai statice, apoi dispar si abia

@@ -8,3 +8,5 @@
 .tk-chip:hover { border-color: var(--pu-400); box-shadow: var(--glow-pu); }
 @keyframes tk-move { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .tk-track { animation: none; flex-wrap: wrap; width: auto; } }
+
+.tk-msg { color: var(--ye-500); border-color: rgba(250,204,21,.4); }

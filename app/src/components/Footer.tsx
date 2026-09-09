@@ -3,8 +3,11 @@ import './Footer.css';
 import { asset } from '../lib/asset';
 import { SCHOOLS } from '../data/schools';
 import { SchoolCrest } from './SchoolCrest';
+import { useStore } from '../store/state';
 
 export function Footer() {
+  const c = useStore(s => s.state.config);
+  const soc = ([['facebook', 'Facebook'], ['instagram', 'Instagram'], ['tiktok', 'TikTok'], ['youtube', 'YouTube']] as const).filter(([k]) => c.contact[k]);
   return (
     <footer className="footer">
       <div className="container footer-in">
@@ -23,6 +26,7 @@ export function Footer() {
           <div>
             <p className="mono">Documente</p>
             <Link to="/regulamente">Regulamente</Link><a href={asset('/regulamente/toate-regulamentele.pdf')} download>Toate regulamentele (PDF)</a><a href={asset('/regulamente/anexa-hcl.pdf')} download>Regulament cadru (HCL)</a>
+            {c.extraDocs.map(d => <a key={d.id} href={d.url} target="_blank" rel="noreferrer">{d.title}</a>)}
           </div>
           <div>
             <p className="mono">Ghid</p>
@@ -30,15 +34,15 @@ export function Footer() {
           </div>
           <div>
             <p className="mono">Contact</p>
-            <a href="mailto:cultura.sport@primariaslatina.ro">cultura.sport@primariaslatina.ro</a>
-            <a href="tel:+40249439377">0249 439 377</a>
-            <a href="https://www.primariaslatina.ro" target="_blank" rel="noreferrer">primariaslatina.ro</a>
+            {c.contact.email && <a href={`mailto:${c.contact.email}`}>{c.contact.email}</a>}
+            {c.contact.phone && <a href={`tel:${c.contact.phone.replace(/\s+/g, '')}`}>{c.contact.phone}</a>}
+            {c.contact.site && <a href={c.contact.site} target="_blank" rel="noreferrer">{c.contact.site.replace(/^https?:\/\/(www\.)?/, '')}</a>}
+            {soc.map(([k, l]) => <a key={k} href={c.contact[k]} target="_blank" rel="noreferrer">{l}</a>)}
           </div>
         </nav>
         <div className="footer-bottom mono">
-          <span>© 2026 Primăria Municipiului Slatina · Str. M. Kogălniceanu nr. 1</span>
-          <span>Hărți © OpenStreetMap contributors</span>
-          <Link to="/admin" className="footer-admin" aria-label="Administrare">·</Link>
+          <span>© 2026 Primăria Municipiului Slatina · {c.contact.address}</span>
+          <span>Hărți © OpenStreetMap contributors · <Link to="/admin" className="footer-admin">Administrare</Link></span>
         </div>
       </div>
     </footer>

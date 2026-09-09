@@ -150,6 +150,8 @@ export function generalStandings(state: State): GeneralRow[] {
       if (i === 0) r.gold++; else if (i === 1) r.silver++; else if (i === 2) r.bronze++;
     });
   }
+  // bonusuri / penalizari date din panou (cu motiv), peste punctele din probe
+  for (const a of state.config.standings?.adjustments ?? []) { const r = rows.get(a.schoolId); if (r) r.pts += a.pts; }
   return [...rows.values()].sort((x, y) => (y.pts - x.pts) || (y.gold - x.gold) || (y.silver - x.silver) || (y.bronze - x.bronze) || (x.school.nr - y.school.nr));
 }
 

@@ -6,6 +6,7 @@ import { PageHead } from '../components/PageHead';
 import { gsap, revealChars, prefersReducedMotion, scrollToTop } from '../lib/motion';
 import './Regulamente.css';
 import { asset } from '../lib/asset';
+import { useStore } from '../store/state';
 
 interface Item { number: string | null; text: string; bullets: string[]; emphasis?: boolean }
 interface Section { number: string; heading: string; items: Item[] }
@@ -16,6 +17,7 @@ const ORDER = ['general', 'anexa-hcl', 'futsal', 'handbal', 'baschet', 'volei', 
 
 export default function Regulamente() {
   const { slug } = useParams();
+  const { regsHidden, extraDocs } = useStore(s => s.state.config);
   const reg = slug ? REGS.find(r => r.slug === slug) : null;
   const root = useRef<HTMLDivElement>(null!);
   const h = useRef<HTMLHeadingElement>(null!);
@@ -91,7 +93,7 @@ export default function Regulamente() {
         <div className="row"><a href={asset('/regulamente/toate-regulamentele.pdf')} download className="btn"><Icon className="ic" icon="solar:download-minimalistic-linear" /> Toate regulamentele (PDF)</a><a href={asset('/regulamente/anexa-hcl.pdf')} download className="btn btn-ghost">Regulament cadru HCL 184</a></div>
       </PageHead>
       <ul className="container rg-list">
-        {ORDER.map(sl => REGS.find(r => r.slug === sl)).filter(Boolean).map((r, i) => (
+        {ORDER.filter(sl => !regsHidden.includes(sl)).map(sl => REGS.find(r => r.slug === sl)).filter(Boolean).map((r, i) => (
           <li key={r!.slug}>
             <Link to={`/regulamente/${r!.slug}`} className="rg-card">
               <span className="mono">{String(i + 1).padStart(2, '0')} · {CAT[r!.category]}{r!.gender ? ` · ${r!.gender}` : ''}</span>
@@ -99,6 +101,16 @@ export default function Regulamente() {
               <span className="body">{r!.sections.length} secțiuni{r!.placeholder ? ' · text în curs de publicare' : ''}</span>
               <span className="rg-card-a"><a href={asset(`/regulamente/${r!.slug}.pdf`)} download onClick={e => e.stopPropagation()} className="tag">PDF</a><Icon icon="solar:arrow-right-up-linear" /></span>
             </Link>
+          </li>
+        ))}
+        {extraDocs.map((d, i) => (
+          <li key={d.id}>
+            <a href={d.url} target="_blank" rel="noreferrer" className="rg-card">
+              <span className="mono">{String(ORDER.length - regsHidden.length + i + 1).padStart(2, '0')} · Document</span>
+              <span className="h3">{d.title}</span>
+              <span className="body">Link extern</span>
+              <span className="rg-card-a"><Icon icon="solar:arrow-right-up-linear" /></span>
+            </a>
           </li>
         ))}
       </ul>

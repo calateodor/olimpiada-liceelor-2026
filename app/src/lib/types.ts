@@ -90,6 +90,12 @@ export type ConcertPhase = 0 | 1 | 2; // 0 = mister, 1 = "e un concert", 2 = Gra
 
 export interface Roster { [schoolId: string]: Partial<Record<EventId, string[]>> }
 
+export interface Announcement { on: boolean; text: string; kind: 'info' | 'live' | 'warn'; link?: string }
+export interface Adjustment { id: string; schoolId: SchoolId; pts: number; reason: string }
+export interface ExtraDoc { id: string; title: string; url: string }
+export interface SchoolInfo { motto?: string; coordinator?: string; contact?: string; note?: string }
+export interface LogEntry { at: string; what: string }
+
 export interface Config {
   /** puncte acordate în clasamentul general pentru locul 1..7 */
   pointsPerPlace: number[];
@@ -98,6 +104,21 @@ export interface Config {
   concertVenue: string;
   heroTagline: string;
   showRosters: boolean;
+  /* --- panou: site --- */
+  siteTitle: string;
+  heroPhoto: boolean;                        // poza cu multimea in spatele logo-ului
+  countdownEventId: EventId | '';            // forteaza „urmatorul eveniment" din hero
+  announcement: Announcement;                // bara de anunt de sub meniu
+  maintenance: { on: boolean; text: string };
+  home: { ticker: boolean; roadmap: boolean; standings: boolean; probes: boolean; concert: boolean };
+  tickerMessages: string[];                  // mesaje in banda de sub hero, pe langa licee
+  standings: { show: boolean; note: string; adjustments: Adjustment[] };
+  contact: { email: string; phone: string; site: string; address: string; facebook: string; instagram: string; tiktok: string; youtube: string };
+  concert: { artist: string; teasers: string[]; poster: string };
+  regsHidden: string[];                      // slug-uri de regulamente ascunse public
+  extraDocs: ExtraDoc[];                     // documente / linkuri in plus la Regulamente
+  schoolInfo: Partial<Record<SchoolId, SchoolInfo>>;
+  venueNotes: Record<string, string>;        // note pe locatii (acces, parcare, program)
 }
 
 export interface State {
@@ -109,4 +130,6 @@ export interface State {
   photos: Photo[];
   timeline: TimelineEntry[];
   rosters: Roster;
+  /** jurnalul modificarilor din panou (ultimele 200) */
+  log: LogEntry[];
 }

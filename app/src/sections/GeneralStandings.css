@@ -19,3 +19,6 @@
   .gs-rank { grid-area: r; } .gs-school { grid-area: s; } .gs-pts { grid-area: p; } .gs-bar { grid-area: b; } .gs-medals { display: none; }
   .gs-full { display: none; }
 }
+
+.gs-hidden { display: grid; gap: var(--s3); justify-items: start; }
+.gs-note { margin-top: var(--s4); color: var(--fg-3); }

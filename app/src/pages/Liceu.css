@@ -35,3 +35,6 @@
 .lc-pn-l { display: inline-flex; align-items: center; gap: var(--s3); font-weight: 700; }
 .table .team { display: inline-flex; }
 @media (max-width: 800px) { .lc-hero-in { grid-template-columns: auto 1fr; } .lc-crest { --sz: clamp(96px, 30vw, 140px); align-self: center; } .lc-hero-t { grid-column: 1 / -1; } .lc-num { font-size: clamp(8rem, 40vw, 16rem); } .lc-ev { grid-template-columns: 1fr auto; } .lc-ev-i { display: none; } }
+
+.lc-info { display: grid; gap: var(--s2); }
+.lc-motto { font-style: italic; }

@@ -16,3 +16,5 @@
 @media (max-width: 900px) { .lo-grid { grid-template-columns: 1fr; } .lo-map { position: static; } .lo-leaflet { height: 56vh; } }
 .leaflet-tile-pane { filter: invert(1) hue-rotate(200deg) saturate(.35) brightness(.78) contrast(1.05); }
 .leaflet-container { font-family: var(--f-display); }
+
+.lo-note { color: var(--ye-500); }

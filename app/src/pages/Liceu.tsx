@@ -50,6 +50,7 @@ export default function Liceu() {
   const podiums = state.events.map(ev => ({ ev, place: eventPlacements(ev, state.matches).indexOf(s.id) })).filter(x => x.place >= 0 && x.place < 3);
   const photos = state.photos.filter(p => p.schoolId === s.id);
   const roster = state.rosters[s.id] ?? {};
+  const info = state.config.schoolInfo[s.id] ?? {};
   const idx = SCHOOLS.findIndex(x => x.id === s.id);
   const prev = SCHOOLS[(idx + 6) % 7], next = SCHOOLS[(idx + 1) % 7];
 
@@ -62,6 +63,13 @@ export default function Liceu() {
           <div className="lc-hero-t">
             <p className="mono" data-r><Link to="/licee">Licee</Link> / Grupa {s.group} · {s.colorName}</p>
             <h1 ref={h} className="h1">{s.name}</h1>
+            {(info.motto || info.coordinator || info.note) && (
+              <div className="lc-info" data-r>
+                {info.motto && <p className="lead lc-motto">„{info.motto}”</p>}
+                {info.coordinator && <p className="mono">Coordonator: {info.coordinator}{info.contact ? ` · ${info.contact}` : ''}</p>}
+                {info.note && <p className="body">{info.note}</p>}
+              </div>
+            )}
             <div className="lc-stats" data-r>
               <div><span className="lc-stat-n num">{rank}</span><span className="mono">loc general</span></div>
               <div><span className="lc-stat-n num">{row?.pts ?? 0}</span><span className="mono">puncte</span></div>
