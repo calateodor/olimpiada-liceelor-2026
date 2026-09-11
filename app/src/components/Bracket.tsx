@@ -37,8 +37,8 @@ export function Bracket({ ev, matches }: { ev: OlEvent; matches: Match[] }) {
         <div className="bk-col"><p className="bk-col-t h4">Sferturi</p>{r1.map((m, i) => <Node key={m.id} m={m} title={`Meci ${i + 1}`} />)}</div>
       )}
       <div className="bk-col"><p className="bk-col-t h4">Semifinale</p><Node m={g('sf1')} title="Semifinala 1" /><Node m={g('sf2')} title="Semifinala 2" /></div>
-      <div className="bk-col bk-col-final"><p className="bk-col-t h4">Finala mare</p><Node m={g('f1')} title="Locurile 1–2" /></div>
       <div className="bk-col"><p className="bk-col-t h4">Finala mică</p><Node m={g('f3')} title="Locurile 3–4" /></div>
+      <div className="bk-col bk-col-final"><p className="bk-col-t h4">Finala mare</p><Node m={g('f1')} title="Locurile 1–2" /></div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { MatchCard } from '../components/MatchCard';
 import { PageHead } from '../components/PageHead';
 import { SCHOOLS } from '../data/schools';
 import { SchoolMark } from '../components/SchoolMark';
+import { eventPath } from '../lib/events';
 import type { EventId } from '../lib/types';
 import type { SchoolId } from '../data/schools';
 import { scrollToEl } from '../lib/motion';
@@ -46,21 +47,23 @@ export default function Program() {
       <div className="container pr-days">
         {days.map(d => {
           const ms = matchesOn(filtered, d);
-          const singles = state.events.filter(e => e.format === 'ranking' && (ev === 'all' || e.id === ev) && (d === e.startDate || (e.id === 'voluntariat' && d === e.endDate)) && e.id !== 'galerie');
+          const seenPage = new Set<string>();
+          const singles = state.events.filter(e => e.format === 'ranking' && (ev === 'all' || e.id === ev) && (d === e.startDate || (e.id === 'voluntariat' && d === e.endDate)))
+            .filter(e => { const k = e.page ?? e.id; if (seenPage.has(k)) return false; seenPage.add(k); return true; });
           if (ms.length === 0 && singles.length === 0) return null;
           const isToday = d === today, past = d < today;
           return (
             <section key={d} id={`day-${d}`} className={`pr-day ${isToday ? 'is-today' : ''} ${past ? 'is-past' : ''}`} aria-label={fmtDate(d, 'long')}>
               <header className="pr-day-head">
                 <span className="pr-day-n num">{d.slice(8)}</span>
-                <div><p className="h4">{fmtDate(d, 'long')}</p><p className="mono">{ms.length ? `${ms.length} meciuri` : ''}{ms.length && singles.length ? ' · ' : ''}{singles.map(s => s.name).join(' · ')}</p></div>
+                <div><p className="h4">{fmtDate(d, 'long')}</p><p className="mono">{ms.length ? `${ms.length} meciuri` : ''}{ms.length && singles.length ? ' · ' : ''}{singles.map(s => s.pageName ?? s.name).join(' · ')}</p></div>
                 {isToday && <span className="tag tag-live">Azi</span>}
               </header>
               <div className="pr-grid">
                 {singles.map(e => (
-                  <Link key={e.id} to={`/probe/${e.id}`} className="pr-single card hover-lift">
+                  <Link key={e.id} to={eventPath(e)} className="pr-single card hover-lift">
                     <span className="mono">{e.id === 'voluntariat' && d === e.endDate ? 'Jurizare' : 'Probă'} · {e.time ?? 'toată ziua'}</span>
-                    <span className="h3">{e.name} <span className="dim" style={{ fontSize: '.5em' }}>{e.subtitle}</span></span>
+                    <span className="h3">{e.pageName ?? e.name} <span className="dim" style={{ fontSize: '.5em' }}>{e.pageSubtitle ?? e.subtitle}</span></span>
                     <span className="mono">{e.venue}</span>
                   </Link>
                 ))}

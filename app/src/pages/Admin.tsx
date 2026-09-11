@@ -10,6 +10,7 @@ import type { EventId, Match, MatchStatus, Photo, TimelineEntry, ConcertPhase, S
 import { SchoolMark } from '../components/SchoolMark';
 import { SchoolCrest } from '../components/SchoolCrest';
 import { asset } from '../lib/asset';
+import { AdminInscrieri } from './admin/Inscrieri';
 import './Admin.css';
 
 /* ---------------------------------------------------------------------------
@@ -18,13 +19,14 @@ import './Admin.css';
    trece prin setState(mut, ce) și lasă o urmă în jurnal.
 --------------------------------------------------------------------------- */
 
-type Tab = 'acasa' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'cont' | 'date';
+type Tab = 'acasa' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'cont' | 'date';
 const TABS: [Tab, string, string][] = [
   ['acasa', 'Acasă', 'solar:home-2-linear'],
   ['meciuri', 'Meciuri', 'solar:football-linear'],
   ['probe', 'Probe', 'solar:medal-star-linear'],
   ['clasament', 'Clasament', 'solar:ranking-linear'],
   ['licee', 'Licee', 'solar:buildings-2-linear'],
+  ['inscrieri', 'Înscrieri licee', 'solar:document-text-linear'],
   ['poze', 'Poze', 'solar:camera-linear'],
   ['noutati', 'Noutăți', 'solar:bell-linear'],
   ['anunturi', 'Anunțuri', 'solar:volume-loud-linear'],
@@ -91,6 +93,7 @@ export default function Admin() {
           {tab === 'probe' && <Probe />}
           {tab === 'clasament' && <Clasament />}
           {tab === 'licee' && <Licee />}
+          {tab === 'inscrieri' && <AdminInscrieri />}
           {tab === 'poze' && <Poze />}
           {tab === 'noutati' && <Noutati />}
           {tab === 'anunturi' && <Anunturi />}
@@ -602,14 +605,14 @@ function Site() {
 function Documente() {
   const { state, setState } = useStore();
   const c = state.config;
-  const REGS: [string, string][] = [['general', 'Regulament general'], ['anexa-hcl', 'Regulament cadru (HCL)'], ['futsal', 'Fotbal'], ['handbal', 'Handbal'], ['baschet', 'Baschet'], ['volei', 'Volei'], ['tenis-de-masa', 'Tenis de masă'], ['cros', 'Cros'], ['miss-mister', 'Miss & Mister'], ['graffiti', 'Graffiti'], ['majorete', 'Majorete'], ['galerie', 'Galerie'], ['voluntariat', 'Voluntariat']];
+  const REGS: [string, string][] = [['general', 'Regulament general'], ['anexa-hcl', 'Regulament cadru (HCL)'], ['futsal', 'Fotbal'], ['handbal', 'Handbal'], ['baschet', 'Baschet'], ['volei', 'Volei'], ['tenis-de-masa', 'Tenis de masă'], ['cros', 'Cros'], ['miss-mister', 'Miss & Mister'], ['graffiti', 'Graffiti'], ['majorete', 'Majorete'], ['voluntariat', 'Voluntariat']];
   const VEN: [string, string][] = [['stadion-1-mai', 'Stadionul 1 Mai'], ['baza-dobrescu', 'Baza Sportivă Dumitru Dobrescu'], ['lps', 'Liceul cu Program Sportiv'], ['radu-greceanu', 'Colegiul Național Radu Greceanu'], ['titulescu', 'Liceul Nicolae Titulescu'], ['parcul-dobrescu', 'Parcul Eugen Dobrescu'], ['parcul-tineretului', 'Parcul Tineretului (start cros)'], ['esplanada', 'Esplanada · Scena'], ['primaria', 'Primăria Slatina']];
   const [doc, setDoc] = useState({ title: '', url: '' });
   return (
     <div className="ad-sec">
       <section className="ad-block">
         <h3 className="h4">Note pe locații</h3>
-        <p className="body">Apar pe pagina Locații, sub adresă: acces, parcare, intrarea galeriei, program.</p>
+        <p className="body">Apar pe pagina Locații, sub adresă: acces, parcare, intrarea suporterilor, program.</p>
         <div className="ad-places">{VEN.map(([id, name]) => <label key={id} className="ad-field"><span className="mono">{name}</span><input type="text" value={c.venueNotes[id] ?? ''} onChange={e => setState(s => { s.config.venueNotes[id] = e.target.value; }, `Notă locație: ${name}`)} placeholder="ex. intrarea prin str. Crișan, parcare la stadion" /></label>)}</div>
       </section>
       <section className="ad-block">

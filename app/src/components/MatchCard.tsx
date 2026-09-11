@@ -3,6 +3,7 @@ import type { Match, OlEvent } from '../lib/types';
 import { SCHOOL_BY_ID } from '../data/schools';
 import { SchoolMark } from './SchoolMark';
 import { STAGE_LABEL, fmtDate } from '../lib/competition';
+import { eventPath } from '../lib/events';
 import './MatchCard.css';
 
 export function MatchCard({ m, ev, compact = false, showEvent = true }: { m: Match; ev?: OlEvent; compact?: boolean; showEvent?: boolean }) {
@@ -31,7 +32,7 @@ export function MatchCard({ m, ev, compact = false, showEvent = true }: { m: Mat
       </div>
       {m.sets && m.sets.length > 0 && <div className="mc-sets mono">{m.sets.map((s, i) => <span key={i}>{s.home}–{s.away}</span>)}</div>}
       {!compact && <footer className="mc-foot mono">{m.venue}{m.note && !m.note.startsWith('pen:') ? ` · ${m.note}` : ''}{m.note?.startsWith('pen:') ? ' · după lovituri de departajare' : ''}</footer>}
-      {ev && <Link to={`/probe/${ev.id}`} className="mc-link" aria-label={`Vezi proba ${ev.name}`} />}
+      {ev && <Link to={eventPath(ev)} className="mc-link" aria-label={`Vezi proba ${ev.name}`} />}
     </article>
   );
 }

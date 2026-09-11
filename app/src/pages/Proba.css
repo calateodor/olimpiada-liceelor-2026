@@ -29,3 +29,7 @@
 .pb-rank .team { display: flex; align-items: center; gap: var(--s3); font-weight: 600; }
 .pb-rank .pts { font-weight: 800; font-size: var(--t-xl); text-align: right; }
 @media (max-width: 900px) { .pb-2col { grid-template-columns: 1fr; } .pb-podium { grid-template-columns: 1fr; } .pb-step { min-height: auto; } .pb-block-head { grid-template-columns: 1fr; } .pb-block-head .body { grid-column: 1; } }
+
+/* pagini cu mai multe probe punctate (tenis fete/băieți, Miss/Mister) */
+.pb-ev-head { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; padding-top: var(--s6); }
+.pb-ev.is-multi + .pb-ev { border-top: 1px solid var(--v-600); margin-top: var(--s6); }

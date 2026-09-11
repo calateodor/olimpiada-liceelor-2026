@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { CursorGlow } from './components/CursorGlow';
@@ -17,7 +17,9 @@ const Liceu = lazy(() => import('./pages/Liceu'));
 const Clasament = lazy(() => import('./pages/Clasament'));
 const Regulamente = lazy(() => import('./pages/Regulamente'));
 const Locatii = lazy(() => import('./pages/Locatii'));
-const Galerie = lazy(() => import('./pages/Galerie'));
+const Highlights = lazy(() => import('./pages/Highlights'));
+const Inscrieri = lazy(() => import('./pages/Inscrieri'));
+const Confidentialitate = lazy(() => import('./pages/Confidentialitate'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -72,7 +74,10 @@ export default function App() {
             <Route path="/regulamente" element={<Regulamente />} />
             <Route path="/regulamente/:slug" element={<Regulamente />} />
             <Route path="/locatii" element={<Locatii />} />
-            <Route path="/galerie" element={<Galerie />} />
+            <Route path="/highlights" element={<Highlights />} />
+            <Route path="/galerie" element={<Navigate to="/highlights" replace />} />
+            <Route path="/inscrieri" element={<Inscrieri />} />
+            <Route path="/confidentialitate" element={<Confidentialitate />} />
             <Route path="/admin/*" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

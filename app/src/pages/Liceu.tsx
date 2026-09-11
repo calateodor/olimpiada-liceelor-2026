@@ -13,6 +13,7 @@ import { gsap, revealChars, revealUp, prefersReducedMotion } from '../lib/motion
 import NotFound from './NotFound';
 import './Liceu.css';
 import { asset } from '../lib/asset';
+import { eventPath, blockName } from '../lib/events';
 
 export default function Liceu() {
   const { id } = useParams();
@@ -88,16 +89,16 @@ export default function Liceu() {
       )}
 
       <section className="lc-block container">
-        <div className="lc-head"><span className="mono">Probe</span><h2 className="h3">Toate cele 15 probe</h2><p className="body">Statusul liceului la fiecare probă: grupă, meciuri, loc final și punctele aduse în clasamentul general.</p></div>
+        <div className="lc-head"><span className="mono">Probe</span><h2 className="h3">Toate cele {state.events.length} probe</h2><p className="body">Statusul liceului la fiecare probă: grupă, meciuri, loc final și punctele aduse în clasamentul general.</p></div>
         <ul className="lc-events">
           {state.events.map(ev => {
             const pl = eventPlacements(ev, state.matches); const place = pl.indexOf(s.id); const st = eventStatus(ev, state.matches);
             const mine = ms.filter(m => m.eventId === ev.id); const played = mine.filter(m => m.status === 'finished').length;
             return (
               <li key={ev.id}>
-                <Link to={`/probe/${ev.id}`} className="lc-ev">
+                <Link to={eventPath(ev)} className="lc-ev">
                   <Icon icon={EVENT_ICON[ev.id]} className="lc-ev-i" />
-                  <span className="lc-ev-t"><b>{ev.name}</b> <span className="dim">{ev.subtitle}</span><span className="mono">{SECTION_LABEL[ev.section]} · {ev.dateLabel}{mine.length ? ` · ${played}/${mine.length} meciuri` : ''}</span></span>
+                  <span className="lc-ev-t"><b>{ev.pageName ?? ev.name}</b> <span className="dim">{ev.page ? blockName(ev) : ev.subtitle}</span><span className="mono">{SECTION_LABEL[ev.section]} · {ev.dateLabel}{mine.length ? ` · ${played}/${mine.length} meciuri` : ''}</span></span>
                   <span className="lc-ev-r">
                     {place >= 0 ? <><span className={`lc-place ${place < 3 ? 'is-podium' : ''}`}>Locul {PLACE_LABEL[place]}</span><span className="mono">{state.config.pointsPerPlace[place] || 0} pct</span></> : st === 'live' ? <span className="tag tag-live">Live</span> : st === 'done' ? <span className="mono">încheiată</span> : <span className="mono">{st === 'today' ? 'în desfășurare' : 'urmează'}</span>}
                   </span>
@@ -137,7 +138,7 @@ export default function Liceu() {
                   return (
                     <tr key={m.id}>
                       <td className="num">{fmtDate(m.date)}</td>
-                      <td><Link to={`/probe/${m.eventId}`}>{evById[m.eventId]?.name} <span className="dim">{evById[m.eventId]?.subtitle}</span></Link></td>
+                      <td><Link to={evById[m.eventId] ? eventPath(evById[m.eventId]) : '/probe'}>{evById[m.eventId]?.name} <span className="dim">{evById[m.eventId]?.subtitle}</span></Link></td>
                       <td className="mono">{m.stage === 'gA' || m.stage === 'gB' ? `Grupa ${m.stage[1]}` : m.stage === 'f1' ? 'Finala mare' : m.stage === 'f3' ? 'Finala mică' : m.stage.startsWith('sf') ? 'Semifinală' : 'Sferturi'}</td>
                       <td>{o ? <Link to={`/licee/${o.id}`} className="team"><SchoolMark school={o} size="sm" />{o.short}</Link> : '—'}</td>
                       <td className="c pts">{my} : {th}</td>
@@ -163,7 +164,7 @@ export default function Liceu() {
       )}
 
       <section className="lc-block container">
-        <div className="lc-head"><span className="mono">Galerie</span><h2 className="h3">Fotografii cu {s.short}</h2></div>
+        <div className="lc-head"><span className="mono">Highlights</span><h2 className="h3">Fotografii cu {s.short}</h2></div>
         <PhotoGrid photos={photos} emptyText="Fotografiile liceului apar aici pe măsură ce sunt încărcate din competiție." />
       </section>
 

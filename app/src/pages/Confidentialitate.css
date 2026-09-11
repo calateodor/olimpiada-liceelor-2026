@@ -1,0 +1,8 @@
+.cf { padding-bottom: var(--s24); }
+.cf-body { max-width: 760px; display: grid; gap: var(--s8); }
+.cf-body section { display: grid; gap: var(--s3); }
+.cf-body p, .cf-body li { color: var(--fg-2); line-height: 1.6; }
+.cf-body b { color: var(--fg); }
+.cf-body ul { padding-left: 1.2em; display: grid; gap: var(--s2); }
+.cf-body a { color: var(--pu-300); text-decoration: underline; text-underline-offset: 3px; }
+.cf-foot { border-top: 1px solid var(--v-600); padding-top: var(--s5); color: var(--fg-3); }

@@ -11,6 +11,8 @@ import { SCHOOL_BY_ID } from '../data/schools';
 import { SchoolMark } from '../components/SchoolMark';
 import { asset } from '../lib/asset';
 import fundal from '../assets/fundal-hero.webp';
+import stema from '../assets/primaria-slatina.png';
+import { eventPath } from '../lib/events';
 import './Hero.css';
 
 const CoinsCanvas = lazy(() => import('../three/CoinsScene').then(m => ({ default: m.CoinsCanvas })));
@@ -186,7 +188,7 @@ export function Hero() {
 
       <div className="container hero-content" data-hero-content>
         <div className="hero-copy">
-          <p className="mono" data-hero-fade>Primăria Municipiului Slatina · Ediția 2026</p>
+          <p className="mono hero-org" data-hero-fade><img src={stema} alt="" className="hero-stema" width="108" height="160" /> Primăria Municipiului Slatina · Ediția 2026</p>
           <h2 className="h1 hero-title" data-hero-fade><span className="ye">Hai</span> la joc!</h2>
           <p className="lead" data-hero-fade>{state.config.heroTagline}. Sport, artă și voluntariat, din 7 septembrie până la seara finală de pe Esplanadă.</p>
           <div className="row" data-hero-fade>
@@ -215,7 +217,7 @@ export function Hero() {
                   {[[cd.d, 'zile'], [cd.h, 'ore'], [cd.m, 'min'], [cd.s, 'sec']].map(([v, l]) => <div key={l as string}><b className="num">{String(v).padStart(2, '0')}</b><span className="mono">{l}</span></div>)}
                 </div>
               )}
-              <Link to={`/probe/${nextEv.id}`} className="link">Detalii →</Link>
+              <Link to={eventPath(nextEv)} className="link">Detalii →</Link>
             </>
           ) : (
             <>

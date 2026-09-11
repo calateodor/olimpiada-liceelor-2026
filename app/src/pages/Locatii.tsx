@@ -9,6 +9,7 @@ import { PageHead } from '../components/PageHead';
 import { useStore } from '../store/state';
 import './Locatii.css';
 import { asset } from '../lib/asset';
+import { eventPath } from '../lib/events';
 
 interface Venue { id: string; name: string; address: string; lat: number | null; lon: number | null; confidence: string; confidence_note?: string; candidates?: { lat: number; lon: number; note?: string }[] }
 const VENUES = (venuesData as { venues: Venue[] }).venues;
@@ -75,7 +76,7 @@ export default function Locatii() {
                 <span className="mono"><Icon icon="solar:map-point-linear" /> {v.address}</span>
                 <span className="h4">{NICE[v.id] ?? v.name}</span>
                 {notes[v.id] && <span className="body lo-note">{notes[v.id]}</span>}
-                <span className="lo-evs">{evAt(v.id).map(e => <Link key={e.id} to={`/probe/${e.id}`} className="tag">{e.name} {e.subtitle.split(' ')[0]}</Link>)}</span>
+                <span className="lo-evs">{evAt(v.id).filter((e, i, arr) => arr.findIndex(x => (x.page ?? x.id) === (e.page ?? e.id)) === i).map(e => <Link key={e.id} to={eventPath(e)} className="tag">{e.pageName ?? e.name}{e.page ? '' : ` ${e.subtitle.split(' ')[0]}`}</Link>)}</span>
               </button>
               <a className="link lo-dir" href={`https://www.google.com/maps/dir/?api=1&destination=${v.lat},${v.lon}`} target="_blank" rel="noreferrer">Navighează <Icon icon="solar:arrow-right-up-linear" /></a>
             </li>

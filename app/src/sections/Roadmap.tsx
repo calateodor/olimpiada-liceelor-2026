@@ -5,6 +5,7 @@ import { useStore } from '../store/state';
 import { todayISO, fmtDate, eventStatus, competitionDays } from '../lib/competition';
 import { gsap, prefersReducedMotion } from '../lib/motion';
 import type { EventId, Match, OlEvent, State } from '../lib/types';
+import { eventPath } from '../lib/events';
 import './Roadmap.css';
 
 /* ---------------- etapele drumului (grupate din calendar) ---------------- */
@@ -48,8 +49,7 @@ function buildNodes(state: State): Node[] {
       { label: 'Fete · knock-out · LPS', eventId: 'tenis-f', ...evDone('tenis-f') },
       { label: 'Băieți · knock-out · LPS', eventId: 'tenis-b', ...evDone('tenis-b') } ] },
     { id: 'juriu', title: 'Jurizarea', dates: '2 oct', from: '2026-10-02', to: '2026-10-02', icon: 'solar:clipboard-check-linear', items: [
-      { label: 'Voluntariat · dosarele la Primărie', eventId: 'voluntariat', ...evDone('voluntariat') },
-      { label: 'Galerie · cea mai bună suporteră', eventId: 'galerie', ...evDone('galerie') } ] },
+      { label: 'Voluntariat · dosarele la Primărie', eventId: 'voluntariat', ...evDone('voluntariat') } ] },
     { id: 'final', title: 'Seara finală', dates: '3 oct', from: '2026-10-03', to: '2026-10-03', icon: 'solar:crown-star-linear', items: [
       { label: 'Miss & Mister · 18:00', eventId: 'miss', ...evDone('miss') },
       { label: 'Dans & interpretare muzicală', eventId: 'dans', ...evDone('dans') },
@@ -94,6 +94,7 @@ export function Roadmap() {
   }, [nodes.length, mobile]);
   const { ys, h } = layout && layout.ys.length === nodes.length ? layout : fallback;
   const { d, pts } = useMemo(() => buildPath(ys, mobile, h), [ys, h, mobile]);
+  const pathFor = (id: EventId) => { const e = state.events.find(x => x.id === id); return e ? eventPath(e) : `/probe/${id}`; };
   const status = (n: Node) => (n.items.some(i => i.live) ? 'live' : today > n.to || n.items.filter(i => i.eventId).every(i => i.done) && n.items.some(i => i.done) ? 'done' : today >= n.from && today <= n.to ? 'now' : 'next');
 
   // matches played so far (for the progress card)
@@ -196,7 +197,7 @@ export function Roadmap() {
                     <ul className="rd-items">
                       {n.items.map((it, k) => (
                         <li key={k} className={it.done ? 'is-done' : it.live ? 'is-live' : ''}>
-                          {it.eventId ? <Link to={`/probe/${it.eventId}`}>{it.label}</Link> : <span>{it.label}</span>}
+                          {it.eventId ? <Link to={pathFor(it.eventId)}>{it.label}</Link> : <span>{it.label}</span>}
                           {it.live && <span className="tag tag-live">Live</span>}
                         </li>
                       ))}

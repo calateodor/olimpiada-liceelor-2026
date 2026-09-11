@@ -56,7 +56,7 @@ Ce face comanda: construiește site-ul, pune Worker-ul construit de Vite lângă
 
 De ce Pages și nu un Worker simplu: domeniul `olimpiada.primariaslatina.ro` are DNS-ul la primărie, iar Workers acceptă domenii proprii doar pentru zone aflate în Cloudflare. Pages acceptă un CNAME de la orice DNS.
 
-Secretul de sesiune e pus deja (`wrangler pages secret put ADMIN_SECRET --project-name olimpiada-liceelor`, din `app/pages/`).
+Secretele sunt puse deja, din `app/pages/`: `ADMIN_SECRET` (semnează sesiunile) și `DATA_KEY` (cheia cu care se criptează înscrierile liceelor). Dacă `DATA_KEY` se schimbă vreodată, înscrierile salvate până atunci nu mai pot fi citite: exportă-le înainte.
 
 **Pozele.** R2 nu e încă activat în cont. Când e: dashboard → R2 → Enable (cere card doar ca verificare; planul gratuit are 10 GB), apoi:
 
@@ -86,6 +86,7 @@ Intri din subsol → **Administrare** (sau `/admin`), cu utilizator și parolă.
 - **Probe**: locurile I–VII (automat la sporturi, manual la cele jurizate), „Încheiată” ca punctele să intre în general, punctaje/timpi afișate, plus detaliile probei (loc, perioadă, ore, descriere).
 - **Clasament**: clasamentul general vizibil/ascuns cu mesaj, bonusuri și penalizări cu motiv, punctele pe loc.
 - **Licee**: motto, profesor coordonator, contact, notă publică, loturile pe probe și dacă numele elevilor apar public.
+- **Înscrieri licee**: conturile celor 7 licee (generezi parola, o trimiți coordonatorului, o poți reseta sau dezactiva), datele introduse de fiecare liceu, export CSV pentru fișele de înscriere, preluarea numelor în loturile publice, ștergerea datelor la final (GDPR). Vezi secțiunea 7.
 - **Poze**: încărcare de pe telefon (se redimensionează automat), filtrare, etichetare pe probă/liceu, ordine, ștergere, afiș de concert dintr-o poză.
 - **Noutăți**: adăugare, modificare, ștergere.
 - **Anunțuri**: bara de anunț de sub meniu (informare / important / atenție, cu link), mesaje în banda de pe prima pagină, banda „site în lucru”.
@@ -100,7 +101,24 @@ Pe varianta statică (GitHub Pages) panoul se deschide și funcționează, dar m
 
 ## 6. Ce mai e de completat
 
-- Regulamentele pentru **Galerie** și **Majorete** sunt copii ale celui de futsal în dosarul primit; pagina le marchează ca „text în curs de publicare”. Înlocuiește docx-urile în `assets-src/regulamente/` și rulează `python parse_regulamente.py && python build_pdfs.py` din același folder, apoi copiază PDF-urile în `app/public/regulamente/` și JSON-ul în `app/src/data/regulamente.json`.
+- Regulamentul pentru **Majorete** e o copie a celui de futsal în dosarul primit; pagina îl marchează ca „text în curs de publicare”. Înlocuiește docx-ul în `assets-src/regulamente/` și rulează `python parse_regulamente.py && python build_pdfs.py` din același folder, apoi copiază PDF-urile în `app/public/regulamente/` și JSON-ul în `app/src/data/regulamente.json`. (Proba „Galerie” nu mai există; regulamentul ei rămâne în fișier, dar nu se afișează.)
 - Tragerea la sorți pentru tenis de masă: perechile din sferturi se pun din Admin → Meciuri → Tenis.
 - Loturile (numele elevilor) se pun în Admin → Licee și se afișează doar cu comutatorul „Numele elevilor apar public”.
 - Locația „Parcul Eugen Dobrescu” nu există în OpenStreetMap; pe hartă e folosit parcul cu bustul Dumitru Dobrescu de pe str. Ștrandului. Corectează în `app/src/data/venues.json` dacă e alt loc.
+
+## 7. Înscrierile liceelor și protecția datelor
+
+Cum funcționează:
+
+1. Din panou → **Înscrieri licee** apeși „Generează parolă” la un liceu. Parola apare o singură dată, cu un buton care copiază mesajul complet (adresă, utilizator, parolă) pentru coordonator.
+2. Liceul intră pe **olimpiada.primariaslatina.ro/inscrieri**, alege liceul din listă, pune parola și completează, pe fiecare probă: profesorul coordonator și elevii (nume, prenume, clasa, CNP, seria și numărul CI, telefon). Pagina verifică CNP-ul (cifra de control) și avertizează dacă un elev e la mai mult de două probe.
+3. Salvarea cere bifarea confirmării că liceul deține acordurile părinților (text fix, cu link la nota de informare). Liceul poate reveni oricând să corecteze.
+4. Tu vezi datele fiecărui liceu din panou, le exporți în CSV pentru fișele de înscriere și, dacă vrei, „preiei numele în loturi” (doar nume, fără CNP) ca să apară pe paginile liceelor.
+
+Ce trebuie știut:
+
+- Datele **nu trec prin starea publică** a site-ului: stau criptate (AES-256-GCM, cheia `DATA_KEY`) în KV, câte o intrare per liceu, și le poate citi doar contul liceului respectiv și administratorul. Am verificat că nu apar în `/api/state`.
+- Contul unui liceu nu poate atinge nimic din panoul de administrare (rezultate, setări, alte licee).
+- Nota de informare GDPR e pe **/confidentialitate** (temei: sarcină de interes public, HCL 184; acordul părinților pentru minori se obține și se păstrează de liceu; retenție până la 31 decembrie 2026). Textul e unul standard, bine de trecut pe la responsabilul cu protecția datelor al Primăriei înainte de a trimite parolele liceelor.
+- La final, din panou → Înscrieri licee → „Șterge toate înscrierile”, după ce ai exportat ce e nevoie pentru arhivă.
+- Nu se încarcă documente (copii de buletin) prin site.

@@ -14,3 +14,7 @@
 .footer-schools { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s6); }
 .footer-schools a { display: block; transition: transform var(--d-2) var(--e-out); }
 .footer-schools a:hover { transform: translateY(-3px) scale(1.06); }
+
+/* stema municipiului lângă textul organizatorului */
+.footer-org { display: flex; gap: var(--s5); align-items: center; }
+.footer-stema { width: 62px; height: auto; flex: 0 0 auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,.4)); }

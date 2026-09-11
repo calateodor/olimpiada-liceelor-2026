@@ -13,7 +13,7 @@ interface Section { number: string; heading: string; items: Item[] }
 interface Reg { id: string; slug: string; title: string; subtitle: string; category: string; gender?: string | null; placeholder?: boolean; note?: string; sections: Section[] }
 const REGS = (data as { regulations: Reg[] }).regulations;
 const CAT = { general: 'Cadru', sport: 'Sport', artistic: 'Artistic', voluntariat: 'Voluntariat' } as Record<string, string>;
-const ORDER = ['general', 'anexa-hcl', 'futsal', 'handbal', 'baschet', 'volei', 'tenis-de-masa', 'cros', 'miss-mister', 'graffiti', 'majorete', 'galerie', 'voluntariat'];
+const ORDER = ['general', 'anexa-hcl', 'futsal', 'handbal', 'baschet', 'volei', 'tenis-de-masa', 'cros', 'miss-mister', 'graffiti', 'majorete', 'voluntariat'];
 
 export default function Regulamente() {
   const { slug } = useParams();

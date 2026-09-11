@@ -99,3 +99,9 @@
 .ad-log li { display: grid; grid-template-columns: 12ch 1fr; gap: var(--s3); padding: 4px 0; border-bottom: var(--line); }
 .ad-login-box .body { margin: 0; }
 @media (max-width: 900px) { .ad-two { grid-template-columns: 1fr; } .ad-quick { grid-template-columns: 1fr 1fr; } }
+
+.ad-pw { border-color: #17B26A; background: #F0FBF5; }
+.ad-pw-box { display: grid; grid-template-columns: auto 1fr; gap: var(--s1) var(--s4); align-items: center; }
+.ad-pw-box code { font-size: var(--t-lg); font-weight: 700; letter-spacing: .04em; background: #fff; padding: .2em .5em; border-radius: var(--r-sm); border: var(--line); user-select: all; }
+.ad-ins-ev { display: grid; gap: var(--s2); padding-top: var(--s3); border-top: var(--line); }
+.ad-danger { color: var(--live); border-color: var(--live); }

@@ -8,7 +8,7 @@ import './Nav.css';
 import { asset } from '../lib/asset';
 
 const LINKS = [
-  ['/program', 'Program'], ['/probe', 'Probe'], ['/licee', 'Licee'], ['/clasament', 'Clasament'], ['/galerie', 'Galerie'],
+  ['/program', 'Program'], ['/probe', 'Probe'], ['/licee', 'Licee'], ['/clasament', 'Clasament'], ['/highlights', 'Highlights'],
 ] as const;
 
 export function Nav() {

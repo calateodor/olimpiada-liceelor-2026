@@ -4,7 +4,7 @@ export type Section = 'sport' | 'artistic' | 'voluntariat';
 export type EventFormat = 'groups' | 'knockout' | 'ranking';
 export type EventId =
   | 'fotbal' | 'volei' | 'handbal' | 'baschet' | 'tenis-f' | 'tenis-b' | 'cros'
-  | 'graffiti' | 'majorete' | 'miss' | 'mister' | 'dans' | 'interpretare' | 'galerie' | 'voluntariat';
+  | 'graffiti' | 'majorete' | 'miss' | 'mister' | 'dans' | 'interpretare' | 'voluntariat';
 
 export type Stage = 'gA' | 'gB' | 'r1' | 'sf1' | 'sf2' | 'f3' | 'f1' | 'main';
 export type MatchStatus = 'scheduled' | 'live' | 'finished' | 'postponed';
@@ -34,6 +34,11 @@ export interface OlEvent {
   regulationSlug: string;
   description: string;
   teamSize?: string;
+  /** mai multe probe punctate pot împărți o singură pagină publică (tenis fete+băieți, Miss+Mister) */
+  page?: string;
+  pageName?: string;
+  pageSubtitle?: string;
+  blockName?: string;         // numele blocului în interiorul paginii („Fete", „Miss")
   /** clasament final: lista de școli în ordinea locurilor (1..7) */
   placements?: SchoolId[];
   /** punctaje jurizate / timpi (opțional, doar afișare) */

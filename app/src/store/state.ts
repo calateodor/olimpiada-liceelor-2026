@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Config, State } from '../lib/types';
+import type { Config, OlEvent, State } from '../lib/types';
 import { SEED } from '../data/seed';
 import { ACCESS } from '../data/access';
 import { verifyCredentials } from '../lib/auth';
@@ -42,7 +42,22 @@ export function withDefaults(s: Partial<State>): State {
     schoolInfo: { ...d.schoolInfo, ...(c.schoolInfo ?? {}) },
     venueNotes: { ...d.venueNotes, ...(c.venueNotes ?? {}) },
   };
-  return { ...SEED, ...s, config, log: s.log ?? [] };
+  // Lista de probe e a codului (seed), nu a stării salvate: probele scoase dispar, cele noi apar,
+  // iar din starea salvată păstrăm doar ce se editează din panou (rezultate, locuri, texte).
+  const EDITABLE: (keyof OlEvent)[] = ['finished', 'placements', 'scores', 'notes', 'venue', 'dateLabel', 'startDate', 'endDate', 'time', 'teamSize', 'description'];
+  const events = SEED.events.map(se => {
+    const st = (s.events ?? []).find(e => e.id === se.id);
+    if (!st) return se;
+    const out = { ...se } as OlEvent;
+    for (const k of EDITABLE) if (st[k] !== undefined) (out as unknown as Record<string, unknown>)[k] = st[k];
+    return out;
+  });
+  const ids = new Set(events.map(e => e.id));
+  const matches = (s.matches ?? SEED.matches).filter(m => ids.has(m.eventId));
+  // texte din seed care s-au schimbat odată cu numărul de probe
+  if (config.heroTagline === '7 licee · 15 probe · 3 săptămâni') config.heroTagline = d.heroTagline;
+  const timeline = (s.timeline ?? SEED.timeline).map(t => (t.id === 'tl-hcl' ? { ...t, body: SEED.timeline.find(x => x.id === 'tl-hcl')?.body ?? t.body } : t));
+  return { ...SEED, ...s, config, events, matches, timeline, log: s.log ?? [] };
 }
 
 export const useStore = create<Store>((set, get) => ({

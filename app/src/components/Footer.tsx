@@ -4,6 +4,7 @@ import { asset } from '../lib/asset';
 import { SCHOOLS } from '../data/schools';
 import { SchoolCrest } from './SchoolCrest';
 import { useStore } from '../store/state';
+import stema from '../assets/primaria-slatina.png';
 
 export function Footer() {
   const c = useStore(s => s.state.config);
@@ -13,7 +14,10 @@ export function Footer() {
       <div className="container footer-in">
         <div className="footer-brand">
           <img src={asset('/img/logo-transparent.png')} alt="Olimpiada Liceelor Slatina 2026" width="320" loading="lazy" />
-          <p className="body">Program de stimulare a performanței organizat de Consiliul Local și Primăria Municipiului Slatina, în colaborare cu liceele din municipiu și Inspectoratul Școlar Județean Olt. Aprobat prin HCL nr. 184 / 18.06.2026.</p>
+          <div className="footer-org">
+            <img src={stema} alt="Stema Municipiului Slatina" className="footer-stema" width="108" height="160" loading="lazy" />
+            <p className="body">Program de stimulare a performanței organizat de Consiliul Local și Primăria Municipiului Slatina, în colaborare cu liceele din municipiu și Inspectoratul Școlar Județean Olt. Aprobat prin HCL nr. 184 / 18.06.2026.</p>
+          </div>
           <ul className="footer-schools" aria-label="Liceele participante">
             {SCHOOLS.map(s => <li key={s.id}><Link to={`/licee/${s.id}`} title={s.name}><SchoolCrest school={s} size="md" decorative /><span className="sr-only">{s.name}</span></Link></li>)}
           </ul>
@@ -27,10 +31,11 @@ export function Footer() {
             <p className="mono">Documente</p>
             <Link to="/regulamente">Regulamente</Link><a href={asset('/regulamente/toate-regulamentele.pdf')} download>Toate regulamentele (PDF)</a><a href={asset('/regulamente/anexa-hcl.pdf')} download>Regulament cadru (HCL)</a>
             {c.extraDocs.map(d => <a key={d.id} href={d.url} target="_blank" rel="noreferrer">{d.title}</a>)}
+            <Link to="/confidentialitate">Protecția datelor</Link>
           </div>
           <div>
             <p className="mono">Ghid</p>
-            <Link to="/locatii">Locații & traseu cros</Link><Link to="/galerie">Galerie foto</Link>
+            <Link to="/locatii">Locații & traseu cros</Link><Link to="/highlights">Highlights</Link><Link to="/inscrieri">Înscrieri licee</Link>
           </div>
           <div>
             <p className="mono">Contact</p>

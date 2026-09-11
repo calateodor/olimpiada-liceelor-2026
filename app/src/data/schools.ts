@@ -67,7 +67,7 @@ const RAW: Raw[] = [
   { id: 'lps',         nr: 4, name: 'Liceul cu Program Sportiv',              short: 'LPS',         colorName: 'Gri',        color: '#8A93A6', group: 'A' },
   { id: 'alexe-marin', nr: 5, name: 'Colegiul Tehnologic Alexe Marin',        short: 'Alexe Marin', colorName: 'Mov',        color: '#9B4DE0', group: 'B' },
   { id: 'metalurgic',  nr: 6, name: 'Liceul Tehnologic Metalurgic',           short: 'Metalurgic',  colorName: 'Galben',     color: '#FFE500', group: 'B' },
-  { id: 'economic',    nr: 7, name: 'Colegiul Economic P. S. Aurelian',       short: 'Economic',    colorName: 'Albastru',   color: '#3B6BFF', group: 'B' },
+  { id: 'economic',    nr: 7, name: 'Liceul Economic P. S. Aurelian',         short: 'Economic',    colorName: 'Albastru',   color: '#3B6BFF', group: 'B' },
 ];
 
 export const SCHOOLS: School[] = RAW.map(s => {

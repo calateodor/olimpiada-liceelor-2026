@@ -1,6 +1,6 @@
 .bk { display: grid; gap: var(--s6); align-items: center; }
-.bk-3 { grid-template-columns: 1.1fr 1.2fr 1fr; }
-.bk-4 { grid-template-columns: 1fr 1fr 1.15fr 1fr; }
+.bk-3 { grid-template-columns: 1.1fr 1fr 1.2fr; }
+.bk-4 { grid-template-columns: 1fr 1fr 1fr 1.15fr; }
 .bk-col { display: grid; gap: var(--s4); align-content: center; }
 .bk-col-t { color: var(--pu-200); font-weight: 600; }
 .bk-node { border: 1.5px solid var(--v-600); border-radius: var(--r-lg); padding: var(--s4); display: grid; gap: var(--s2); background: var(--surface); position: relative; }

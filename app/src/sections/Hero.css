@@ -46,3 +46,6 @@
   .hero-next-list li { grid-template-columns: 4.5ch 1fr auto; font-size: var(--t-xs); }
   .hero-next-teams .mark { --sz: 22px; }
 }
+
+.hero-org { display: flex; align-items: center; gap: var(--s3); }
+.hero-stema { height: 36px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
