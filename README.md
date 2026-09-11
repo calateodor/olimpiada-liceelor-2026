@@ -17,4 +17,4 @@ npm run dev
 
 ## Previzualizare publică (GitHub Pages)
 
-La fiecare push pe `main`, workflow-ul din `.github/workflows/pages.yml` publică o variantă statică a site-ului pe GitHub Pages. Varianta statică e doar o previzualizare. Site-ul adevărat, cu panou de administrare, rezultate live și poze, rulează pe Cloudflare Pages la https://olimpiada-liceelor.pages.dev (`npm run deploy:pages`, vezi `DEPLOY.md`) și va primi domeniul olimpiada.primariaslatina.ro.
+La fiecare push pe `main`, workflow-ul din `.github/workflows/pages.yml` publică o variantă statică a site-ului pe GitHub Pages. Varianta statică e doar o previzualizare. Site-ul adevărat, cu panou de administrare, rezultate live și poze, rulează pe Cloudflare Pages la **https://olimpiada.primariaslatina.ro** (rezervă: https://olimpiada-liceelor.pages.dev; publicare cu `npm run deploy:pages`, vezi `DEPLOY.md`).

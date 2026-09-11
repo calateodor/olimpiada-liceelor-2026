@@ -67,20 +67,15 @@ npx wrangler r2 bucket create olimpiada-media
 
 și descomentează `r2_buckets` în `app/pages/wrangler.jsonc`, apoi `npm run deploy:pages`. Până atunci panoul spune clar la Poze că stocarea nu e activată; tot restul merge.
 
-## 4. Domeniu: olimpiada.primariaslatina.ro
+## 4. Domeniu: olimpiada.primariaslatina.ro — activ din 11 septembrie 2026
 
-DNS-ul primăriei e la Hurricane Electric (ns1–ns5.he.net). Cere IT-ului primăriei să adauge:
+Adresa oficială e **https://olimpiada.primariaslatina.ro**. Cum e legată:
 
-```
-Tip: CNAME
-Nume: olimpiada
-Valoare: olimpiada-liceelor.pages.dev
-TTL: 300
-```
+- DNS-ul primăriei (Hurricane Electric, ns1–ns5.he.net) are un CNAME `olimpiada` → `olimpiada-liceelor.pages.dev`, pus de IT-ul primăriei. Nu se atinge nimic altceva din zona lor.
+- Domeniul e atașat proiectului Pages (Custom domains), iar Cloudflare a verificat CNAME-ul și a emis certificatul HTTPS singur; se reînnoiește automat.
+- `olimpiada-liceelor.pages.dev` rămâne funcțional în paralel, ca adresă de rezervă.
 
-După ce înregistrarea există, în Cloudflare dashboard → Workers & Pages → olimpiada-liceelor → Custom domains → Set up a custom domain → `olimpiada.primariaslatina.ro`. Cloudflare verifică CNAME-ul și emite HTTPS automat (câteva minute, cel mult o oră). Până atunci site-ul e accesibil la adresa `.pages.dev`.
-
-Plan B, dacă primăria nu poate: un domeniu propriu (ex. olimpiadaliceelor.ro) adăugat în Cloudflare, ~50 lei/an.
+Dacă vreodată CNAME-ul dispare din DNS-ul primăriei, site-ul mai răspunde doar pe `.pages.dev`; se pune la loc aceeași înregistrare și își revine în câteva minute, fără nimic de făcut în Cloudflare.
 
 ## 5. Cum se folosește admin-ul în timpul competiției
 
