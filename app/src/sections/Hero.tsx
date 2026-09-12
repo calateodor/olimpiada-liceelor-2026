@@ -13,6 +13,7 @@ import { asset } from '../lib/asset';
 import fundal from '../assets/fundal-hero.webp';
 import stema from '../assets/primaria-slatina.png';
 import { eventPath } from '../lib/events';
+import { now } from '../lib/clock';
 import './Hero.css';
 
 const CoinsCanvas = lazy(() => import('../three/CoinsScene').then(m => ({ default: m.CoinsCanvas })));
@@ -27,7 +28,7 @@ function useCountdown(target: number | null) {
 }
 function calc(target: number | null) {
   if (target == null) return null;
-  const ms = target - Date.now(); if (ms <= 0) return null;
+  const ms = target - now().getTime(); if (ms <= 0) return null;
   const s = Math.floor(ms / 1000);
   return { d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 };
 }
@@ -41,8 +42,8 @@ export function Hero() {
   const state = useStore(s => s.state);
   const all = state.events.flatMap(ev => resolvedMatches(ev, state.matches));
   const live = liveMatches(all);
-  const forced = state.config.countdownEventId ? upcomingMatches(all.filter(m => m.eventId === state.config.countdownEventId), new Date(), 1)[0] : null;
-  const next = live[0] ?? forced ?? upcomingMatches(all, new Date(), 1)[0];
+  const forced = state.config.countdownEventId ? upcomingMatches(all.filter(m => m.eventId === state.config.countdownEventId), now(), 1)[0] : null;
+  const next = live[0] ?? forced ?? upcomingMatches(all, now(), 1)[0];
   const nextEv = next ? state.events.find(e => e.id === next.eventId) : null;
   const sameSlot = next ? all.filter(m => m.eventId === next.eventId && m.date === next.date && m.status !== 'finished').sort((a, b) => a.time.localeCompare(b.time)) : [];
   const cd = useCountdown(next && next.status !== 'live' ? matchDate(next).getTime() : null);

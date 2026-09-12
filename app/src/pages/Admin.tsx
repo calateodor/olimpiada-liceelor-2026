@@ -11,6 +11,7 @@ import { SchoolMark } from '../components/SchoolMark';
 import { SchoolCrest } from '../components/SchoolCrest';
 import { asset } from '../lib/asset';
 import { AdminInscrieri } from './admin/Inscrieri';
+import { TimeMachine } from './admin/TimeMachine';
 import './Admin.css';
 
 /* ---------------------------------------------------------------------------
@@ -19,7 +20,7 @@ import './Admin.css';
    trece prin setState(mut, ce) și lasă o urmă în jurnal.
 --------------------------------------------------------------------------- */
 
-type Tab = 'acasa' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'cont' | 'date';
+type Tab = 'acasa' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'timp' | 'cont' | 'date';
 const TABS: [Tab, string, string][] = [
   ['acasa', 'Acasă', 'solar:home-2-linear'],
   ['meciuri', 'Meciuri', 'solar:football-linear'],
@@ -33,6 +34,7 @@ const TABS: [Tab, string, string][] = [
   ['concert', 'Concert', 'solar:music-note-2-linear'],
   ['site', 'Site', 'solar:settings-linear'],
   ['documente', 'Locații & documente', 'solar:map-point-linear'],
+  ['timp', 'Mașina timpului', 'solar:history-linear'],
   ['cont', 'Cont', 'solar:user-circle-linear'],
   ['date', 'Date & jurnal', 'solar:database-linear'],
 ];
@@ -83,6 +85,7 @@ export default function Admin() {
           <div><b>{TABS.find(t => t[0] === tab)?.[1]}</b><span className="mono"> · v{state.version} · actualizat {new Date(state.updatedAt).toLocaleString('ro-RO')}</span></div>
           <div className="row">
             {msg && <span className="mono ad-msg">{msg}</span>}
+            {state.config.simulation.on && <button className="tag tag-live" onClick={() => setTab('timp')} title="Mașina timpului">Simulare activă</button>}
             {dirty && <span className="tag tag-soon">Modificări nepublicate</span>}
             <button className="btn btn-sm" onClick={doPublish} disabled={saving || !dirty}><Icon className="ic" icon="solar:upload-linear" /> {saving ? 'Se publică…' : 'Publică'}</button>
           </div>
@@ -100,6 +103,7 @@ export default function Admin() {
           {tab === 'concert' && <Concert />}
           {tab === 'site' && <Site />}
           {tab === 'documente' && <Documente />}
+          {tab === 'timp' && <TimeMachine />}
           {tab === 'cont' && <Cont />}
           {tab === 'date' && <Date_ />}
         </div>
@@ -587,6 +591,7 @@ function Site() {
           <Switch on={c.home.standings} onChange={v => set(`Clasament pe acasă ${v ? 'pornit' : 'oprit'}`, x => { x.home.standings = v; })} label="Clasamentul general" />
           <Switch on={c.home.probes} onChange={v => set(`Probe pe acasă ${v ? 'pornite' : 'oprite'}`, x => { x.home.probes = v; })} label="Grila cu probele" />
           <Switch on={c.home.concert} onChange={v => set(`Teaser concert ${v ? 'pornit' : 'oprit'}`, x => { x.home.concert = v; })} label="Teaser-ul serii finale" />
+          <Switch on={c.home.today} onChange={v => set(`Banda „Azi” ${v ? 'pornită' : 'oprită'}`, x => { x.home.today = v; })} label="Banda „Azi” de sub logo" hint="meciurile și probele zilei; dispare în zilele fără program" />
         </div>
       </section>
       <section className="ad-block">

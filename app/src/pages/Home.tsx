@@ -1,5 +1,6 @@
 import { Hero } from '../sections/Hero';
 import { Ticker } from '../sections/Ticker';
+import { TodayStrip } from '../sections/TodayStrip';
 import { Roadmap } from '../sections/Roadmap';
 import { GeneralStandings } from '../sections/GeneralStandings';
 import { ProbeGrid } from '../sections/ProbeGrid';
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      {h.today && <TodayStrip />}
       {h.ticker && <Ticker />}
       {h.roadmap && <Roadmap />}
       {h.standings && <GeneralStandings />}

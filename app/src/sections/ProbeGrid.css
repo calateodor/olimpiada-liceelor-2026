@@ -19,3 +19,9 @@
 .pg-podium { display: flex; gap: 4px; }
 .pg-arrow { width: 20px; height: 20px; color: var(--ye-500); }
 .pg-card.is-done .pg-icon { opacity: .6; }
+
+.pg-card.is-upcoming { opacity: .72; }
+.pg-card.is-upcoming .pg-icon { color: var(--fg-3); }
+.pg-card.is-upcoming:hover { opacity: 1; }
+.pg-card.is-live { border-color: var(--live); box-shadow: 0 0 0 1.5px rgba(255,59,92,.4), 0 0 24px rgba(255,59,92,.3); }
+.pg-card.is-today { border-color: var(--ye-500); }

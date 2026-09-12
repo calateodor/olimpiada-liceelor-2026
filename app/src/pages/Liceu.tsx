@@ -14,6 +14,7 @@ import NotFound from './NotFound';
 import './Liceu.css';
 import { asset } from '../lib/asset';
 import { eventPath, blockName } from '../lib/events';
+import { now as clockNow } from '../lib/clock';
 
 export default function Liceu() {
   const { id } = useParams();
@@ -45,7 +46,7 @@ export default function Liceu() {
   }, [s?.id]);
 
   if (!s) return <NotFound />;
-  const now = Date.now();
+  const now = clockNow().getTime();
   const upcoming = ms.filter(m => m.status !== 'finished' && matchDate(m).getTime() > now - 3600e3).slice(0, 4);
   const results = ms.filter(m => m.status === 'finished').sort((a, b) => matchDate(b).getTime() - matchDate(a).getTime());
   const podiums = state.events.map(ev => ({ ev, place: eventPlacements(ev, state.matches).indexOf(s.id) })).filter(x => x.place >= 0 && x.place < 3);

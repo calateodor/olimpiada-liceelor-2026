@@ -1,5 +1,6 @@
 import type { Match, OlEvent, State, EventId, Stage } from './types';
 import { SCHOOLS, SCHOOL_BY_ID, type SchoolId, type School } from '../data/schools';
+import { now } from './clock';
 
 /* ------------------------------------------------------------------ dates */
 export const TZ = '+03:00'; // Europe/Bucharest (EEST) pentru sept–oct 2026
@@ -8,7 +9,7 @@ export const COMP_END = '2026-10-03';
 
 export function matchDate(m: Pick<Match, 'date' | 'time'>) { return new Date(`${m.date}T${m.time || '00:00'}:00${TZ}`); }
 export function dayOf(d: Date) { return new Date(d.getTime() + 3 * 3600e3).toISOString().slice(0, 10); } // YYYY-MM-DD în ora RO
-export function todayISO(now = new Date()) { return dayOf(now); }
+export function todayISO(at = now()) { return dayOf(at); }
 
 const MONTHS = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
 const MONTHS_S = ['ian', 'feb', 'mar', 'apr', 'mai', 'iun', 'iul', 'aug', 'sept', 'oct', 'nov', 'dec'];
@@ -157,9 +158,9 @@ export function generalStandings(state: State): GeneralRow[] {
 
 /* ------------------------------------------------------------------ status */
 export type EvStatus = 'upcoming' | 'today' | 'live' | 'done';
-export function eventStatus(ev: OlEvent, matches: Match[], now = new Date()): EvStatus {
+export function eventStatus(ev: OlEvent, matches: Match[], at = now()): EvStatus {
   if (ev.finished) return 'done';
-  const t = todayISO(now);
+  const t = todayISO(at);
   if (matches.some(m => m.eventId === ev.id && m.status === 'live')) return 'live';
   const pl = eventPlacements(ev, matches);
   if (ev.format !== 'ranking' && pl[0]) return 'done';
@@ -170,8 +171,8 @@ export function eventStatus(ev: OlEvent, matches: Match[], now = new Date()): Ev
 
 export function matchesOn(matches: Match[], iso: string) { return matches.filter(m => m.date === iso).sort((a, b) => a.time.localeCompare(b.time)); }
 export function liveMatches(matches: Match[]) { return matches.filter(m => m.status === 'live'); }
-export function upcomingMatches(matches: Match[], now = new Date(), n = 6) {
-  const t = now.getTime();
+export function upcomingMatches(matches: Match[], at = now(), n = 6) {
+  const t = at.getTime();
   return matches.filter(m => m.status === 'scheduled' && matchDate(m).getTime() >= t - 3600e3).sort((a, b) => matchDate(a).getTime() - matchDate(b).getTime()).slice(0, n);
 }
 export function recentResults(matches: Match[], n = 6) {

@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { useStore } from '../store/state';
-import { todayISO, fmtDate, eventStatus, competitionDays } from '../lib/competition';
+import { todayISO, fmtDate, eventStatus, competitionDays, daysBetween } from '../lib/competition';
 import { gsap, prefersReducedMotion } from '../lib/motion';
 import type { EventId, Match, OlEvent, State } from '../lib/types';
 import { eventPath } from '../lib/events';
@@ -94,6 +94,26 @@ export function Roadmap() {
   }, [nodes.length, mobile]);
   const { ys, h } = layout && layout.ys.length === nodes.length ? layout : fallback;
   const { d, pts } = useMemo(() => buildPath(ys, mobile, h), [ys, h, mobile]);
+  // cât din drum e „în urmă": până la nodul de azi, sau între două noduri proporțional cu zilele
+  const todayY = useMemo(() => {
+    if (today < nodes[0].from) return 0;
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      if (today >= n.from && today <= n.to) return Math.max(0, ys[i] - 70);   // puțin deasupra nodului, ca marcajul „azi” să nu acopere numărul
+      const nx = nodes[i + 1];
+      if (nx && today > n.to && today < nx.from) { const total = Math.max(1, daysBetween(n.to, nx.from)); return ys[i] + (ys[i + 1] - ys[i]) * (daysBetween(n.to, today) / total); }
+    }
+    return h;
+  }, [today, nodes, ys, h]);
+  // punctul de pe drum unde e „azi" (drumul e monotom pe verticală, deci căutare binară pe lungime)
+  const [todayPt, setTodayPt] = useState<{ x: number; y: number } | null>(null);
+  useLayoutEffect(() => {
+    const p = pathRef.current; if (!p || todayY <= 0 || todayY >= h) { setTodayPt(null); return; }
+    const L = p.getTotalLength(); let lo = 0, hi = L;
+    for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (p.getPointAtLength(mid).y < todayY) lo = mid; else hi = mid; }
+    const pt = p.getPointAtLength((lo + hi) / 2);
+    setTodayPt({ x: pt.x, y: pt.y });
+  }, [d, todayY, h]);
   const pathFor = (id: EventId) => { const e = state.events.find(x => x.id === id); return e ? eventPath(e) : `/probe/${id}`; };
   const status = (n: Node) => (n.items.some(i => i.live) ? 'live' : today > n.to || n.items.filter(i => i.eventId).every(i => i.done) && n.items.some(i => i.done) ? 'done' : today >= n.from && today <= n.to ? 'now' : 'next');
 
@@ -178,11 +198,15 @@ export function Roadmap() {
           <svg viewBox={`0 0 ${W} ${h}`} preserveAspectRatio="none" className="rd-svg" aria-hidden="true">
             <defs>
               <filter id="rd-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14" /></filter>
+              <clipPath id="rd-clip-past"><rect x="0" y="0" width={W} height={Math.max(0, todayY)} /></clipPath>
+              <clipPath id="rd-clip-future"><rect x="0" y={todayY} width={W} height={Math.max(0, h - todayY)} /></clipPath>
             </defs>
-            <path d={d} className="rd-glowline" filter="url(#rd-glow)" />
+            {/* drumul parcurs strălucește; ce urmează e asfalt fără lumini, cu linia de mijloc stinsă */}
+            <path d={d} className="rd-glowline" filter="url(#rd-glow)" clipPath="url(#rd-clip-past)" />
             <path d={d} className="rd-asphalt" />
             <path d={d} className="rd-edge" />
-            <path ref={pathRef} d={d} className="rd-dash" />
+            <path d={d} className="rd-dash rd-dash-future" clipPath="url(#rd-clip-future)" />
+            <path ref={pathRef} d={d} className="rd-dash" clipPath="url(#rd-clip-past)" />
           </svg>
           {nodes.map((n, i) => {
             const st = status(n); const [x, y] = pts[i];
@@ -192,7 +216,7 @@ export function Roadmap() {
                 <div className="rd-num"><span className="num">{String(i + 1).padStart(2, '0')}</span>{st === 'done' && <Icon icon="solar:check-read-linear" className="rd-check" />}</div>
                 <div className="rd-side">
                   <div className="rd-label">
-                    <div className="rd-bartitle bar">{n.title}</div>
+                    <div className={`rd-bartitle bar ${st === 'now' || st === 'live' ? 'bar-ye' : ''}`}>{n.title}</div>
                     <p className="mono rd-dates">{n.dates}{st === 'now' ? ' · azi' : st === 'live' ? ' · live' : st === 'done' ? ' · încheiat' : ''}</p>
                     <ul className="rd-items">
                       {n.items.map((it, k) => (
@@ -209,6 +233,11 @@ export function Roadmap() {
               </article>
             );
           })}
+          {todayPt && (
+            <div className="rd-today" style={{ left: `${(todayPt.x / W) * 100}%`, top: `${(todayPt.y / h) * 100}%` }} aria-hidden="true">
+              <span className="rd-today-dot" /><span className="rd-today-lbl mono">azi · {fmtDate(today)}</span>
+            </div>
+          )}
           <div className="rd-finish" style={{ top: '100%' }} aria-hidden="true"><Icon icon="solar:flag-linear" /><span className="bar bar-ye">Cupa cea mare</span></div>
         </div>
       </div>

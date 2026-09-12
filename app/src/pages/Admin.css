@@ -105,3 +105,12 @@
 .ad-pw-box code { font-size: var(--t-lg); font-weight: 700; letter-spacing: .04em; background: #fff; padding: .2em .5em; border-radius: var(--r-sm); border: var(--line); user-select: all; }
 .ad-ins-ev { display: grid; gap: var(--s2); padding-top: var(--s3); border-top: var(--line); }
 .ad-danger { color: var(--live); border-color: var(--live); }
+
+.ad-tm-on { border-color: #F0B323; background: #FFFBEB; }
+.ad-tm-row { display: grid; grid-template-columns: auto auto 1fr auto; gap: var(--s4); align-items: end; }
+.ad-tm-days { gap: var(--s1); }
+.ad-tm-days .tag { cursor: pointer; }
+.ad-tm-moments { display: grid; gap: 2px; max-height: 420px; overflow: auto; font-size: var(--t-sm); }
+.ad-tm-moments li { display: grid; grid-template-columns: 12ch 1fr; gap: var(--s3); padding: 3px 0; border-bottom: var(--line); }
+.ad-stats-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1100px) { .ad-tm-row { grid-template-columns: 1fr 1fr; } }

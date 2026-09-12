@@ -20,7 +20,18 @@
 .rd-num { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%); width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: var(--v-900); border: 3px solid var(--pu-400); box-shadow: var(--glow-pu-strong); font-weight: 800; font-size: 1.6rem; color: #fff; font-variation-settings: 'opsz' 48, 'wdth' 85, 'wght' 800; z-index: 2; }
 .rd-node.is-done .rd-num { background: var(--ye-500); color: var(--v-950); border-color: var(--ye-400); box-shadow: var(--glow-ye); }
 .rd-node.is-now .rd-num, .rd-node.is-live .rd-num { animation: rd-pulse 1.8s ease-in-out infinite; border-color: var(--ye-500); }
-.rd-node.is-next .rd-num { opacity: .9; }
+/* etapele la care nu s-a ajuns: stinse, fără lumini; cea de azi: galbenă, pulsând */
+.rd-node.is-next { opacity: .55; }
+.rd-node.is-next .rd-num { background: var(--v-800); border-color: var(--v-600); box-shadow: none; color: var(--fg-3); }
+.rd-node.is-next .rd-icon { border-color: var(--v-600); color: var(--fg-3); background: transparent; box-shadow: none; }
+.rd-node.is-next .rd-items li::before { background: var(--fg-3); }
+.rd-node.is-now .rd-num, .rd-node.is-live .rd-num { background: var(--v-900); color: var(--ye-500); }
+.rd-node.is-now .rd-icon, .rd-node.is-live .rd-icon { border-color: var(--ye-500); color: var(--ye-500); box-shadow: var(--glow-ye); }
+.rd-dash-future { stroke: rgba(255,255,255,.16); filter: none; }
+.rd-today { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: var(--s2); pointer-events: none; z-index: 3; }
+.rd-today-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--ye-500); box-shadow: 0 0 0 4px rgba(250,204,21,.25), 0 0 20px rgba(250,204,21,.8); animation: rd-today 1.6s ease-in-out infinite; }
+.rd-today-lbl { color: var(--ye-500); background: var(--v-950); padding: 2px 8px; border-radius: var(--r-pill); border: 1px solid rgba(250,204,21,.5); white-space: nowrap; }
+@keyframes rd-today { 0%, 100% { box-shadow: 0 0 0 4px rgba(250,204,21,.25), 0 0 20px rgba(250,204,21,.8); } 50% { box-shadow: 0 0 0 10px rgba(250,204,21,.08), 0 0 30px rgba(250,204,21,1); } }
 .rd-check { position: absolute; right: -8px; bottom: -8px; width: 26px; height: 26px; background: var(--ok); color: var(--v-950); border-radius: 50%; padding: 3px; }
 @keyframes rd-pulse { 0%, 100% { box-shadow: var(--glow-pu-strong); } 50% { box-shadow: var(--glow-ye); } }
 .rd-side { position: absolute; top: 0; transform: translateY(-50%); width: min(44vw, 470px); display: grid; grid-template-columns: 1fr auto; gap: var(--s5); align-items: center; }

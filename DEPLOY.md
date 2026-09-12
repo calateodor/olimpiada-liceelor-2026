@@ -93,6 +93,7 @@ Intri din subsol → **Administrare** (sau `/admin`), cu utilizator și parolă.
 - **Concert**: faza dezvăluirii (mister → concert → artist), textele pe faze, artistul, data, locul, afișul.
 - **Site**: titlul, tagline-ul, „următorul eveniment” din hero, poza din hero, ce secțiuni apar pe prima pagină, contactul și rețelele din subsol.
 - **Locații & documente**: note pe locații (acces, parcare), ce regulamente sunt vizibile, documente/linkuri în plus.
+- **Mașina timpului**: simulare. Alegi orice zi și oră din competiție, iar site-ul se comportă ca atunci, cu rezultate inventate dar consistente (același seed, aceleași scoruri; „Alte rezultate” schimbă scenariul): meciuri jucate cu scor, meciul din acel moment live cu scor parțial care curge, probe încheiate cu podium, clasament general, noutăți cu rezultate, anunț „Live acum”, faza concertului după calendar. Datele reale nu se ating. În browserul tău se vede instant (și după refresh); cu **Publică** o văd toți, cu o bandă galbenă „Simulare · date fictive”. Oprești simularea din același loc și publici din nou.
 - **Cont**: schimbarea utilizatorului și a parolei, deconectare.
 - **Date & jurnal**: jurnalul ultimelor 200 de modificări, export/import JSON, versiunile publicate (readuci oricare din ultimele 60 de zile), reset la calendarul inițial.
 - **Publică** (sus dreapta) trimite modificările live. Vizitatorii le văd în cel mult 30 de secunde, fără refresh.

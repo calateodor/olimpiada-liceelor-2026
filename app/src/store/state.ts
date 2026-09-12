@@ -3,11 +3,16 @@ import type { Config, OlEvent, State } from '../lib/types';
 import { SEED } from '../data/seed';
 import { ACCESS } from '../data/access';
 import { verifyCredentials } from '../lib/auth';
+import { setSimulation } from '../lib/clock';
+import { applySimulation } from '../lib/simulation';
 
 const TOKEN_KEY = 'ol.admin.token';
 const DRAFT_KEY = 'ol.draft';
 
 interface Store {
+  /** datele reale (ce se publică) */
+  raw: State;
+  /** ce vede site-ul: datele reale, sau — cu simularea pornită — starea derivată la momentul simulat */
   state: State;
   loaded: boolean;
   /** backend-ul (Cloudflare) răspunde; altfel site-ul e găzduit static și panoul lucrează doar local */
@@ -16,7 +21,7 @@ interface Store {
   saving: boolean;
   token: string | null;
   load: () => Promise<void>;
-  /** modifică starea; `what` intră în jurnalul panoului */
+  /** modifică datele reale; `what` intră în jurnalul panoului */
   setState: (mut: (s: State) => void, what?: string) => void;
   replace: (s: State, what?: string) => void;
   publish: () => Promise<{ ok: boolean; error?: string }>;
@@ -41,6 +46,7 @@ export function withDefaults(s: Partial<State>): State {
     concert: { ...d.concert, ...(c.concert ?? {}) },
     schoolInfo: { ...d.schoolInfo, ...(c.schoolInfo ?? {}) },
     venueNotes: { ...d.venueNotes, ...(c.venueNotes ?? {}) },
+    simulation: { ...d.simulation, ...(c.simulation ?? {}) },
   };
   // Lista de probe e a codului (seed), nu a stării salvate: probele scoase dispar, cele noi apar,
   // iar din starea salvată păstrăm doar ce se editează din panou (rezultate, locuri, texte).
@@ -60,7 +66,15 @@ export function withDefaults(s: Partial<State>): State {
   return { ...SEED, ...s, config, events, matches, timeline, log: s.log ?? [] };
 }
 
+/** ce vede site-ul: datele reale sau simularea, la momentul curent al ceasului */
+function derive(raw: State): State {
+  const sim = raw.config.simulation;
+  setSimulation(sim.on ? { at: sim.at, setAt: sim.setAt, frozen: sim.frozen } : null);
+  return sim.on ? applySimulation(raw) : raw;
+}
+
 export const useStore = create<Store>((set, get) => ({
+  raw: SEED,
   state: SEED,
   loaded: false,
   online: false,
@@ -69,45 +83,49 @@ export const useStore = create<Store>((set, get) => ({
   token: typeof localStorage !== 'undefined' ? localStorage.getItem(TOKEN_KEY) : null,
 
   load: async () => {
+    // ciorna administratorului (modificări nepublicate) are prioritate în browserul lui, chiar și
+    // după reîncărcarea paginii: altfel simularea sau un scor introdus ar dispărea la un refresh
+    const draft = (() => { try { const d = localStorage.getItem(DRAFT_KEY); return d && localStorage.getItem(TOKEN_KEY) ? withDefaults(JSON.parse(d)) : null; } catch { return null; } })();
     try {
       const r = await fetch('/api/state', { cache: 'no-store' });
       if (!r.ok || !(r.headers.get('content-type') ?? '').includes('json')) throw new Error(String(r.status));
-      const s = (await r.json()) as State;
-      set({ state: withDefaults(s), loaded: true, online: true });
+      const server = withDefaults((await r.json()) as State);
+      const raw = draft ?? server;
+      set({ raw, state: derive(raw), loaded: true, online: true, dirty: !!draft });
     } catch {
       // găzduire statică sau backend căzut: seed + ciorna locală
-      const local = localStorage.getItem(DRAFT_KEY);
-      set({ state: local ? withDefaults(JSON.parse(local)) : SEED, loaded: true, online: false });
+      const raw = draft ?? SEED;
+      set({ raw, state: derive(raw), loaded: true, online: false, dirty: !!draft });
     }
   },
 
   setState: (mut, what) => {
-    const s = clone(get().state);
-    mut(s);
-    s.updatedAt = new Date().toISOString();
-    if (what) { s.log = [{ at: s.updatedAt, what }, ...(s.log ?? [])].slice(0, 200); }
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(s));
-    set({ state: s, dirty: true });
+    const raw = clone(get().raw);
+    mut(raw);
+    raw.updatedAt = new Date().toISOString();
+    if (what) { raw.log = [{ at: raw.updatedAt, what }, ...(raw.log ?? [])].slice(0, 200); }
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(raw));
+    set({ raw, state: derive(raw), dirty: true });
   },
 
   replace: (s, what) => {
-    const next = withDefaults(s);
-    if (what) next.log = [{ at: new Date().toISOString(), what }, ...(next.log ?? [])].slice(0, 200);
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(next));
-    set({ state: next, dirty: true });
+    const raw = withDefaults(s);
+    if (what) raw.log = [{ at: new Date().toISOString(), what }, ...(raw.log ?? [])].slice(0, 200);
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(raw));
+    set({ raw, state: derive(raw), dirty: true });
   },
 
   publish: async () => {
-    const { state, token, online } = get();
+    const { raw, token, online } = get();
     if (!online) return { ok: false, error: 'Site-ul e găzduit static (GitHub Pages): modificările rămân doar în acest browser. Publicarea pentru vizitatori merge după mutarea pe Cloudflare (vezi DEPLOY.md).' };
     set({ saving: true });
     try {
-      const r = await fetch('/api/state', { method: 'PUT', headers: { 'content-type': 'application/json', authorization: `Bearer ${token ?? ''}` }, body: JSON.stringify({ ...state, version: state.version + 1 }) });
+      const r = await fetch('/api/state', { method: 'PUT', headers: { 'content-type': 'application/json', authorization: `Bearer ${token ?? ''}` }, body: JSON.stringify({ ...raw, version: raw.version + 1 }) });
       if (r.status === 401) { set({ saving: false, token: null }); localStorage.removeItem(TOKEN_KEY); return { ok: false, error: 'Sesiune expirată. Loghează-te din nou.' }; }
       if (!r.ok) throw new Error(await r.text());
-      const s = (await r.json()) as State;
+      const next = withDefaults((await r.json()) as State);
       localStorage.removeItem(DRAFT_KEY);
-      set({ state: withDefaults(s), dirty: false, saving: false, online: true });
+      set({ raw: next, state: derive(next), dirty: false, saving: false, online: true });
       return { ok: true };
     } catch (e) {
       set({ saving: false });
@@ -148,5 +166,7 @@ export const useStore = create<Store>((set, get) => ({
 /** Public pages re-read the state every 30s so live scores update. */
 export function startPolling() {
   const id = setInterval(() => { if (!useStore.getState().dirty && document.visibilityState === 'visible') useStore.getState().load(); }, 30000);
-  return () => clearInterval(id);
+  // cu simularea pornită și ceasul curgând, starea derivată se recalculează periodic (meciurile intră/ies din live)
+  const tick = setInterval(() => { const { raw } = useStore.getState(); if (raw.config.simulation.on && !raw.config.simulation.frozen) useStore.setState({ state: derive(raw) }); }, 20000);
+  return () => { clearInterval(id); clearInterval(tick); };
 }
