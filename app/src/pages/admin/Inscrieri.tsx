@@ -86,17 +86,17 @@ export function AdminInscrieri() {
     setMsg('Înscrierile au fost șterse.');
   };
 
-  if (!online) return <div className="ad-sec"><div className="ad-note"><Icon icon="solar:info-circle-linear" /> Conturile și înscrierile liceelor există doar pe server (Cloudflare). Deschide panoul pe adresa oficială.</div></div>;
+  if (!online) return <div className="pn-sec"><div className="pn-note"><Icon icon="solar:info-circle-linear" /> Conturile și înscrierile liceelor există doar pe server (Cloudflare). Deschide panoul pe adresa oficială.</div></div>;
 
   return (
-    <div className="ad-sec">
+    <div className="pn-sec">
       <p className="body">Fiecare liceu intră pe <b>/inscrieri</b> cu numele scurt (ex. <code>titulescu</code>) și parola generată aici, și își completează elevii pe probe. Datele stau criptate pe server; le vezi doar tu și liceul respectiv. Nota de informare GDPR e pe <b>/confidentialitate</b>.</p>
-      {msg && <p className="ad-note"><Icon icon="solar:info-circle-linear" /> {msg}</p>}
+      {msg && <p className="pn-note"><Icon icon="solar:info-circle-linear" /> {msg}</p>}
       {pwShown && (
-        <div className="ad-block ad-pw">
+        <div className="pn-block pn-pw">
           <h3 className="h4">Parola pentru {SCHOOL_BY_ID[pwShown.school].name}</h3>
           <p className="body">Se afișează o singură dată. Trimite-o coordonatorului împreună cu adresa și numele de utilizator.</p>
-          <div className="ad-pw-box">
+          <div className="pn-pw-box">
             <span className="mono">utilizator</span><code>{pwShown.school}</code>
             <span className="mono">parola</span><code>{pwShown.password}</code>
           </div>
@@ -106,14 +106,14 @@ export function AdminInscrieri() {
           </div>
         </div>
       )}
-      <section className="ad-block">
+      <section className="pn-block">
         <div className="between"><h3 className="h4">Conturile liceelor</h3><button className="link" onClick={refresh}>reîmprospătează</button></div>
-        <table className="table ad-table">
+        <table className="table pn-table">
           <thead><tr><th>Liceu</th><th>Cont</th><th>Ultima intrare</th><th>Ultima salvare</th><th className="c">Elevi</th><th className="c">Probe</th><th>Acord</th><th /></tr></thead>
           <tbody>
             {SCHOOLS.map(s => { const st = list?.find(x => x.id === s.id); return (
               <tr key={s.id}>
-                <td><span className="ad-team"><SchoolMark school={s} size="sm" plain />{s.short}</span></td>
+                <td><span className="pn-team"><SchoolMark school={s} size="sm" plain />{s.short}</span></td>
                 <td>{st ? (st.hasPassword ? <span className="tag tag-ok">activ</span> : <span className="tag">fără parolă</span>) : '…'}</td>
                 <td className="mono">{fmt(st?.lastLogin ?? null)}</td>
                 <td className="mono">{fmt(st?.updatedAt ?? null)}</td>
@@ -132,15 +132,15 @@ export function AdminInscrieri() {
       </section>
 
       {openSchool && data[openSchool] && (
-        <section className="ad-block">
+        <section className="pn-block">
           <h3 className="h4">{SCHOOL_BY_ID[openSchool].name} · {membriCount(data[openSchool]!)} elevi</h3>
           {Object.entries(data[openSchool]!.events).filter(([, e]) => (e?.membri.length ?? 0) > 0).map(([evId, e]) => {
             const ev = state.events.find(x => x.id === evId);
             return (
-              <div key={evId} className="ad-ins-ev">
+              <div key={evId} className="pn-ins-ev">
                 <p className="h4">{ev ? (ev.page ? `${ev.pageName ?? ev.name} · ${blockName(ev)}` : `${ev.name} ${ev.subtitle}`) : evId} <span className="dim">· {e!.coordonator || 'fără coordonator'}{e!.coordonatorTel ? ` · ${e!.coordonatorTel}` : ''}</span></p>
-                <table className="table ad-table"><thead><tr><th>#</th><th>Nume</th><th>Prenume</th><th>Clasa</th><th>CNP</th><th>CI</th><th>Telefon</th></tr></thead>
-                  <tbody>{e!.membri.map((m, i) => <tr key={m.id}><td className="mono">{i + 1}</td><td>{m.nume}</td><td>{m.prenume}</td><td>{m.clasa}</td><td className={`mono ${validateCNP(m.cnp).ok ? '' : 'ad-err'}`}>{m.cnp}</td><td className="mono">{m.ci}</td><td className="mono">{m.telefon}</td></tr>)}</tbody>
+                <table className="table pn-table"><thead><tr><th>#</th><th>Nume</th><th>Prenume</th><th>Clasa</th><th>CNP</th><th>CI</th><th>Telefon</th></tr></thead>
+                  <tbody>{e!.membri.map((m, i) => <tr key={m.id}><td className="mono">{i + 1}</td><td>{m.nume}</td><td>{m.prenume}</td><td>{m.clasa}</td><td className={`mono ${validateCNP(m.cnp).ok ? '' : 'pn-err'}`}>{m.cnp}</td><td className="mono">{m.ci}</td><td className="mono">{m.telefon}</td></tr>)}</tbody>
                 </table>
               </div>
             );
@@ -149,22 +149,22 @@ export function AdminInscrieri() {
         </section>
       )}
 
-      <div className="ad-two">
-        <section className="ad-block">
+      <div className="pn-two">
+        <section className="pn-block">
           <h3 className="h4">Export</h3>
           <p className="body">Toate înscrierile, toate liceele, într-un CSV (se deschide în Excel). Pentru fișele de înscriere și statele de premiere.</p>
           <button className="btn btn-sm" disabled={busy === 'csv'} onClick={exportCsv}><Icon className="ic" icon="solar:download-minimalistic-linear" /> Descarcă CSV</button>
         </section>
-        <section className="ad-block">
+        <section className="pn-block">
           <h3 className="h4">Loturile publice</h3>
           <p className="body">Copiază doar numele elevilor din înscrieri în loturile de pe paginile liceelor. Fără CNP, fără acte. Apar public doar dacă e pornit comutatorul din Licee.</p>
           <button className="btn btn-sm btn-ghost" onClick={importNames}>Preia numele în loturi</button>
         </section>
       </div>
-      <section className="ad-block">
+      <section className="pn-block">
         <h3 className="h4">Ștergerea datelor (GDPR)</h3>
         <p className="body">După premiere, cel târziu pe 31 decembrie 2026, datele elevilor trebuie șterse din platformă, conform notei de informare. Exportă înainte ce ai nevoie pentru arhivă.</p>
-        <button className="btn btn-sm btn-ghost ad-danger" onClick={deleteAll}>Șterge toate înscrierile</button>
+        <button className="btn btn-sm btn-ghost pn-danger" onClick={deleteAll}>Șterge toate înscrierile</button>
       </section>
     </div>
   );
