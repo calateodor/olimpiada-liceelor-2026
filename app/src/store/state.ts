@@ -166,7 +166,8 @@ export const useStore = create<Store>((set, get) => ({
 /** Public pages re-read the state every 30s so live scores update. */
 export function startPolling() {
   const id = setInterval(() => { if (!useStore.getState().dirty && document.visibilityState === 'visible') useStore.getState().load(); }, 30000);
-  // cu simularea pornită și ceasul curgând, starea derivată se recalculează periodic (meciurile intră/ies din live)
-  const tick = setInterval(() => { const { raw } = useStore.getState(); if (raw.config.simulation.on && !raw.config.simulation.frozen) useStore.setState({ state: derive(raw) }); }, 20000);
+  // ceasul merge mai departe chiar dacă datele nu se schimbă: un meci intră în „se joacă acum"
+  // la ora lui, fără refresh (și, în simulare, scorul curge)
+  const tick = setInterval(() => { const { raw } = useStore.getState(); useStore.setState({ state: derive(raw) }); }, 20000);
   return () => { clearInterval(id); clearInterval(tick); };
 }

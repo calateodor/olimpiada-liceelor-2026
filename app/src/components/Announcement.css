@@ -11,3 +11,7 @@
 .ann-info { background: var(--pu-500); }
 
 .ann-sim { background: #FACC15; color: var(--v-950); font-family: var(--f-mono); font-weight: 500; font-size: var(--t-xs); letter-spacing: .06em; text-transform: uppercase; padding-block: 4px; }
+
+.ann-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; flex: 0 0 auto; animation: ann-blink 1.4s ease-in-out infinite; }
+.ann-score { font-variant-numeric: tabular-nums; }
+@keyframes ann-blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }

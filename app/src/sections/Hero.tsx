@@ -6,7 +6,7 @@ import { heroSignals } from '../three/signals';
 import { computeLayout } from '../three/heroLayout';
 import { Wordmark, WORDMARK } from './Wordmark';
 import { useStore } from '../store/state';
-import { liveMatches, upcomingMatches, resolvedMatches, fmtDate, matchDate, STAGE_LABEL } from '../lib/competition';
+import { liveMatches, upcomingMatches, resolvedMatches, fmtDate, matchDate, STAGE_LABEL, hasScore } from '../lib/competition';
 import { SCHOOL_BY_ID } from '../data/schools';
 import { SchoolMark } from '../components/SchoolMark';
 import { asset } from '../lib/asset';
@@ -209,7 +209,7 @@ export function Hero() {
                   <li key={m.id}>
                     <span className="mono num">{m.time}</span>
                     <span className="hero-next-teams">{m.home ? <><SchoolMark school={SCHOOL_BY_ID[m.home]} size="sm" /> {SCHOOL_BY_ID[m.home].short}</> : m.homeLabel} <span className="dim">vs</span> {m.away ? <>{SCHOOL_BY_ID[m.away].short} <SchoolMark school={SCHOOL_BY_ID[m.away]} size="sm" /></> : m.awayLabel}</span>
-                    {m.status === 'live' && <span className="score score-sm">{m.homeScore ?? 0}<span className="sep">:</span>{m.awayScore ?? 0}</span>}
+                    {m.status === 'live' && (hasScore(m) ? <span className="score score-sm">{m.homeScore}<span className="sep">:</span>{m.awayScore}</span> : <span className="tag tag-live">în joc</span>)}
                   </li>
                 ))}
               </ul>

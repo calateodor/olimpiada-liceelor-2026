@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import type { Match, OlEvent } from '../lib/types';
 import { SCHOOL_BY_ID } from '../data/schools';
 import { SchoolMark } from './SchoolMark';
-import { STAGE_LABEL, fmtDate } from '../lib/competition';
+import { STAGE_LABEL, fmtDate, hasScore } from '../lib/competition';
 import { eventPath } from '../lib/events';
 import './MatchCard.css';
 
@@ -13,6 +13,8 @@ export function MatchCard({ m, ev, compact = false, showEvent = true }: { m: Mat
   const live = m.status === 'live';
   const hw = done && m.homeScore != null && m.awayScore != null && m.homeScore > m.awayScore;
   const aw = done && m.homeScore != null && m.awayScore != null && m.awayScore > m.homeScore;
+  // un meci în desfășurare la care nu s-a introdus încă scorul nu afișează 0:0, ci „în joc"
+  const showScore = (done || live) && hasScore(m);
   return (
     <article className={`mc ${compact ? 'mc-compact' : ''} ${live ? 'is-live' : ''} ${done ? 'is-done' : ''}`}>
       <header className="mc-head">
@@ -23,8 +25,8 @@ export function MatchCard({ m, ev, compact = false, showEvent = true }: { m: Mat
         <div className={`mc-team ${hw ? 'is-win' : ''}`}>
           {h ? <><SchoolMark school={h} size={compact ? 'sm' : 'md'} /><span className="mc-name">{h.short}</span></> : <span className="mc-tbd">{m.homeLabel ?? 'TBD'}</span>}
         </div>
-        <div className={`score ${compact ? 'score-sm' : ''} ${done || live ? '' : 'pending'}`}>
-          {done || live ? <><span className="num">{m.homeScore ?? 0}</span><span className="sep">:</span><span className="num">{m.awayScore ?? 0}</span></> : <span className="mc-vs mono">vs</span>}
+        <div className={`score ${compact ? 'score-sm' : ''} ${showScore ? '' : 'pending'}`}>
+          {showScore ? <><span className="num">{m.homeScore}</span><span className="sep">:</span><span className="num">{m.awayScore}</span></> : <span className="mc-vs mono">{live ? 'în joc' : 'vs'}</span>}
         </div>
         <div className={`mc-team mc-team-r ${aw ? 'is-win' : ''}`}>
           {a ? <><span className="mc-name">{a.short}</span><SchoolMark school={a} size={compact ? 'sm' : 'md'} /></> : <span className="mc-tbd">{m.awayLabel ?? 'TBD'}</span>}

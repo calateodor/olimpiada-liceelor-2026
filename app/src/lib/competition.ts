@@ -84,6 +84,29 @@ export function groupComplete(ev: OlEvent, matches: Match[], group: 'A' | 'B') {
   return ms.length > 0 && ms.every(m => m.status === 'finished');
 }
 
+/* ---------------------------------------------------------------------------
+   Meciul care se joacă ACUM.
+   Statusul „live" se poate pune din panou (cu scor), dar site-ul nu trebuie să depindă de asta:
+   un meci programat a cărui oră a trecut și care nu e încheiat sau amânat se arată singur ca
+   „în desfășurare", fără scor, până când cineva introduce scorul sau apasă Final.
+--------------------------------------------------------------------------- */
+/** durata estimată a unui meci, în minute, pe sport */
+export const MATCH_MINUTES: Partial<Record<EventId, number>> = { fotbal: 50, handbal: 40, baschet: 45, volei: 80, 'tenis-f': 30, 'tenis-b': 30 };
+/** cât timp după ora estimată de final mai rămâne marcat „în desfășurare", dacă nimeni nu a închis meciul */
+const GRACE_MIN = 45;
+
+export function autoLive(m: Match, at = now()): boolean {
+  if (m.status !== 'scheduled') return false;
+  if (!m.home || !m.away) return false;                 // fără echipe stabilite nu anunțăm nimic
+  const start = matchDate(m).getTime();
+  const end = start + ((MATCH_MINUTES[m.eventId] ?? 45) + GRACE_MIN) * 60e3;
+  const t = at.getTime();
+  return t >= start && t <= end;
+}
+
+/** meciul are scor introdus (un meci „în desfășurare" automat încă nu are) */
+export const hasScore = (m: Match) => m.homeScore != null && m.awayScore != null;
+
 export function winner(m: Match): SchoolId | null {
   if (m.status !== 'finished' || m.homeScore == null || m.awayScore == null || !m.home || !m.away) return null;
   if (m.homeScore === m.awayScore) return m.note?.includes('pen:') ? (m.note.includes('pen:home') ? m.home : m.away) : null;
@@ -115,6 +138,7 @@ export function resolvedMatches(ev: OlEvent, all: Match[]): Match[] {
     if (f1 && sf1 && sf2) { f1.home ??= winner(sf1); f1.away ??= winner(sf2); }
     if (f3 && sf1 && sf2) { f3.home ??= loser(sf1); f3.away ??= loser(sf2); }
   }
+  for (const m of ms) if (autoLive(m)) m.status = 'live';
   return ms.sort((x, y) => matchDate(x).getTime() - matchDate(y).getTime());
 }
 
@@ -161,7 +185,7 @@ export type EvStatus = 'upcoming' | 'today' | 'live' | 'done';
 export function eventStatus(ev: OlEvent, matches: Match[], at = now()): EvStatus {
   if (ev.finished) return 'done';
   const t = todayISO(at);
-  if (matches.some(m => m.eventId === ev.id && m.status === 'live')) return 'live';
+  if (matches.some(m => m.eventId === ev.id && (m.status === 'live' || autoLive(m, at)))) return 'live';
   const pl = eventPlacements(ev, matches);
   if (ev.format !== 'ranking' && pl[0]) return 'done';
   if (t >= ev.startDate && t <= ev.endDate) return 'today';
@@ -170,7 +194,7 @@ export function eventStatus(ev: OlEvent, matches: Match[], at = now()): EvStatus
 }
 
 export function matchesOn(matches: Match[], iso: string) { return matches.filter(m => m.date === iso).sort((a, b) => a.time.localeCompare(b.time)); }
-export function liveMatches(matches: Match[]) { return matches.filter(m => m.status === 'live'); }
+export function liveMatches(matches: Match[], at = now()) { return matches.filter(m => m.status === 'live' || autoLive(m, at)); }
 export function upcomingMatches(matches: Match[], at = now(), n = 6) {
   const t = at.getTime();
   return matches.filter(m => m.status === 'scheduled' && matchDate(m).getTime() >= t - 3600e3).sort((a, b) => matchDate(a).getTime() - matchDate(b).getTime()).slice(0, n);
