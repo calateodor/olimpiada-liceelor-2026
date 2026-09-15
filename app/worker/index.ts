@@ -287,6 +287,11 @@ export default {
     if (res.status === 404 && req.method === 'GET' && !p.split('/').pop()!.includes('.')) {
       return env.ASSETS.fetch(new Request(new URL('/', req.url), req));
     }
+    // pozele și segmentele video (public/foto/) nu se schimbă: browserul le poate ține o săptămână
+    if (res.ok && p.startsWith('/foto/')) {
+      const h = new Headers(res.headers); h.set('cache-control', 'public, max-age=604800');
+      return new Response(res.body, { status: res.status, headers: h });
+    }
     return res;
   },
 } satisfies ExportedHandler<Env>;
