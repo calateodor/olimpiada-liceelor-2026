@@ -1,13 +1,23 @@
 .vt { position: relative; width: 100%; margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--v-800); box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 24px 48px -24px rgba(0,0,0,.7); }
-.vt video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
-.vt.is-playing video { object-fit: contain; }
-.vt-play { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: var(--s4); width: 100%; text-align: center; color: #fff; cursor: pointer;
-  background: linear-gradient(180deg, rgba(11,14,34,0) 35%, rgba(11,14,34,.86) 100%); }
+.vt video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; cursor: pointer; }
 .vt-btn { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: var(--ye-500); color: var(--v-950); box-shadow: 0 0 0 10px rgba(255,214,10,.16), 0 12px 32px -8px rgba(255,214,10,.6); transition: transform var(--d-2) var(--e-out), box-shadow var(--d-2); }
 .vt-btn svg { margin-left: 3px; }
-.vt-play:hover .vt-btn { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(255,214,10,.2), 0 12px 32px -8px rgba(255,214,10,.7); }
+/* înainte de prima redare: poster + titlu, cu un gradient doar la bază, ca textul să se citească */
+.vt-play { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: var(--s4); width: 100%; text-align: center; color: #fff; cursor: pointer;
+  background: linear-gradient(180deg, rgba(11,14,34,0) 45%, rgba(11,14,34,.82) 100%); }
+.vt-play:hover .vt-btn, .vt-resume:hover .vt-btn { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(255,214,10,.2), 0 12px 32px -8px rgba(255,214,10,.7); }
 .vt-cap { position: absolute; left: var(--s5); right: var(--s5); bottom: var(--s5); display: grid; gap: 4px; text-align: left; }
 .vt-cap .mono { color: var(--ye-400); }
 .vt-cap b { font-size: var(--t-lg); line-height: 1.15; letter-spacing: -.01em; }
 .vt-cap small { color: rgba(255,255,255,.72); font-size: var(--t-sm); line-height: 1.35; }
+/* pe pauză: doar butonul, fără văl peste clip */
+.vt-resume { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; color: #fff; cursor: pointer; background: transparent; }
+/* bara de jos: progres + timp + sunet, pe o pastilă mică, nu peste tot clipul */
+.vt-bar { position: absolute; left: var(--s3); right: var(--s3); bottom: var(--s3); display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: var(--s3); padding: var(--s2) var(--s3); border-radius: var(--r-pill); background: rgba(7,9,26,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; }
+.vt-track { position: relative; height: 22px; cursor: pointer; }
+.vt-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: rgba(255,255,255,.28); }
+.vt-fill { position: absolute; left: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: var(--ye-500); box-shadow: 0 0 8px rgba(250,204,21,.6); }
+.vt-time { color: rgba(255,255,255,.85); font-size: var(--t-2xs); letter-spacing: .04em; text-transform: none; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vt-mute { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; }
+.vt-mute:hover { background: rgba(255,255,255,.12); }
 .vt-err { position: absolute; left: var(--s4); right: var(--s4); bottom: var(--s4); padding: var(--s2) var(--s3); background: rgba(0,0,0,.7); border-radius: var(--r-sm); color: #fff; }
