@@ -13,6 +13,8 @@
 .pb-block-head { display: grid; grid-template-columns: auto 1fr; gap: var(--s3) var(--s6); align-items: baseline; }
 .pb-block-head .body { grid-column: 2; }
 .pb-2col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s6); }
+/* coloanele nu se lărgesc după tabel (min-width: auto): tabelul derulează în table-wrap, pagina rămâne cât ecranul */
+.pb-2col > * { min-width: 0; }
 .pb-gt { margin-bottom: var(--s3); }
 .pb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s4); }
 .pb-podium { grid-template-columns: repeat(3, 1fr); align-items: end; gap: var(--s4); }
