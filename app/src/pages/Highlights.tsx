@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { PageHead } from '../components/PageHead';
 import { PhotoGrid } from '../components/PhotoGrid';
 import { VideoTile } from '../components/VideoTile';
@@ -8,6 +8,7 @@ import { SCHOOLS, type SchoolId } from '../data/schools';
 import { SchoolMark } from '../components/SchoolMark';
 import { fmtDate, daysBetween } from '../lib/competition';
 import { eventPath } from '../lib/events';
+import { scrollToEl } from '../lib/motion';
 import type { EventId } from '../lib/types';
 import '../pages/Program.css';
 import './Highlights.css';
@@ -29,6 +30,14 @@ export default function Highlights() {
   const days = [...new Set([...photos, ...videos].map(x => x.createdAt.slice(0, 10)))].sort().reverse();
   const total = state.photos.length + state.videos.length;
 
+  // /highlights#z-2026-09-14 (din roadmap) derulează la ziua respectivă, după ce pagina s-a așezat
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const id = setTimeout(() => { const el = document.getElementById(hash.slice(1)); if (el) scrollToEl(el, -96); }, 450);
+    return () => clearTimeout(id);
+  }, [hash, days.join(',')]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className="page" style={{ paddingBottom: 'var(--s24)' }}>
       <PageHead idx={`Highlights · ${state.photos.length} fotografii${state.videos.length ? ` · ${state.videos.length} ${state.videos.length === 1 ? 'clip' : 'clipuri'}` : ''}`} title="Din tribune și de pe teren" lead="Clipurile și fotografiile fiecărei zile, din fiecare probă și de la fiecare liceu, pe măsură ce se întâmplă.">
@@ -45,7 +54,7 @@ export default function Highlights() {
           const evs = state.events.filter(e => ph.some(p => p.eventId === e.id) || vi.some(v => v.eventIds?.includes(e.id)));
           const n = daysBetween(day0, d) + 1;
           return (
-            <section key={d} className={`hl-day ${vi.length ? 'has-video' : ''}`} aria-label={`Ziua ${n}`}>
+            <section key={d} id={`z-${d}`} className={`hl-day ${vi.length ? 'has-video' : ''}`} aria-label={`Ziua ${n}`}>
               <header className="hl-head">
                 <div>
                   <span className="mono hl-n">{n > 0 ? `Ziua ${n}` : 'Înainte de start'}</span>

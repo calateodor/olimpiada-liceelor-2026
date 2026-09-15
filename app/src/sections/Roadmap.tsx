@@ -8,6 +8,14 @@ import type { EventId, Match, OlEvent, State } from '../lib/types';
 import { eventPath } from '../lib/events';
 import './Roadmap.css';
 
+/* Iconița unei etape duce la highlights-urile ei (prima zi din etapă cu poze sau clipuri); fără
+   materiale, rămâne un simplu ornament. */
+const addDay = (d: string) => new Date(Date.parse(d) + 86400e3).toISOString().slice(0, 10);
+function highlightsDay(n: Node, mediaDays: Set<string>): string | null {
+  for (let d = n.from; d <= n.to; d = addDay(d)) if (mediaDays.has(d)) return d;
+  return null;
+}
+
 /* ---------------- etapele drumului (grupate din calendar) ---------------- */
 interface Node { id: string; title: string; dates: string; from: string; to: string; icon: string; items: { label: string; eventId?: EventId; done?: boolean; live?: boolean }[]; link?: string }
 
@@ -86,6 +94,7 @@ export function Roadmap() {
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 760px)').matches);
   const today = todayISO();
   const nodes = useMemo(() => buildNodes(state), [state]);
+  const mediaDays = useMemo(() => new Set([...state.photos, ...state.videos].map(x => x.createdAt.slice(0, 10))), [state.photos, state.videos]);
   // estimare pentru prima randare; useLayoutEffect-ul de mai jos o inlocuieste cu masuratorile reale
   const [layout, setLayout] = useState<{ ys: number[]; h: number } | null>(null);
   const fallback = useMemo(() => {
@@ -210,6 +219,7 @@ export function Roadmap() {
           </svg>
           {nodes.map((n, i) => {
             const st = status(n); const [x, y] = pts[i];
+            const hd = highlightsDay(n, mediaDays);
             const left = i % 2 === 0; // label on the right of an even node (left side), left of odd nodes
             return (
               <article key={n.id} className={`rd-node is-${st} ${mobile ? 'side-r' : left ? 'side-r' : 'side-l'}`} style={{ left: `${(x / W) * 100}%`, top: `${(y / h) * 100}%` }}>
@@ -226,9 +236,18 @@ export function Roadmap() {
                         </li>
                       ))}
                     </ul>
-                    {n.link && <Link to={n.link} className="link rd-more">Detalii →</Link>}
+                    <div className="rd-links">
+                      {n.link && <Link to={n.link} className="link rd-more">Detalii →</Link>}
+                      {hd && <Link to={`/highlights#z-${hd}`} className="link rd-more rd-more-hl"><Icon icon="solar:camera-linear" /> Highlights →</Link>}
+                    </div>
                   </div>
-                  <div className="rd-icon spark" aria-hidden="true"><Icon icon={n.icon} /></div>
+                  {hd ? (
+                    <Link to={`/highlights#z-${hd}`} className="rd-icon spark rd-icon-link" aria-label={`Highlights: ${n.title}, ${n.dates}`}>
+                      <Icon icon={n.icon} />
+                      <span className="rd-icon-badge" aria-hidden="true"><Icon icon="solar:camera-bold" /></span>
+                      <span className="rd-icon-hint mono" aria-hidden="true">Highlights</span>
+                    </Link>
+                  ) : <div className="rd-icon spark" aria-hidden="true"><Icon icon={n.icon} /></div>}
                 </div>
               </article>
             );

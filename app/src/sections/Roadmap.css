@@ -60,3 +60,15 @@
 .rd-road.is-mobile .rd-num { width: 56px; height: 56px; font-size: 1.2rem; }
 .rd-road.is-mobile .rd-bartitle { white-space: normal; }
 @media (max-width: 760px) { .rd-road { margin-top: var(--s8); } }
+
+/* iconița-buton către highlights */
+.rd-icon-link { position: relative; cursor: pointer; transition: transform var(--d-2) var(--e-out), border-color var(--d-2), color var(--d-2), box-shadow var(--d-2); }
+.rd-icon-link:hover, .rd-icon-link:focus-visible { transform: translateY(-2px) scale(1.06); border-color: var(--ye-500); color: var(--ye-500); box-shadow: var(--glow-ye); }
+.rd-icon-badge { position: absolute; right: -8px; bottom: -8px; width: 24px; height: 24px; border-radius: 50%; background: var(--ye-500); color: var(--v-950); display: grid; place-items: center; box-shadow: 0 0 0 3px var(--bg); }
+.rd-icon-badge svg { width: 14px; height: 14px; }
+.rd-icon-hint { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-4px); color: var(--ye-500); white-space: nowrap; opacity: 0; transition: opacity var(--d-2), transform var(--d-2) var(--e-out); pointer-events: none; }
+.rd-icon-link:hover .rd-icon-hint, .rd-icon-link:focus-visible .rd-icon-hint { opacity: 1; transform: translateX(-50%) translateY(0); }
+.rd-links { display: flex; gap: var(--s4); flex-wrap: wrap; }
+.rd-node.side-l .rd-links { justify-content: flex-end; }
+.rd-more-hl { display: inline-flex; align-items: center; gap: .35em; }
+.rd-more-hl svg { width: 14px; height: 14px; }
