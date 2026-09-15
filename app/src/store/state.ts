@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Config, OlEvent, State } from '../lib/types';
 import { SEED } from '../data/seed';
+import { STATIC_PHOTOS, STATIC_VIDEOS } from '../data/media';
 import { ACCESS } from '../data/access';
 import { verifyCredentials } from '../lib/auth';
 import { setSimulation } from '../lib/clock';
@@ -63,7 +64,18 @@ export function withDefaults(s: Partial<State>): State {
   // texte din seed care s-au schimbat odată cu numărul de probe
   if (config.heroTagline === '7 licee · 15 probe · 3 săptămâni') config.heroTagline = d.heroTagline;
   const timeline = (s.timeline ?? SEED.timeline).map(t => (t.id === 'tl-hcl' ? { ...t, body: SEED.timeline.find(x => x.id === 'tl-hcl')?.body ?? t.body } : t));
-  return { ...SEED, ...s, config, events, matches, timeline, log: s.log ?? [] };
+  // pozele și clipurile livrate cu site-ul (data/media.ts): ce e deja în starea salvată rămâne cum a fost
+  // editat din panou; ce lipsește se adaugă, mai puțin ce a fost șters din panou
+  const removedMedia = s.removedMedia ?? [];
+  const removed = new Set(removedMedia);
+  const photos = mergeStatic(s.photos ?? [], STATIC_PHOTOS, removed);
+  const videos = mergeStatic(s.videos ?? [], STATIC_VIDEOS, removed);
+  return { ...SEED, ...s, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
+}
+
+function mergeStatic<T extends { id: string }>(saved: T[], builtIn: T[], removed: Set<string>): T[] {
+  const have = new Set(saved.map(x => x.id));
+  return [...saved, ...builtIn.filter(x => !have.has(x.id) && !removed.has(x.id))];
 }
 
 /** ce vede site-ul: datele reale sau simularea, la momentul curent al ceasului */

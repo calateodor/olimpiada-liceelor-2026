@@ -1,0 +1,796 @@
+{
+ "day": "2026-09-14",
+ "photos": [
+  {
+   "id": "2026-09-14-fotbal-alx_1801",
+   "url": "/foto/2026-09-14/fotbal/ALX_1801.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1801.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T14:58:33+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1815",
+   "url": "/foto/2026-09-14/fotbal/ALX_1815.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1815.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:04:58+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1826",
+   "url": "/foto/2026-09-14/fotbal/ALX_1826.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1826.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:06:59+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1862",
+   "url": "/foto/2026-09-14/fotbal/ALX_1862.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1862.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:37:41+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1873",
+   "url": "/foto/2026-09-14/fotbal/ALX_1873.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1873.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:39:05+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1889",
+   "url": "/foto/2026-09-14/fotbal/ALX_1889.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1889.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:40:10+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1895",
+   "url": "/foto/2026-09-14/fotbal/ALX_1895.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1895.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:40:51+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1903",
+   "url": "/foto/2026-09-14/fotbal/ALX_1903.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1903.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:41:49+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1920",
+   "url": "/foto/2026-09-14/fotbal/ALX_1920.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1920.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:46:45+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1936",
+   "url": "/foto/2026-09-14/fotbal/ALX_1936.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1936.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:55:39+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1941",
+   "url": "/foto/2026-09-14/fotbal/ALX_1941.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1941.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:55:44+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_1946",
+   "url": "/foto/2026-09-14/fotbal/ALX_1946.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_1946.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:55:53+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3467",
+   "url": "/foto/2026-09-14/fotbal/ALX_3467.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3467.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T14:57:12+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3470",
+   "url": "/foto/2026-09-14/fotbal/ALX_3470.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3470.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T14:57:17+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3482",
+   "url": "/foto/2026-09-14/fotbal/ALX_3482.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3482.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:04:37+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3487",
+   "url": "/foto/2026-09-14/fotbal/ALX_3487.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3487.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:05:16+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3490",
+   "url": "/foto/2026-09-14/fotbal/ALX_3490.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3490.jpg",
+   "w": 1198,
+   "h": 1800,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:05:45+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3493",
+   "url": "/foto/2026-09-14/fotbal/ALX_3493.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3493.jpg",
+   "w": 1198,
+   "h": 1800,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:05:51+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3498",
+   "url": "/foto/2026-09-14/fotbal/ALX_3498.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3498.jpg",
+   "w": 1198,
+   "h": 1800,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:06:05+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3504",
+   "url": "/foto/2026-09-14/fotbal/ALX_3504.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3504.jpg",
+   "w": 1198,
+   "h": 1800,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:06:20+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3522",
+   "url": "/foto/2026-09-14/fotbal/ALX_3522.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3522.jpg",
+   "w": 1198,
+   "h": 1800,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:07:34+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3526",
+   "url": "/foto/2026-09-14/fotbal/ALX_3526.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3526.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:07:54+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3535",
+   "url": "/foto/2026-09-14/fotbal/ALX_3535.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3535.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:08:16+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3538",
+   "url": "/foto/2026-09-14/fotbal/ALX_3538.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3538.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:08:50+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3547",
+   "url": "/foto/2026-09-14/fotbal/ALX_3547.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3547.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:09:34+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3553",
+   "url": "/foto/2026-09-14/fotbal/ALX_3553.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3553.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:11:58+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3567",
+   "url": "/foto/2026-09-14/fotbal/ALX_3567.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3567.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:12:16+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3610",
+   "url": "/foto/2026-09-14/fotbal/ALX_3610.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3610.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:15:00+03:00"
+  },
+  {
+   "id": "2026-09-14-fotbal-alx_3613",
+   "url": "/foto/2026-09-14/fotbal/ALX_3613.jpg",
+   "thumb": "/foto/2026-09-14/fotbal/t/ALX_3613.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "fotbal",
+   "createdAt": "2026-09-14T15:15:06+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_1971",
+   "url": "/foto/2026-09-14/handbal/ALX_1971.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_1971.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:24:31+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_1973",
+   "url": "/foto/2026-09-14/handbal/ALX_1973.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_1973.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:24:31+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_1982",
+   "url": "/foto/2026-09-14/handbal/ALX_1982.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_1982.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:24:59+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2000",
+   "url": "/foto/2026-09-14/handbal/ALX_2000.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2000.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:26:07+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2002",
+   "url": "/foto/2026-09-14/handbal/ALX_2002.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2002.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:26:09+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2004",
+   "url": "/foto/2026-09-14/handbal/ALX_2004.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2004.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:26:11+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2008",
+   "url": "/foto/2026-09-14/handbal/ALX_2008.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2008.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:26:12+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2013",
+   "url": "/foto/2026-09-14/handbal/ALX_2013.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2013.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:26:15+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2024",
+   "url": "/foto/2026-09-14/handbal/ALX_2024.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2024.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:27:17+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2035",
+   "url": "/foto/2026-09-14/handbal/ALX_2035.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2035.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:27:35+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2039",
+   "url": "/foto/2026-09-14/handbal/ALX_2039.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2039.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:27:46+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2049",
+   "url": "/foto/2026-09-14/handbal/ALX_2049.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2049.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:28:08+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2065",
+   "url": "/foto/2026-09-14/handbal/ALX_2065.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2065.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:28:30+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2073",
+   "url": "/foto/2026-09-14/handbal/ALX_2073.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2073.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:28:43+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2088",
+   "url": "/foto/2026-09-14/handbal/ALX_2088.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2088.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:29:30+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2095",
+   "url": "/foto/2026-09-14/handbal/ALX_2095.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2095.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:29:34+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2098",
+   "url": "/foto/2026-09-14/handbal/ALX_2098.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2098.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:29:35+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2102",
+   "url": "/foto/2026-09-14/handbal/ALX_2102.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2102.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:29:36+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2107",
+   "url": "/foto/2026-09-14/handbal/ALX_2107.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2107.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:29:48+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2122",
+   "url": "/foto/2026-09-14/handbal/ALX_2122.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2122.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:30:28+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2131",
+   "url": "/foto/2026-09-14/handbal/ALX_2131.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2131.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:30:37+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2136",
+   "url": "/foto/2026-09-14/handbal/ALX_2136.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2136.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:36:47+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2139",
+   "url": "/foto/2026-09-14/handbal/ALX_2139.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2139.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:37:06+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2150",
+   "url": "/foto/2026-09-14/handbal/ALX_2150.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2150.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:37:24+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2156",
+   "url": "/foto/2026-09-14/handbal/ALX_2156.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2156.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:37:28+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2167",
+   "url": "/foto/2026-09-14/handbal/ALX_2167.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2167.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:37:33+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2187",
+   "url": "/foto/2026-09-14/handbal/ALX_2187.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2187.jpg",
+   "w": 1800,
+   "h": 1199,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:38:14+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2202",
+   "url": "/foto/2026-09-14/handbal/ALX_2202.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2202.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:50:44+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2218",
+   "url": "/foto/2026-09-14/handbal/ALX_2218.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2218.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:52:15+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2238",
+   "url": "/foto/2026-09-14/handbal/ALX_2238.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2238.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:53:15+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2260",
+   "url": "/foto/2026-09-14/handbal/ALX_2260.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2260.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:00:57+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2271",
+   "url": "/foto/2026-09-14/handbal/ALX_2271.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2271.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:06:15+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2275",
+   "url": "/foto/2026-09-14/handbal/ALX_2275.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2275.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:06:16+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2285",
+   "url": "/foto/2026-09-14/handbal/ALX_2285.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2285.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:07:17+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2289",
+   "url": "/foto/2026-09-14/handbal/ALX_2289.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2289.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:07:31+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2292",
+   "url": "/foto/2026-09-14/handbal/ALX_2292.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2292.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:07:35+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2296",
+   "url": "/foto/2026-09-14/handbal/ALX_2296.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2296.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:07:40+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2301",
+   "url": "/foto/2026-09-14/handbal/ALX_2301.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2301.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:07:45+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2311",
+   "url": "/foto/2026-09-14/handbal/ALX_2311.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2311.jpg",
+   "w": 1200,
+   "h": 1800,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:08:05+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2317",
+   "url": "/foto/2026-09-14/handbal/ALX_2317.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2317.jpg",
+   "w": 1200,
+   "h": 1800,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:08:08+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2323",
+   "url": "/foto/2026-09-14/handbal/ALX_2323.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2323.jpg",
+   "w": 1200,
+   "h": 1800,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:08:21+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2336",
+   "url": "/foto/2026-09-14/handbal/ALX_2336.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2336.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:00+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2339",
+   "url": "/foto/2026-09-14/handbal/ALX_2339.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2339.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:02+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2352",
+   "url": "/foto/2026-09-14/handbal/ALX_2352.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2352.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:09+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2372",
+   "url": "/foto/2026-09-14/handbal/ALX_2372.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2372.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:38+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2382",
+   "url": "/foto/2026-09-14/handbal/ALX_2382.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2382.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:43+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2390",
+   "url": "/foto/2026-09-14/handbal/ALX_2390.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2390.jpg",
+   "w": 1200,
+   "h": 1800,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:09:52+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_2410",
+   "url": "/foto/2026-09-14/handbal/ALX_2410.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_2410.jpg",
+   "w": 1800,
+   "h": 1200,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T17:10:22+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3632",
+   "url": "/foto/2026-09-14/handbal/ALX_3632.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3632.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:08:33+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3639",
+   "url": "/foto/2026-09-14/handbal/ALX_3639.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3639.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:08:47+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3645",
+   "url": "/foto/2026-09-14/handbal/ALX_3645.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3645.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:05+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3651",
+   "url": "/foto/2026-09-14/handbal/ALX_3651.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3651.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:20+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3655",
+   "url": "/foto/2026-09-14/handbal/ALX_3655.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3655.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:37+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3658",
+   "url": "/foto/2026-09-14/handbal/ALX_3658.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3658.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:38+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3663",
+   "url": "/foto/2026-09-14/handbal/ALX_3663.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3663.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:40+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3669",
+   "url": "/foto/2026-09-14/handbal/ALX_3669.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3669.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:09:55+03:00"
+  },
+  {
+   "id": "2026-09-14-handbal-alx_3679",
+   "url": "/foto/2026-09-14/handbal/ALX_3679.jpg",
+   "thumb": "/foto/2026-09-14/handbal/t/ALX_3679.jpg",
+   "w": 1800,
+   "h": 1198,
+   "eventId": "handbal",
+   "createdAt": "2026-09-14T16:11:04+03:00"
+  }
+ ],
+ "videos": [
+  {
+   "id": "2026-09-14-clip-olimpiada-liceelor-ziua-1-2026",
+   "src": "/foto/2026-09-14/video/olimpiada-liceelor-ziua-1-2026.m3u8",
+   "poster": "/foto/2026-09-14/video/olimpiada-liceelor-ziua-1-2026-poster.jpg",
+   "w": 1080,
+   "h": 1920,
+   "duration": 91,
+   "title": "Ziua 1: fluierul de start",
+   "caption": "Fotbal la Baza Dumitru Dobrescu și handbal la LPS, în prima zi a Olimpiadei.",
+   "eventIds": [
+    "fotbal",
+    "handbal"
+   ],
+   "createdAt": "2026-09-14T20:00:00+03:00"
+  }
+ ]
+}

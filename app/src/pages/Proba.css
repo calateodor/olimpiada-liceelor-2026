@@ -33,3 +33,12 @@
 /* pagini cu mai multe probe punctate (tenis fete/băieți, Miss/Mister) */
 .pb-ev-head { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; padding-top: var(--s6); }
 .pb-ev.is-multi + .pb-ev { border-top: 1px solid var(--v-600); margin-top: var(--s6); }
+
+/* highlights: clipurile în stânga (lipite la derulare), pozele în dreapta; pe telefon, unele sub altele */
+.pb-hl { display: grid; gap: var(--s6); align-items: start; }
+.pb-hl.has-video { grid-template-columns: minmax(240px, 320px) 1fr; }
+.pb-videos { display: grid; gap: var(--s4); position: sticky; top: calc(var(--nav-h) + var(--s4)); }
+@media (max-width: 760px) {
+  .pb-hl.has-video { grid-template-columns: 1fr; }
+  .pb-videos { position: static; max-width: 420px; }
+}

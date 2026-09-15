@@ -80,6 +80,20 @@ export interface Photo {
   createdAt: string;
 }
 
+export interface Video {
+  id: string;
+  /** playlist HLS (.m3u8) sau fișier mp4 */
+  src: string;
+  poster: string;
+  w?: number; h?: number;
+  duration?: number;         // secunde
+  title: string;
+  caption?: string;
+  eventIds?: EventId[];
+  schoolId?: SchoolId;
+  createdAt: string;
+}
+
 export interface TimelineEntry {
   id: string;
   date: string;              // ISO datetime
@@ -135,6 +149,9 @@ export interface State {
   events: OlEvent[];
   matches: Match[];
   photos: Photo[];
+  videos: Video[];
+  /** id-uri de poze/clipuri livrate cu site-ul (data/media.ts) șterse din panou */
+  removedMedia: string[];
   timeline: TimelineEntry[];
   rosters: Roster;
   /** jurnalul modificarilor din panou (ultimele 200) */

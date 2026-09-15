@@ -454,7 +454,7 @@ function Poze() {
               <div className="row">
                 <button className="link" onClick={() => setState(s => { const i = s.photos.findIndex(x => x.id === p.id); if (i > 0) { const [x] = s.photos.splice(i, 1); s.photos.unshift(x); } }, 'Poză mutată în față')}>în față</button>
                 <button className="link" onClick={() => setState(s => { s.config.concert.poster = p.url; }, 'Afiș concert setat din poze')}>afiș concert</button>
-                <button className="link pn-del" onClick={() => { if (confirm('Ștergi poza din site?')) setState(s => { s.photos = s.photos.filter(x => x.id !== p.id); }, 'Poză ștearsă'); }}>șterge</button>
+                <button className="link pn-del" onClick={() => { if (confirm('Ștergi poza din site?')) setState(s => { s.photos = s.photos.filter(x => x.id !== p.id); if (!s.removedMedia.includes(p.id)) s.removedMedia.push(p.id); }, 'Poză ștearsă'); }}>șterge</button>
               </div>
             </li>
           ))}

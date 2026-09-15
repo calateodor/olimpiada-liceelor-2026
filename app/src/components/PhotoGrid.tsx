@@ -4,9 +4,14 @@ import type { Photo } from '../lib/types';
 import { SCHOOL_BY_ID } from '../data/schools';
 import { useStore } from '../store/state';
 import { getLenis } from '../lib/motion';
+import { asset } from '../lib/asset';
+import { fmtDate } from '../lib/competition';
 import './PhotoGrid.css';
 
-export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.' }: { photos: Photo[]; emptyText?: string }) {
+/** pozele din R2 sau din public/ sunt căi absolute pe site; celelalte (http...) rămân cum sunt */
+const src = (u: string) => (u.startsWith('/') ? asset(u) : u);
+
+export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', showDate = true }: { photos: Photo[]; emptyText?: string; showDate?: boolean }) {
   const [open, setOpen] = useState<number | null>(null);
   const events = useStore(s => s.state.events);
   const list = [...photos].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -21,16 +26,17 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.' }: { 
 
   if (list.length === 0) return <div className="empty">{emptyText}</div>;
   const cur = open != null ? list[open] : null;
+  const meta = (p: Photo) => [events.find(e => e.id === p.eventId)?.name, p.schoolId ? SCHOOL_BY_ID[p.schoolId].short : null, showDate ? fmtDate(p.createdAt) : null].filter(Boolean).join(' · ');
   return (
     <>
       <ul className="phg">
         {list.map((p, i) => {
-          const s = p.schoolId ? SCHOOL_BY_ID[p.schoolId] : null; const ev = events.find(e => e.id === p.eventId);
+          const portrait = !!p.w && !!p.h && p.h > p.w;
           return (
-            <li key={p.id} className="phg-item">
-              <button onClick={() => setOpen(i)} aria-label={`Deschide fotografia: ${p.caption ?? ev?.name ?? ''}`}>
-                <img src={p.thumb ?? p.url} alt={p.caption ?? `${ev?.name ?? ''} ${s?.short ?? ''}`.trim()} loading="lazy" width={p.w} height={p.h} />
-                <span className="phg-cap mono">{[ev?.name, s?.short].filter(Boolean).join(' · ')}</span>
+            <li key={p.id} className={`phg-item ${portrait ? 'is-p' : ''}`}>
+              <button onClick={() => setOpen(i)} aria-label={`Deschide fotografia: ${p.caption ?? meta(p)}`}>
+                <img src={src(p.thumb ?? p.url)} alt={p.caption ?? meta(p)} loading="lazy" decoding="async" width={p.w} height={p.h} />
+                <span className="phg-cap mono">{meta(p)}</span>
               </button>
             </li>
           );
@@ -38,8 +44,8 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.' }: { 
       </ul>
       {cur && (
         <div className="lb" role="dialog" aria-modal="true" aria-label="Fotografie" onClick={() => setOpen(null)}>
-          <img src={cur.url} alt={cur.caption ?? ''} onClick={e => e.stopPropagation()} />
-          <p className="lb-cap" onClick={e => e.stopPropagation()}>{cur.caption}<span className="mono"> {[events.find(e => e.id === cur.eventId)?.name, cur.schoolId ? SCHOOL_BY_ID[cur.schoolId].short : null].filter(Boolean).join(' · ')}</span></p>
+          <img src={src(cur.url)} alt={cur.caption ?? ''} onClick={e => e.stopPropagation()} />
+          <p className="lb-cap" onClick={e => e.stopPropagation()}>{cur.caption}<span className="mono"> {meta(cur)} · {open! + 1}/{list.length}</span></p>
           <button className="lb-x" onClick={() => setOpen(null)} aria-label="Închide"><Icon icon="solar:close-circle-linear" width="32" /></button>
           {open! > 0 && <button className="lb-nav lb-prev" onClick={e => { e.stopPropagation(); setOpen(open! - 1); }} aria-label="Anterioara"><Icon icon="solar:alt-arrow-left-linear" width="32" /></button>}
           {open! < list.length - 1 && <button className="lb-nav lb-next" onClick={e => { e.stopPropagation(); setOpen(open! + 1); }} aria-label="Următoarea"><Icon icon="solar:alt-arrow-right-linear" width="32" /></button>}

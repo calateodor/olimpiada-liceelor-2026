@@ -1,6 +1,11 @@
-.phg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s3); }
-.phg-item button { display: grid; gap: var(--s2); width: 100%; text-align: left; border-radius: var(--r-md); }
-.phg-item img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; border-radius: var(--r-md); background: var(--v-800); transition: transform var(--d-3) var(--e-out), filter var(--d-3); }
+.phg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-auto-flow: dense; gap: var(--s3); }
+.phg-item button { display: grid; grid-template-rows: 1fr auto; gap: var(--s2); width: 100%; height: 100%; text-align: left; border-radius: var(--r-md); }
+.phg-item img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; height: 100%; border-radius: var(--r-md); background: var(--v-800); transition: transform var(--d-3) var(--e-out), filter var(--d-3); }
+/* pozele pe verticală ocupă două rânduri, ca să nu fie tăiate la 4:3 */
+.phg-item.is-p { grid-row: span 2; }
+.phg-item.is-p img { aspect-ratio: auto; min-height: 0; }
+.phg-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 600px) { .phg { grid-template-columns: 1fr 1fr; gap: var(--s2); } }
 .phg-item button:hover img { transform: scale(1.02); }
 .lb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: center; padding: var(--s6); animation: fade var(--d-2) var(--e-out); }
 .lb img { max-height: 84vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); }

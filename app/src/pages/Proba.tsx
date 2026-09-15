@@ -11,6 +11,7 @@ import { Berger } from '../components/Berger';
 import { Bracket } from '../components/Bracket';
 import { MatchCard } from '../components/MatchCard';
 import { PhotoGrid } from '../components/PhotoGrid';
+import { VideoTile } from '../components/VideoTile';
 import { EVENT_ICON } from '../sections/ProbeGrid';
 import { gsap, revealChars, revealUp, prefersReducedMotion } from '../lib/motion';
 import type { OlEvent, Match } from '../lib/types';
@@ -54,6 +55,7 @@ export default function Proba() {
   const teamSizes = [...new Set(page.events.map(e => e.teamSize).filter(Boolean))].join(' · ');
   const ids = new Set(page.events.map(e => e.id));
   const photos = state.photos.filter(p => p.eventId && ids.has(p.eventId));
+  const videos = state.videos.filter(v => v.eventIds?.some(id => ids.has(id)));
   const multi = page.events.length > 1;
 
   return (
@@ -93,8 +95,11 @@ export default function Proba() {
       )}
 
       <section className="pb-block container" aria-label="Highlights">
-        <div className="pb-block-head"><span className="mono">Highlights</span><h2 className="h3">Fotografii de la {page.name.toLowerCase()}</h2></div>
-        <PhotoGrid photos={photos} emptyText={`Pozele de la ${page.name.toLowerCase()} apar din ${fmtDate(first.startDate)}.`} />
+        <div className="pb-block-head"><span className="mono">Highlights</span><h2 className="h3">{videos.length ? 'Clipuri și fotografii' : 'Fotografii'} de la {page.name.toLowerCase()}</h2></div>
+        <div className={`pb-hl ${videos.length ? 'has-video' : ''}`}>
+          {videos.length > 0 && <div className="pb-videos">{videos.map(v => <VideoTile key={v.id} v={v} />)}</div>}
+          <PhotoGrid photos={photos} emptyText={`Pozele de la ${page.name.toLowerCase()} apar din ${fmtDate(first.startDate)}.`} />
+        </div>
       </section>
     </div>
   );

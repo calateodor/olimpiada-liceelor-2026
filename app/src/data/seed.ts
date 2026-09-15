@@ -115,6 +115,8 @@ export const SEED: State = {
   events: EVENTS,
   matches: MATCHES,
   photos: [],
+  videos: [],
+  removedMedia: [],
   timeline: [
     { id: 'tl-hcl', date: '2026-06-18T12:00:00+03:00', title: 'Consiliul Local aprobă ediția 2026', body: 'Olimpiada Liceelor revine cu 14 probe sportive, artistice și de voluntariat.', kind: 'milestone' },
     { id: 'tl-sorti', date: '2026-09-04T12:00:00+03:00', title: 'Tragerea la sorți: numere, culori, grupe', body: 'Grupa A: Titulescu, Minulescu, Greceanu, LPS. Grupa B: Alexe Marin, Metalurgic, Economic.', kind: 'milestone' },

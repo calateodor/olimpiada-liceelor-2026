@@ -58,7 +58,16 @@ De ce Pages și nu un Worker simplu: domeniul `olimpiada.primariaslatina.ro` are
 
 Secretele sunt puse deja, din `app/pages/`: `ADMIN_SECRET` (semnează sesiunile) și `DATA_KEY` (cheia cu care se criptează înscrierile liceelor). Dacă `DATA_KEY` se schimbă vreodată, înscrierile salvate până atunci nu mai pot fi citite: exportă-le înainte.
 
-**Pozele.** R2 nu e încă activat în cont. Când e: dashboard → R2 → Enable (cere card doar ca verificare; planul gratuit are 10 GB), apoi:
+**Pozele și clipurile de la fotograf** (câte un folder pe zi, ca `D:\Teo\PNL\Olimpiada\Ziua 1`) intră în site ca fișiere statice, fără R2, cu un singur script:
+
+```bash
+cd app
+python scripts/media-day.py "D:\Teo\PNL\Olimpiada\Ziua 2" 2026-09-16 --poster 24 --title "Ziua 2: ..." --caption "..."
+```
+
+Subfolderele spun proba (Fotbal, HANDBAL, Baschet, Volei, „Tenis fete”, „Tenis băieți”, Cros, Majorete, Graffiti, Miss, Mister, Dans, Interpretare, Voluntariat); pozele ies la 1800px cu miniaturi, fără EXIF, cu ora din EXIF pentru ordine; clipurile (.mp4/.mov) devin HLS în două calități (1080p ~4,5 Mbps, 720p ~2 Mbps, segmente de 6 s, sub limita de 25 MB/fișier a Pages), cu poster din secunda `--poster`. Rezultatul stă în `app/public/foto/<zi>/` (+ `manifest.json`) și în `app/src/data/media.ts`, generat. Apoi: verifică local, `git add -A && git commit`, `npm run deploy:pages`. Pe site apar pe **/highlights** (pe zile, clipul zilei lângă poze) și pe pagina fiecărei probe. Din panou → Poze se pot eticheta pe liceu, descrie sau șterge (ștergerea se ține minte în `removedMedia`, nu reapar la următoarea încărcare). Scriptul cere Python 3 cu Pillow și ffmpeg în PATH; rulat de mai multe ori, nu reface ce există deja.
+
+**Încărcarea de poze din panou (de pe telefon)** are nevoie de R2, care nu e încă activat în cont. Când e: dashboard → R2 → Enable (cere card doar ca verificare; planul gratuit are 10 GB), apoi:
 
 ```bash
 cd app
@@ -87,7 +96,7 @@ Intri din subsol → **Administrare** (sau `/admin`), cu utilizator și parolă.
 - **Clasament**: clasamentul general vizibil/ascuns cu mesaj, bonusuri și penalizări cu motiv, punctele pe loc.
 - **Licee**: motto, profesor coordonator, contact, notă publică, loturile pe probe și dacă numele elevilor apar public.
 - **Înscrieri licee**: conturile celor 7 licee (generezi parola, o trimiți coordonatorului, o poți reseta sau dezactiva), datele introduse de fiecare liceu, export CSV pentru fișele de înscriere, preluarea numelor în loturile publice, ștergerea datelor la final (GDPR). Vezi secțiunea 7.
-- **Poze**: încărcare de pe telefon (se redimensionează automat), filtrare, etichetare pe probă/liceu, ordine, ștergere, afiș de concert dintr-o poză.
+- **Poze**: pozele puse cu `scripts/media-day.py` apar aici după publicare (etichetare pe probă/liceu, descriere, ștergere, afiș de concert dintr-o poză); încărcarea direct de pe telefon merge după activarea R2.
 - **Noutăți**: adăugare, modificare, ștergere.
 - **Anunțuri**: bara de anunț de sub meniu (informare / important / atenție, cu link), mesaje în banda de pe prima pagină, banda „site în lucru”.
 - **Concert**: faza dezvăluirii (mister → concert → artist), textele pe faze, artistul, data, locul, afișul.
