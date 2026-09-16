@@ -6,7 +6,10 @@
 .rx-chip.is-mine { background: var(--ye-500); color: var(--v-950); }
 .rx-chip.is-mine:hover { background: var(--ye-400); }
 .rx-chip.is-mine .rx-e { animation: rx-pop var(--d-3) var(--e-out); }
-.rx-e { font-size: 1.05em; }
+.rx-e { display: inline-grid; line-height: 1; }
+.rx-e .ae img { display: block; width: 100%; height: 100%; }
+.rx-mini .ae { vertical-align: middle; }
+.rx-mini .ae + .ae { margin-left: -4px; }
 .rx-n { font-family: var(--f-mono); font-size: .76rem; font-weight: 700; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .rx-more { color: var(--fg-3); }
 .rx-add { position: relative; }
@@ -32,6 +35,7 @@
 .ae-glyph { display: block; }
 .ae-box { position: absolute; inset: 0; }
 .ae-box svg { display: block; width: 100% !important; height: 100% !important; }
+.ae img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .rx-err { flex-basis: 100%; color: var(--ye-400); }
 .rx-sm .rx-chip { height: 28px; font-size: .92rem; }
 /* rezumatul din miniaturi */

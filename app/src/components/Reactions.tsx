@@ -9,8 +9,9 @@ import './Reactions.css';
 /* Reacțiile unei poze sau ale unui clip, în stilul Telegram: pastile mici cu emoji și număr, lipite
    sub conținut în stânga; a ta e plină de culoare și o retragi apăsând din nou. „+" deschide o bară
    orizontală cu emoji-urile la îndemână; săgeata din capăt arată tot setul și câmpul pentru orice
-   emoji tastat. Emoji-urile din bară sunt animate (Noto Animated Emoji, ca la Telegram), iar când
-   reacționezi, varianta animată sare și zboară în sus. */
+   emoji tastat. Animate (Noto Animated Emoji, ca la Telegram): pastilele deja puse rulează în buclă
+   (WebP) de când se deschide pagina, bara rapidă are previzualizare animată (Lottie), grila extinsă
+   rămâne statică, iar când reacționezi emoji-ul animat sare și zboară în sus. */
 export function Reactions({ id, compact = false }: { id: string; compact?: boolean }) {
   const on = useStore(s => s.state.config.reactions.on);
   const counts = useRx(s => s.counts[id]);
@@ -30,7 +31,7 @@ export function Reactions({ id, compact = false }: { id: string; compact?: boole
     document.addEventListener('pointerdown', away);
     return () => document.removeEventListener('pointerdown', away);
   }, [open]);
-  useEffect(() => { if (!fly) return; const t = setTimeout(() => setFly(null), 900); return () => clearTimeout(t); }, [fly]);
+  useEffect(() => { if (!fly) return; const t = setTimeout(() => setFly(null), 1150); return () => clearTimeout(t); }, [fly]);
   if (!on) return null;
 
   const list = rxSorted(counts);
@@ -45,7 +46,7 @@ export function Reactions({ id, compact = false }: { id: string; compact?: boole
     <div ref={root} className={`rx ${compact ? 'rx-sm' : ''}`} onClick={e => e.stopPropagation()}>
       {shown.map(([e, n]) => (
         <button key={e} className={`rx-chip ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => react(e)} aria-pressed={mine.includes(e)} aria-label={`${e} ${n}${mine.includes(e) ? ' · reacția ta' : ''}`}>
-          <span className="rx-e">{e}</span><span className="rx-n">{n}</span>
+          <span className="rx-e"><AnimEmoji emoji={e} kind="webp" size={compact ? 18 : 20} /></span><span className="rx-n">{n}</span>
         </button>
       ))}
       {rest > 0 && <span className="rx-more mono" title="alte reacții">+{rest}</span>}
@@ -56,7 +57,7 @@ export function Reactions({ id, compact = false }: { id: string; compact?: boole
         {open && (
           <div className={`rx-pop ${more ? 'is-more' : ''}`} role="dialog" aria-label="Alege un emoji" onKeyDown={e => { if (e.key === 'Escape') { e.stopPropagation(); setOpen(false); setMore(false); } }}>
             <div className="rx-bar">
-              {quick.map(e => <button key={e} className={`rx-q ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => pick(e)} aria-label={e} aria-pressed={mine.includes(e)}><AnimEmoji emoji={e} play="loop" size={34} /></button>)}
+              {quick.map(e => <button key={e} className={`rx-q ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => pick(e)} aria-label={e} aria-pressed={mine.includes(e)}>{more ? <span className="ae" style={{ width: 34, height: 34, fontSize: 26 }}>{e}</span> : <AnimEmoji emoji={e} kind="lottie" play="loop" size={34} />}</button>)}
               {!more && <button className="rx-q rx-expand" onClick={() => setMore(true)} aria-label="Mai multe emoji"><Icon icon="solar:alt-arrow-down-linear" width="20" /></button>}
             </div>
             {more && (
@@ -68,7 +69,7 @@ export function Reactions({ id, compact = false }: { id: string; compact?: boole
           </div>
         )}
       </div>
-      {fly && <span key={fly.k} className="rx-fly" aria-hidden="true"><AnimEmoji emoji={fly.e} play="once" size={64} /></span>}
+      {fly && <span key={fly.k} className="rx-fly" aria-hidden="true"><AnimEmoji emoji={fly.e} kind="lottie" play="once" size={64} /></span>}
       {error && <span className="rx-err mono" role="alert">{error}</span>}
     </div>
   );
@@ -80,5 +81,5 @@ export function ReactionsMini({ id }: { id: string }) {
   const counts = useRx(s => s.counts[id]);
   const total = rxTotal(counts);
   if (!on || !total) return null;
-  return <span className="rx-mini" aria-label={`${total} reacții`}>{rxSorted(counts).slice(0, 3).map(([e]) => e).join('')}<b>{total}</b></span>;
+  return <span className="rx-mini" aria-label={`${total} reacții`}>{rxSorted(counts).slice(0, 3).map(([e]) => <AnimEmoji key={e} emoji={e} kind="webp" size={16} />)}<b>{total}</b></span>;
 }
