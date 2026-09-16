@@ -134,3 +134,5 @@ Ce trebuie știut:
 - Nota de informare GDPR e pe **/confidentialitate** (temei: sarcină de interes public, HCL 184; acordul părinților pentru minori se obține și se păstrează de liceu; retenție până la 31 decembrie 2026). Textul e unul standard, bine de trecut pe la responsabilul cu protecția datelor al Primăriei înainte de a trimite parolele liceelor.
 - La final, din panou → Înscrieri licee → „Șterge toate înscrierile”, după ce ai exportat ce e nevoie pentru arhivă.
 - Nu se încarcă documente (copii de buletin) prin site.
+
+**Statisticile de trafic** sunt proprii, în aceeași bază D1 (`app/migrations/0002_stats.sql`, aplicată remote și local): site-ul trimite `/api/hit` (pagini, clipuri pornite, poze deschise, timp activ), fără cookie; worker-ul (`app/worker/stats.ts`) adaugă ziua/ora RO, amprenta zilnică anonimă, dispozitivul, sursa și orașul din Cloudflare. Zilele încheiate se adună în `stats_daily`, rândurile brute se șterg după 7 zile. Se văd în panou → Statistici (cu rezumat de copiat) și se opresc din panou → Site. Nu se numără roboții, paginile /admin și browserele logate în panou.

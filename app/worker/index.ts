@@ -12,6 +12,7 @@
  * - POST /api/password              → schimbă utilizatorul/parola de admin (amprentă PBKDF2 în KV)
  * - GET  /api/backups · POST /api/restore
  * - POST /api/upload                → poze în R2
+ * - GET  /api/stats                 → statisticile de trafic (D1, vezi worker/stats.ts); ?fresh=1 ocolește cache-ul de 2 min
  * - GET  /api/schools               → starea conturilor liceelor (fără date personale)
  * - POST /api/schools/:id/password  → generează o parolă nouă pentru liceu (o întoarce o singură dată)
  * - DELETE /api/schools/:id/password
@@ -42,6 +43,7 @@ import { verifyCredentials, makeAccess } from '../src/lib/auth';
 import { sanitizeInscriere, emptyInscriere, randomPassword, membriCount, type Inscriere } from '../src/lib/inscrieri';
 import { STATIC_PHOTOS, STATIC_VIDEOS } from '../src/data/media';
 import { EMOJI_RE } from '../src/lib/emoji';
+import { recordHit, statsReport } from './stats';
 
 export interface Env {
   OL_KV: KVNamespace;
@@ -122,6 +124,13 @@ async function visitor(env: Env, req: Request): Promise<{ id: string; cookie?: s
 /** amprenta IP-ului: hash cu secret; IP-ul în clar nu ajunge în baza de date */
 async function ipHash(env: Env, req: Request) {
   return (await hmac(secret(env, await adminAccess(env)), 'ip:' + (req.headers.get('cf-connecting-ip') ?? '0'))).slice(0, 24);
+}
+
+/** secretul pentru amprentele zilnice ale vizitatorilor, ținut 10 minute în memorie ca fiecare vizită să nu citească din KV */
+let saltMemo: { v: string; until: number } | null = null;
+async function statsSalt(env: Env) {
+  if (!saltMemo || saltMemo.until < Date.now()) saltMemo = { v: 'stats:' + secret(env, await adminAccess(env)), until: Date.now() + 600e3 };
+  return saltMemo.v;
 }
 
 const cookieHdr = (v: { cookie?: string }): Record<string, string> => (v.cookie ? { 'set-cookie': v.cookie } : {});
@@ -379,6 +388,17 @@ export default {
       h.set('etag', obj.httpEtag);
       h.set('cache-control', 'public, max-age=31536000, immutable');
       return new Response(obj.body, { headers: h });
+    }
+
+    /* ---------------- statistici de trafic (D1) ---------------- */
+    if (p === '/api/hit' && req.method === 'POST') {
+      if (!env.OL_DB) return new Response(null, { status: 204 });
+      try { return await recordHit(env.OL_DB, req, await statsSalt(env)); } catch { return new Response(null, { status: 204 }); }
+    }
+    if (p === '/api/stats' && req.method === 'GET') {
+      if (!isAdmin(await principal(env, req))) return json({ error: 'unauthorized' }, 401);
+      if (!env.OL_DB) return json({ error: 'Statisticile au nevoie de baza D1.' }, 503);
+      return statsReport(env.OL_DB, url.searchParams.get('fresh') === '1');
     }
 
     if (p.startsWith('/api/')) return json({ error: 'not found' }, 404);

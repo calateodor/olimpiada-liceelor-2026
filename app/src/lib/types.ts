@@ -140,6 +140,8 @@ export interface Config {
   venueNotes: Record<string, string>;        // note pe locatii (acces, parcare, program)
   /** reacții cu emoji la poze și clipuri (vizitatori anonimi, vezi worker /api/reactions) */
   reactions: { on: boolean };
+  /** statistici de trafic proprii, anonime (vezi worker/stats.ts și lib/track.ts) */
+  stats: { on: boolean };
   /** „Mașina timpului": site-ul se comportă ca la momentul `at`, cu rezultate inventate (vezi lib/simulation.ts) */
   simulation: { on: boolean; at: string; setAt: string; frozen: boolean; seed: number; news: boolean; announcement: boolean; concert: boolean };
 }

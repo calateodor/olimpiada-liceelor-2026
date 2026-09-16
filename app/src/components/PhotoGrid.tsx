@@ -5,6 +5,7 @@ import type { Photo } from '../lib/types';
 import { SCHOOL_BY_ID } from '../data/schools';
 import { useStore } from '../store/state';
 import { getLenis } from '../lib/motion';
+import { trackEvent } from '../lib/track';
 import { asset } from '../lib/asset';
 import { fmtDate } from '../lib/competition';
 import { Reactions, ReactionsMini } from './Reactions';
@@ -21,6 +22,7 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', show
   const loadRx = useRx(s => s.load);
   useEffect(() => { loadRx(list.map(p => p.id)); }, [photos, loadRx]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => { if (open != null && list[open]) trackEvent('photo', list[open].id); }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (open == null) return;
     const l = getLenis(); l?.stop(); document.body.style.overflow = 'hidden';

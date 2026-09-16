@@ -13,6 +13,7 @@ import { asset } from '../lib/asset';
 import { rxSorted } from '../lib/reactions';
 import { AdminInscrieri } from './admin/Inscrieri';
 import { TimeMachine } from './admin/TimeMachine';
+import { Statistici } from './admin/Statistici';
 import './Admin.css';
 
 /* ---------------------------------------------------------------------------
@@ -21,9 +22,10 @@ import './Admin.css';
    trece prin setState(mut, ce) și lasă o urmă în jurnal.
 --------------------------------------------------------------------------- */
 
-type Tab = 'acasa' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'timp' | 'cont' | 'date';
+type Tab = 'acasa' | 'statistici' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'timp' | 'cont' | 'date';
 const TABS: [Tab, string, string][] = [
   ['acasa', 'Acasă', 'solar:home-2-linear'],
+  ['statistici', 'Statistici', 'solar:chart-2-linear'],
   ['meciuri', 'Meciuri', 'solar:football-linear'],
   ['probe', 'Probe', 'solar:medal-star-linear'],
   ['clasament', 'Clasament', 'solar:ranking-linear'],
@@ -93,6 +95,7 @@ export default function Admin() {
         </header>
         <div className="pn-content">
           {tab === 'acasa' && <Acasa go={setTab} />}
+          {tab === 'statistici' && <Statistici />}
           {tab === 'meciuri' && <Meciuri />}
           {tab === 'probe' && <Probe />}
           {tab === 'clasament' && <Clasament />}
@@ -599,6 +602,7 @@ function Site() {
         <div className="pn-switches">
           <Switch on={c.heroPhoto} onChange={v => set(`Poza din hero ${v ? 'pornită' : 'oprită'}`, x => { x.heroPhoto = v; })} label="Poza cu mulțimea în spatele logo-ului" />
           <Switch on={c.reactions.on} onChange={v => set(`Reacții cu emoji ${v ? 'pornite' : 'oprite'}`, x => { x.reactions.on = v; })} label="Reacții cu emoji la poze și clipuri" hint="vizitatorii pot reacționa cu orice emoji, o dată pe emoji pe poză; totalurile sunt la Poze" />
+          <Switch on={c.stats.on} onChange={v => set(`Statistici de trafic ${v ? 'pornite' : 'oprite'}`, x => { x.stats.on = v; })} label="Statistici de trafic" hint="anonime, fără cookie; se văd în tab-ul Statistici" />
           <Switch on={c.home.ticker} onChange={v => set(`Bandă licee ${v ? 'pornită' : 'oprită'}`, x => { x.home.ticker = v; })} label="Banda cu liceele" />
           <Switch on={c.home.roadmap} onChange={v => set(`Traseu ${v ? 'pornit' : 'oprit'}`, x => { x.home.roadmap = v; })} label="Traseul competiției" />
           <Switch on={c.home.standings} onChange={v => set(`Clasament pe acasă ${v ? 'pornit' : 'oprit'}`, x => { x.home.standings = v; })} label="Clasamentul general" />

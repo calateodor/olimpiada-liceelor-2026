@@ -7,6 +7,7 @@ import { CredFloat } from './components/CredFloat';
 import { Announcement } from './components/Announcement';
 import { initSmoothScroll, destroySmoothScroll, ScrollTrigger, scrollToTop } from './lib/motion';
 import { useStore, startPolling } from './store/state';
+import { trackPage } from './lib/track';
 
 const Home = lazy(() => import('./pages/Home'));
 const Program = lazy(() => import('./pages/Program'));
@@ -46,6 +47,8 @@ export default function App() {
   }, [isAdmin]);
 
   useEffect(() => { load(); const stop = startPolling(); return stop; }, [load]);
+  const loaded = useStore(s => s.loaded);
+  useEffect(() => { if (loaded && !isAdmin) trackPage(pathname); }, [pathname, loaded, isAdmin]);
   useEffect(() => {
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
     const onResize = () => ScrollTrigger.refresh();

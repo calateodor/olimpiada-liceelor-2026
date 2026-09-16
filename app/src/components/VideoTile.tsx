@@ -6,6 +6,7 @@ import { asset } from '../lib/asset';
 import { getLenis } from '../lib/motion';
 import { Reactions } from './Reactions';
 import './VideoTile.css';
+import { trackEvent } from '../lib/track';
 
 /* Clip vertical (9:16) cu poster și buton de redare. HLS: Safari îl redă nativ, restul browserelor
    prin hls.js, încărcat doar la prima apăsare pe Play (nu intră în bundle-ul paginii).
@@ -73,7 +74,7 @@ export function VideoTile({ v }: { v: Video }) {
   const player = (
     <figure className={`vt is-${st} ${big ? 'is-big' : ''}`} style={{ aspectRatio: `${v.w ?? 9} / ${v.h ?? 16}` }} onClick={e => e.stopPropagation()}>
       <video ref={ref} poster={asset(v.poster)} playsInline preload="none" aria-label={v.title} onClick={toggle}
-        onPlay={() => setSt('playing')} onPause={() => setSt(ref.current.ended ? 'ended' : 'paused')} onEnded={() => setSt('ended')}
+        onPlay={() => { setSt('playing'); trackEvent('video', v.id); }} onPause={() => setSt(ref.current.ended ? 'ended' : 'paused')} onEnded={() => setSt('ended')}
         onTimeUpdate={() => setT(ref.current.currentTime)} onDurationChange={() => { if (ref.current.duration) setDur(ref.current.duration); }}
         onVolumeChange={() => { setVol(ref.current.volume); setMuted(ref.current.muted); }} />
       {st === 'idle' && !big && (

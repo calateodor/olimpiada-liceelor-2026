@@ -53,8 +53,9 @@ export default function Confidentialitate() {
           <h2 className="h3">8. Site-ul public</h2>
           <p>Paginile publice ale site-ului nu cer date personale și nu folosesc cookie-uri de urmărire. Site-ul reține în browserul tău doar preferințe locale (de exemplu, poziția insignei „Cred în Slatina”), care nu părăsesc dispozitivul. Hărțile folosesc date OpenStreetMap.</p>
           <p><b>Reacțiile cu emoji</b> din galerie sunt anonime. Ca aceeași persoană să nu poată reacționa de mai multe ori cu același emoji la aceeași poză, site-ul pune un cookie tehnic („ol_v”, un identificator aleatoriu, valabil un an) și păstrează, pentru fiecare reacție, o amprentă criptografică a adresei IP (nu adresa în sine), folosită doar pentru a limita abuzurile. Nu se leagă de nume, cont sau alte date. Temei: interesul legitim al organizatorului de a proteja funcționarea site-ului. Reacțiile pot fi șterse de administrator oricând.</p>
+          <p><b>Statisticile de vizitare</b> sunt proprii și anonime, fără cookie și fără servicii externe de analiză. Pentru fiecare pagină deschisă se înregistrează: pagina, ora, sursa (de exemplu, un link de pe Facebook), tipul de dispozitiv, sistemul și browserul, localitatea și țara aproximate de rețea, precum și dacă s-a pornit un clip sau s-a deschis o poză. Vizitele din același tab sunt legate printr-un identificator aleatoriu care dispare când închizi tab-ul. Pentru a număra oamenii diferiți dintr-o zi se folosește o amprentă criptografică a adresei IP și a browserului, care se schimbă zilnic și nu permite identificarea sau urmărirea de la o zi la alta; adresa IP nu se salvează. Înregistrările detaliate se șterg după 7 zile, rămân doar totaluri pe zi. Dacă browserul tău transmite semnalul „Global Privacy Control”, nu se înregistrează nimic. Temei: interesul legitim al organizatorului de a ști cum este folosit site-ul.</p>
         </section>
-        <p className="mono cf-foot">Versiunea 2 · septembrie 2026 · <Link to="/inscrieri">Înscrieri licee</Link></p>
+        <p className="mono cf-foot">Versiunea 3 · septembrie 2026 · <Link to="/inscrieri">Înscrieri licee</Link></p>
       </article>
     </div>
   );

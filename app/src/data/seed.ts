@@ -119,6 +119,7 @@ export const SEED: State = {
     schoolInfo: {},
     venueNotes: {},
     reactions: { on: true },
+    stats: { on: true },
     simulation: { on: false, at: '2026-09-20T15:20:00+03:00', setAt: '', frozen: false, seed: 2026, news: true, announcement: true, concert: true },
   },
   events: EVENTS,
