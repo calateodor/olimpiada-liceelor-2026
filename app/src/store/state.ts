@@ -60,7 +60,18 @@ export function withDefaults(s: Partial<State>): State {
     return out;
   });
   const ids = new Set(events.map(e => e.id));
-  const matches = (s.matches ?? SEED.matches).filter(m => ids.has(m.eventId));
+  let matches = (s.matches ?? SEED.matches).filter(m => ids.has(m.eventId));
+  // Calendarul s-a schimbat în cod (SEED.calendarVersion): meciurile nejucate din starea salvată primesc
+  // data, ora și locul din seed, o singură dată; după aceea editările din panou rămân ale panoului.
+  let calendarVersion = s.calendarVersion ?? 1;
+  if (calendarVersion < SEED.calendarVersion!) {
+    const seedById = new Map(SEED.matches.map(m => [m.id, m]));
+    matches = matches.map(m => {
+      const sm = seedById.get(m.id);
+      return sm && m.status === 'scheduled' ? { ...m, date: sm.date, time: sm.time, venue: sm.venue } : m;
+    });
+    calendarVersion = SEED.calendarVersion!;
+  }
   // texte din seed care s-au schimbat odată cu numărul de probe
   if (config.heroTagline === '7 licee · 15 probe · 3 săptămâni') config.heroTagline = d.heroTagline;
   const timeline = (s.timeline ?? SEED.timeline).map(t => (t.id === 'tl-hcl' ? { ...t, body: SEED.timeline.find(x => x.id === 'tl-hcl')?.body ?? t.body } : t));
@@ -70,7 +81,7 @@ export function withDefaults(s: Partial<State>): State {
   const removed = new Set(removedMedia);
   const photos = mergeStatic(s.photos ?? [], STATIC_PHOTOS, removed);
   const videos = mergeStatic(s.videos ?? [], STATIC_VIDEOS, removed);
-  return { ...SEED, ...s, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
+  return { ...SEED, ...s, calendarVersion, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
 }
 
 function mergeStatic<T extends { id: string }>(saved: T[], builtIn: T[], removed: Set<string>): T[] {

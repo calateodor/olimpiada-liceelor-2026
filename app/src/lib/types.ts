@@ -144,6 +144,8 @@ export interface Config {
 
 export interface State {
   version: number;
+  /** versiunea calendarului din cod aplicată stării salvate (vezi withDefaults: meciurile nejucate primesc data/ora/locul din seed) */
+  calendarVersion?: number;
   updatedAt: string;
   config: Config;
   events: OlEvent[];

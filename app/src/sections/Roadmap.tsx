@@ -37,9 +37,11 @@ function buildNodes(state: State): Node[] {
       { label: lbl('volei', 'etapele 1–3'), eventId: 'volei', ...stageDone(['volei'], ['gA', 'gB'], '2026-09-01', '2026-09-30') },
       { label: lbl('baschet', 'etapele 1–3'), eventId: 'baschet', ...stageDone(['baschet'], ['gA', 'gB'], '2026-09-01', '2026-09-30') },
       { label: lbl('fotbal', 'etapele 2–3'), eventId: 'fotbal', ...stageDone(['fotbal'], ['gA', 'gB'], '2026-09-15', '2026-09-30') },
-      { label: lbl('handbal', 'etapele 2–3'), eventId: 'handbal', ...stageDone(['handbal'], ['gA', 'gB'], '2026-09-15', '2026-09-30') } ] },
+      { label: lbl('handbal', 'etapa 2'), eventId: 'handbal', ...stageDone(['handbal'], ['gA', 'gB'], '2026-09-15', '2026-09-19') } ] },
     { id: 'semi', title: 'Semifinalele', dates: '20 – 22 sept', from: '2026-09-20', to: '2026-09-22', icon: 'solar:cup-first-linear', items: [
-      { label: 'Fotbal & baschet · 20 sept', eventId: 'fotbal', ...stageDone(['fotbal', 'baschet'], ['sf1', 'sf2'], '2026-09-20', '2026-09-20') },
+      { label: 'Baschet · 20 sept', eventId: 'baschet', ...stageDone(['baschet'], ['sf1', 'sf2'], '2026-09-20', '2026-09-20') },
+      { label: 'Fotbal · 21 sept · Stadionul 1 Mai', eventId: 'fotbal', ...stageDone(['fotbal'], ['sf1', 'sf2'], '2026-09-21', '2026-09-21') },
+      { label: lbl('handbal', 'etapa 3 · 21 sept'), eventId: 'handbal', ...stageDone(['handbal'], ['gA', 'gB'], '2026-09-20', '2026-09-23') },
       { label: 'Volei · 21 sept', eventId: 'volei', ...stageDone(['volei'], ['sf1', 'sf2'], '2026-09-21', '2026-09-21') },
       { label: 'Handbal · 22 sept', eventId: 'handbal', ...stageDone(['handbal'], ['sf1', 'sf2'], '2026-09-22', '2026-09-22') } ] },
     { id: 'finale1', title: 'Primele finale', dates: '24 – 25 sept', from: '2026-09-24', to: '2026-09-25', icon: 'solar:medal-ribbons-star-linear', items: [

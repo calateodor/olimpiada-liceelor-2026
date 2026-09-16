@@ -24,34 +24,41 @@ export const EVENTS: OlEvent[] = [
   { id: 'interpretare', name: 'Interpretare muzicală', subtitle: 'solo', section: 'artistic', format: 'ranking', icon: '🎤', venue: 'Scena de pe Esplanadă', venueId: 'esplanada', dateLabel: '3 octombrie', startDate: '2026-10-03', endDate: '2026-10-03', time: '18:00', regulationSlug: 'general', description: 'Vocea fiecărui liceu, live, pe scena de pe Esplanadă.', teamSize: 'individual sau trupă · max. 3 min', finished: false },
 ];
 
-/* ---------- calendar meciuri (din Calendar Competitii Olimpiada Liceelor 2026.xlsx) ---------- */
+/* ---------- calendar meciuri (din Calendar Competitii Olimpiada Liceelor 2026.xlsx,
+   cu modificările din 16 sept: semifinalele de fotbal pe 21 sept 14:00/15:00, etapa 3 de handbal
+   mutată pe 21 sept 16/17/18 în altă ordine, etapa 3 de baschet la 14/15/16) ---------- */
 type Pair = [SchoolId, SchoolId];
 const DAY1: { A: Pair[]; B: Pair[] } = { A: [['titulescu', 'lps'], ['minulescu', 'greceanu']], B: [['metalurgic', 'economic']] };
 const DAY2: { A: Pair[]; B: Pair[] } = { A: [['lps', 'greceanu'], ['titulescu', 'minulescu']], B: [['alexe-marin', 'metalurgic']] };
 const DAY3: { A: Pair[]; B: Pair[] } = { A: [['minulescu', 'lps'], ['greceanu', 'titulescu']], B: [['economic', 'alexe-marin']] };
 const DAYS = [DAY1, DAY2, DAY3];
 
-interface TeamSportCal { id: EventId; venue: string; groupDays: string[]; sf: { date: string; t1: string; t2: string; venue?: string }; finals: { date: string; t3: string; t1: string; venue?: string } }
+/** o zi de grupe poate avea alte ore și altă ordine a celor trei meciuri (indici în lista A0, A1, B0) */
+interface DayOverride { slots?: string[]; order?: number[] }
+interface TeamSportCal { id: EventId; venue: string; groupDays: string[]; days?: Partial<Record<number, DayOverride>>; sf: { date: string; t1: string; t2: string; venue?: string }; finals: { date: string; t3: string; t1: string; venue?: string } }
 
 const CAL: TeamSportCal[] = [
-  { id: 'fotbal', venue: 'Baza Sportivă Dumitru Dobrescu', groupDays: ['2026-09-14', '2026-09-16', '2026-09-17'], sf: { date: '2026-09-20', t1: '10:00', t2: '11:00', venue: 'Stadionul 1 Mai' }, finals: { date: '2026-09-28', t3: '17:00', t1: '18:00', venue: 'Stadionul 1 Mai' } },
+  { id: 'fotbal', venue: 'Baza Sportivă Dumitru Dobrescu', groupDays: ['2026-09-14', '2026-09-16', '2026-09-17'], sf: { date: '2026-09-21', t1: '14:00', t2: '15:00', venue: 'Stadionul 1 Mai' }, finals: { date: '2026-09-28', t3: '17:00', t1: '18:00', venue: 'Stadionul 1 Mai' } },
   { id: 'volei', venue: 'Liceul Nicolae Titulescu', groupDays: ['2026-09-15', '2026-09-17', '2026-09-18'], sf: { date: '2026-09-21', t1: '17:00', t2: '18:00' }, finals: { date: '2026-09-24', t3: '17:00', t1: '18:00' } },
-  { id: 'handbal', venue: 'Liceul cu Program Sportiv', groupDays: ['2026-09-14', '2026-09-16', '2026-09-19'], sf: { date: '2026-09-22', t1: '17:00', t2: '18:00' }, finals: { date: '2026-09-25', t3: '10:00', t1: '10:00' } },
-  { id: 'baschet', venue: 'Colegiul Național Radu Greceanu', groupDays: ['2026-09-15', '2026-09-18', '2026-09-19'], sf: { date: '2026-09-20', t1: '14:00', t2: '15:00' }, finals: { date: '2026-09-30', t3: '17:00', t1: '18:00' } },
+  { id: 'handbal', venue: 'Liceul cu Program Sportiv', groupDays: ['2026-09-14', '2026-09-16', '2026-09-21'], days: { 2: { slots: ['16:00', '17:00', '18:00'], order: [1, 2, 0] } }, sf: { date: '2026-09-22', t1: '17:00', t2: '18:00' }, finals: { date: '2026-09-25', t3: '10:00', t1: '10:00' } },
+  { id: 'baschet', venue: 'Colegiul Național Radu Greceanu', groupDays: ['2026-09-15', '2026-09-18', '2026-09-19'], days: { 2: { slots: ['14:00', '15:00', '16:00'] } }, sf: { date: '2026-09-20', t1: '14:00', t2: '15:00' }, finals: { date: '2026-09-30', t3: '17:00', t1: '18:00' } },
 ];
 
 function buildTeamSportMatches(c: TeamSportCal): Match[] {
   const out: Match[] = [];
   c.groupDays.forEach((date, di) => {
     const day = DAYS[di];
-    const slots = ['15:00', '16:00', '17:00'];
+    const ov = c.days?.[di] ?? {};
+    const slots = ov.slots ?? ['15:00', '16:00', '17:00'];
     const list: { g: 'gA' | 'gB'; p: Pair }[] = [
       { g: 'gA', p: day.A[0] }, { g: 'gA', p: day.A[1] }, { g: 'gB', p: day.B[0] },
     ];
-    list.forEach((m, i) => out.push({
-      id: `${c.id}-${m.g}-${di + 1}-${i + 1}`, eventId: c.id, stage: m.g, round: di + 1, date, time: slots[i], venue: c.venue,
+    // id-ul rămâne al perechii (poziția din listă), chiar dacă ziua se joacă în altă ordine:
+    // scorurile deja salvate în starea publicată se leagă de id
+    (ov.order ?? [0, 1, 2]).forEach((k, i) => { const m = list[k]; out.push({
+      id: `${c.id}-${m.g}-${di + 1}-${k + 1}`, eventId: c.id, stage: m.g, round: di + 1, date, time: slots[i], venue: c.venue,
       home: m.p[0], away: m.p[1], homeScore: null, awayScore: null, status: 'scheduled',
-    }));
+    }); });
   });
   const sfVenue = c.sf.venue ?? c.venue; const fVenue = c.finals.venue ?? c.venue;
   out.push(
@@ -88,6 +95,7 @@ export const MATCHES: Match[] = [
 
 export const SEED: State = {
   version: 1,
+  calendarVersion: 2,
   updatedAt: '2026-09-08T00:00:00.000Z',
   config: {
     pointsPerPlace: [10, 8, 6, 0, 0, 0, 0],
