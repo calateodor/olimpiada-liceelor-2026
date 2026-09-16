@@ -35,6 +35,16 @@ const lottie = () => (player ??= import('lottie-web/build/player/lottie_light').
 
 interface Props { emoji: string; kind?: 'lottie' | 'webp'; play?: 'loop' | 'once'; size?: number; className?: string }
 
+/** varianta statică, în același stil (SVG Noto de la Google); dacă nu există, gliful sistemului */
+export function StaticEmoji({ emoji, size = 30 }: { emoji: string; size?: number }) {
+  const [bad, setBad] = useState(false);
+  return (
+    <span className="ae ae-static" style={{ width: size, height: size, fontSize: size * 0.78 }} aria-hidden="true">
+      {bad ? <span className="ae-glyph">{emoji}</span> : <img src={`${NOTO}${code(emoji)}/emoji.svg`} alt="" width={size} height={size} loading="lazy" decoding="async" onError={() => setBad(true)} />}
+    </span>
+  );
+}
+
 export function AnimEmoji({ emoji, kind = 'webp', play = 'loop', size = 40, className = '' }: Props) {
   return kind === 'webp' ? <WebpEmoji emoji={emoji} size={size} className={className} /> : <LottieEmoji emoji={emoji} play={play} size={size} className={className} />;
 }

@@ -3,14 +3,14 @@ import { Icon } from '@iconify/react';
 import { useStore } from '../store/state';
 import { useRx, rxSorted, rxTotal } from '../lib/reactions';
 import { QUICK_EMOJI, isEmoji } from '../lib/emoji';
-import { AnimEmoji } from './AnimEmoji';
+import { AnimEmoji, StaticEmoji } from './AnimEmoji';
 import './Reactions.css';
 
 /* Reacțiile unei poze sau ale unui clip, în stilul Telegram: pastile mici cu emoji și număr, lipite
    sub conținut în stânga. Fiecare vizitator are o singură reacție pe element: a lui e plină de culoare,
    alt emoji o înlocuiește, apăsată din nou se retrage. „+" deschide bara rapidă (7 emoji, previzualizare
    animată); săgeata deschide tot catalogul de emoji animate (881, pe categorii, cu căutare — previzualizare
-   statică) și câmpul pentru orice emoji tastat. Pastilele deja puse rulează animat (WebP) de la deschiderea
+   statică, dar în același stil Google) și câmpul pentru orice emoji tastat. Pastilele deja puse rulează animat (WebP) de la deschiderea
    paginii, iar când reacționezi emoji-ul animat sare și zboară în sus. */
 type Catalog = { cats: string[]; list: [string, number, string][] };
 let catalog: Promise<Catalog> | null = null;
@@ -101,7 +101,7 @@ function Picker({ mine, onPick }: { mine: string | null; onPick: (e: string) => 
       <div className="rx-grid">
         {!cat && <span className="rx-empty mono">se încarcă…</span>}
         {cat && items.length === 0 && <span className="rx-empty mono">{typed ? 'apasă „Reacționează”' : 'nimic găsit — poți tasta direct emoji-ul'}</span>}
-        {items.map(([e]) => <button key={e} className={`rx-q ${mine === e ? 'is-mine' : ''}`} onClick={() => onPick(e)} aria-label={e} aria-pressed={mine === e}>{e}</button>)}
+        {items.map(([e]) => <button key={e} className={`rx-q ${mine === e ? 'is-mine' : ''}`} onClick={() => onPick(e)} aria-label={e} aria-pressed={mine === e}><StaticEmoji emoji={e} size={30} /></button>)}
       </div>
       <span className="rx-hint mono">{cat ? `${cat.list.length} emoji animate` : ''}</span>
     </>
