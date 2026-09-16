@@ -90,7 +90,7 @@ function Picker({ mine, onPick }: { mine: string | null; onPick: (e: string) => 
   return (
     <>
       <form className="rx-any" onSubmit={e => { e.preventDefault(); if (typed) onPick(q.trim()); }}>
-        <input value={q} onChange={e => setQ(e.target.value)} placeholder="caută (fire, heart, party…) sau tastează orice emoji" aria-label="Caută sau tastează un emoji" maxLength={32} autoFocus />
+        <input value={q} onChange={e => setQ(e.target.value)} placeholder="caută (fire, heart, party…) sau tastează orice emoji" aria-label="Caută sau tastează un emoji" maxLength={32} />
         {typed && <button type="submit" className="btn btn-sm">Reacționează</button>}
       </form>
       {!qq && cat && (
