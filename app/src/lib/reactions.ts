@@ -46,13 +46,14 @@ export const useRx = create<Rx>((set, get) => ({
 
   toggle: async (id, emoji) => {
     const s = get();
-    const had = (s.mine[id] ?? []).includes(emoji);
-    const bump = (c: Counts, d: number) => { const n = (c[emoji] ?? 0) + d; const out = { ...c }; if (n > 0) out[emoji] = n; else delete out[emoji]; return out; };
-    set({
-      counts: { ...s.counts, [id]: bump(s.counts[id] ?? {}, had ? -1 : 1) },
-      mine: { ...s.mine, [id]: had ? (s.mine[id] ?? []).filter(e => e !== emoji) : [...(s.mine[id] ?? []), emoji] },
-      error: '',
-    });
+    const prev = s.mine[id] ?? [];
+    const had = prev.includes(emoji);
+    const bump = (c: Counts, e: string, d: number) => { const n = (c[e] ?? 0) + d; const out = { ...c }; if (n > 0) out[e] = n; else delete out[e]; return out; };
+    // o singură reacție per element: cea nouă o înlocuiește pe cea veche; aceeași apăsată din nou = retrasă
+    let counts = s.counts[id] ?? {};
+    for (const e of prev) counts = bump(counts, e, -1);
+    if (!had) counts = bump(counts, emoji, 1);
+    set({ counts: { ...s.counts, [id]: counts }, mine: { ...s.mine, [id]: had ? [] : [emoji] }, error: '' });
     try {
       const r = await fetch('/api/reactions', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id, emoji, on: !had }), credentials: 'same-origin' });
       const d = (await r.json().catch(() => ({}))) as { counts?: Counts; mine?: string[]; error?: string };
@@ -60,7 +61,7 @@ export const useRx = create<Rx>((set, get) => ({
       set(st => ({ counts: { ...st.counts, [id]: d.counts ?? {} }, mine: { ...st.mine, [id]: d.mine ?? [] } }));
     } catch (e) {
       // înapoi la ce era, cu mesajul serverului
-      set(st => ({ counts: { ...st.counts, [id]: bump(st.counts[id] ?? {}, had ? 1 : -1) }, mine: { ...st.mine, [id]: had ? [...(st.mine[id] ?? []), emoji] : (st.mine[id] ?? []).filter(x => x !== emoji) }, error: (e as Error).message }));
+      set(st => { let c = st.counts[id] ?? {}; if (!had) c = bump(c, emoji, -1); for (const x of prev) c = bump(c, x, 1); return { counts: { ...st.counts, [id]: c }, mine: { ...st.mine, [id]: prev }, error: (e as Error).message }; });
       setTimeout(() => set({ error: '' }), 4000);
     }
   },

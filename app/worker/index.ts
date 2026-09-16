@@ -25,7 +25,8 @@
  *
  * Reacții cu emoji la poze/clipuri (D1 = SQLite; fără cont)
  * - POST /api/reactions/list       → { ids } → { counts: {id: {emoji: n}}, mine: {id: [emoji]} }
- * - POST /api/reactions            → { id, emoji, on } → { counts, mine }; o reacție pe emoji pe element per vizitator
+ * - POST /api/reactions            → { id, emoji, on } → { counts, mine }; o singură reacție pe element per vizitator
+ *                                     (alt emoji o înlocuiește; același emoji cu on:false o retrage)
  * - GET  /api/reactions/stats · DELETE /api/reactions?item=|all=1   (admin)
  *   Vizitatorul = cookie „ol_v" semnat HMAC (nu se poate fabrica); IP-ul se păstrează doar ca hash cu secret,
  *   pentru limite pe oră. Cheia primară (item, emoji, visitor) din D1 face dublarea imposibilă chiar și la
@@ -233,7 +234,11 @@ export default {
           if ((a?.n ?? 0) >= RX.perVisitorHour) return json({ error: 'Prea multe reacții într-o oră. Mai încearcă mai târziu.' }, 429, extra);
           const b = await db.prepare('SELECT COUNT(*) AS n FROM reactions WHERE iph = ? AND at > ?').bind(iph, hourAgo).first<{ n: number }>();
           if ((b?.n ?? 0) >= RX.perIpHour) return json({ error: 'Prea multe reacții de pe această rețea. Mai încearcă mai târziu.' }, 429, extra);
-          await db.prepare('INSERT OR IGNORE INTO reactions (item, emoji, visitor, iph, at) VALUES (?, ?, ?, ?, ?)').bind(id, emoji, v.id, iph, now).run();
+          // o singură reacție per element: ce avea vizitatorul pe acest element dispare, apoi intră cea nouă
+          await db.batch([
+            db.prepare('DELETE FROM reactions WHERE item = ? AND visitor = ? AND emoji <> ?').bind(id, v.id, emoji),
+            db.prepare('INSERT OR IGNORE INTO reactions (item, emoji, visitor, iph, at) VALUES (?, ?, ?, ?, ?)').bind(id, emoji, v.id, iph, now),
+          ]);
         } else {
           await db.prepare('DELETE FROM reactions WHERE item = ? AND emoji = ? AND visitor = ?').bind(id, emoji, v.id).run();
         }
