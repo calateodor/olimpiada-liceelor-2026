@@ -12,7 +12,7 @@
 .rx-mini .ae + .ae { margin-left: -4px; }
 .rx-n { font-family: var(--f-mono); font-size: .76rem; font-weight: 700; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .rx-more { color: var(--fg-3); }
-.rx-add { position: relative; }
+.rx-add { position: static; }   /* selectorul se aliniază la marginea rândului, nu la „+”, ca să încapă în ecran */
 .rx-plus { padding: 0 9px; color: rgba(255,255,255,.8); }
 .rx-plus.is-open { background: rgba(124,58,237,.3); color: #fff; }
 /* bara de emoji (Telegram): orizontală, rotunjită; cu „mai multe" devine grilă + câmp */
