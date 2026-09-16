@@ -45,8 +45,17 @@ export function Hero() {
   const forced = state.config.countdownEventId ? upcomingMatches(all.filter(m => m.eventId === state.config.countdownEventId), now(), 1)[0] : null;
   const next = live[0] ?? forced ?? upcomingMatches(all, now(), 1)[0];
   const nextEv = next ? state.events.find(e => e.id === next.eventId) : null;
-  const sameSlot = next ? all.filter(m => m.eventId === next.eventId && m.date === next.date && m.status !== 'finished').sort((a, b) => a.time.localeCompare(b.time)) : [];
-  const cd = useCountdown(next && next.status !== 'live' ? matchDate(next).getTime() : null);
+  /* Cardul gândește la nivel de zi de concurs, nu de meci: toate meciurile probei din ziua lui `next`.
+     Înainte de primul fluier → „Următorul eveniment · Urmează" (doar cele viitoare, numărătoare până la primul).
+     După ce a început primul meci al zilei → „Se joacă azi · În desfășurare": toate meciurile zilei, cele
+     terminate cu scor, cel în joc marcat, iar numărătoarea e până la următorul meci. */
+  const dayMs = next ? all.filter(m => m.eventId === next.eventId && m.date === next.date).sort((a, b) => a.time.localeCompare(b.time)) : [];
+  const isLive = !!next && (next.status === 'live' || live.includes(next));
+  const started = isLive || dayMs.some(m => m.status === 'finished' || m.status === 'live' || matchDate(m).getTime() <= now().getTime());
+  const shownMs = started ? dayMs : dayMs.filter(m => m.status !== 'finished');
+  const nextUp = started ? dayMs.find(m => m.status === 'scheduled' && !live.includes(m) && matchDate(m).getTime() > now().getTime()) ?? null : next;
+  const cd = useCountdown(nextUp ? matchDate(nextUp).getTime() : null);
+  const mode: 'live' | 'day' | 'next' = isLive ? 'live' : started ? 'day' : 'next';
 
   useEffect(() => {
     const el = root.current;
@@ -198,24 +207,34 @@ export function Hero() {
           </div>
         </div>
 
-        <aside className={`hero-next card card-glow ${next?.status === 'live' ? 'is-live' : ''}`} data-hero-fade aria-label="Următorul eveniment">
+        <aside className={`hero-next card card-glow ${mode === 'live' ? 'is-live' : ''} ${mode === 'day' ? 'is-day' : ''}`} data-hero-fade aria-label={mode === 'next' ? 'Următorul eveniment' : 'Se joacă azi'}>
           {next && nextEv ? (
             <>
-              <div className="between"><span className="bar bar-sm">{next.status === 'live' ? 'Se joacă acum' : 'Următorul eveniment'}</span>{next.status === 'live' ? <span className="tag tag-live">Live</span> : <span className="tag tag-soon">Urmează</span>}</div>
-              <p className="h3 hero-next-t">{nextEv.name} <span className="dim">{nextEv.subtitle}</span> · {STAGE_LABEL[next.stage]}{next.round && (next.stage === 'gA' || next.stage === 'gB') ? ` · Et. ${next.round}` : ''}</p>
+              <div className="between">
+                <span className="bar bar-sm">{mode === 'live' ? 'Se joacă acum' : mode === 'day' ? 'Se joacă azi' : 'Următorul eveniment'}</span>
+                {mode === 'live' ? <span className="tag tag-live">Live</span> : mode === 'day' ? <span className="tag tag-soon">În desfășurare</span> : <span className="tag tag-soon">Urmează</span>}
+              </div>
+              <p className="h3 hero-next-t">{nextEv.name} <span className="dim">{nextEv.subtitle}</span> · {(next.stage === 'gA' || next.stage === 'gB') && next.round ? (mode === 'next' && shownMs.every(m => m.stage === next.stage) ? `${STAGE_LABEL[next.stage]} · Et. ${next.round}` : `Etapa ${next.round}`) : STAGE_LABEL[next.stage]}</p>
               <p className="mono">{fmtDate(next.date, 'long')} · {next.venue}</p>
               <ul className="hero-next-list">
-                {sameSlot.slice(0, 3).map(m => (
-                  <li key={m.id}>
-                    <span className="mono num">{m.time}</span>
-                    <span className="hero-next-teams">{m.home ? <><SchoolMark school={SCHOOL_BY_ID[m.home]} size="sm" /> {SCHOOL_BY_ID[m.home].short}</> : m.homeLabel} <span className="dim">vs</span> {m.away ? <>{SCHOOL_BY_ID[m.away].short} <SchoolMark school={SCHOOL_BY_ID[m.away]} size="sm" /></> : m.awayLabel}</span>
-                    {m.status === 'live' && (hasScore(m) ? <span className="score score-sm">{m.homeScore}<span className="sep">:</span>{m.awayScore}</span> : <span className="tag tag-live">în joc</span>)}
-                  </li>
-                ))}
+                {shownMs.slice(0, 4).map(m => {
+                  const isOn = m.status === 'live' || live.includes(m);
+                  return (
+                    <li key={m.id} className={m.status === 'finished' ? 'is-done' : isOn ? 'is-on' : ''}>
+                      <span className="mono num">{m.time}</span>
+                      <span className="hero-next-teams">{m.home ? <><SchoolMark school={SCHOOL_BY_ID[m.home]} size="sm" /> {SCHOOL_BY_ID[m.home].short}</> : m.homeLabel} <span className="dim">vs</span> {m.away ? <>{SCHOOL_BY_ID[m.away].short} <SchoolMark school={SCHOOL_BY_ID[m.away]} size="sm" /></> : m.awayLabel}</span>
+                      {m.status === 'finished' && hasScore(m) && <span className="score score-sm">{m.homeScore}<span className="sep">:</span>{m.awayScore}</span>}
+                      {isOn && (hasScore(m) ? <span className="score score-sm">{m.homeScore}<span className="sep">:</span>{m.awayScore}</span> : <span className="tag tag-live">în joc</span>)}
+                    </li>
+                  );
+                })}
               </ul>
               {cd && (
-                <div className="hero-cd" aria-label="Timp până la meci">
-                  {[[cd.d, 'zile'], [cd.h, 'ore'], [cd.m, 'min'], [cd.s, 'sec']].map(([v, l]) => <div key={l as string}><b className="num">{String(v).padStart(2, '0')}</b><span className="mono">{l}</span></div>)}
+                <div className="hero-cd-wrap">
+                  {mode !== 'next' && <span className="hero-cd-l mono">Următorul meci în</span>}
+                  <div className="hero-cd" aria-label={mode !== 'next' ? 'Timp până la următorul meci' : 'Timp până la meci'}>
+                    {[[cd.d, 'zile'], [cd.h, 'ore'], [cd.m, 'min'], [cd.s, 'sec']].map(([v, l]) => <div key={l as string}><b className="num">{String(v).padStart(2, '0')}</b><span className="mono">{l}</span></div>)}
+                  </div>
                 </div>
               )}
               <Link to={eventPath(nextEv)} className="link">Detalii →</Link>

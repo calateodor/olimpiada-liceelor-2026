@@ -35,6 +35,10 @@
 .hero-next-list { display: grid; gap: var(--s2); border-top: 1px solid var(--v-600); padding-top: var(--s3); }
 .hero-next-list li { display: grid; grid-template-columns: 5ch 1fr auto; gap: var(--s3); align-items: center; font-weight: 600; font-size: var(--t-sm); }
 .hero-next-teams { display: inline-flex; align-items: center; gap: var(--s2); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.hero-next-list li.is-done { color: var(--fg-2); }
+.hero-next-list li.is-done .score { color: var(--ye-500); }
+.hero-cd-wrap { display: grid; gap: var(--s2); }
+.hero-cd-l { color: var(--fg-3); font-size: var(--t-2xs); letter-spacing: .12em; text-transform: uppercase; }
 .hero-cd { display: flex; gap: var(--s6); flex-wrap: wrap; }
 .hero-cd > div { display: grid; }
 .hero-scroll { position: absolute; right: var(--gutter); bottom: var(--s6); z-index: 3; display: flex; align-items: center; gap: var(--s2); color: var(--ye-500); }
