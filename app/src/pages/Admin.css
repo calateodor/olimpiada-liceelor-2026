@@ -114,3 +114,5 @@
 .pn-tm-moments li { display: grid; grid-template-columns: 12ch 1fr; gap: var(--s3); padding: 3px 0; border-bottom: var(--line); }
 .pn-stats-3 { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 1100px) { .pn-tm-row { grid-template-columns: 1fr 1fr; } }
+
+.pn-rx { font-size: .8rem; text-transform: none; letter-spacing: 0; }

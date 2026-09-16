@@ -31,10 +31,13 @@
 .vt-vol::-moz-range-progress { height: 3px; border-radius: 2px; background: var(--ye-500); }
 .vt-vol::-moz-range-thumb { width: 12px; height: 12px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.35); }
 /* pe desktop clipul rulează mare, într-un overlay ca galeria */
-.vlb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: center; padding: var(--s6) var(--s6) var(--s12); animation: fade var(--d-2) var(--e-out); }
-.vlb .vt { width: auto; height: min(86vh, 1100px); max-width: 92vw; box-shadow: var(--sh-3); }
+.vt-wrap { display: grid; gap: var(--s3); }
+.vlb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: start center; padding: var(--s6) var(--s6) var(--s12); animation: fade var(--d-2) var(--e-out); }
+.vlb .vt { width: auto; height: min(76vh, 1100px); max-width: 92vw; box-shadow: var(--sh-3); }
 .vlb .vt video { object-fit: contain; }
-.vlb-cap { position: absolute; bottom: var(--s6); left: 50%; transform: translateX(-50%); color: #fff; font-weight: 500; white-space: nowrap; max-width: 92vw; overflow: hidden; text-overflow: ellipsis; }
+.vlb-foot { position: absolute; bottom: var(--s5); left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: var(--s3); width: min(92vw, 900px); }
+.vlb-foot .rx { justify-content: center; }
+.vlb-cap { color: #fff; font-weight: 500; white-space: nowrap; max-width: 92vw; overflow: hidden; text-overflow: ellipsis; }
 .vlb-cap span { color: rgba(255,255,255,.6); font-weight: 400; }
 .vlb-x { position: absolute; top: var(--s5); right: var(--s5); color: #fff; }
 @keyframes fade { from { opacity: 0 } to { opacity: 1 } }

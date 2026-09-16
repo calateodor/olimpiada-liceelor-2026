@@ -52,8 +52,9 @@ export default function Confidentialitate() {
         <section>
           <h2 className="h3">8. Site-ul public</h2>
           <p>Paginile publice ale site-ului nu cer date personale și nu folosesc cookie-uri de urmărire. Site-ul reține în browserul tău doar preferințe locale (de exemplu, poziția insignei „Cred în Slatina”), care nu părăsesc dispozitivul. Hărțile folosesc date OpenStreetMap.</p>
+          <p><b>Reacțiile cu emoji</b> din galerie sunt anonime. Ca aceeași persoană să nu poată reacționa de mai multe ori cu același emoji la aceeași poză, site-ul pune un cookie tehnic („ol_v”, un identificator aleatoriu, valabil un an) și păstrează, pentru fiecare reacție, o amprentă criptografică a adresei IP (nu adresa în sine), folosită doar pentru a limita abuzurile. Nu se leagă de nume, cont sau alte date. Temei: interesul legitim al organizatorului de a proteja funcționarea site-ului. Reacțiile pot fi șterse de administrator oricând.</p>
         </section>
-        <p className="mono cf-foot">Versiunea 1 · septembrie 2026 · <Link to="/inscrieri">Înscrieri licee</Link></p>
+        <p className="mono cf-foot">Versiunea 2 · septembrie 2026 · <Link to="/inscrieri">Înscrieri licee</Link></p>
       </article>
     </div>
   );

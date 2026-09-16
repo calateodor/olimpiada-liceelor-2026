@@ -7,6 +7,8 @@ import { useStore } from '../store/state';
 import { getLenis } from '../lib/motion';
 import { asset } from '../lib/asset';
 import { fmtDate } from '../lib/competition';
+import { Reactions, ReactionsMini } from './Reactions';
+import { useRx } from '../lib/reactions';
 import './PhotoGrid.css';
 
 /** pozele din R2 sau din public/ sunt căi absolute pe site; celelalte (http...) rămân cum sunt */
@@ -16,6 +18,8 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', show
   const [open, setOpen] = useState<number | null>(null);
   const events = useStore(s => s.state.events);
   const list = [...photos].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const loadRx = useRx(s => s.load);
+  useEffect(() => { loadRx(list.map(p => p.id)); }, [photos, loadRx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (open == null) return;
@@ -37,7 +41,7 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', show
             <li key={p.id} className={`phg-item ${portrait ? 'is-p' : ''}`}>
               <button onClick={() => setOpen(i)} aria-label={`Deschide fotografia: ${p.caption ?? meta(p)}`}>
                 <img src={src(p.thumb ?? p.url)} alt={p.caption ?? meta(p)} loading="lazy" decoding="async" width={p.w} height={p.h} />
-                <span className="phg-cap mono">{meta(p)}</span>
+                <span className="phg-cap mono"><span className="phg-cap-t">{meta(p)}</span><ReactionsMini id={p.id} /></span>
               </button>
             </li>
           );
@@ -46,7 +50,10 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', show
       {cur && createPortal(
         <div className="lb" role="dialog" aria-modal="true" aria-label="Fotografie" onClick={() => setOpen(null)}>
           <img src={src(cur.url)} alt={cur.caption ?? ''} onClick={e => e.stopPropagation()} />
-          <p className="lb-cap" onClick={e => e.stopPropagation()}>{cur.caption}<span className="mono"> {meta(cur)} · {open! + 1}/{list.length}</span></p>
+          <div className="lb-foot" onClick={e => e.stopPropagation()}>
+            <Reactions id={cur.id} />
+            <p className="lb-cap">{cur.caption}<span className="mono"> {meta(cur)} · {open! + 1}/{list.length}</span></p>
+          </div>
           <button className="lb-x" onClick={() => setOpen(null)} aria-label="Închide"><Icon icon="solar:close-circle-linear" width="32" /></button>
           {open! > 0 && <button className="lb-nav lb-prev" onClick={e => { e.stopPropagation(); setOpen(open! - 1); }} aria-label="Anterioara"><Icon icon="solar:alt-arrow-left-linear" width="32" /></button>}
           {open! < list.length - 1 && <button className="lb-nav lb-next" onClick={e => { e.stopPropagation(); setOpen(open! + 1); }} aria-label="Următoarea"><Icon icon="solar:alt-arrow-right-linear" width="32" /></button>}

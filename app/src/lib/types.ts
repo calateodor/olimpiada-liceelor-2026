@@ -138,6 +138,8 @@ export interface Config {
   extraDocs: ExtraDoc[];                     // documente / linkuri in plus la Regulamente
   schoolInfo: Partial<Record<SchoolId, SchoolInfo>>;
   venueNotes: Record<string, string>;        // note pe locatii (acces, parcare, program)
+  /** reacții cu emoji la poze și clipuri (vizitatori anonimi, vezi worker /api/reactions) */
+  reactions: { on: boolean };
   /** „Mașina timpului": site-ul se comportă ca la momentul `at`, cu rezultate inventate (vezi lib/simulation.ts) */
   simulation: { on: boolean; at: string; setAt: string; frozen: boolean; seed: number; news: boolean; announcement: boolean; concert: boolean };
 }

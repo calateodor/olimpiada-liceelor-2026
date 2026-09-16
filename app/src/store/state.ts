@@ -47,6 +47,7 @@ export function withDefaults(s: Partial<State>): State {
     concert: { ...d.concert, ...(c.concert ?? {}) },
     schoolInfo: { ...d.schoolInfo, ...(c.schoolInfo ?? {}) },
     venueNotes: { ...d.venueNotes, ...(c.venueNotes ?? {}) },
+    reactions: { ...d.reactions, ...(c.reactions ?? {}) },
     simulation: { ...d.simulation, ...(c.simulation ?? {}) },
   };
   // Lista de probe e a codului (seed), nu a stării salvate: probele scoase dispar, cele noi apar,

@@ -13,6 +13,10 @@
   "compatibility_flags": ["nodejs_compat"],
   "kv_namespaces": [
     { "binding": "OL_KV", "id": "7699a7a108b14742b4ee16508bdc2421" }
+  ],
+  // reacțiile cu emoji din galerie (D1 = SQLite): o cheie unică (poză, emoji, vizitator) face imposibilă dublarea
+  "d1_databases": [
+    { "binding": "OL_DB", "database_name": "olimpiada-reactions", "database_id": "8411adb7-1a18-4108-a460-6417e70e3df1" }
   ]
   // Când R2 e activat în cont (dashboard → R2 → Enable) și bucket-ul există
   // (`npx wrangler r2 bucket create olimpiada-media`), adaugă:

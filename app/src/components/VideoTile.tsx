@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import type { Video } from '../lib/types';
 import { asset } from '../lib/asset';
 import { getLenis } from '../lib/motion';
+import { Reactions } from './Reactions';
 import './VideoTile.css';
 
 /* Clip vertical (9:16) cu poster și buton de redare. HLS: Safari îl redă nativ, restul browserelor
@@ -108,9 +109,9 @@ export function VideoTile({ v }: { v: Video }) {
     </figure>
   );
 
-  if (!big) return player;
+  if (!big) return <div className="vt-wrap">{player}<Reactions id={v.id} compact /></div>;
   return (
-    <>
+    <div className="vt-wrap">
       {/* tile-ul rămâne la locul lui, cu posterul, cât timp clipul rulează în overlay */}
       <figure className="vt is-idle" style={{ aspectRatio: `${v.w ?? 9} / ${v.h ?? 16}` }} aria-hidden="true">
         <img src={asset(v.poster)} alt="" className="vt-poster" />
@@ -118,11 +119,15 @@ export function VideoTile({ v }: { v: Video }) {
       {createPortal(
         <div className="vlb" role="dialog" aria-modal="true" aria-label={v.title} onClick={() => setBig(false)}>
           {player}
-          <p className="vlb-cap" onClick={e => e.stopPropagation()}><b>{v.title}</b>{v.caption && <span> · {v.caption}</span>}</p>
+          <div className="vlb-foot" onClick={e => e.stopPropagation()}>
+            <Reactions id={v.id} />
+            <p className="vlb-cap"><b>{v.title}</b>{v.caption && <span> · {v.caption}</span>}</p>
+          </div>
           <button className="vlb-x" onClick={() => setBig(false)} aria-label="Închide"><Icon icon="solar:close-circle-linear" width="32" /></button>
         </div>,
         document.body,
       )}
-    </>
+      <Reactions id={v.id} compact />
+    </div>
   );
 }

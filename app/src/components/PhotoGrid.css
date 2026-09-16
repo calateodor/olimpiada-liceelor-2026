@@ -4,12 +4,15 @@
 /* pozele pe verticală ocupă două rânduri, ca să nu fie tăiate la 4:3 */
 .phg-item.is-p { grid-row: span 2; }
 .phg-item.is-p img { aspect-ratio: auto; min-height: 0; }
-.phg-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.phg-cap { display: flex; align-items: center; gap: var(--s2); min-width: 0; }
+.phg-cap-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 600px) { .phg { grid-template-columns: 1fr 1fr; gap: var(--s2); } }
 .phg-item button:hover img { transform: scale(1.02); }
 .lb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: center; padding: var(--s6); animation: fade var(--d-2) var(--e-out); }
-.lb img { max-height: 84vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); }
-.lb-cap { position: absolute; bottom: var(--s6); left: 50%; transform: translateX(-50%); color: #fff; font-weight: 500; }
+.lb img { max-height: 74vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); align-self: start; margin-top: var(--s6); }
+.lb-foot { position: absolute; bottom: var(--s5); left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: var(--s3); width: min(92vw, 900px); }
+.lb-foot .rx { justify-content: center; }
+.lb-cap { color: #fff; font-weight: 500; text-align: center; }
 .lb-cap .mono { color: rgba(255,255,255,.6); }
 .lb-x { position: absolute; top: var(--s5); right: var(--s5); color: #fff; }
 .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); }

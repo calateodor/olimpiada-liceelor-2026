@@ -10,6 +10,7 @@ import type { EventId, Match, MatchStatus, Photo, TimelineEntry, ConcertPhase, S
 import { SchoolMark } from '../components/SchoolMark';
 import { SchoolCrest } from '../components/SchoolCrest';
 import { asset } from '../lib/asset';
+import { rxSorted } from '../lib/reactions';
 import { AdminInscrieri } from './admin/Inscrieri';
 import { TimeMachine } from './admin/TimeMachine';
 import './Admin.css';
@@ -406,6 +407,15 @@ function Licee() {
 /* ------------------------------------------------------------------ Poze */
 function Poze() {
   const { state, setState, token, online } = useStore();
+  // reacțiile cu emoji (D1): totaluri pe poză, cu ștergere
+  const [rx, setRx] = useState<{ counts: Record<string, Record<string, number>>; total: number; visitors: number } | null>(null);
+  const loadRx = () => { if (online && token) fetch('/api/reactions/stats', { headers: { authorization: `Bearer ${token}` } }).then(r => (r.ok ? r.json() : null)).then(setRx).catch(() => setRx(null)); };
+  useEffect(loadRx, [online, token]); // eslint-disable-line react-hooks/exhaustive-deps
+  const clearRx = async (item?: string) => {
+    if (!confirm(item ? 'Ștergi reacțiile acestei poze?' : 'Ștergi TOATE reacțiile din galerie?')) return;
+    await fetch(`/api/reactions?${item ? `item=${encodeURIComponent(item)}` : 'all=1'}`, { method: 'DELETE', headers: { authorization: `Bearer ${token}` } });
+    loadRx();
+  };
   const [evId, setEvId] = useState<EventId | ''>('');
   const [scId, setScId] = useState<SchoolId | ''>('');
   const [cap, setCap] = useState('');
@@ -442,12 +452,14 @@ function Poze() {
         {busy && <p className="mono">{busy}</p>}
       </section>
       <section className="pn-block">
+        {rx && <p className="mono dim">Reacții cu emoji: <b>{rx.total}</b> de la {rx.visitors} vizitatori{rx.total > 0 && <> · <button className="link pn-del" onClick={() => clearRx()}>șterge toate</button></>}</p>}
         <div className="between"><h3 className="h4">{shown.length} din {state.photos.length} poze</h3>
           <select value={filter} onChange={e => setFilter(e.target.value as EventId)}><option value="">toate</option><optgroup label="Probe">{state.events.map(e => <option key={e.id} value={e.id}>{e.name} {e.subtitle}</option>)}</optgroup><optgroup label="Licee">{SCHOOLS.map(s => <option key={s.id} value={s.id}>{s.short}</option>)}</optgroup></select></div>
         <ul className="pn-photos">
           {shown.map(p => (
             <li key={p.id}>
               <img src={p.thumb ?? p.url} alt="" loading="lazy" />
+              {rx?.counts[p.id] && <p className="mono dim pn-rx">{rxSorted(rx.counts[p.id]).map(([e, n]) => `${e} ${n}`).join(' · ')} · <button className="link" onClick={() => clearRx(p.id)}>șterge</button></p>}
               <select value={p.eventId ?? ''} onChange={e => setState(s => { s.photos.find(x => x.id === p.id)!.eventId = (e.target.value || undefined) as EventId; })}><option value="">— probă —</option>{state.events.map(e => <option key={e.id} value={e.id}>{e.name} {e.subtitle}</option>)}</select>
               <select value={p.schoolId ?? ''} onChange={e => setState(s => { s.photos.find(x => x.id === p.id)!.schoolId = (e.target.value || undefined) as SchoolId; })}><option value="">— liceu —</option>{SCHOOLS.map(s => <option key={s.id} value={s.id}>{s.nr} · {s.short}</option>)}</select>
               <input type="text" value={p.caption ?? ''} placeholder="descriere" onChange={e => setState(s => { s.photos.find(x => x.id === p.id)!.caption = e.target.value; })} />
@@ -586,6 +598,7 @@ function Site() {
         </div>
         <div className="pn-switches">
           <Switch on={c.heroPhoto} onChange={v => set(`Poza din hero ${v ? 'pornită' : 'oprită'}`, x => { x.heroPhoto = v; })} label="Poza cu mulțimea în spatele logo-ului" />
+          <Switch on={c.reactions.on} onChange={v => set(`Reacții cu emoji ${v ? 'pornite' : 'oprite'}`, x => { x.reactions.on = v; })} label="Reacții cu emoji la poze și clipuri" hint="vizitatorii pot reacționa cu orice emoji, o dată pe emoji pe poză; totalurile sunt la Poze" />
           <Switch on={c.home.ticker} onChange={v => set(`Bandă licee ${v ? 'pornită' : 'oprită'}`, x => { x.home.ticker = v; })} label="Banda cu liceele" />
           <Switch on={c.home.roadmap} onChange={v => set(`Traseu ${v ? 'pornit' : 'oprit'}`, x => { x.home.roadmap = v; })} label="Traseul competiției" />
           <Switch on={c.home.standings} onChange={v => set(`Clasament pe acasă ${v ? 'pornit' : 'oprit'}`, x => { x.home.standings = v; })} label="Clasamentul general" />

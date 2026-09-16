@@ -76,6 +76,8 @@ npx wrangler r2 bucket create olimpiada-media
 
 și descomentează `r2_buckets` în `app/pages/wrangler.jsonc`, apoi `npm run deploy:pages`. Până atunci panoul spune clar la Poze că stocarea nu e activată; tot restul merge.
 
+**Reacțiile cu emoji** din galerie stau în D1 (baza SQL gratuită a Cloudflare), baza `olimpiada-reactions`, legată ca `OL_DB` în `app/pages/wrangler.jsonc` și `app/wrangler.jsonc`. Schema e în `app/migrations/0001_reactions.sql` (aplicată deja, remote și local); dacă vreodată o refaci: `npx wrangler d1 execute olimpiada-reactions --remote --file=migrations/0001_reactions.sql`. Cum se previne dublarea: cookie `ol_v` semnat de server + cheie unică (poză, emoji, vizitator) în tabel + limite pe oră per vizitator (120) și per IP hash-uit (900). Din panou → Site se opresc reacțiile; din Poze se văd totalurile și se șterg (pe poză sau toate).
+
 ## 4. Domeniu: olimpiada.primariaslatina.ro — activ din 11 septembrie 2026
 
 Adresa oficială e **https://olimpiada.primariaslatina.ro**. Cum e legată:
@@ -96,7 +98,7 @@ Intri din subsol → **Administrare** (sau `/admin`), cu utilizator și parolă.
 - **Clasament**: clasamentul general vizibil/ascuns cu mesaj, bonusuri și penalizări cu motiv, punctele pe loc.
 - **Licee**: motto, profesor coordonator, contact, notă publică, loturile pe probe și dacă numele elevilor apar public.
 - **Înscrieri licee**: conturile celor 7 licee (generezi parola, o trimiți coordonatorului, o poți reseta sau dezactiva), datele introduse de fiecare liceu, export CSV pentru fișele de înscriere, preluarea numelor în loturile publice, ștergerea datelor la final (GDPR). Vezi secțiunea 7.
-- **Poze**: pozele puse cu `scripts/media-day.py` apar aici după publicare (etichetare pe probă/liceu, descriere, ștergere, afiș de concert dintr-o poză); încărcarea direct de pe telefon merge după activarea R2.
+- **Poze**: pozele puse cu `scripts/media-day.py` apar aici după publicare (etichetare pe probă/liceu, descriere, ștergere, afiș de concert dintr-o poză); încărcarea direct de pe telefon merge după activarea R2. Tot aici: totalurile reacțiilor cu emoji pe fiecare poză, cu ștergere.
 - **Noutăți**: adăugare, modificare, ștergere.
 - **Anunțuri**: bara de anunț de sub meniu (informare / important / atenție, cu link), mesaje în banda de pe prima pagină, banda „site în lucru”.
 - **Concert**: faza dezvăluirii (mister → concert → artist), textele pe faze, artistul, data, locul, afișul.

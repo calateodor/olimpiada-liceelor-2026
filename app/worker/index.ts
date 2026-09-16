@@ -23,6 +23,14 @@
  * - GET  /api/inscrieri             → propriile înscrieri
  * - PUT  /api/inscrieri             → salvează propriile înscrieri (cere consimțământul bifat)
  *
+ * Reacții cu emoji la poze/clipuri (D1 = SQLite; fără cont)
+ * - POST /api/reactions/list       → { ids } → { counts: {id: {emoji: n}}, mine: {id: [emoji]} }
+ * - POST /api/reactions            → { id, emoji, on } → { counts, mine }; o reacție pe emoji pe element per vizitator
+ * - GET  /api/reactions/stats · DELETE /api/reactions?item=|all=1   (admin)
+ *   Vizitatorul = cookie „ol_v" semnat HMAC (nu se poate fabrica); IP-ul se păstrează doar ca hash cu secret,
+ *   pentru limite pe oră. Cheia primară (item, emoji, visitor) din D1 face dublarea imposibilă chiar și la
+ *   apăsări simultane.
+ *
  * Parolele nu se stochează niciodată în clar (amprente PBKDF2). Înscrierile — date personale —
  * stau criptate AES-256-GCM, câte o cheie KV per liceu, cu cheia derivată din secretul DATA_KEY.
  */
@@ -31,6 +39,8 @@ import { ACCESS, type Access } from '../src/data/access';
 import { SCHOOLS, type SchoolId } from '../src/data/schools';
 import { verifyCredentials, makeAccess } from '../src/lib/auth';
 import { sanitizeInscriere, emptyInscriere, randomPassword, membriCount, type Inscriere } from '../src/lib/inscrieri';
+import { STATIC_PHOTOS, STATIC_VIDEOS } from '../src/data/media';
+import { EMOJI_RE } from '../src/lib/emoji';
 
 export interface Env {
   OL_KV: KVNamespace;
@@ -39,6 +49,8 @@ export interface Env {
   ADMIN_SECRET?: string;
   /** cheia cu care se criptează înscrierile; fără ea se folosește ADMIN_SECRET */
   DATA_KEY?: string;
+  /** reacțiile cu emoji din galerie; lipsește → răspuns 503, restul site-ului merge */
+  OL_DB?: D1Database;
   ASSETS: Fetcher;
 }
 
@@ -94,6 +106,37 @@ async function principal(env: Env, req: Request): Promise<Principal | null> {
 
 const isAdmin = (p: Principal | null): p is { role: 'admin' } => !!p && p.role === 'admin';
 
+/* ---------------------------------------------------------------- reacții cu emoji (D1) */
+const RX = { perVisitorHour: 120, perIpHour: 900, maxIds: 600 };
+const ID_RE = /^[\w.-]{1,120}$/;
+
+/** identitatea anonimă a vizitatorului: cookie semnat cu secretul serverului; lipsă sau fals → se emite unul nou */
+async function visitor(env: Env, req: Request): Promise<{ id: string; cookie?: string }> {
+  const s = secret(env, await adminAccess(env));
+  const m = /(?:^|;\s*)ol_v=([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)/.exec(req.headers.get('cookie') ?? '');
+  if (m && (await hmac(s, 'v:' + m[1])) === m[2]) return { id: m[1] };
+  const id = b64url(crypto.getRandomValues(new Uint8Array(16)).buffer);
+  return { id, cookie: `ol_v=${id}.${await hmac(s, 'v:' + id)}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax` };
+}
+/** amprenta IP-ului: hash cu secret; IP-ul în clar nu ajunge în baza de date */
+async function ipHash(env: Env, req: Request) {
+  return (await hmac(secret(env, await adminAccess(env)), 'ip:' + (req.headers.get('cf-connecting-ip') ?? '0'))).slice(0, 24);
+}
+
+const cookieHdr = (v: { cookie?: string }): Record<string, string> => (v.cookie ? { 'set-cookie': v.cookie } : {});
+
+async function reactionCounts(db: D1Database, ids: string[], visitorId: string) {
+  const counts: Record<string, Record<string, number>> = {}; const mine: Record<string, string[]> = {};
+  for (let i = 0; i < ids.length; i += 80) {
+    const chunk = ids.slice(i, i + 80); const q = chunk.map(() => '?').join(',');
+    const c = await db.prepare(`SELECT item, emoji, COUNT(*) AS n FROM reactions WHERE item IN (${q}) GROUP BY item, emoji`).bind(...chunk).all<{ item: string; emoji: string; n: number }>();
+    for (const r of c.results) (counts[r.item] ??= {})[r.emoji] = r.n;
+    const m = await db.prepare(`SELECT item, emoji FROM reactions WHERE visitor = ? AND item IN (${q})`).bind(visitorId, ...chunk).all<{ item: string; emoji: string }>();
+    for (const r of m.results) (mine[r.item] ??= []).push(r.emoji);
+  }
+  return { counts, mine };
+}
+
 /* ---------------------------------------------------------------- criptare înscrieri */
 async function dataKey(env: Env) {
   const material = env.DATA_KEY || env.ADMIN_SECRET || ACCESS.hash;
@@ -145,6 +188,59 @@ export default {
         return json(next);
       }
       return json({ error: 'method' }, 405);
+    }
+
+    /* ---------------- reacții cu emoji ---------------- */
+    if (p.startsWith('/api/reactions')) {
+      const db = env.OL_DB;
+      if (!db) return json({ error: 'Reacțiile nu sunt activate (lipsește baza D1).' }, 503);
+      if (p === '/api/reactions/list' && req.method === 'POST') {
+        const { ids } = (await req.json().catch(() => ({}))) as { ids?: unknown };
+        if (!Array.isArray(ids) || ids.length > RX.maxIds || !ids.every(x => typeof x === 'string' && ID_RE.test(x))) return json({ error: 'ids' }, 400);
+        const v = await visitor(env, req);
+        return json(await reactionCounts(db, ids as string[], v.id), 200, cookieHdr(v));
+      }
+      if (p === '/api/reactions/stats' && req.method === 'GET') {
+        if (!isAdmin(await principal(env, req))) return json({ error: 'unauthorized' }, 401);
+        const r = await db.prepare('SELECT item, emoji, COUNT(*) AS n FROM reactions GROUP BY item, emoji').all<{ item: string; emoji: string; n: number }>();
+        const counts: Record<string, Record<string, number>> = {};
+        for (const x of r.results) (counts[x.item] ??= {})[x.emoji] = x.n;
+        const tot = await db.prepare('SELECT COUNT(*) AS n, COUNT(DISTINCT visitor) AS v FROM reactions').first<{ n: number; v: number }>();
+        return json({ counts, total: tot?.n ?? 0, visitors: tot?.v ?? 0 });
+      }
+      if (p === '/api/reactions' && req.method === 'DELETE') {
+        if (!isAdmin(await principal(env, req))) return json({ error: 'unauthorized' }, 401);
+        const item = url.searchParams.get('item');
+        if (item) await db.prepare('DELETE FROM reactions WHERE item = ?').bind(item).run();
+        else if (url.searchParams.get('all') === '1') await db.prepare('DELETE FROM reactions').run();
+        else return json({ error: 'item' }, 400);
+        return json({ ok: true });
+      }
+      if (p === '/api/reactions' && req.method === 'POST') {
+        const { id, emoji, on } = (await req.json().catch(() => ({}))) as { id?: unknown; emoji?: unknown; on?: unknown };
+        if (typeof id !== 'string' || !ID_RE.test(id)) return json({ error: 'id' }, 400);
+        if (typeof emoji !== 'string' || emoji.length > 24 || !EMOJI_RE.test(emoji)) return json({ error: 'Doar un emoji.' }, 400);
+        // elementul trebuie să existe (poze/clipuri publicate sau livrate cu site-ul), iar reacțiile să fie pornite
+        const state = JSON.parse((await env.OL_KV.get('state', 'text')) ?? JSON.stringify(seed)) as { config?: { reactions?: { on?: boolean } }; photos?: { id: string }[]; videos?: { id: string }[] };
+        if (state.config?.reactions?.on === false) return json({ error: 'Reacțiile sunt oprite.' }, 403);
+        const known = new Set([...(state.photos ?? []), ...(state.videos ?? []), ...STATIC_PHOTOS, ...STATIC_VIDEOS].map(x => x.id));
+        if (!known.has(id)) return json({ error: 'item' }, 404);
+        const v = await visitor(env, req); const extra = cookieHdr(v);
+        const now = Date.now();
+        if (on !== false) {
+          const iph = await ipHash(env, req); const hourAgo = now - 3600e3;
+          const a = await db.prepare('SELECT COUNT(*) AS n FROM reactions WHERE visitor = ? AND at > ?').bind(v.id, hourAgo).first<{ n: number }>();
+          if ((a?.n ?? 0) >= RX.perVisitorHour) return json({ error: 'Prea multe reacții într-o oră. Mai încearcă mai târziu.' }, 429, extra);
+          const b = await db.prepare('SELECT COUNT(*) AS n FROM reactions WHERE iph = ? AND at > ?').bind(iph, hourAgo).first<{ n: number }>();
+          if ((b?.n ?? 0) >= RX.perIpHour) return json({ error: 'Prea multe reacții de pe această rețea. Mai încearcă mai târziu.' }, 429, extra);
+          await db.prepare('INSERT OR IGNORE INTO reactions (item, emoji, visitor, iph, at) VALUES (?, ?, ?, ?, ?)').bind(id, emoji, v.id, iph, now).run();
+        } else {
+          await db.prepare('DELETE FROM reactions WHERE item = ? AND emoji = ? AND visitor = ?').bind(id, emoji, v.id).run();
+        }
+        const r = await reactionCounts(db, [id], v.id);
+        return json({ counts: r.counts[id] ?? {}, mine: r.mine[id] ?? [] }, 200, extra);
+      }
+      return json({ error: 'not found' }, 404);
     }
 
     /* ---------------- admin: cont ---------------- */
