@@ -3,11 +3,14 @@ import { Icon } from '@iconify/react';
 import { useStore } from '../store/state';
 import { useRx, rxSorted, rxTotal } from '../lib/reactions';
 import { QUICK_EMOJI, isEmoji } from '../lib/emoji';
+import { AnimEmoji } from './AnimEmoji';
 import './Reactions.css';
 
-/* Rândul de reacții al unei poze sau al unui clip: pastilele cu emoji și numărul lor (a ta e galbenă,
-   apeși din nou ca s-o retragi) și „+", care deschide selectorul: 16 emoji la îndemână sau orice emoji
-   tastat de la tastatura telefonului. */
+/* Reacțiile unei poze sau ale unui clip, în stilul Telegram: pastile mici cu emoji și număr, lipite
+   sub conținut în stânga; a ta e plină de culoare și o retragi apăsând din nou. „+" deschide o bară
+   orizontală cu emoji-urile la îndemână; săgeata din capăt arată tot setul și câmpul pentru orice
+   emoji tastat. Emoji-urile din bară sunt animate (Noto Animated Emoji, ca la Telegram), iar când
+   reacționezi, varianta animată sare și zboară în sus. */
 export function Reactions({ id, compact = false }: { id: string; compact?: boolean }) {
   const on = useStore(s => s.state.config.reactions.on);
   const counts = useRx(s => s.counts[id]);
@@ -16,47 +19,56 @@ export function Reactions({ id, compact = false }: { id: string; compact?: boole
   const toggle = useRx(s => s.toggle);
   const load = useRx(s => s.load);
   const [open, setOpen] = useState(false);
+  const [more, setMore] = useState(false);
   const [txt, setTxt] = useState('');
-  const pop = useRef<HTMLDivElement>(null);
+  const [fly, setFly] = useState<{ e: string; k: number } | null>(null);
+  const root = useRef<HTMLDivElement>(null);
   useEffect(() => { load([id]); }, [id, load]);
   useEffect(() => {
     if (!open) return;
-    const away = (e: PointerEvent) => { if (!pop.current?.parentElement?.contains(e.target as Node)) setOpen(false); };
+    const away = (e: PointerEvent) => { if (!root.current?.contains(e.target as Node)) { setOpen(false); setMore(false); } };
     document.addEventListener('pointerdown', away);
     return () => document.removeEventListener('pointerdown', away);
   }, [open]);
+  useEffect(() => { if (!fly) return; const t = setTimeout(() => setFly(null), 900); return () => clearTimeout(t); }, [fly]);
   if (!on) return null;
 
   const list = rxSorted(counts);
   const shown = list.slice(0, 8);
   const rest = list.slice(8).reduce((n, [, c]) => n + c, 0);
-  const pick = (e: string) => { toggle(id, e); setOpen(false); setTxt(''); };
+  const react = (e: string) => { if (!mine.includes(e)) setFly({ e, k: Date.now() }); toggle(id, e); };
+  const pick = (e: string) => { react(e); setOpen(false); setMore(false); setTxt(''); };
   const ok = isEmoji(txt.trim());
+  const quick = more ? QUICK_EMOJI : QUICK_EMOJI.slice(0, 7);
 
   return (
-    <div className={`rx ${compact ? 'rx-sm' : ''}`} onClick={e => e.stopPropagation()}>
+    <div ref={root} className={`rx ${compact ? 'rx-sm' : ''}`} onClick={e => e.stopPropagation()}>
       {shown.map(([e, n]) => (
-        <button key={e} className={`rx-chip ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => toggle(id, e)} aria-pressed={mine.includes(e)} aria-label={`${e} ${n}${mine.includes(e) ? ' · reacția ta' : ''}`}>
+        <button key={e} className={`rx-chip ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => react(e)} aria-pressed={mine.includes(e)} aria-label={`${e} ${n}${mine.includes(e) ? ' · reacția ta' : ''}`}>
           <span className="rx-e">{e}</span><span className="rx-n">{n}</span>
         </button>
       ))}
       {rest > 0 && <span className="rx-more mono" title="alte reacții">+{rest}</span>}
       <div className="rx-add">
-        <button className={`rx-chip rx-plus ${open ? 'is-open' : ''}`} onClick={() => setOpen(o => !o)} aria-label="Adaugă o reacție" aria-expanded={open}>
+        <button className={`rx-chip rx-plus ${open ? 'is-open' : ''}`} onClick={() => { setOpen(o => !o); setMore(false); }} aria-label="Adaugă o reacție" aria-expanded={open}>
           <Icon icon="solar:smile-circle-linear" width="18" /><span className="rx-n">+</span>
         </button>
         {open && (
-          <div ref={pop} className="rx-pop" role="dialog" aria-label="Alege un emoji" onKeyDown={e => { if (e.key === 'Escape') { e.stopPropagation(); setOpen(false); } }}>
-            <div className="rx-grid">
-              {QUICK_EMOJI.map(e => <button key={e} className={`rx-q ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => pick(e)} aria-label={e} aria-pressed={mine.includes(e)}>{e}</button>)}
+          <div className={`rx-pop ${more ? 'is-more' : ''}`} role="dialog" aria-label="Alege un emoji" onKeyDown={e => { if (e.key === 'Escape') { e.stopPropagation(); setOpen(false); setMore(false); } }}>
+            <div className="rx-bar">
+              {quick.map(e => <button key={e} className={`rx-q ${mine.includes(e) ? 'is-mine' : ''}`} onClick={() => pick(e)} aria-label={e} aria-pressed={mine.includes(e)}><AnimEmoji emoji={e} play="loop" size={34} /></button>)}
+              {!more && <button className="rx-q rx-expand" onClick={() => setMore(true)} aria-label="Mai multe emoji"><Icon icon="solar:alt-arrow-down-linear" width="20" /></button>}
             </div>
-            <form className="rx-any" onSubmit={e => { e.preventDefault(); if (ok) pick(txt.trim()); }}>
-              <input value={txt} onChange={e => setTxt(e.target.value)} placeholder="sau orice emoji…" aria-label="Orice emoji" maxLength={16} autoFocus />
-              <button type="submit" className="btn btn-sm" disabled={!ok}>Reacționează</button>
-            </form>
+            {more && (
+              <form className="rx-any" onSubmit={e => { e.preventDefault(); if (ok) pick(txt.trim()); }}>
+                <input value={txt} onChange={e => setTxt(e.target.value)} placeholder="sau orice emoji…" aria-label="Orice emoji" maxLength={16} autoFocus />
+                <button type="submit" className="btn btn-sm" disabled={!ok}>Reacționează</button>
+              </form>
+            )}
           </div>
         )}
       </div>
+      {fly && <span key={fly.k} className="rx-fly" aria-hidden="true"><AnimEmoji emoji={fly.e} play="once" size={64} /></span>}
       {error && <span className="rx-err mono" role="alert">{error}</span>}
     </div>
   );

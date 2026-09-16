@@ -49,11 +49,13 @@ export function PhotoGrid({ photos, emptyText = 'Nicio fotografie încă.', show
       </ul>
       {cur && createPortal(
         <div className="lb" role="dialog" aria-modal="true" aria-label="Fotografie" onClick={() => setOpen(null)}>
-          <img src={src(cur.url)} alt={cur.caption ?? ''} onClick={e => e.stopPropagation()} />
-          <div className="lb-foot" onClick={e => e.stopPropagation()}>
-            <Reactions id={cur.id} />
-            <p className="lb-cap">{cur.caption}<span className="mono"> {meta(cur)} · {open! + 1}/{list.length}</span></p>
-          </div>
+          <figure className="lb-box" onClick={e => e.stopPropagation()}>
+            <img src={src(cur.url)} alt={cur.caption ?? ''} />
+            <figcaption className="lb-under">
+              <Reactions id={cur.id} />
+              <p className="lb-cap">{cur.caption}<span className="mono"> {meta(cur)} · {open! + 1}/{list.length}</span></p>
+            </figcaption>
+          </figure>
           <button className="lb-x" onClick={() => setOpen(null)} aria-label="Închide"><Icon icon="solar:close-circle-linear" width="32" /></button>
           {open! > 0 && <button className="lb-nav lb-prev" onClick={e => { e.stopPropagation(); setOpen(open! - 1); }} aria-label="Anterioara"><Icon icon="solar:alt-arrow-left-linear" width="32" /></button>}
           {open! < list.length - 1 && <button className="lb-nav lb-next" onClick={e => { e.stopPropagation(); setOpen(open! + 1); }} aria-label="Următoarea"><Icon icon="solar:alt-arrow-right-linear" width="32" /></button>}

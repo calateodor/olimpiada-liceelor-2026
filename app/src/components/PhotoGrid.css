@@ -9,10 +9,12 @@
 @media (max-width: 600px) { .phg { grid-template-columns: 1fr 1fr; gap: var(--s2); } }
 .phg-item button:hover img { transform: scale(1.02); }
 .lb { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,7,11,.94); display: grid; place-items: center; padding: var(--s6); animation: fade var(--d-2) var(--e-out); }
-.lb img { max-height: 74vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); align-self: start; margin-top: var(--s6); }
-.lb-foot { position: absolute; bottom: var(--s5); left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: var(--s3); width: min(92vw, 900px); }
-.lb-foot .rx { justify-content: center; }
-.lb-cap { color: #fff; font-weight: 500; text-align: center; }
+/* poza centrată; dedesubt, ca la Telegram: reacțiile în stânga, legenda în dreapta */
+.lb-box { display: grid; gap: var(--s3); justify-items: start; max-width: 92vw; margin: 0; }
+.lb img { max-height: 72vh; max-width: 92vw; object-fit: contain; border-radius: var(--r-md); box-shadow: var(--sh-3); }
+.lb-under { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s4); width: 100%; }
+.lb-cap { color: #fff; font-weight: 500; margin-left: auto; text-align: right; }
+@media (max-width: 600px) { .lb { padding: var(--s4); } .lb img { max-height: 64vh; } .lb-cap { margin-left: 0; text-align: left; } }
 .lb-cap .mono { color: rgba(255,255,255,.6); }
 .lb-x { position: absolute; top: var(--s5); right: var(--s5); color: #fff; }
 .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); }

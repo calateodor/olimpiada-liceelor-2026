@@ -118,10 +118,12 @@ export function VideoTile({ v }: { v: Video }) {
       </figure>
       {createPortal(
         <div className="vlb" role="dialog" aria-modal="true" aria-label={v.title} onClick={() => setBig(false)}>
-          {player}
-          <div className="vlb-foot" onClick={e => e.stopPropagation()}>
-            <Reactions id={v.id} />
-            <p className="vlb-cap"><b>{v.title}</b>{v.caption && <span> · {v.caption}</span>}</p>
+          <div className="vlb-box" onClick={e => e.stopPropagation()}>
+            {player}
+            <div className="vlb-under">
+              <Reactions id={v.id} />
+              <p className="vlb-cap"><b>{v.title}</b>{v.caption && <span> · {v.caption}</span>}</p>
+            </div>
           </div>
           <button className="vlb-x" onClick={() => setBig(false)} aria-label="Închide"><Icon icon="solar:close-circle-linear" width="32" /></button>
         </div>,
