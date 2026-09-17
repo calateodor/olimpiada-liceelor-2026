@@ -13,7 +13,11 @@ export default function Clasament() {
   const counted = state.events.filter(e => e.finished || (eventPlacements(e, state.matches)[0] && e.format !== 'ranking')).length;
   return (
     <div className="page cl">
-      <PageHead idx={`Clasament general · ${counted}/${state.events.length} probe punctate`} title="Cine ia cupa?" lead="Locul I aduce 10 puncte, locul II 8, locul III 6, la fiecare probă. Primele trei licee primesc trofee și premii, iar fiecare liceu participant primește dotări de până la 100.000 lei." />
+      <PageHead idx={`Clasament general · ${counted}/${state.events.length} probe punctate`} title="Cine ia cupa?" lead={'Liceele orașului ies din bănci și se bat pe teren, pe scenă și în oraș.
+Fotbal, baschet, handbal, volei, tenis de masă, cros.
+Dans, muzică, graffiti, Miss și Mister.
+Voluntariat. Echipă. Fair-play.
+Fie ca cel mai bun liceu să câștige.'} />
       <GeneralStandings full />
       <section className="container cl-matrix">
         <div className="sec-head"><span className="idx">Pe probe</span><h2 className="h2">Matricea punctelor</h2><p className="aside body">Locul obținut și punctele aduse de fiecare liceu, probă cu probă. Probele nepunctate încă apar goale.</p></div>

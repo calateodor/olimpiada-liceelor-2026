@@ -14,7 +14,7 @@ export function PageHead({ idx, title, lead, children, dark = false }: { idx: st
     <div ref={root} className={`page-head container ${dark ? 'is-dark' : ''}`}>
       <p className="mono" data-ph>{idx}</p>
       <h1 ref={h} className="h1" style={{ marginTop: 'var(--s4)' }}>{title}</h1>
-      {lead && <p className="lead" data-ph style={{ marginTop: 'var(--s6)' }}>{lead}</p>}
+      {lead && <p className="lead" data-ph style={{ marginTop: 'var(--s6)', whiteSpace: 'pre-line' }}>{lead}</p>}
       {children && <div data-ph style={{ marginTop: 'var(--s6)' }}>{children}</div>}
     </div>
   );
