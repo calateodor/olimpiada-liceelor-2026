@@ -34,7 +34,8 @@ interface Store {
 function clone<T>(x: T): T { return JSON.parse(JSON.stringify(x)); }
 
 /** Starea salvată poate fi mai veche decât codul: completăm câmpurile noi din seed, la fiecare nivel. */
-export const STALE_TEXT: [string, string][] = [['baschet', 'Două reprize a câte 15 minute, 5 pe teren. Victorie 2 puncte, înfrângere 1 punct, neprezentare 0.']];
+export const FIX_SCORES: { id: string; wrong: [number, number]; right: [number, number] }[] = [{ id: 'volei-gB-2-3', wrong: [2, 1], right: [1, 2] }]; // 17 sept: Alexe Marin – Metalurgic a fost 1–2
+const STALE_TEXT: [string, string][] = [['baschet', 'Două reprize a câte 15 minute, 5 pe teren. Victorie 2 puncte, înfrângere 1 punct, neprezentare 0.']];
 
 function withDefaults(s: Partial<State>): State {
   const d = SEED.config;
@@ -87,6 +88,11 @@ function withDefaults(s: Partial<State>): State {
   const removed = new Set(removedMedia);
   const photos = mergeStatic(s.photos ?? [], STATIC_PHOTOS, removed);
   const videos = mergeStatic(s.videos ?? [], STATIC_VIDEOS, removed);
+  // scoruri introduse invers în panou și corectate din cod (o dată; la următoarea publicare rămâne corectura)
+  matches = matches.map(m => {
+    const fix = FIX_SCORES.find(f => f.id === m.id && m.homeScore === f.wrong[0] && m.awayScore === f.wrong[1]);
+    return fix ? { ...m, homeScore: fix.right[0], awayScore: fix.right[1] } : m;
+  });
   return { ...SEED, ...s, calendarVersion, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
 }
 
