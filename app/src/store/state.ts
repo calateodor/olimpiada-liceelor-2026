@@ -34,7 +34,9 @@ interface Store {
 function clone<T>(x: T): T { return JSON.parse(JSON.stringify(x)); }
 
 /** Starea salvată poate fi mai veche decât codul: completăm câmpurile noi din seed, la fiecare nivel. */
-export function withDefaults(s: Partial<State>): State {
+export const STALE_TEXT: [string, string][] = [['baschet', 'Două reprize a câte 15 minute, 5 pe teren. Victorie 2 puncte, înfrângere 1 punct, neprezentare 0.']];
+
+function withDefaults(s: Partial<State>): State {
   const d = SEED.config;
   const c = (s.config ?? {}) as Partial<Config>;
   const config: Config = {
@@ -59,6 +61,8 @@ export function withDefaults(s: Partial<State>): State {
     if (!st) return se;
     const out = { ...se } as OlEvent;
     for (const k of EDITABLE) if (st[k] !== undefined) (out as unknown as Record<string, unknown>)[k] = st[k];
+    // texte corectate după publicare: varianta veche salvată e înlocuită cu cea din seed (o dată; la următoarea publicare rămâne cea nouă)
+    if (STALE_TEXT.some(([id, old]) => id === se.id && out.description === old)) out.description = se.description;
     return out;
   });
   const ids = new Set(events.map(e => e.id));
