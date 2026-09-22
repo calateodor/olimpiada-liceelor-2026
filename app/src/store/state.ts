@@ -77,6 +77,11 @@ function withDefaults(s: Partial<State>): State {
       const sm = seedById.get(m.id);
       return sm && m.status === 'scheduled' ? { ...m, date: sm.date, time: sm.time, venue: sm.venue } : m;
     });
+    // și datele/orele probelor neîncheiate (de exemplu finalele de handbal mutate, majoretele la altă oră)
+    for (const ev of events) {
+      const se = SEED.events.find(x => x.id === ev.id);
+      if (se && !ev.finished) Object.assign(ev, { dateLabel: se.dateLabel, startDate: se.startDate, endDate: se.endDate, time: se.time });
+    }
     calendarVersion = SEED.calendarVersion!;
   }
   // texte din seed care s-au schimbat odată cu numărul de probe

@@ -44,12 +44,13 @@ function buildNodes(state: State): Node[] {
       { label: lbl('handbal', 'etapa 3 · 21 sept'), eventId: 'handbal', ...stageDone(['handbal'], ['gA', 'gB'], '2026-09-20', '2026-09-23') },
       { label: 'Volei · 21 sept', eventId: 'volei', ...stageDone(['volei'], ['sf1', 'sf2'], '2026-09-21', '2026-09-21') },
       { label: 'Handbal · 22 sept', eventId: 'handbal', ...stageDone(['handbal'], ['sf1', 'sf2'], '2026-09-22', '2026-09-22') } ] },
-    { id: 'finale1', title: 'Primele finale', dates: '24 – 25 sept', from: '2026-09-24', to: '2026-09-25', icon: 'solar:medal-ribbons-star-linear', items: [
-      { label: 'Finale volei · 24 sept', eventId: 'volei', ...stageDone(['volei'], ['f3', 'f1'], '2026-09-24', '2026-09-24') },
-      { label: 'Finale handbal · 25 sept', eventId: 'handbal', ...stageDone(['handbal'], ['f3', 'f1'], '2026-09-25', '2026-09-25') } ] },
+    { id: 'finale1', title: 'Primele finale', dates: '23 – 24 sept', from: '2026-09-23', to: '2026-09-24', icon: 'solar:medal-ribbons-star-linear', items: [
+      { label: 'Finale handbal · 23 sept · LPS', eventId: 'handbal', ...stageDone(['handbal'], ['f3', 'f1'], '2026-09-23', '2026-09-23') },
+      { label: 'Finale volei · 24 sept · Greceanu', eventId: 'volei', ...stageDone(['volei'], ['f3', 'f1'], '2026-09-24', '2026-09-24') } ] },
     { id: 'stadion', title: 'Ziua stadionului', dates: '28 sept', from: '2026-09-28', to: '2026-09-28', icon: 'solar:star-fall-2-linear', items: [
-      { label: 'Majorete + mascotă · 15:00', eventId: 'majorete', ...evDone('majorete') },
-      { label: 'Finalele de fotbal · 17:00 & 18:00', eventId: 'fotbal', ...stageDone(['fotbal'], ['f3', 'f1'], '2026-09-28', '2026-09-28') } ] },
+      { label: 'Finala mică de fotbal · 16:00', eventId: 'fotbal', ...stageDone(['fotbal'], ['f3'], '2026-09-28', '2026-09-28') },
+      { label: 'Majorete + mascotă · 17:00', eventId: 'majorete', ...evDone('majorete') },
+      { label: 'Finala mare de fotbal · 18:00', eventId: 'fotbal', ...stageDone(['fotbal'], ['f1'], '2026-09-28', '2026-09-28') } ] },
     { id: 'cros', title: 'Crosul', dates: '29 sept', from: '2026-09-29', to: '2026-09-29', icon: 'solar:running-2-linear', items: [
       { label: '4,9 km prin centru · start 18:00', eventId: 'cros', ...evDone('cros') } ], link: '/locatii#cros' },
     { id: 'graffiti', title: 'Graffiti & baschet', dates: '30 sept', from: '2026-09-30', to: '2026-09-30', icon: 'solar:pallete-2-linear', items: [
