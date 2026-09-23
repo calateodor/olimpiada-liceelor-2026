@@ -96,10 +96,11 @@ export const MATCHES: Match[] = [
 export const SEED: State = {
   version: 1,
   calendarVersion: 3,
+  concertVersion: 1,
   updatedAt: '2026-09-08T00:00:00.000Z',
   config: {
     pointsPerPlace: [10, 8, 6, 0, 0, 0, 0],
-    concertPhase: 0,
+    concertPhase: 3,
     concertDate: '2026-10-03T20:00:00+03:00',
     concertVenue: 'Esplanada Slatina',
     heroTagline: '7 licee · 14 probe · 3 săptămâni',
@@ -113,7 +114,7 @@ export const SEED: State = {
     tickerMessages: [],
     standings: { show: true, note: '', adjustments: [] },
     contact: { email: 'cultura.sport@primariaslatina.ro', phone: '0249 439 377', site: 'https://www.primariaslatina.ro', address: 'Str. M. Kogălniceanu nr. 1, Slatina', facebook: '', instagram: '', tiktok: '', youtube: '' },
-    concert: { artist: 'Grasu XXL', teasers: ['Seara finală se încheie cu o surpriză.', 'Confirmat: seara finală se încheie cu un concert live. Artistul, în curând.', 'Concert Grasu XXL pe Esplanadă, după premiere.'], poster: '' },
+    concert: { artist: 'Grasu XXL', teasers: ['Seara finală se încheie cu o surpriză.', 'Confirmat: seara finală se încheie cu un concert live. Artistul, în curând.', 'Concert Grasu XXL pe Esplanadă, după premiere.', 'Merry Christmas! Seara finală ascunde o surpriză.'], poster: '' },
     regsHidden: [],
     extraDocs: [],
     schoolInfo: {},

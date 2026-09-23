@@ -17,22 +17,25 @@ export function ConcertTeaser() {
     return () => ctx.revert();
   }, [phase]);
 
-  const title = phase === 0 ? '???' : phase === 1 ? 'Concert' : 'Grasu XXL';
-  const sub = phase === 0 ? 'Ceva se pregătește pentru seara finală, după Miss & Mister. Nu putem spune încă ce. Urmărește traseul.' : phase === 1 ? 'După Miss & Mister, scena de pe Esplanadă rămâne aprinsă. Un concert. Artistul, în curând.' : 'Live pe Esplanadă, după finala Miss & Mister. Intrarea liberă.';
+  const mystery = phase === 0 || phase === 3;
+  const title = mystery ? '???' : phase === 1 ? 'Concert' : 'Grasu XXL';
+  const sub = mystery ? 'Ceva se pregătește pentru seara finală, după Miss & Mister. Nu putem spune încă ce. Urmărește traseul.' : phase === 1 ? 'După Miss & Mister, scena de pe Esplanadă rămâne aprinsă. Un concert. Artistul, în curând.' : 'Live pe Esplanadă, după finala Miss & Mister. Intrarea liberă.';
 
   return (
     <section ref={root} className="ct section" aria-label="Seara finală">
       <div className="container ct-in">
         <div className="ct-copy">
           <div className="idx" data-ct><span className="bar bar-sm">Seara finală · 3 oct</span><span className="mono">Esplanada Slatina</span></div>
-          <h2 className={`h1 ct-title ${phase === 0 ? 'is-mystery' : ''}`} data-ct>{title}</h2>
+          <h2 className={`h1 ct-title ${mystery ? 'is-mystery' : ''}`} data-ct>{title}</h2>
           <p className="lead" data-ct>{sub}</p>
           <p className="mono" data-ct>3 octombrie · Esplanada · intrarea liberă</p>
         </div>
         <div className="ct-card">
           <span className="mono ct-card-d">3 oct</span>
-          {phase === 2 ? <img src={asset('/img/grasu-xxl.jpg')} alt="Grasu XXL" className="ct-photo" /> : <span className="ct-q">?</span>}
-          <span className="ct-card-l">{phase === 0 ? 'surpriză' : phase === 1 ? 'concert' : 'live'}</span>
+          {phase === 2 ? <img src={asset('/img/grasu-xxl.jpg')} alt="Grasu XXL" className="ct-photo" /> : phase === 3 ? (
+            <span className="ct-xmas"><span className="ct-xmas-t">Merry Christmas!</span><span className="ct-q">?</span></span>
+          ) : <span className="ct-q">?</span>}
+          <span className="ct-card-l">{mystery ? 'surpriză' : phase === 1 ? 'concert' : 'live'}</span>
         </div>
       </div>
     </section>

@@ -65,7 +65,7 @@ function buildNodes(state: State): Node[] {
       { label: 'Miss & Mister · 18:00', eventId: 'miss', ...evDone('miss') },
       { label: 'Dans & interpretare muzicală', eventId: 'dans', ...evDone('dans') },
       { label: 'Premierea · clasamentul general' },
-      { label: state.config.concertPhase === 0 ? '? ? ?' : state.config.concertPhase === 1 ? 'Concert live' : 'Concert Grasu XXL' } ], link: '/probe/miss' },
+      { label: state.config.concertPhase === 0 || state.config.concertPhase === 3 ? '? ? ?' : state.config.concertPhase === 1 ? 'Concert live' : 'Concert Grasu XXL' } ], link: '/probe/miss' },
   ];
 }
 

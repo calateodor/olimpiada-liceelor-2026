@@ -6,7 +6,7 @@ import { SCHOOLS, SCHOOL_BY_ID, type SchoolId } from '../data/schools';
 import { SEED } from '../data/seed';
 import { STAGE_LABEL, eventPlacements, fmtDate, resolvedMatches, PLACE_LABEL, generalStandings, todayISO, eventStatus } from '../lib/competition';
 import { resizeImage, uploadBlob } from '../lib/image';
-import type { EventId, Match, MatchStatus, Photo, TimelineEntry, ConcertPhase, Stage } from '../lib/types';
+import { PHASE_ORDER, type EventId, type Match, type MatchStatus, type Photo, type TimelineEntry, type Stage } from '../lib/types';
 import { SchoolMark } from '../components/SchoolMark';
 import { SchoolCrest } from '../components/SchoolCrest';
 import { asset } from '../lib/asset';
@@ -558,14 +558,14 @@ function Concert() {
       <section className="pn-block">
         <h3 className="h4">Faza dezvăluirii</h3>
         <div className="pn-radio">
-          {([0, 1, 2] as ConcertPhase[]).map(p => <label key={p} className={`pn-radio-opt ${c.concertPhase === p ? 'is-on' : ''}`}><input type="radio" name="phase" checked={c.concertPhase === p} onChange={() => setState(s => { s.config.concertPhase = p; }, `Concert: faza ${p + 1}`)} /><b>{['Faza 1 · Mister', 'Faza 2 · „E un concert”', `Faza 3 · ${c.concert.artist || 'Artistul'}`][p]}</b><span className="dim">{c.concert.teasers[p]}</span></label>)}
+          {PHASE_ORDER.map((p, i) => <label key={p} className={`pn-radio-opt ${c.concertPhase === p ? 'is-on' : ''}`}><input type="radio" name="phase" checked={c.concertPhase === p} onChange={() => setState(s => { s.config.concertPhase = p; }, `Concert: faza ${i + 1}`)} /><b>Faza {i + 1} · {{ 3: '„Merry Christmas!”', 0: 'Mister', 1: '„E un concert”', 2: c.concert.artist || 'Artistul' }[p]}</b><span className="dim">{c.concert.teasers[p]}</span></label>)}
         </div>
       </section>
       <section className="pn-block">
         <h3 className="h4">Texte pe faze</h3>
         <div className="pn-places">
-          {[0, 1, 2].map(i => <label key={i} className="pn-field pn-span"><span className="mono">Faza {i + 1}</span><input type="text" value={c.concert.teasers[i] ?? ''} onChange={e => setState(s => { s.config.concert.teasers[i] = e.target.value; }, `Concert: text faza ${i + 1}`)} /></label>)}
-          <label className="pn-field"><span className="mono">Artistul (apare doar în faza 3)</span><input type="text" value={c.concert.artist} onChange={e => setState(s => { s.config.concert.artist = e.target.value; }, 'Concert: artist')} /></label>
+          {PHASE_ORDER.map((i, n) => <label key={i} className="pn-field pn-span"><span className="mono">Faza {n + 1}</span><input type="text" value={c.concert.teasers[i] ?? ''} onChange={e => setState(s => { s.config.concert.teasers[i] = e.target.value; }, `Concert: text faza ${n + 1}`)} /></label>)}
+          <label className="pn-field"><span className="mono">Artistul (apare doar în faza 4)</span><input type="text" value={c.concert.artist} onChange={e => setState(s => { s.config.concert.artist = e.target.value; }, 'Concert: artist')} /></label>
           <label className="pn-field"><span className="mono">Data / ora</span><input type="datetime-local" value={c.concertDate.slice(0, 16)} onChange={e => setState(s => { s.config.concertDate = e.target.value + ':00+03:00'; }, 'Concert: dată')} /></label>
           <label className="pn-field"><span className="mono">Locul</span><input type="text" value={c.concertVenue} onChange={e => setState(s => { s.config.concertVenue = e.target.value; })} /></label>
         </div>

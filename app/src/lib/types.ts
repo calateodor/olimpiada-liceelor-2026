@@ -105,7 +105,10 @@ export interface TimelineEntry {
   photoId?: string;
 }
 
-export type ConcertPhase = 0 | 1 | 2; // 0 = mister, 1 = "e un concert", 2 = Grasu XXL
+/** 3 = „Merry Christmas!” deasupra semnului întrebării (prima fază, adăugată după celelalte, de aceea are numărul 3),
+    0 = mister, 1 = „e un concert”, 2 = artistul. Ordinea în care se trece prin ele: PHASE_ORDER. */
+export type ConcertPhase = 0 | 1 | 2 | 3;
+export const PHASE_ORDER: ConcertPhase[] = [3, 0, 1, 2];
 
 export interface Roster { [schoolId: string]: Partial<Record<EventId, string[]>> }
 
@@ -150,6 +153,8 @@ export interface State {
   version: number;
   /** versiunea calendarului din cod aplicată stării salvate (vezi withDefaults: meciurile nejucate primesc data/ora/locul din seed) */
   calendarVersion?: number;
+  /** migrările fazelor concertului deja aplicate (1 = trecerea din „Mister” în „Merry Christmas!”) */
+  concertVersion?: number;
   updatedAt: string;
   config: Config;
   events: OlEvent[];

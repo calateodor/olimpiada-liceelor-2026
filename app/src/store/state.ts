@@ -98,7 +98,15 @@ function withDefaults(s: Partial<State>): State {
     const fix = FIX_SCORES.find(f => f.id === m.id && m.homeScore === f.wrong[0] && m.awayScore === f.wrong[1]);
     return fix ? { ...m, homeScore: fix.right[0], awayScore: fix.right[1] } : m;
   });
-  return { ...SEED, ...s, calendarVersion, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
+  // faza nouă a teaserului („Merry Christmas!”): site-ul trece o singură dată din „Mister” în ea; după ce panoul
+  // publică, alegerea din panou rămâne a panoului
+  let concertVersion = s.concertVersion ?? 0;
+  if (concertVersion < 1) {
+    if (config.concertPhase === 0) config.concertPhase = 3;
+    if (config.concert.teasers.length < 4) config.concert = { ...config.concert, teasers: [...config.concert.teasers, ...SEED.config.concert.teasers.slice(config.concert.teasers.length)] };
+    concertVersion = 1;
+  }
+  return { ...SEED, ...s, calendarVersion, concertVersion, config, events, matches, timeline, photos, videos, removedMedia, log: s.log ?? [] };
 }
 
 function mergeStatic<T extends { id: string }>(saved: T[], builtIn: T[], removed: Set<string>): T[] {

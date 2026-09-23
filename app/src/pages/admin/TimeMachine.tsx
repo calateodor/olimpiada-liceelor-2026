@@ -5,7 +5,7 @@ import { SCHOOL_BY_ID } from '../../data/schools';
 import { competitionDays, fmtDate, generalStandings, STAGE_LABEL, matchDate, TZ } from '../../lib/competition';
 import { keyMoments } from '../../lib/simulation';
 import { now } from '../../lib/clock';
-import type { Config } from '../../lib/types';
+import { PHASE_ORDER, type Config } from '../../lib/types';
 
 type Sim = Config['simulation'];
 
@@ -88,7 +88,7 @@ export function TimeMachine() {
               </div>
               {live.length > 0 && <ul className="pn-list pn-list-2">{live.map(m => <li key={m.id}><span className="mono">{m.time}</span><b>{evName(m.eventId)} · {STAGE_LABEL[m.stage]}: {m.home ? SCHOOL_BY_ID[m.home].short : '?'} {m.homeScore}–{m.awayScore} {m.away ? SCHOOL_BY_ID[m.away].short : '?'}</b></li>)}</ul>}
               <p className="mono dim">Clasament general: {gen.map((r, i) => `${i + 1}. ${r.school.short} ${r.pts}p`).join(' · ')}</p>
-              <p className="mono dim">Concert: faza {state.config.concertPhase + 1}{state.config.announcement.on ? ` · anunț: „${state.config.announcement.text.slice(0, 60)}…”` : ''}</p>
+              <p className="mono dim">Concert: faza {PHASE_ORDER.indexOf(state.config.concertPhase) + 1}{state.config.announcement.on ? ` · anunț: „${state.config.announcement.text.slice(0, 60)}…”` : ''}</p>
               <button className="link" onClick={() => setTick(t => t + 1)}>reîmprospătează</button>
             </>
           )}
