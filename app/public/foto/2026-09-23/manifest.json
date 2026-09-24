@@ -1415,5 +1415,20 @@
    "createdAt": "2026-09-23T17:32:27+03:00"
   }
  ],
- "videos": []
+ "videos": [
+  {
+   "id": "2026-09-23-clip-finala-handball",
+   "src": "/foto/2026-09-23/video/finala-handball.m3u8",
+   "poster": "/foto/2026-09-23/video/finala-handball-poster.jpg",
+   "w": 1080,
+   "h": 1920,
+   "duration": 88,
+   "title": "Ziua 8: finalele la handbal",
+   "caption": "Finala mică și finala mare de handbal fete, la Liceul cu Program Sportiv.",
+   "eventIds": [
+    "handbal"
+   ],
+   "createdAt": "2026-09-23T20:00:00+03:00"
+  }
+ ]
 }
