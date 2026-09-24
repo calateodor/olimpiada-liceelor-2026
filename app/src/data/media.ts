@@ -1019,7 +1019,6 @@ export const STATIC_PHOTOS: Photo[] = [
   { id: "2026-09-23-handbal-nyk00270", url: "/foto/2026-09-23/handbal/NYK00270.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00270.jpg", w: 1200, h: 1800, eventId: "handbal", createdAt: "2026-09-23T16:22:48+03:00" },
   { id: "2026-09-23-handbal-nyk00279", url: "/foto/2026-09-23/handbal/NYK00279.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00279.jpg", w: 1200, h: 1800, eventId: "handbal", createdAt: "2026-09-23T16:24:50+03:00" },
   { id: "2026-09-23-handbal-nyk00286", url: "/foto/2026-09-23/handbal/NYK00286.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00286.jpg", w: 1800, h: 1200, eventId: "handbal", createdAt: "2026-09-23T16:24:55+03:00" },
-  { id: "2026-09-23-handbal-nyk00295", url: "/foto/2026-09-23/handbal/NYK00295.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00295.jpg", w: 1200, h: 1800, eventId: "handbal", createdAt: "2026-09-23T16:26:19+03:00" },
   { id: "2026-09-23-handbal-nyk00298", url: "/foto/2026-09-23/handbal/NYK00298.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00298.jpg", w: 1200, h: 1800, eventId: "handbal", createdAt: "2026-09-23T16:32:24+03:00" },
   { id: "2026-09-23-handbal-nyk00301", url: "/foto/2026-09-23/handbal/NYK00301.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00301.jpg", w: 1800, h: 1200, eventId: "handbal", createdAt: "2026-09-23T16:33:39+03:00" },
   { id: "2026-09-23-handbal-nyk00305", url: "/foto/2026-09-23/handbal/NYK00305.jpg", thumb: "/foto/2026-09-23/handbal/t/NYK00305.jpg", w: 1800, h: 1200, eventId: "handbal", createdAt: "2026-09-23T16:34:31+03:00" },
