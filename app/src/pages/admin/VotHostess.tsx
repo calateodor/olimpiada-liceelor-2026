@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { useStore } from '../../store/state';
 import { HOSTESSES } from '../../data/hostess';
@@ -17,7 +17,8 @@ type Net = { iph: string; n: number; first: number; last: number; split: Record<
 type Stats = {
   counts: Record<string, number>; voters: number; moved: number; networks: number; first: number | null; last: number | null;
   nets: Net[]; countries: { country: string; n: number }[]; hours: { h: number; n: number }[];
-  status: { live: boolean; on: boolean; open: boolean; closesAt: string; announce: boolean };
+  status: { live: boolean; on: boolean; open: boolean; closesAt: string; announce: boolean; cap: number };
+  preview: { cap: number; counts: Record<string, number> };
   turnstile: { sitekey: string; hasSecret: boolean };
 };
 
@@ -46,13 +47,22 @@ export function VotHostess() {
 
   const load = () => {
     if (!online || !token) return;
-    fetch('/api/vote/stats', { headers: auth, cache: 'no-store' })
+    fetch(`/api/vote/stats${capRef.current > 0 ? `?cap=${capRef.current}` : ''}`, { headers: auth, cache: 'no-store' })
       .then(async r => { const j = await r.json(); if (!r.ok) throw new Error(j.error ?? `Eroare ${r.status}`); return j; })
       .then((j: Stats) => { setSt(j); setTs(t => ({ ...t, sitekey: j.turnstile?.sitekey ?? '' })); setErr(''); })
       .catch(e => setErr((e as Error).message));
   };
   useEffect(() => { load(); const t = setInterval(load, 30000); return () => clearInterval(t); }, [online, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const applyCap = async () => {
+    const n = c.perNetwork;
+    const removed = total - Object.values(st?.preview.counts ?? {}).reduce((a, b) => a + b, 0);
+    if (!(n > 0) || !confirm(`Din fiecare rețea rămân doar primele ${n} voturi, iar celelalte ${removed.toLocaleString('ro-RO')} se șterg definitiv. Continui?`)) return;
+    setBusy('Se aplică limita…');
+    const r = await fetch(`/api/vote?cap=${n}`, { method: 'DELETE', headers: auth });
+    const j = await r.json().catch(() => ({}));
+    setBusy(r.ok ? `Gata: ${Number(j.removed ?? 0).toLocaleString('ro-RO')} voturi șterse.` : 'Nu s-a putut aplica.'); setTimeout(() => setBusy(''), 8000); load();
+  };
   const del = async (q: string, what: string) => {
     if (!confirm(what)) return;
     setBusy('Se șterge…');
@@ -67,6 +77,9 @@ export function VotHostess() {
     setTs(t => ({ ...t, secret: '' })); setTimeout(() => setBusy(''), 5000); load();
   };
   const set = (what: string, mut: (v: typeof c) => void) => setState(s => { mut(s.config.vote); }, what);
+  // previzualizarea urmează valoarea din câmp (și înainte de „Publică”)
+  const capRef = useRef(c.perNetwork);
+  useEffect(() => { capRef.current = c.perNetwork; const t = setTimeout(load, 400); return () => clearTimeout(t); }, [c.perNetwork]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const counts = st?.counts ?? {};
   const total = HOSTESSES.reduce((n, h) => n + (counts[h.id] ?? 0), 0);
@@ -120,12 +133,35 @@ export function VotHostess() {
         <label className="pn-field" style={{ maxWidth: 320 }}><span className="mono">Se închide automat (ora României)</span>
           <input type="datetime-local" step="1" value={toLocal(c.closesAt)} onChange={e => set('Vot hostess: ora de închidere', x => { x.closesAt = `${e.target.value.length === 16 ? e.target.value + ':00' : e.target.value}${TZ}`; })} />
         </label>
+        <label className="pn-field" style={{ maxWidth: 320 }}><span className="mono">Voturi noi dintr-o singură rețea (0 = fără limită)</span>
+          <input type="number" min={0} max={1000} value={c.perNetwork} onChange={e => set('Vot hostess: limita pe rețea', x => { x.perNetwork = Math.max(0, Math.floor(Number(e.target.value) || 0)); })} />
+        </label>
+        <p className="body dim">Oprește votul repetat din ferestre incognito: fiecare fereastră nouă pare alt telefon, dar vine din aceeași rețea. Cine a votat își poate muta oricând votul. Cine ajunge la limită e rugat să voteze de pe altă rețea, de exemplu de pe datele mobile. Acum pe site: {st ? (st.status.cap > 0 ? `${st.status.cap} voturi pe rețea` : 'fără limită') : '…'}.</p>
         <p className="body dim">Setările intră pe site după „Publică”, în cel mult 15 secunde.</p>
       </section>
 
+      {st && c.perNetwork > 0 && (
+        <section className="pn-block">
+          <div className="between"><h3 className="h4">Limita aplicată și voturilor deja date</h3><span className="mono dim">previzualizare · {c.perNetwork} pe rețea</span></div>
+          <p className="body dim">Din fiecare rețea ar rămâne doar primele {c.perNetwork} voturi, în ordinea în care au venit, iar restul s-ar șterge definitiv.</p>
+          <div className="pn-rows">
+            {rankHostesses(st.preview.counts).map(h => (
+              <div key={h.id} className="pn-net-row">
+                <b>{h.name}</b>
+                <span className="num">{nf(counts[h.id] ?? 0)} acum</span>
+                <span className="num"><b>{nf(st.preview.counts[h.id] ?? 0)}</b> după</span>
+                <span className="dim num">−{nf((counts[h.id] ?? 0) - (st.preview.counts[h.id] ?? 0))}</span>
+                <span />
+              </div>
+            ))}
+          </div>
+          <div className="row"><button className="btn btn-sm" onClick={applyCap}>Aplică limita și voturilor deja date</button>{busy && <span className="mono">{busy}</span>}</div>
+        </section>
+      )}
+
       <section className="pn-block">
-        <div className="between"><h3 className="h4">De unde s-a votat</h3><span className="mono dim">fără limită pe rețea</span></div>
-        <p className="body dim">O rețea e o adresă de internet, păstrată doar ca amprentă criptată. Un liceu pe Wi-Fi sau o rețea mobilă pot avea legitim multe voturi. Voturile venite într-un timp foarte scurt din aceeași rețea, toate pentru aceeași fată, pot fi un script: le poți șterge de aici.</p>
+        <div className="between"><h3 className="h4">De unde s-a votat</h3><span className="mono dim">{st ? (st.status.cap > 0 ? `limită: ${st.status.cap} pe rețea` : 'fără limită pe rețea') : ''}</span></div>
+        <p className="body dim">O rețea e o adresă de internet, păstrată doar ca amprentă criptată. Câteva voturi din aceeași rețea sunt normale: o familie, o clasă pe Wi-Fi. Sute de voturi din aceeași rețea pentru aceeași fată înseamnă vot repetat din incognito sau un script: le poți șterge de aici.</p>
         {st && st.nets.length === 0 && <p className="body dim">Încă niciun vot.</p>}
         <div className="pn-rows">
           {st?.nets.map(nw => {

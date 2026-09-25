@@ -12,11 +12,13 @@
    - DELETE /api/vote?iph=<hash>   → șterge voturile venite dintr-o rețea și renumără
    - POST   /api/vote/turnstile    → cheile Cloudflare Turnstile (verificarea anti-robot, opțională; starea lor vine în /stats)
 
-   Nu există limită automată pe rețea: un liceu întreg iese pe internet prin aceeași adresă. Panoul arată
-   însă rețelele cu multe voturi și le poate șterge. Se votează doar pe domeniul oficial (voteLiveOn).
+   Limită pe rețea: dintr-o singură rețea (IPv4, sau prefixul /64 la IPv6) se primesc cel mult perNetwork voturi
+   noi (implicit VOTE_NET_CAP; 0 = fără limită). Oprește votul repetat din ferestre incognito, care ar fi altfel
+   de fiecare dată un vizitator nou. Mutarea unui vot existent e oricând permisă. Panoul arată rețelele cu multe
+   voturi, le poate șterge și poate aplica limita și voturilor deja date (DELETE /api/vote?cap=N). Se votează doar pe domeniul oficial (voteLiveOn).
 --------------------------------------------------------------------------- */
 import { HOSTESSES } from '../src/data/hostess';
-import { VOTE_CLOSES_AT, voteLiveOn } from '../src/lib/vote';
+import { VOTE_CLOSES_AT, VOTE_NET_CAP, voteLiveOn } from '../src/lib/vote';
 
 type Who = { id: string; token: string; cookie?: string };
 export interface VoteCtx {
@@ -28,7 +30,7 @@ export interface VoteCtx {
   ipHash: (req: Request) => Promise<string>;
   isAdmin: (req: Request) => Promise<boolean>;
 }
-type VoteCfg = { on?: boolean; closesAt?: string; announce?: boolean };
+type VoteCfg = { on?: boolean; closesAt?: string; announce?: boolean; perNetwork?: number };
 type TsCfg = { sitekey?: string; secret?: string };
 
 const IDS = new Set(HOSTESSES.map(h => h.id));
@@ -55,7 +57,8 @@ function status(cfg: VoteCfg, host: string) {
   const closesAt = cfg.closesAt || VOTE_CLOSES_AT;
   const live = voteLiveOn(host);
   const on = cfg.on !== false;
-  return { live, on, open: live && on && Date.now() < Date.parse(closesAt), closesAt, announce: cfg.announce !== false };
+  const cap = typeof cfg.perNetwork === 'number' && cfg.perNetwork >= 0 ? Math.floor(cfg.perNetwork) : VOTE_NET_CAP;
+  return { live, on, open: live && on && Date.now() < Date.parse(closesAt), closesAt, announce: cfg.announce !== false, cap };
 }
 
 async function counts(db: D1Database) {
@@ -108,6 +111,13 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
     const prev = await db.prepare('SELECT cand FROM votes WHERE visitor = ?').bind(who.id).first<{ cand: string }>();
     if (prev?.cand !== id) {
       const iph = await c.ipHash(req);
+      // vot nou (nu mutarea unuia existent): cel mult st.cap voturi din aceeași rețea
+      if (!prev && st.cap > 0) {
+        const r = await db.prepare('SELECT COUNT(*) n FROM votes WHERE iph = ?').bind(iph).first<{ n: number }>();
+        if ((r?.n ?? 0) >= st.cap) {
+          return json({ error: `Din rețeaua ta s-au dat deja ${st.cap} voturi, cât se poate dintr-o singură rețea. Poți vota de pe altă rețea, de exemplu de pe datele mobile.` }, 429, extra);
+        }
+      }
       const country = (req as Request & { cf?: { country?: string } }).cf?.country ?? '';
       // o singură tranzacție: votul vechi (dacă există) scade, rândul vizitatorului se mută, votul nou crește
       await db.batch([
@@ -132,6 +142,9 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
       db.prepare("SELECT country, COUNT(*) n FROM votes GROUP BY country ORDER BY n DESC LIMIT 10"),
       db.prepare('SELECT at / 3600000 h, COUNT(*) n FROM votes WHERE at > ? GROUP BY h ORDER BY h').bind(Date.now() - 48 * 3600e3),
     ]);
+    const st0 = status(await voteConfig(kv), url.hostname);
+    const pv = Math.floor(Number(url.searchParams.get('cap') ?? st0.cap)) || 0;
+    const capped = pv > 0 ? (await db.prepare('SELECT cand, COUNT(*) n FROM (SELECT cand, ROW_NUMBER() OVER (PARTITION BY iph ORDER BY at) rn FROM votes) WHERE rn <= ? GROUP BY cand').bind(pv).all<{ cand: string; n: number }>()).results : [];
     const split: Record<string, Record<string, number>> = {};
     for (const r of byNet.results as { iph: string; cand: string; n: number }[]) (split[r.iph] ??= {})[r.cand] = r.n;
     const ts = (await kv.get('turnstile', 'json').catch(() => null)) as TsCfg | null;
@@ -140,7 +153,8 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
       ...(tot.results[0] as object),
       nets: (nets.results as { iph: string; n: number; first: number; last: number }[]).map(r => ({ ...r, split: split[r.iph] ?? {} })),
       countries: countries.results, hours: hours.results,
-      status: status(await voteConfig(kv), url.hostname),
+      status: st0,
+      preview: { cap: pv, counts: Object.fromEntries(capped.map(r => [r.cand, r.n])) },
       turnstile: { sitekey: ts?.sitekey ?? '', hasSecret: !!ts?.secret },
     });
   }
@@ -154,7 +168,19 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
         db.prepare('DELETE FROM vote_counts'),
         db.prepare('INSERT INTO vote_counts (cand, n) SELECT cand, COUNT(*) FROM votes GROUP BY cand'),
       ]);
-    } else return json({ error: 'all=1 sau iph' }, 400);
+    } else if (url.searchParams.has('cap')) {
+      // limita aplicată și voturilor deja date: din fiecare rețea rămân primele N voturi, restul se șterg
+      const cap = Math.floor(Number(url.searchParams.get('cap')));
+      if (!(cap >= 1)) return json({ error: 'cap' }, 400);
+      const before = await db.prepare('SELECT COUNT(*) n FROM votes').first<{ n: number }>();
+      await db.batch([
+        db.prepare('DELETE FROM votes WHERE visitor IN (SELECT visitor FROM (SELECT visitor, ROW_NUMBER() OVER (PARTITION BY iph ORDER BY at) rn FROM votes) WHERE rn > ?)').bind(cap),
+        db.prepare('DELETE FROM vote_counts'),
+        db.prepare('INSERT INTO vote_counts (cand, n) SELECT cand, COUNT(*) FROM votes GROUP BY cand'),
+      ]);
+      const after = await db.prepare('SELECT COUNT(*) n FROM votes').first<{ n: number }>();
+      return json({ ok: true, removed: (before?.n ?? 0) - (after?.n ?? 0), counts: await counts(db) });
+    } else return json({ error: 'all=1, iph sau cap' }, 400);
     return json({ ok: true, counts: await counts(db) });
   }
 

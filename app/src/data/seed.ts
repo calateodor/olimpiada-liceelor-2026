@@ -1,4 +1,4 @@
-import { VOTE_CLOSES_AT } from '../lib/vote';
+import { VOTE_CLOSES_AT, VOTE_NET_CAP } from '../lib/vote';
 import type { Match, OlEvent, State, EventId, GroupRules } from '../lib/types';
 import type { SchoolId } from './schools';
 
@@ -122,7 +122,7 @@ export const SEED: State = {
     venueNotes: {},
     reactions: { on: true },
     stats: { on: true },
-    vote: { on: true, closesAt: VOTE_CLOSES_AT, announce: true },
+    vote: { on: true, closesAt: VOTE_CLOSES_AT, announce: true, perNetwork: VOTE_NET_CAP },
     simulation: { on: false, at: '2026-09-20T15:20:00+03:00', setAt: '', frozen: false, seed: 2026, news: true, announcement: true, concert: true },
   },
   events: EVENTS,

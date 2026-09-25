@@ -146,7 +146,7 @@ export interface Config {
   /** statistici de trafic proprii, anonime (vezi worker/stats.ts și lib/track.ts) */
   stats: { on: boolean };
   /** votul pentru hostess-a serii finale (vezi worker/vote.ts): deschis, ora de închidere, anunțarea câștigătoarei */
-  vote: { on: boolean; closesAt: string; announce: boolean };
+  vote: { on: boolean; closesAt: string; announce: boolean; perNetwork: number };
   /** „Mașina timpului": site-ul se comportă ca la momentul `at`, cu rezultate inventate (vezi lib/simulation.ts) */
   simulation: { on: boolean; at: string; setAt: string; frozen: boolean; seed: number; news: boolean; announcement: boolean; concert: boolean };
 }

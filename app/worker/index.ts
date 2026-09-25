@@ -138,7 +138,16 @@ async function visitor(env: Env, req: Request): Promise<Who> {
 }
 /** amprenta IP-ului: hash cu secret; IP-ul în clar nu ajunge în baza de date */
 async function ipHash(env: Env, req: Request) {
-  return (await hmac(secret(env, await adminAccess(env)), 'ip:' + (req.headers.get('cf-connecting-ip') ?? '0'))).slice(0, 24);
+  return (await hmac(secret(env, await adminAccess(env)), 'ip:' + netOf(req.headers.get('cf-connecting-ip') ?? '0'))).slice(0, 24);
+}
+/** rețeaua din spatele adresei: IPv4 întreagă; la IPv6, prefixul /64 (o casă sau un abonament), pentru că
+    telefonul își schimbă singur ultima parte a adresei și altfel ar părea mereu altă rețea */
+function netOf(ip: string) {
+  if (!ip.includes(':')) return ip;
+  const [head, tail = ''] = ip.split('::');
+  const h = head ? head.split(':') : [], t = tail ? tail.split(':') : [];
+  const g = [...h, ...Array(Math.max(0, 8 - h.length - t.length)).fill('0'), ...t];
+  return g.slice(0, 4).map(x => (x || '0').toLowerCase().replace(/^0+(?=.)/, '')).join(':') + '::/64';
 }
 
 /** secretul pentru amprentele zilnice ale vizitatorilor, ținut 10 minute în memorie ca fiecare vizită să nu citească din KV */
