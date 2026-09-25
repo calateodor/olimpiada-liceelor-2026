@@ -1,3 +1,4 @@
+import { VOTE_CLOSES_AT } from '../lib/vote';
 import type { Match, OlEvent, State, EventId, GroupRules } from '../lib/types';
 import type { SchoolId } from './schools';
 
@@ -110,7 +111,7 @@ export const SEED: State = {
     countdownEventId: '',
     announcement: { on: false, text: '', kind: 'info', link: '' },
     maintenance: { on: false, text: 'Site în lucru: rezultatele se actualizează în următoarele minute.' },
-    home: { ticker: true, roadmap: true, standings: true, probes: true, concert: true, today: true },
+    home: { ticker: true, roadmap: true, standings: true, probes: true, concert: true, today: true, vote: true },
     tickerMessages: [],
     standings: { show: true, note: '', adjustments: [] },
     contact: { email: 'cultura.sport@primariaslatina.ro', phone: '0249 439 377', site: 'https://www.primariaslatina.ro', address: 'Str. M. Kogălniceanu nr. 1, Slatina', facebook: '', instagram: '', tiktok: '', youtube: '' },
@@ -121,6 +122,7 @@ export const SEED: State = {
     venueNotes: {},
     reactions: { on: true },
     stats: { on: true },
+    vote: { on: true, closesAt: VOTE_CLOSES_AT, announce: true },
     simulation: { on: false, at: '2026-09-20T15:20:00+03:00', setAt: '', frozen: false, seed: 2026, news: true, announcement: true, concert: true },
   },
   events: EVENTS,

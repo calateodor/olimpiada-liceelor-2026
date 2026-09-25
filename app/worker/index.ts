@@ -12,6 +12,7 @@
  * - POST /api/password              → schimbă utilizatorul/parola de admin (amprentă PBKDF2 în KV)
  * - GET  /api/backups · POST /api/restore
  * - POST /api/upload                → poze în R2
+ * - /api/vote…                      → votul pentru hostess (vezi worker/vote.ts)
  * - GET  /api/stats                 → statisticile de trafic (D1, vezi worker/stats.ts); ?fresh=1 ocolește cache-ul de 2 min
  * - GET  /api/schools               → starea conturilor liceelor (fără date personale)
  * - POST /api/schools/:id/password  → generează o parolă nouă pentru liceu (o întoarce o singură dată)
@@ -44,6 +45,7 @@ import { sanitizeInscriere, emptyInscriere, randomPassword, membriCount, type In
 import { STATIC_PHOTOS, STATIC_VIDEOS } from '../src/data/media';
 import { EMOJI_RE } from '../src/lib/emoji';
 import { recordHit, statsReport } from './stats';
+import { handleVote } from './vote';
 
 export interface Env {
   OL_KV: KVNamespace;
@@ -114,12 +116,25 @@ const RX = { perVisitorHour: 120, perIpHour: 900, maxIds: 600 };
 const ID_RE = /^[\w.-]{1,120}$/;
 
 /** identitatea anonimă a vizitatorului: cookie semnat cu secretul serverului; lipsă sau fals → se emite unul nou */
-async function visitor(env: Env, req: Request): Promise<{ id: string; cookie?: string }> {
-  const s = secret(env, await adminAccess(env));
+type Who = { id: string; token: string; cookie?: string };
+const visitorCookie = (id: string, sig: string) => `ol_v=${id}.${sig}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax`;
+async function knownVisitor(env: Env, req: Request, s?: string): Promise<Who | null> {
+  s ??= secret(env, await adminAccess(env));
   const m = /(?:^|;\s*)ol_v=([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)/.exec(req.headers.get('cookie') ?? '');
-  if (m && (await hmac(s, 'v:' + m[1])) === m[2]) return { id: m[1] };
+  if (m && (await hmac(s, 'v:' + m[1])) === m[2]) return { id: m[1], token: `${m[1]}.${m[2]}` };
+  // cookie-ul a fost șters, dar pagina a păstrat copia semnată (votul o ține în browser): același vizitator,
+  // iar cookie-ul se pune la loc; o copie falsificată nu trece de semnătură
+  const h = /^([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)$/.exec(req.headers.get('x-ol-v') ?? '');
+  if (h && (await hmac(s, 'v:' + h[1])) === h[2]) return { id: h[1], token: `${h[1]}.${h[2]}`, cookie: visitorCookie(h[1], h[2]) };
+  return null;
+}
+async function visitor(env: Env, req: Request): Promise<Who> {
+  const s = secret(env, await adminAccess(env));
+  const known = await knownVisitor(env, req, s);
+  if (known) return known;
   const id = b64url(crypto.getRandomValues(new Uint8Array(16)).buffer);
-  return { id, cookie: `ol_v=${id}.${await hmac(s, 'v:' + id)}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax` };
+  const sig = await hmac(s, 'v:' + id);
+  return { id, token: `${id}.${sig}`, cookie: visitorCookie(id, sig) };
 }
 /** amprenta IP-ului: hash cu secret; IP-ul în clar nu ajunge în baza de date */
 async function ipHash(env: Env, req: Request) {
@@ -399,6 +414,16 @@ export default {
       if (!isAdmin(await principal(env, req))) return json({ error: 'unauthorized' }, 401);
       if (!env.OL_DB) return json({ error: 'Statisticile au nevoie de baza D1.' }, 503);
       return statsReport(env.OL_DB, url.searchParams.get('fresh') === '1');
+    }
+
+    /* ---------------- votul pentru hostess (D1) ---------------- */
+    if (p === '/api/vote' || p.startsWith('/api/vote/')) {
+      if (!env.OL_DB) return json({ error: 'Votul are nevoie de baza D1.' }, 503);
+      return handleVote(req, url, {
+        db: env.OL_DB, kv: env.OL_KV, json,
+        visitor: r => visitor(env, r), knownVisitor: r => knownVisitor(env, r), ipHash: r => ipHash(env, r),
+        isAdmin: async r => isAdmin(await principal(env, r)),
+      });
     }
 
     if (p.startsWith('/api/')) return json({ error: 'not found' }, 404);

@@ -33,6 +33,7 @@ function src() {
 
 function allowed() {
   if (typeof window === 'undefined' || location.pathname.includes('/admin')) return false;
+  if (location.hostname.startsWith('vot-test.')) return false;   // adresa de test a votului nu intră în statistici
   if ((navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl) return false;
   try { if (localStorage.getItem('ol.admin.token')) return false; } catch { /* ignorat */ }
   const st = useStore.getState();

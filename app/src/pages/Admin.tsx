@@ -14,6 +14,7 @@ import { rxSorted } from '../lib/reactions';
 import { AdminInscrieri } from './admin/Inscrieri';
 import { TimeMachine } from './admin/TimeMachine';
 import { Statistici } from './admin/Statistici';
+import { VotHostess } from './admin/VotHostess';
 import './Admin.css';
 
 /* ---------------------------------------------------------------------------
@@ -22,10 +23,11 @@ import './Admin.css';
    trece prin setState(mut, ce) și lasă o urmă în jurnal.
 --------------------------------------------------------------------------- */
 
-type Tab = 'acasa' | 'statistici' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'timp' | 'cont' | 'date';
+type Tab = 'acasa' | 'statistici' | 'vot' | 'meciuri' | 'probe' | 'clasament' | 'licee' | 'inscrieri' | 'poze' | 'noutati' | 'anunturi' | 'concert' | 'site' | 'documente' | 'timp' | 'cont' | 'date';
 const TABS: [Tab, string, string][] = [
   ['acasa', 'Acasă', 'solar:home-2-linear'],
   ['statistici', 'Statistici', 'solar:chart-2-linear'],
+  ['vot', 'Vot hostess', 'solar:crown-star-linear'],
   ['meciuri', 'Meciuri', 'solar:football-linear'],
   ['probe', 'Probe', 'solar:medal-star-linear'],
   ['clasament', 'Clasament', 'solar:ranking-linear'],
@@ -96,6 +98,7 @@ export default function Admin() {
         <div className="pn-content">
           {tab === 'acasa' && <Acasa go={setTab} />}
           {tab === 'statistici' && <Statistici />}
+          {tab === 'vot' && <VotHostess />}
           {tab === 'meciuri' && <Meciuri />}
           {tab === 'probe' && <Probe />}
           {tab === 'clasament' && <Clasament />}

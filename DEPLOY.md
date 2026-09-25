@@ -136,3 +136,10 @@ Ce trebuie știut:
 - Nu se încarcă documente (copii de buletin) prin site.
 
 **Statisticile de trafic** sunt proprii, în aceeași bază D1 (`app/migrations/0002_stats.sql`, aplicată remote și local): site-ul trimite `/api/hit` (pagini, clipuri pornite, poze deschise, timp activ), fără cookie; worker-ul (`app/worker/stats.ts`) adaugă ziua/ora RO, amprenta zilnică anonimă, dispozitivul, sursa și orașul din Cloudflare. Zilele încheiate se adună în `stats_daily`, rândurile brute se șterg după 7 zile. Se văd în panou → Statistici (cu rezumat de copiat) și se opresc din panou → Site. Nu se numără roboții, paginile /admin și browserele logate în panou.
+
+**Votul pentru hostess** (pagina `/vot` și secțiunea de pe prima pagină, deasupra traseului). Candidatele se generează din folderul cu poze: `python scripts/hostess.py --src "D:\Teo\PNL\Olimpiada\PozeHostess"` (numele fișierelor „Nume Prenume - Liceu.png”; poziția ochilor se trece în `EYES` din script, pentru fiecare poză nouă). Voturile stau în D1 (`app/migrations/0003_votes.sql`): un rând pe vizitator, totaluri în `vote_counts`. Logica e în `app/worker/vote.ts`, iar constantele comune în `app/src/lib/vote.ts`.
+
+Testul: `VOTE_LIVE = false` ascunde votul pe site-ul public; se vede doar pe adresa de test și local. Publicarea pe adresa de test: `npm run build && node scripts/pages-bundle.mjs && cd pages && npx wrangler pages deploy --branch vot-test --commit-dirty=true` → https://vot-test.olimpiada-liceelor.pages.dev/vot (cu `?simulare=final` se vede pagina ca după închidere). Adresa de test folosește aceleași date (KV, D1) ca site-ul real.
+
+Lansarea: `VOTE_LIVE = true` în `app/src/lib/vote.ts`, panou → Vot hostess → „Șterge toate voturile”, apoi `npm run deploy:pages`. Închiderea e automată la `config.vote.closesAt` (implicit 1 oct 2026, 23:59:59, ora României), cu anunțarea câștigătoarei. Opțional, verificarea anti-robot Cloudflare Turnstile: cheile se pun în panou, la Vot hostess.
+

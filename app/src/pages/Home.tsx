@@ -5,6 +5,8 @@ import { Roadmap } from '../sections/Roadmap';
 import { GeneralStandings } from '../sections/GeneralStandings';
 import { ProbeGrid } from '../sections/ProbeGrid';
 import { ConcertTeaser } from '../sections/ConcertTeaser';
+import { HostessVote } from '../sections/HostessVote';
+import { voteVisible } from '../lib/vote';
 import { useStore } from '../store/state';
 
 export default function Home() {
@@ -14,6 +16,7 @@ export default function Home() {
       <Hero />
       {h.today && <TodayStrip />}
       {h.ticker && <Ticker />}
+      {h.vote && voteVisible() && <HostessVote />}
       {h.roadmap && <Roadmap />}
       {h.standings && <GeneralStandings />}
       {h.probes && <ProbeGrid />}

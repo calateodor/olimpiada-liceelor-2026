@@ -52,6 +52,7 @@ function withDefaults(s: Partial<State>): State {
     venueNotes: { ...d.venueNotes, ...(c.venueNotes ?? {}) },
     reactions: { ...d.reactions, ...(c.reactions ?? {}) },
     stats: { ...d.stats, ...(c.stats ?? {}) },
+    vote: { ...d.vote, ...(c.vote ?? {}) },
     simulation: { ...d.simulation, ...(c.simulation ?? {}) },
   };
   // Lista de probe e a codului (seed), nu a stării salvate: probele scoase dispar, cele noi apar,

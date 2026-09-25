@@ -19,6 +19,7 @@ const Clasament = lazy(() => import('./pages/Clasament'));
 const Regulamente = lazy(() => import('./pages/Regulamente'));
 const Locatii = lazy(() => import('./pages/Locatii'));
 const Highlights = lazy(() => import('./pages/Highlights'));
+const Vot = lazy(() => import('./pages/Vot'));
 const Inscrieri = lazy(() => import('./pages/Inscrieri'));
 const Confidentialitate = lazy(() => import('./pages/Confidentialitate'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -78,6 +79,7 @@ export default function App() {
             <Route path="/regulamente/:slug" element={<Regulamente />} />
             <Route path="/locatii" element={<Locatii />} />
             <Route path="/highlights" element={<Highlights />} />
+            <Route path="/vot" element={<Vot />} />
             <Route path="/galerie" element={<Navigate to="/highlights" replace />} />
             <Route path="/inscrieri" element={<Inscrieri />} />
             <Route path="/confidentialitate" element={<Confidentialitate />} />

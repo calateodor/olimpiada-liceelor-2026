@@ -132,7 +132,7 @@ export interface Config {
   countdownEventId: EventId | '';            // forteaza „urmatorul eveniment" din hero
   announcement: Announcement;                // bara de anunt de sub meniu
   maintenance: { on: boolean; text: string };
-  home: { ticker: boolean; roadmap: boolean; standings: boolean; probes: boolean; concert: boolean; today: boolean };
+  home: { ticker: boolean; roadmap: boolean; standings: boolean; probes: boolean; concert: boolean; today: boolean; vote: boolean };
   tickerMessages: string[];                  // mesaje in banda de sub hero, pe langa licee
   standings: { show: boolean; note: string; adjustments: Adjustment[] };
   contact: { email: string; phone: string; site: string; address: string; facebook: string; instagram: string; tiktok: string; youtube: string };
@@ -145,6 +145,8 @@ export interface Config {
   reactions: { on: boolean };
   /** statistici de trafic proprii, anonime (vezi worker/stats.ts și lib/track.ts) */
   stats: { on: boolean };
+  /** votul pentru hostess-a serii finale (vezi worker/vote.ts): deschis, ora de închidere, anunțarea câștigătoarei */
+  vote: { on: boolean; closesAt: string; announce: boolean };
   /** „Mașina timpului": site-ul se comportă ca la momentul `at`, cu rezultate inventate (vezi lib/simulation.ts) */
   simulation: { on: boolean; at: string; setAt: string; frozen: boolean; seed: number; news: boolean; announcement: boolean; concert: boolean };
 }

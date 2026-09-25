@@ -6,10 +6,13 @@ import { liveMatches } from '../lib/competition';
 import { getLenis } from '../lib/motion';
 import './Nav.css';
 import { asset } from '../lib/asset';
+import { voteVisible } from '../lib/vote';
 
-const LINKS = [
+const BASE_LINKS: [string, string][] = [
   ['/program', 'Program'], ['/probe', 'Probe'], ['/licee', 'Licee'], ['/clasament', 'Clasament'], ['/highlights', 'Highlights'],
-] as const;
+];
+// „Vot hostess” apare în meniu doar cât votul e vizibil (după lansare, sau pe adresa de test)
+const LINKS: [string, string][] = voteVisible() ? [...BASE_LINKS, ['/vot', 'Vot hostess']] : BASE_LINKS;
 
 export function Nav() {
   const [open, setOpen] = useState(false);
