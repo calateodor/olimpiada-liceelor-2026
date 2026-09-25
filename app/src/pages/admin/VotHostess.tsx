@@ -5,7 +5,7 @@ import { HOSTESSES } from '../../data/hostess';
 import { SCHOOL_BY_ID } from '../../data/schools';
 import { SchoolCrest } from '../../components/SchoolCrest';
 import { asset } from '../../lib/asset';
-import { rankHostesses, VOTE_LIVE } from '../../lib/vote';
+import { rankHostesses, stageResult, VOTE_LIVE } from '../../lib/vote';
 import { TZ } from '../../lib/competition';
 
 /* ---------------------------------------------------------------------------
@@ -71,6 +71,8 @@ export function VotHostess() {
   const counts = st?.counts ?? {};
   const total = HOSTESSES.reduce((n, h) => n + (counts[h.id] ?? 0), 0);
   const ranked = rankHostesses(counts);
+  const { sure, tied } = stageResult(counts);
+  const onStage = new Set(sure.map(h => h.id)), atTie = new Set(tied.map(h => h.id));
   const nameOf = (id: string) => HOSTESSES.find(h => h.id === id)?.name ?? id;
 
   return (
@@ -100,7 +102,7 @@ export function VotHostess() {
                 <span className="mono">{i + 1}</span>
                 <img src={asset(h.full)} alt="" width="44" height="58" style={{ objectFit: 'cover', borderRadius: 8 }} />
                 <SchoolCrest school={sc} size="sm" />
-                <span><b>{h.name}</b><br /><span className="dim">{sc.name}</span></span>
+                <span><b>{h.name}</b>{onStage.has(h.id) && <span className="tag tag-ok" style={{ marginLeft: 8 }}>pe scenă</span>}{atTie.has(h.id) && <span className="tag tag-soon" style={{ marginLeft: 8 }}>egalitate</span>}<br /><span className="dim">{sc.name}</span></span>
                 <span className="pn-vote-bar"><i style={{ width: `${total ? (n / Math.max(...Object.values(counts), 1)) * 100 : 0}%`, background: sc.ring }} /></span>
                 <b className="num">{nf(n)}</b>
                 <span className="dim num">{total ? Math.round((n / total) * 100) : 0}%</span>
@@ -113,7 +115,7 @@ export function VotHostess() {
       <section className="pn-block">
         <h3 className="h4">Setări</h3>
         <Switch on={c.on} onChange={v => set(`Vot hostess ${v ? 'pornit' : 'oprit'}`, x => { x.on = v; })} label="Votul e deschis" hint="oprit: panglicile rămân, dar nu se mai poate vota până îl pornești din nou" />
-        <Switch on={c.announce} onChange={v => set(`Anunțarea câștigătoarei ${v ? 'pornită' : 'oprită'}`, x => { x.announce = v; })} label="Anunță câștigătoarea după închidere" hint="pe site apare numele ei și eticheta „Câștigătoarea votului”" />
+        <Switch on={c.announce} onChange={v => set(`Anunțarea câștigătoarelor ${v ? 'pornită' : 'oprită'}`, x => { x.announce = v; })} label="Anunță câștigătoarele după închidere" hint="pe site apar primele două, cu eticheta „Urcă pe scenă”; la egalitate pe locul 2 apar toate cele la egalitate" />
         <Switch on={state.config.home.vote} onChange={v => setState(s => { s.config.home.vote = v; }, `Votul pe prima pagină ${v ? 'afișat' : 'ascuns'}`)} label="Secțiunea de vot pe prima pagină" hint="deasupra traseului competiției; pagina /vot rămâne oricum" />
         <label className="pn-field" style={{ maxWidth: 320 }}><span className="mono">Se închide automat (ora României)</span>
           <input type="datetime-local" step="1" value={toLocal(c.closesAt)} onChange={e => set('Vot hostess: ora de închidere', x => { x.closesAt = `${e.target.value.length === 16 ? e.target.value + ':00' : e.target.value}${TZ}`; })} />

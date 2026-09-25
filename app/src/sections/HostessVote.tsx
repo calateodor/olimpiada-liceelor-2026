@@ -7,7 +7,7 @@ import { SchoolCrest } from '../components/SchoolCrest';
 import { asset } from '../lib/asset';
 import { getLenis, prefersReducedMotion } from '../lib/motion';
 import { useVote } from '../lib/voteStore';
-import { rankHostesses, voteWinners, isVoteTestHost } from '../lib/vote';
+import { rankHostesses, stageResult, isVoteTestHost } from '../lib/vote';
 import './HostessVote.css';
 
 /* ---------------------------------------------------------------------------
@@ -16,7 +16,7 @@ import './HostessVote.css';
    Lungimea panglicii arată voturile, cu o lungime minimă, fără cifre; ordinea e după voturi, iar la egalitate
    după numărul liceului. Hover (calculator) sau tap (telefon) pe o panglică: poza întreagă, numele, liceul,
    sigla și butonul VOTE. Un vot pe dispozitiv; cine se răzgândește își mută votul. După închidere
-   (1 oct, 23:59:59) se anunță câștigătoarea.
+   (1 oct, 23:59:59) se anunță primele două, care urcă pe scenă.
    Pe adresa de test, ?simulare=final arată pagina ca după închidere, fără să atingă voturile.
 --------------------------------------------------------------------------- */
 const BY_ID: Record<string, Hostess> = Object.fromEntries(HOSTESSES.map(h => [h.id, h]));
@@ -87,23 +87,25 @@ export function useVoteView() {
   const ended = simFinal || Date.now() >= Date.parse(v.closesAt);
   const paused = !ended && v.loaded && !v.on;
   const canVote = v.loaded && v.open && !ended;
-  const winners = ended && v.announce ? voteWinners(v.counts) : [];
-  const title = ended ? 'Your favorite hostess' : 'Cast your vote for your favorite hostess';
+  const { sure, tied } = ended && v.announce ? stageResult(v.counts) : { sure: [] as Hostess[], tied: [] as Hostess[] };
+  const winners = [...sure, ...tied];
+  const title = ended ? (winners.length === 1 ? 'Your favorite hostess' : 'Your favorite hostesses') : 'Cast your vote for your favorite hostess';
   let lead: string;
-  if (ended && winners.length === 1) {
-    const w = winners[0];
-    lead = `Votul s-a încheiat. ${w.name}, de la ${SCHOOL_BY_ID[w.school].name}, urcă pe scena serii finale, pe 3 octombrie.`;
-  } else if (ended && winners.length > 1) lead = `Votul s-a încheiat la egalitate: ${names(winners)}. Ne vedem la seara finală, pe 3 octombrie.`;
+  const who = (h: Hostess) => `${h.name}, de la ${SCHOOL_BY_ID[h.school].name}`;
+  if (ended && tied.length && !sure.length) lead = `Votul s-a încheiat la egalitate între ${names(tied)}, pentru cele două locuri de pe scenă.`;
+  else if (ended && tied.length) lead = `Votul s-a încheiat. ${who(sure[0])}, urcă pe scena serii finale. Pentru al doilea loc e egalitate între ${names(tied)}.`;
+  else if (ended && winners.length === 2) lead = `Votul s-a încheiat. ${who(winners[0])}, și ${who(winners[1])}, urcă pe scena serii finale, pe 3 octombrie.`;
+  else if (ended && winners.length === 1) lead = `Votul s-a încheiat. ${who(winners[0])}, urcă pe scena serii finale, pe 3 octombrie.`;
   else if (ended) lead = 'Votul s-a încheiat. Mulțumim tuturor celor care au votat!';
   else if (paused) lead = 'Votul e oprit pentru moment. Revine în curând.';
-  else lead = 'Una dintre ele urcă pe scena serii finale ca hostess, pe 3 octombrie. Atinge o panglică, vezi cine e și votează.';
+  else lead = 'Primele două urcă pe scena serii finale ca hostess, pe 3 octombrie. Atinge o panglică, vezi cine e și votează.';
   const status = ended ? 'Vot încheiat' : paused ? 'Vot oprit' : canVote ? 'Vot deschis' : 'Vot';
-  return { v, ended, paused, canVote, winners, title, lead, status, simFinal };
+  return { v, ended, paused, canVote, winners, sure, tied, title, lead, status, simFinal };
 }
 
 export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'page' }) {
   const view = useVoteView();
-  const { v, canVote, winners } = view;
+  const { v, canVote, winners, sure, tied } = view;
   const mobile = useMobile();
   const [sel, setSel] = useState<string | null>(null);
   const [drawer, setDrawer] = useState(false);
@@ -114,7 +116,7 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
 
   const ranked = rankHostesses(v.counts);
   const max = Math.max(0, ...HOSTESSES.map(h => v.counts[h.id] ?? 0));
-  const winSet = new Set(winners.map(w => w.id));
+  const winSet = new Set(sure.map(w => w.id)), tieSet = new Set(tied.map(w => w.id));
   const cur = BY_ID[sel && BY_ID[sel] ? sel : (winners[0]?.id ?? ranked[0]?.id)];
 
   // panglicile cresc când secțiunea intră în ecran, una după alta (o singură dată, după timp, nu după scroll)
@@ -155,7 +157,7 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
   if (!HOSTESSES.length) return null;
   const curSchool = cur ? SCHOOL_BY_ID[cur.school] : null;
 
-  const panel = cur && <Panel h={cur} view={view} win={winSet.has(cur.id)} />;
+  const panel = cur && <Panel h={cur} view={view} win={winSet.has(cur.id)} tie={tieSet.has(cur.id)} />;
   return (
     <section className={`hv ${variant === 'page' ? 'hv-page' : 'section'}`} aria-label="Votul pentru hostess" style={{ ['--cur' as string]: curSchool?.color ?? '#7C3AED' } as CSSProperties}>
       <div className="container">
@@ -180,7 +182,7 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
                   style={{ ['--c' as string]: sc.color, ['--w' as string]: `${w}%`, ['--i' as string]: i } as CSSProperties}>
                   <div className="hv-bar">
                     <button type="button" className="hv-rb" aria-pressed={on}
-                      aria-label={`${h.name}, ${sc.name}${v.mine === h.id ? ', votul tău' : ''}${winSet.has(h.id) ? ', câștigătoarea votului' : ''}`}
+                      aria-label={`${h.name}, ${sc.name}${v.mine === h.id ? ', votul tău' : ''}${winSet.has(h.id) ? ', urcă pe scenă' : tieSet.has(h.id) ? ', la egalitate pentru un loc pe scenă' : ''}`}
                       onMouseEnter={() => { if (!mobile) setSel(h.id); }} onFocus={() => { if (!mobile) setSel(h.id); }}
                       onClick={() => { setSel(h.id); if (mobile) setDrawer(true); }}>
                       <span className="hv-eyes" style={{ backgroundImage: `url(${asset(h.eyes)})` }} />
@@ -207,14 +209,14 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
   );
 }
 
-function Panel({ h, view, win }: { h: Hostess; view: ReturnType<typeof useVoteView>; win: boolean }) {
+function Panel({ h, view, win, tie }: { h: Hostess; view: ReturnType<typeof useVoteView>; win: boolean; tie: boolean }) {
   const { v, canVote, ended, paused } = view;
   const sc = SCHOOL_BY_ID[h.school];
   const mine = v.mine === h.id;
   const burst = v.justVoted?.id === h.id && Date.now() - v.justVoted.at < 2500;
   let note = '';
   if (canVote) note = '';
-  else if (ended) note = win ? 'Câștigătoarea votului publicului.' : mine ? 'Aici a fost votul tău.' : 'Votul s-a încheiat.';
+  else if (ended) note = win ? 'Urcă pe scena serii finale, pe 3 octombrie.' : tie ? 'La egalitate pentru un loc pe scenă.' : mine ? 'Aici a fost votul tău.' : 'Votul s-a încheiat.';
   else if (paused) note = 'Votul e oprit momentan.';
   else if (v.loaded && !v.live) note = 'Votul nu a început încă.';
   else if (!v.loaded) note = 'Se încarcă votul…';
@@ -223,7 +225,8 @@ function Panel({ h, view, win }: { h: Hostess; view: ReturnType<typeof useVoteVi
       <div className="hv-photo">
         <img className="hv-photo-bg" src={asset(h.full)} alt="" aria-hidden="true" />
         <img key={h.id} className="hv-photo-img" src={asset(h.full)} alt={`${h.name}, ${sc.name}`} decoding="async" />
-        {win && <span className="hv-win bar bar-sm bar-ye"><Icon icon="solar:crown-bold" /> Câștigătoarea votului</span>}
+        {win && <span className="hv-win bar bar-sm bar-ye"><Icon icon="solar:crown-bold" /> Urcă pe scenă</span>}
+        {tie && <span className="hv-win bar bar-sm">Egalitate pentru scenă</span>}
       </div>
       <div className="hv-meta">
         <SchoolCrest school={sc} size="md" />

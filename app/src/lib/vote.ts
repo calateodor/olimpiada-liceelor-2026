@@ -25,8 +25,22 @@ export function rankHostesses(counts: Record<string, number>, list: Hostess[] = 
     || (SCHOOL_BY_ID[a.school].nr - SCHOOL_BY_ID[b.school].nr) || a.name.localeCompare(b.name, 'ro'));
 }
 
-/** câștigătoarea (sau câștigătoarele, la egalitate); nimic dacă nu a votat nimeni */
-export function voteWinners(counts: Record<string, number>, list: Hostess[] = HOSTESSES): Hostess[] {
-  const top = Math.max(0, ...list.map(h => counts[h.id] ?? 0));
-  return top > 0 ? rankHostesses(counts, list).filter(h => (counts[h.id] ?? 0) === top) : [];
+/** câte urcă pe scenă: primele două din vot */
+export const STAGE_SEATS = 2;
+
+/** cele care urcă pe scenă: primele STAGE_SEATS după voturi. La egalitate pe ultimul loc intră toate cele
+    la egalitate (fără tragere după liceu), ca organizatorii să decidă. Doar fete cu cel puțin un vot. */
+export function voteWinners(counts: Record<string, number>, list: Hostess[] = HOSTESSES, seats = STAGE_SEATS): Hostess[] {
+  const withVotes = rankHostesses(counts, list).filter(h => (counts[h.id] ?? 0) > 0);
+  if (!withVotes.length) return [];
+  const cut = counts[withVotes[Math.min(seats, withVotes.length) - 1].id] ?? 0;
+  return withVotes.filter(h => (counts[h.id] ?? 0) >= cut);
+}
+
+/** rezultatul pentru scenă: cele sigure și, dacă e egalitate pe ultimul loc, cele la egalitate pentru el */
+export function stageResult(counts: Record<string, number>, list: Hostess[] = HOSTESSES) {
+  const w = voteWinners(counts, list);
+  if (w.length <= STAGE_SEATS) return { sure: w, tied: [] as Hostess[] };
+  const cut = counts[w[w.length - 1].id] ?? 0;
+  return { sure: w.filter(h => (counts[h.id] ?? 0) > cut), tied: w.filter(h => (counts[h.id] ?? 0) === cut) };
 }
