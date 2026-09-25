@@ -48,6 +48,10 @@ EYES = {
 FULL_CROP = {
     'Dumitrescu Daria Anamaria - LPS.png': (395, 575, 995, 1375),
 }
+# nume corectate față de numele fișierului (fișierul poate rămâne așa)
+NAME_FIX = {'Prună Andra': 'Prună Anda'}
+# id-ul candidatei e cheia voturilor din D1: rămâne același când se corectează numele (altfel voturile ei s-ar pierde)
+ID_PIN = {'Prună Anda': 'pruna-andra'}
 NAVY = (11, 14, 34)  # fundalul site-ului, umbrele duotonului (ca la fundalul din prima pagina)
 STRIP_H = 240        # inaltimea benzii cu ochi (panglica are cel mult ~76px, ecrane de 3x)
 
@@ -138,7 +142,8 @@ def main():
         full = max(imgs, key=lambda x: x[1].height / x[1].width)
         eyes_src = min(imgs, key=lambda x: x[1].height / x[1].width) if len(imgs) > 1 else full
         if eyes_src[0] not in EYES: sys.exit(f'Lipseste pozitia ochilor pentru „{eyes_src[0]}” in EYES (scripts/hostess.py).')
-        pid = slug(person)
+        name = NAME_FIX.get(person, person)
+        pid = ID_PIN.get(name, slug(person))
         big = full[1].crop(FULL_CROP[full[0]]) if full[0] in FULL_CROP else full[1].copy()
         if full[0] in FULL_CROP and big.height < 1200:   # decupajul strâns rămâne mic: îl mărim fin, ca browserul să nu-l întindă grosier
             k = 1200 / big.height
@@ -153,9 +158,9 @@ def main():
         fy = 0.3
         if full[0] in EYES:
             (x1, y1), (x2, y2) = EYES[full[0]]; fy = round(((y1 + y2) / 2) / full[1].height, 3)
-        out.append(dict(id=pid, name=person, school=sid, full=f'/hostess/{pid}.jpg', eyes=f'/hostess/{pid}-eyes.jpg',
+        out.append(dict(id=pid, name=name, school=sid, full=f'/hostess/{pid}.jpg', eyes=f'/hostess/{pid}-eyes.jpg',
                         w=big.width, h=big.height, eyesW=strip.width, eyesH=strip.height, focusY=fy))
-        print(f'  {person} ({sid}): poza {big.width}x{big.height}, ochi {strip.width}x{strip.height} {info}')
+        print(f'  {name} ({sid}): poza {big.width}x{big.height}, ochi {strip.width}x{strip.height} {info}')
     order = list(SCHOOLS)
     out.sort(key=lambda c: (order.index(c['school']), c['name']))
     lines = ['/* GENERAT de scripts/hostess.py din folderul cu pozele candidatelor. Nu se editeaza de mana. */',
