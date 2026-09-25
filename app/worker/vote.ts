@@ -13,10 +13,10 @@
    - POST   /api/vote/turnstile    → cheile Cloudflare Turnstile (verificarea anti-robot, opțională; starea lor vine în /stats)
 
    Nu există limită automată pe rețea: un liceu întreg iese pe internet prin aceeași adresă. Panoul arată
-   însă rețelele cu multe voturi și le poate șterge. Pe site-ul public nimic nu merge până la VOTE_LIVE.
+   însă rețelele cu multe voturi și le poate șterge. Se votează doar pe domeniul oficial (voteLiveOn).
 --------------------------------------------------------------------------- */
 import { HOSTESSES } from '../src/data/hostess';
-import { VOTE_LIVE, VOTE_CLOSES_AT, isVoteTestHost } from '../src/lib/vote';
+import { VOTE_CLOSES_AT, voteLiveOn } from '../src/lib/vote';
 
 type Who = { id: string; token: string; cookie?: string };
 export interface VoteCtx {
@@ -53,7 +53,7 @@ async function turnstile(kv: KVNamespace): Promise<TsCfg | null> {
 
 function status(cfg: VoteCfg, host: string) {
   const closesAt = cfg.closesAt || VOTE_CLOSES_AT;
-  const live = VOTE_LIVE || isVoteTestHost(host);
+  const live = voteLiveOn(host);
   const on = cfg.on !== false;
   return { live, on, open: live && on && Date.now() < Date.parse(closesAt), closesAt, announce: cfg.announce !== false };
 }
