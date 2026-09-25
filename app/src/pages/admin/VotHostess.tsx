@@ -136,7 +136,7 @@ export function VotHostess() {
         <label className="pn-field" style={{ maxWidth: 320 }}><span className="mono">Voturi noi dintr-o singură rețea (0 = fără limită)</span>
           <input type="number" min={0} max={1000} value={c.perNetwork} onChange={e => set('Vot hostess: limita pe rețea', x => { x.perNetwork = Math.max(0, Math.floor(Number(e.target.value) || 0)); })} />
         </label>
-        <p className="body dim">Oprește votul repetat din ferestre incognito: fiecare fereastră nouă pare alt telefon, dar vine din aceeași rețea. Cine a votat își poate muta oricând votul. Cine ajunge la limită e rugat să voteze de pe altă rețea, de exemplu de pe datele mobile. Acum pe site: {st ? (st.status.cap > 0 ? `${st.status.cap} voturi pe rețea` : 'fără limită') : '…'}.</p>
+        <p className="body dim">Oprește votul repetat din ferestre incognito: fiecare fereastră nouă pare alt telefon, dar vine din aceeași rețea. Cine a votat își poate muta oricând votul. Cine ajunge la limită vede doar „Ai atins limita de voturi de pe acest dispozitiv”, fără număr. Acum pe site: {st ? (st.status.cap > 0 ? `${st.status.cap} voturi pe rețea` : 'fără limită') : '…'}.</p>
         <p className="body dim">Setările intră pe site după „Publică”, în cel mult 15 secunde.</p>
       </section>
 

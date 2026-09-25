@@ -53,6 +53,9 @@ async function turnstile(kv: KVNamespace): Promise<TsCfg | null> {
   return tsMemo.v;
 }
 
+/** ce află pagina despre vot: fără limita pe rețea (numărul ei rămâne doar în panou) */
+const pub = ({ cap: _cap, ...rest }: ReturnType<typeof status>) => rest;
+
 function status(cfg: VoteCfg, host: string) {
   const closesAt = cfg.closesAt || VOTE_CLOSES_AT;
   const live = voteLiveOn(host);
@@ -91,7 +94,7 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
       who ? db.prepare('SELECT cand FROM votes WHERE visitor = ?').bind(who.id).first<{ cand: string }>() : null,
       turnstile(kv),
     ]);
-    return json({ ...st, counts: cnt, mine: mine?.cand ?? null, sitekey: ts?.sitekey ?? null }, 200, who?.cookie ? { 'set-cookie': who.cookie } : {});
+    return json({ ...pub(st), counts: cnt, mine: mine?.cand ?? null, sitekey: ts?.sitekey ?? null }, 200, who?.cookie ? { 'set-cookie': who.cookie } : {});
   }
 
   if (p === '/api/vote' && req.method === 'POST') {
@@ -115,7 +118,7 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
       if (!prev && st.cap > 0) {
         const r = await db.prepare('SELECT COUNT(*) n FROM votes WHERE iph = ?').bind(iph).first<{ n: number }>();
         if ((r?.n ?? 0) >= st.cap) {
-          return json({ error: `Din rețeaua ta s-au dat deja ${st.cap} voturi, cât se poate dintr-o singură rețea. Poți vota de pe altă rețea, de exemplu de pe datele mobile.` }, 429, extra);
+          return json({ error: 'Ai atins limita de voturi de pe acest dispozitiv.' }, 429, extra);
         }
       }
       const country = (req as Request & { cf?: { country?: string } }).cf?.country ?? '';
@@ -127,7 +130,7 @@ export async function handleVote(req: Request, url: URL, c: VoteCtx): Promise<Re
         db.prepare('INSERT INTO vote_counts (cand, n) VALUES (?, 1) ON CONFLICT(cand) DO UPDATE SET n = n + 1').bind(id),
       ]);
     }
-    return json({ ...st, counts: await counts(db), mine: id, v: who.token }, 200, extra);
+    return json({ ...pub(st), counts: await counts(db), mine: id, v: who.token }, 200, extra);
   }
 
   /* ---------------- administrator ---------------- */
