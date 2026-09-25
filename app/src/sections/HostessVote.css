@@ -66,7 +66,16 @@
 .hv-vote.is-mine, .hv-vote.is-mine[disabled] { opacity: 1; background: transparent; color: var(--ye-500); border-color: var(--ye-500); letter-spacing: .04em; }
 .hv-note { color: var(--fg-2); font-size: var(--t-sm); max-width: 44ch; }
 .hv-err { color: #FF8FA3; font-size: var(--t-sm); }
-.hv-hint { margin-top: var(--s5); color: var(--fg-3); }
+/* numărătoarea inversă (ca în cardul din prima pagină) și nota măruntă */
+.hv-cd-wrap { display: grid; gap: var(--s2); justify-items: start; margin-top: var(--s2); }
+.hv-cd-l { color: var(--fg-3); font-size: var(--t-2xs); letter-spacing: .12em; }
+.hv-cd { display: flex; gap: clamp(var(--s4), 3vw, var(--s8)); flex-wrap: wrap; }
+.hv-cd > div { display: grid; }
+.hv-cd b { font-weight: 800; font-size: clamp(2.2rem, 4.4vw, 3.4rem); letter-spacing: -.04em; line-height: 1; color: var(--ye-500);
+  font-variation-settings: 'opsz' 96, 'wdth' 80, 'wght' 800; text-shadow: 0 0 24px rgba(250,204,21,.25); }
+.hv-cd .mono { margin-top: 4px; }
+.hv-fine { font-size: var(--t-2xs); color: var(--fg-3); letter-spacing: .02em; }
+.hv-page-cd { margin-bottom: clamp(var(--s8), 4vw, var(--s12)); }
 
 /* confetti mic la vot, în culoarea liceului și galben */
 .hv-burst { position: absolute; left: 50%; top: 50%; pointer-events: none; }

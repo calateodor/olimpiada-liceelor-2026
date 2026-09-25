@@ -44,6 +44,10 @@ EYES = {
     'Petroi Anaya Veronica - Radu Greceanu.png': ((418, 653), (499, 647)),
     'Prună Andra - Nicolae Titulescu.png': ((425, 461), (487, 602)),
 }
+# poza mare, decupată mai strâns cand fata e mică în cadru (x0, y0, x1, y1 pe poza originala, 3:4)
+FULL_CROP = {
+    'Dumitrescu Daria Anamaria - LPS.png': (395, 575, 995, 1375),
+}
 NAVY = (11, 14, 34)  # fundalul site-ului, umbrele duotonului (ca la fundalul din prima pagina)
 STRIP_H = 240        # inaltimea benzii cu ochi (panglica are cel mult ~76px, ecrane de 3x)
 
@@ -135,7 +139,11 @@ def main():
         eyes_src = min(imgs, key=lambda x: x[1].height / x[1].width) if len(imgs) > 1 else full
         if eyes_src[0] not in EYES: sys.exit(f'Lipseste pozitia ochilor pentru „{eyes_src[0]}” in EYES (scripts/hostess.py).')
         pid = slug(person)
-        big = full[1].copy(); big.thumbnail((1500, 1500), Image.LANCZOS)
+        big = full[1].crop(FULL_CROP[full[0]]) if full[0] in FULL_CROP else full[1].copy()
+        if full[0] in FULL_CROP and big.height < 1200:   # decupajul strâns rămâne mic: îl mărim fin, ca browserul să nu-l întindă grosier
+            k = 1200 / big.height
+            big = big.resize((round(big.width * k), 1200), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.6, percent=60, threshold=2))
+        big.thumbnail((1500, 1500), Image.LANCZOS)
         big.save(os.path.join(OUT, f'{pid}.jpg'), 'JPEG', quality=84, optimize=True, progressive=True)
         strip, raw, info = eye_strip(eyes_src[1], EYES[eyes_src[0]], SCHOOLS[sid])
         strip.save(os.path.join(OUT, f'{pid}-eyes.jpg'), 'JPEG', quality=86, optimize=True, progressive=True)

@@ -21,20 +21,31 @@ import './HostessVote.css';
 --------------------------------------------------------------------------- */
 const BY_ID: Record<string, Hostess> = Object.fromEntries(HOSTESSES.map(h => [h.id, h]));
 const MIN = 42;   // lungimea minimă a panglicii, în procente din cea maximă
-const MONTHS = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
 
-/** 1 zi, 2 zile, 20 de zile */
-const nr = (n: number, one: string, many: string) => (n === 1 ? `1 ${one}` : `${n}${n % 100 >= 20 || (n > 0 && n % 100 === 0) ? ' de' : ''} ${many}`);
-function left(ms: number) {
-  const m = Math.max(1, Math.ceil(ms / 60000)), d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), mm = m % 60;
-  if (d > 0) return `${nr(d, 'zi', 'zile')} și ${nr(h, 'oră', 'ore')}`;
-  if (h > 0) return `${nr(h, 'oră', 'ore')} și ${mm} min`;
-  return `${mm} min`;
-}
-/** „1 octombrie, la 23:59" în ora României */
-function deadlineText(iso: string) {
-  const d = new Date(Date.parse(iso) + 3 * 3600e3);
-  return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}, la ${String(d.getUTCHours()).padStart(2, '0')}:${String(d.getUTCMinutes()).padStart(2, '0')}`;
+/** numărătoarea inversă până la închiderea votului, cu secunde; la zero reîncarcă starea (votul se închide) */
+export function VoteCountdown({ closesAt }: { closesAt: string }) {
+  const end = Date.parse(closesAt);
+  const [ms, setMs] = useState(() => end - Date.now());
+  useEffect(() => {
+    const t = setInterval(() => {
+      const left = end - Date.now();
+      setMs(left);
+      if (left <= 0) { clearInterval(t); setTimeout(() => useVote.getState().load(), 1500); }
+    }, 1000);
+    return () => clearInterval(t);
+  }, [end]);
+  if (!(ms > 0)) return null;
+  const s = Math.floor(ms / 1000);
+  const parts: [number, string][] = [[Math.floor(s / 86400), 'zile'], [Math.floor((s % 86400) / 3600), 'ore'], [Math.floor((s % 3600) / 60), 'min'], [s % 60, 'sec']];
+  return (
+    <div className="hv-cd-wrap">
+      <span className="mono hv-cd-l">Votul se închide în</span>
+      <div className="hv-cd" role="timer" aria-label="Timp până la închiderea votului">
+        {parts.map(([n, l]) => <div key={l}><b className="num">{String(n).padStart(2, '0')}</b><span className="mono">{l}</span></div>)}
+      </div>
+      <p className="hv-fine">Îți poți muta votul oricând*</p>
+    </div>
+  );
 }
 const names = (hs: Hostess[]) => (hs.length < 2 ? hs.map(h => h.name).join('') : `${hs.slice(0, -1).map(h => h.name).join(', ')} și ${hs[hs.length - 1].name}`);
 
@@ -77,7 +88,6 @@ export function useVoteView() {
   const paused = !ended && v.loaded && !v.on;
   const canVote = v.loaded && v.open && !ended;
   const winners = ended && v.announce ? voteWinners(v.counts) : [];
-  const when = deadlineText(v.closesAt);
   const title = ended ? 'Your favorite hostess' : 'Cast your vote for your favorite hostess';
   let lead: string;
   if (ended && winners.length === 1) {
@@ -86,14 +96,14 @@ export function useVoteView() {
   } else if (ended && winners.length > 1) lead = `Votul s-a încheiat la egalitate: ${names(winners)}. Ne vedem la seara finală, pe 3 octombrie.`;
   else if (ended) lead = 'Votul s-a încheiat. Mulțumim tuturor celor care au votat!';
   else if (paused) lead = 'Votul e oprit pentru moment. Revine în curând.';
-  else lead = `Una dintre ele urcă pe scena serii finale ca hostess, pe 3 octombrie. Atinge o panglică, vezi cine e și votează. Ai un singur vot de pe fiecare telefon sau calculator și îl poți muta oricând, până pe ${when}.`;
-  const status = ended ? 'Vot încheiat' : paused ? 'Vot oprit' : canVote ? `Votul se închide în ${left(Date.parse(v.closesAt) - Date.now())}` : 'Vot';
-  return { v, ended, paused, canVote, winners, when, title, lead, status, simFinal };
+  else lead = 'Una dintre ele urcă pe scena serii finale ca hostess, pe 3 octombrie. Atinge o panglică, vezi cine e și votează.';
+  const status = ended ? 'Vot încheiat' : paused ? 'Vot oprit' : canVote ? 'Vot deschis' : 'Vot';
+  return { v, ended, paused, canVote, winners, title, lead, status, simFinal };
 }
 
 export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'page' }) {
   const view = useVoteView();
-  const { v, ended, canVote, winners } = view;
+  const { v, canVote, winners } = view;
   const mobile = useMobile();
   const [sel, setSel] = useState<string | null>(null);
   const [drawer, setDrawer] = useState(false);
@@ -154,9 +164,10 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
             <div className="idx"><span className="bar bar-sm">Seara finală · 3 oct</span><span className="mono">{view.status}</span></div>
             <h2 className="h2">{view.title}</h2>
             <p className="aside body">{view.lead}</p>
+            {canVote && <VoteCountdown closesAt={v.closesAt} />}
           </div>
         )}
-        {variant === 'page' && <p className="mono hv-status">{view.status}</p>}
+        {variant === 'page' && (canVote ? <div className="hv-page-cd"><VoteCountdown closesAt={v.closesAt} /></div> : <p className="mono hv-status">{view.status}</p>)}
         <div className="hv-grid">
           <ol ref={listRef} className={`hv-list ${inView ? 'is-in' : ''} ${ready ? 'is-ready' : ''}`} aria-label="Candidatele">
             {ranked.map((h, i) => {
@@ -186,7 +197,6 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
           </ol>
           {!mobile && <div className="hv-side" style={{ ['--c' as string]: curSchool?.color } as CSSProperties}>{panel}</div>}
         </div>
-        {mobile && !drawer && <p className="mono hv-hint">{canVote ? 'Atinge o panglică și votează' : ended ? 'Atinge o panglică să vezi cine e' : ''}</p>}
       </div>
       {mobile && drawer && cur && createPortal(
         <div className="hv-drawer" role="dialog" aria-label={`${cur.name}, ${curSchool!.name}`} data-lenis-prevent style={{ ['--c' as string]: curSchool!.color } as CSSProperties}>
@@ -198,13 +208,12 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
 }
 
 function Panel({ h, view, win }: { h: Hostess; view: ReturnType<typeof useVoteView>; win: boolean }) {
-  const { v, canVote, ended, paused, when } = view;
+  const { v, canVote, ended, paused } = view;
   const sc = SCHOOL_BY_ID[h.school];
   const mine = v.mine === h.id;
-  const mineH = v.mine ? BY_ID[v.mine] : null;
   const burst = v.justVoted?.id === h.id && Date.now() - v.justVoted.at < 2500;
   let note = '';
-  if (canVote) note = mine ? `Te poți răzgândi până pe ${when}.` : mineH ? `Votul tău e acum la ${mineH.name}. Dacă votezi aici, îl muți.` : 'Un singur vot de pe fiecare telefon sau calculator.';
+  if (canVote) note = '';
   else if (ended) note = win ? 'Câștigătoarea votului publicului.' : mine ? 'Aici a fost votul tău.' : 'Votul s-a încheiat.';
   else if (paused) note = 'Votul e oprit momentan.';
   else if (v.loaded && !v.live) note = 'Votul nu a început încă.';
