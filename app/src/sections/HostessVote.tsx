@@ -13,7 +13,7 @@ import './HostessVote.css';
 /* ---------------------------------------------------------------------------
    Votul pentru hostess-a serii finale (schița lui Teo): în stânga, câte o panglică pentru fiecare fată,
    cu sigla liceului la capăt și ochii ei, în duotonul culorii liceului (ca fundalul din prima pagină).
-   Lungimea panglicii arată voturile, cu o lungime minimă, fără cifre; ordinea e după voturi, iar la egalitate
+   Lungimea panglicii arată voturile, cu o lungime minimă, iar numărul lor apare la capătul ei; ordinea e după voturi, iar la egalitate
    după numărul liceului. Hover (calculator) sau tap (telefon) pe o panglică: poza întreagă, numele, liceul,
    sigla și butonul VOTE. Un vot pe dispozitiv; cine se răzgândește își mută votul. După închidere
    (1 oct, 23:59:59) se anunță primele două, care urcă pe scenă.
@@ -47,6 +47,8 @@ export function VoteCountdown({ closesAt }: { closesAt: string }) {
     </div>
   );
 }
+/** 1 vot, 2 voturi, 20 de voturi */
+const votes = (n: number) => (n === 1 ? '1 vot' : `${n.toLocaleString('ro-RO')}${n % 100 >= 20 || (n > 0 && n % 100 === 0) ? ' de' : ''} voturi`);
 const names = (hs: Hostess[]) => (hs.length < 2 ? hs.map(h => h.name).join('') : `${hs.slice(0, -1).map(h => h.name).join(', ')} și ${hs[hs.length - 1].name}`);
 
 function useMobile() {
@@ -179,10 +181,10 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
               const on = cur?.id === h.id && (!mobile || drawer);
               return (
                 <li key={h.id} data-id={h.id} className={`hv-item ${on ? 'is-on' : ''} ${v.mine === h.id ? 'is-mine' : ''}`}
-                  style={{ ['--c' as string]: sc.color, ['--w' as string]: `${w}%`, ['--i' as string]: i } as CSSProperties}>
+                  style={{ ['--c' as string]: sc.color, ['--w' as string]: w, ['--i' as string]: i } as CSSProperties}>
                   <div className="hv-bar">
                     <button type="button" className="hv-rb" aria-pressed={on}
-                      aria-label={`${h.name}, ${sc.name}${v.mine === h.id ? ', votul tău' : ''}${winSet.has(h.id) ? ', urcă pe scenă' : tieSet.has(h.id) ? ', la egalitate pentru un loc pe scenă' : ''}`}
+                      aria-label={`${h.name}, ${sc.name}, ${votes(n)}${v.mine === h.id ? ', votul tău' : ''}${winSet.has(h.id) ? ', urcă pe scenă' : tieSet.has(h.id) ? ', la egalitate pentru un loc pe scenă' : ''}`}
                       onMouseEnter={() => { if (!mobile) setSel(h.id); }} onFocus={() => { if (!mobile) setSel(h.id); }}
                       onClick={() => { setSel(h.id); if (mobile) setDrawer(true); }}>
                       <span className="hv-eyes" style={{ backgroundImage: `url(${asset(h.eyes)})` }} />
@@ -193,6 +195,7 @@ export function HostessVote({ variant = 'section' }: { variant?: 'section' | 'pa
                       </span>
                     </button>
                   </div>
+                  {v.loaded && v.live && <span className="hv-count" aria-hidden="true"><b className="num">{n.toLocaleString('ro-RO')}</b><i>{n === 1 ? 'vot' : 'voturi'}</i></span>}
                 </li>
               );
             })}
@@ -234,6 +237,7 @@ function Panel({ h, view, win, tie }: { h: Hostess; view: ReturnType<typeof useV
           <p className="hv-name">{h.name}</p>
           <p className="mono hv-school">{sc.name}</p>
         </div>
+        {v.loaded && v.live && <p className="hv-votes"><b className="num">{(v.counts[h.id] ?? 0).toLocaleString('ro-RO')}</b><span className="mono">{(v.counts[h.id] ?? 0) === 1 ? 'vot' : 'voturi'}</span></p>}
       </div>
       {canVote && (
         <div className="hv-vote-wrap">
