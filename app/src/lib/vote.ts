@@ -13,7 +13,7 @@ export const VOTE_LIVE = true;
 export const VOTE_HOST = 'olimpiada.primariaslatina.ro';
 export const VOTE_CLOSES_AT = '2026-10-01T23:59:59+03:00';
 /** câte voturi noi se primesc dintr-o singură rețea (Wi-Fi, abonament); 0 = fără limită. Se schimbă din panou. */
-export const VOTE_NET_CAP = 10;
+export const VOTE_NET_CAP = 4;
 
 const isLocal = (host: string) => host === 'localhost' || host === '127.0.0.1';
 export const isVoteTestHost = (host: string) => host.startsWith('vot-test.') || isLocal(host);
